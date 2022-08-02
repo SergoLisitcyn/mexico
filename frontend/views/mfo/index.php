@@ -1,0 +1,1385 @@
+<?php
+
+use yii\helpers\Html;
+use yii\helpers\Url;
+
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
+$this->title = 'Mfos';
+?>
+<div class="breadcrumbs">
+    <div class="container">
+        <ul class="breadcrumbs__items">
+            <li class="breadcrumbs__item">
+                <a href="/" class="breadcrumbs__link">Займы онлайн</a>
+            </li>
+            <li class="breadcrumbs__item">
+                МФО
+            </li>
+        </ul>
+    </div>
+</div>
+<section class="calculator">
+    <div class="container">
+        <div class="calculator__main">
+            <div class="calculator__row background-set">
+                <div class="calculator__columns">
+                    <div class="calculator__col">
+                        <div class="calculator__range range">
+                            <label class="range__label">
+                                <span class="range__label-title">¿Cuánto dinero necesitas?</span>
+                            </label>
+                            <div class="range__inputs">
+                                <div class="range__result result-1">
+                                    <div class="range__result-input">
+                                        <input aria-invalid="false" type="text" slot="amount" aria-labelledby="input-amount-slider" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense" value="50" name="rs_sum_output" id="rs_sum_output">
+                                    </div>
+                                    <span class="range__result-span">$</span>
+                                </div>
+                                <input id="rs_sum" type="range" name="rs_sum" min="0" max="100" value="50" step="5" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calculator__col">
+                        <div class="calculator__range range">
+                            <label class="range__label">
+                                <span class="range__label-title">¿En cuánto tiempo deseas pagarlo?</span>
+                            </label>
+                            <div class="range__inputs">
+                                <div class="range__result result-2">
+                                    <div class="range__result-input">
+                                        <input aria-invalid="false" type="text" slot="term" aria-labelledby="input-term-slider" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense" value="30" name="rs_term_output" id="rs_term_output">
+                                    </div>
+                                    <span class="range__result-span">días</span>
+                                </div>
+                                <input id="rs_term" type="range" name="rs_term" min="0" max="100" value="5" step="5" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="calculator__button button button--primary">Compara ofertas</button>
+            </div>
+        </div>
+        <div class="calculator__mini">
+            <div class="calculator__row background-set">
+                <div class="calculator__columns">
+                    <div class="calculator__col">
+                        <div class="calculator__range range">
+                            <label class="range__label">
+                                <span class="range__label-title">Monto:</span>
+                            </label>
+                            <div class="range__result result-1">
+                                <div class="range__result-input">
+                                    <input aria-invalid="false" type="text" slot="amount" aria-labelledby="input-amount-slider" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense" value="50" name="rs_sum_output" id="rs_sum_output">
+                                </div>
+                                <span class="range__result-span">$</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calculator__col">
+                        <div class="calculator__range range">
+                            <label class="range__label">
+                                <span class="range__label-title">Período:</span>
+                            </label>
+                            <div class="range__result result-2">
+                                <div class="range__result-input">
+                                    <input aria-invalid="false" type="text" slot="term" aria-labelledby="input-term-slider" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense" value="30" name="rs_term_output" id="rs_term_output">
+                                </div>
+                                <span class="range__result-span">días</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="calculator__button button button--secondary">Más info</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="content">
+    <div class="container">
+        <div class="content__row">
+            <section class="cards">
+                <?php foreach ($mfos as $mfo) : ?>
+                <div class="offer change-text">
+                    <div class="offer__row">
+                        <div class="offer__company">
+                            <div class="offer__company-line">Recomendado</div>
+                            <div class="offer__company-logo">
+                                <div class="offer__company-img">
+                                    <img src="<?= $mfo->logo ?>" alt="<?= $mfo->name ?>">
+                                </div>
+                                <div class="repute">
+                                    <div class="repute__rating">
+                                        <img class="repute__rating-image" src="img/stars.svg" alt="stars">
+                                        <div class="repute__rating-number">4,4</div>
+                                    </div>
+                                    <div class="repute__comments">
+                                        Leer <a href="#" class="repute__comments-link">25 comentarios</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="offer__company-title">IDF Capital, S.A.P.I de C.V SOFOM, E.N.R.</div>
+                        </div>
+                        <div class="offer__content">
+                            <div class="offer__value">
+                                <ul class="offer__value-list">
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Monto del Préstamo, $</div>
+                                        <div class="offer__value-number">50</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Fecha de Pago, días</div>
+                                        <div class="offer__value-number">30</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Tasa de interés, %</div>
+                                        <div class="offer__value-number">11</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Total a Pagar, $</div>
+                                        <div class="offer__value-number">61</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            CAT, %</div>
+                                        <div class="offer__value-number">11</div>
+                                    </li>
+                                    <li class="offer__value-item offer__value-item--last">
+                                        <div class="offer__value-title">
+                                            Nuestra calificación</div>
+                                        <div class="offer__value-number">4,8</div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="offer__info">
+                                <div class="offer__buttons">
+                                    <input type="checkbox" checked class="checkbox">
+                                    <div class="offer__links">
+                                        <div class="offer__open button button--secondary open">Más info</div>
+                                        <a class="offer__receive button button--primary" href="#">Recibir dinero</a>
+                                    </div>
+                                </div>
+                                <div class="offer__repute repute">
+                                    <div class="repute__rating">
+                                        <img class="repute__rating-image" src="img/stars.svg" alt="stars">
+                                        <div class="repute__rating-number">4,4</div>
+                                    </div>
+                                    <div class="repute__comments">
+                                        Leer <a href="#" class="repute__comments-link">25 comentarios</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="offer__dropdown offer-dropdown">
+                        <div class="offer-dropdown__items">
+                            <div class="offer-dropdown__item offer-dropdown__repute">
+                                <ul class="offer-dropdown__repute-list">
+                                    <li class="offer-dropdown__repute-item">
+                                        <div class="offer-dropdown__repute-title">Nuestra calificación</div>
+                                        <div class="offer-dropdown__repute-rating">
+                                            <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                            <span class="offer-dropdown__repute-number">4,8</span>
+                                        </div>
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Interés & Costes</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Condiciones</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Atención al cliente</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Funcionalidad</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <a href="#" class="offer-dropdown__repute-link">Información precisa</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="offer-dropdown__item offer-dropdown__info">
+                                <ul class="offer-dropdown__info-list">
+                                    <li class="offer-dropdown__info-item">
+                                        <p class="offer-dropdown__info-text">Ser mayor de</p>
+                                        <div class="offer-dropdown__info-number">18</div>
+                                    </li>
+                                    <li class="offer-dropdown__info-item">
+                                        <p class="offer-dropdown__info-text">La tasa de interés</p>
+                                        <div class="offer-dropdown__info-number">5-15%</div>
+                                    </li>
+                                    <li class="offer-dropdown__info-item">
+                                        <p class="offer-dropdown__info-text">Acepta mal historial crediticio</p>
+                                        <img class="offer-dropdown__info-image" src="img/checkbox.svg" alt="checkbox">
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="offer-dropdown__item offer-dropdown__connection">
+                                <ul class="offer-dropdown__connection-list">
+                                    <li class="offer-dropdown__connection-item">
+                                        <p class="offer-dropdown__connection-text">Abierto 24/7</p>
+                                        <img class="offer-dropdown__connection-image" src="img/checkbox.svg" alt="checkbox">
+                                    </li>
+                                    <li class="offer-dropdown__connection-item offer-dropdown__connection-item--column">
+                                        <p class="offer-dropdown__connection-text">WhatsApp</p>
+                                        <a href="tel:+525580703990" class="offer-dropdown__connection-phone">+52 55 8070 3990</a>
+                                    </li>
+                                    <li class="offer-dropdown__connection-item">
+                                        <p class="offer-dropdown__connection-text">Tiene app</p>
+                                        <img class="offer-dropdown__connection-image" src="img/checkbox.svg" alt="checkbox">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+                <div class="offer change-text">
+                    <div class="offer__row">
+                        <div class="offer__company">
+                            <div class="offer__company-line">Лучший выбор</div>
+                            <div class="offer__company-logo">
+                                <div class="offer__company-img">
+                                    <img src="img/cards/company/icon-2.png" alt="ZAItime">
+                                </div>
+                                <div class="repute">
+                                    <div class="repute__rating">
+                                        <img class="repute__rating-image" src="img/stars.svg" alt="stars">
+                                        <div class="repute__rating-number">4,2</div>
+                                    </div>
+                                    <div class="repute__comments">
+                                        Leer <a href="#" class="repute__comments-link">14 comentarios</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="offer__company-title">Proximus Finance, S. de R.L. de C.V</div>
+                        </div>
+                        <div class="offer__content">
+                            <div class="offer__value">
+                                <ul class="offer__value-list">
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Monto del Préstamo, $</div>
+                                        <div class="offer__value-number">50</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Fecha de Pago, días</div>
+                                        <div class="offer__value-number">30</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Tasa de interés, %</div>
+                                        <div class="offer__value-number">18</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Total a Pagar, $</div>
+                                        <div class="offer__value-number">69</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            CAT, %</div>
+                                        <div class="offer__value-number">17</div>
+                                    </li>
+                                    <li class="offer__value-item offer__value-item--last">
+                                        <div class="offer__value-title">
+                                            Nuestra calificación</div>
+                                        <div class="offer__value-number">4,2</div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="offer__info">
+                                <div class="offer__buttons">
+                                    <input type="checkbox" checked class="checkbox">
+                                    <div class="offer__links">
+                                        <div class="offer__open button button--secondary open">Más info</div>
+                                        <a class="offer__receive button button--primary" href="#">Recibir dinero</a>
+                                    </div>
+                                </div>
+                                <div class="offer__repute repute">
+                                    <div class="repute__rating">
+                                        <img class="repute__rating-image" src="img/stars.svg" alt="stars">
+                                        <div class="repute__rating-number">4,2</div>
+                                    </div>
+                                    <div class="repute__comments">
+                                        Leer <a href="#" class="repute__comments-link">17 comentarios</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="offer__dropdown offer-dropdown">
+                        <div class="offer-dropdown__items">
+                            <div class="offer-dropdown__item offer-dropdown__repute">
+                                <ul class="offer-dropdown__repute-list">
+                                    <li class="offer-dropdown__repute-item">
+                                        <div class="offer-dropdown__repute-title">Nuestra calificación</div>
+                                        <div class="offer-dropdown__repute-rating">
+                                            <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                            <span class="offer-dropdown__repute-number">4,8</span>
+                                        </div>
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Interés & Costes</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Condiciones</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Atención al cliente</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Funcionalidad</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <a href="#" class="offer-dropdown__repute-link">Información precisa</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="offer-dropdown__item offer-dropdown__info">
+                                <ul class="offer-dropdown__info-list">
+                                    <li class="offer-dropdown__info-item">
+                                        <p class="offer-dropdown__info-text">Ser mayor de</p>
+                                        <div class="offer-dropdown__info-number">18</div>
+                                    </li>
+                                    <li class="offer-dropdown__info-item">
+                                        <p class="offer-dropdown__info-text">La tasa de interés</p>
+                                        <div class="offer-dropdown__info-number">5-15%</div>
+                                    </li>
+                                    <li class="offer-dropdown__info-item">
+                                        <p class="offer-dropdown__info-text">Acepta mal historial crediticio</p>
+                                        <img class="offer-dropdown__info-image" src="img/checkbox.svg" alt="checkbox">
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="offer-dropdown__item offer-dropdown__connection">
+                                <ul class="offer-dropdown__connection-list">
+                                    <li class="offer-dropdown__connection-item">
+                                        <p class="offer-dropdown__connection-text">Abierto 24/7</p>
+                                        <img class="offer-dropdown__connection-image" src="img/checkbox.svg" alt="checkbox">
+                                    </li>
+                                    <li class="offer-dropdown__connection-item offer-dropdown__connection-item--column">
+                                        <p class="offer-dropdown__connection-text">WhatsApp</p>
+                                        <a href="tel:+525580703990" class="offer-dropdown__connection-phone">+52 55 8070 3990</a>
+                                    </li>
+                                    <li class="offer-dropdown__connection-item">
+                                        <p class="offer-dropdown__connection-text">Tiene app</p>
+                                        <img class="offer-dropdown__connection-image" src="img/checkbox.svg" alt="checkbox">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="offer change-text">
+                    <div class="offer__row">
+                        <div class="offer__company">
+                            <div class="offer__company-line">Акция</div>
+                            <div class="offer__company-logo">
+                                <div class="offer__company-img">
+                                    <img src="img/cards/company/icon-3.png" alt="MoneyMan">
+                                </div>
+                                <div class="repute">
+                                    <div class="repute__rating">
+                                        <img class="repute__rating-image" src="img/stars.svg" alt="stars">
+                                        <div class="repute__rating-number">4,1</div>
+                                    </div>
+                                    <div class="repute__comments">
+                                        Leer <a href="#" class="repute__comments-link">19 comentarios</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="offer__company-title">IDF Capital, S.A.P.I de C.V SOFOM, E.N.R.</div>
+                        </div>
+                        <div class="offer__content">
+                            <div class="offer__value">
+                                <ul class="offer__value-list">
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Monto del Préstamo, $</div>
+                                        <div class="offer__value-number">50</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Fecha de Pago, días</div>
+                                        <div class="offer__value-number">30</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Tasa de interés, %</div>
+                                        <div class="offer__value-number">12</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Total a Pagar, $</div>
+                                        <div class="offer__value-number">67</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            CAT, %</div>
+                                        <div class="offer__value-number">12</div>
+                                    </li>
+                                    <li class="offer__value-item offer__value-item--last">
+                                        <div class="offer__value-title">
+                                            Nuestra calificación</div>
+                                        <div class="offer__value-number">4,3</div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="offer__info">
+                                <div class="offer__buttons">
+                                    <input type="checkbox" checked class="checkbox">
+                                    <div class="offer__links">
+                                        <div class="offer__open button button--secondary open">Más info</div>
+                                        <a class="offer__receive button button--primary" href="#">Recibir dinero</a>
+                                    </div>
+                                </div>
+                                <div class="offer__repute repute">
+                                    <div class="repute__rating">
+                                        <img class="repute__rating-image" src="img/stars.svg" alt="stars">
+                                        <div class="repute__rating-number">4,1</div>
+                                    </div>
+                                    <div class="repute__comments">
+                                        Leer <a href="#" class="repute__comments-link">19 comentarios</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="offer__dropdown offer-dropdown">
+                        <div class="offer-dropdown__items">
+                            <div class="offer-dropdown__item offer-dropdown__repute">
+                                <ul class="offer-dropdown__repute-list">
+                                    <li class="offer-dropdown__repute-item">
+                                        <div class="offer-dropdown__repute-title">Nuestra calificación</div>
+                                        <div class="offer-dropdown__repute-rating">
+                                            <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                            <span class="offer-dropdown__repute-number">4,8</span>
+                                        </div>
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Interés & Costes</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Condiciones</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Atención al cliente</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Funcionalidad</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <a href="#" class="offer-dropdown__repute-link">Información precisa</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="offer-dropdown__item offer-dropdown__info">
+                                <ul class="offer-dropdown__info-list">
+                                    <li class="offer-dropdown__info-item">
+                                        <p class="offer-dropdown__info-text">Ser mayor de</p>
+                                        <div class="offer-dropdown__info-number">18</div>
+                                    </li>
+                                    <li class="offer-dropdown__info-item">
+                                        <p class="offer-dropdown__info-text">La tasa de interés</p>
+                                        <div class="offer-dropdown__info-number">5-15%</div>
+                                    </li>
+                                    <li class="offer-dropdown__info-item">
+                                        <p class="offer-dropdown__info-text">Acepta mal historial crediticio</p>
+                                        <img class="offer-dropdown__info-image" src="img/checkbox.svg" alt="checkbox">
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="offer-dropdown__item offer-dropdown__connection">
+                                <ul class="offer-dropdown__connection-list">
+                                    <li class="offer-dropdown__connection-item">
+                                        <p class="offer-dropdown__connection-text">Abierto 24/7</p>
+                                        <img class="offer-dropdown__connection-image" src="img/checkbox.svg" alt="checkbox">
+                                    </li>
+                                    <li class="offer-dropdown__connection-item offer-dropdown__connection-item--column">
+                                        <p class="offer-dropdown__connection-text">WhatsApp</p>
+                                        <a href="tel:+525580703990" class="offer-dropdown__connection-phone">+52 55 8070 3990</a>
+                                    </li>
+                                    <li class="offer-dropdown__connection-item">
+                                        <p class="offer-dropdown__connection-text">Tiene app</p>
+                                        <img class="offer-dropdown__connection-image" src="img/checkbox.svg" alt="checkbox">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="offer offer--hidden change-text">
+                    <div class="offer__row">
+                        <div class="offer__company">
+                            <div class="offer__company-line">Recomendado</div>
+                            <div class="offer__company-logo">
+                                <div class="offer__company-img">
+                                    <img src="img/cards/company/icon-1.png" alt="Credito.kz">
+                                </div>
+                                <div class="repute">
+                                    <div class="repute__rating">
+                                        <img class="repute__rating-image" src="img/stars.svg" alt="stars">
+                                        <div class="repute__rating-number">4,4</div>
+                                    </div>
+                                    <div class="repute__comments">
+                                        Leer <a href="#" class="repute__comments-link">25 comentarios</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="offer__company-title">IDF Capital, S.A.P.I de C.V SOFOM, E.N.R.</div>
+                        </div>
+                        <div class="offer__content">
+                            <div class="offer__value">
+                                <ul class="offer__value-list">
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Monto del Préstamo, $</div>
+                                        <div class="offer__value-number">50</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Fecha de Pago, días</div>
+                                        <div class="offer__value-number">30</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Tasa de interés, %</div>
+                                        <div class="offer__value-number">11</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Total a Pagar, $</div>
+                                        <div class="offer__value-number">61</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            CAT, %</div>
+                                        <div class="offer__value-number">11</div>
+                                    </li>
+                                    <li class="offer__value-item offer__value-item--last">
+                                        <div class="offer__value-title">
+                                            Nuestra calificación</div>
+                                        <div class="offer__value-number">4,8</div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="offer__info">
+                                <div class="offer__buttons">
+                                    <input type="checkbox" checked class="checkbox">
+                                    <div class="offer__links">
+                                        <div class="offer__open button button--secondary open">Más info</div>
+                                        <a class="offer__receive button button--primary" href="#">Recibir dinero</a>
+                                    </div>
+                                </div>
+                                <div class="offer__repute repute">
+                                    <div class="repute__rating">
+                                        <img class="repute__rating-image" src="img/stars.svg" alt="stars">
+                                        <div class="repute__rating-number">4,4</div>
+                                    </div>
+                                    <div class="repute__comments">
+                                        Leer <a href="#" class="repute__comments-link">25 comentarios</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="offer__dropdown offer-dropdown">
+                        <div class="offer-dropdown__items">
+                            <div class="offer-dropdown__item offer-dropdown__repute">
+                                <ul class="offer-dropdown__repute-list">
+                                    <li class="offer-dropdown__repute-item">
+                                        <div class="offer-dropdown__repute-title">Nuestra calificación</div>
+                                        <div class="offer-dropdown__repute-rating">
+                                            <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                            <span class="offer-dropdown__repute-number">4,8</span>
+                                        </div>
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Interés & Costes</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Condiciones</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Atención al cliente</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Funcionalidad</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <a href="#" class="offer-dropdown__repute-link">Información precisa</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="offer-dropdown__item offer-dropdown__info">
+                                <ul class="offer-dropdown__info-list">
+                                    <li class="offer-dropdown__info-item">
+                                        <p class="offer-dropdown__info-text">Ser mayor de</p>
+                                        <div class="offer-dropdown__info-number">18</div>
+                                    </li>
+                                    <li class="offer-dropdown__info-item">
+                                        <p class="offer-dropdown__info-text">La tasa de interés</p>
+                                        <div class="offer-dropdown__info-number">5-15%</div>
+                                    </li>
+                                    <li class="offer-dropdown__info-item">
+                                        <p class="offer-dropdown__info-text">Acepta mal historial crediticio</p>
+                                        <img class="offer-dropdown__info-image" src="img/checkbox.svg" alt="checkbox">
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="offer-dropdown__item offer-dropdown__connection">
+                                <ul class="offer-dropdown__connection-list">
+                                    <li class="offer-dropdown__connection-item">
+                                        <p class="offer-dropdown__connection-text">Abierto 24/7</p>
+                                        <img class="offer-dropdown__connection-image" src="img/checkbox.svg" alt="checkbox">
+                                    </li>
+                                    <li class="offer-dropdown__connection-item offer-dropdown__connection-item--column">
+                                        <p class="offer-dropdown__connection-text">WhatsApp</p>
+                                        <a href="tel:+525580703990" class="offer-dropdown__connection-phone">+52 55 8070 3990</a>
+                                    </li>
+                                    <li class="offer-dropdown__connection-item">
+                                        <p class="offer-dropdown__connection-text">Tiene app</p>
+                                        <img class="offer-dropdown__connection-image" src="img/checkbox.svg" alt="checkbox">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="offer offer--hidden change-text">
+                    <div class="offer__row">
+                        <div class="offer__company">
+                            <div class="offer__company-line">Лучший выбор</div>
+                            <div class="offer__company-logo">
+                                <div class="offer__company-img">
+                                    <img src="img/cards/company/icon-2.png" alt="ZAItime">
+                                </div>
+                                <div class="repute">
+                                    <div class="repute__rating">
+                                        <img class="repute__rating-image" src="img/stars.svg" alt="stars">
+                                        <div class="repute__rating-number">4,2</div>
+                                    </div>
+                                    <div class="repute__comments">
+                                        Leer <a href="#" class="repute__comments-link">14 comentarios</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="offer__company-title">Proximus Finance, S. de R.L. de C.V</div>
+                        </div>
+                        <div class="offer__content">
+                            <div class="offer__value">
+                                <ul class="offer__value-list">
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Monto del Préstamo, $</div>
+                                        <div class="offer__value-number">50</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Fecha de Pago, días</div>
+                                        <div class="offer__value-number">30</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Tasa de interés, %</div>
+                                        <div class="offer__value-number">18</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Total a Pagar, $</div>
+                                        <div class="offer__value-number">69</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            CAT, %</div>
+                                        <div class="offer__value-number">17</div>
+                                    </li>
+                                    <li class="offer__value-item offer__value-item--last">
+                                        <div class="offer__value-title">
+                                            Nuestra calificación</div>
+                                        <div class="offer__value-number">4,2</div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="offer__info">
+                                <div class="offer__buttons">
+                                    <input type="checkbox" checked class="checkbox">
+                                    <div class="offer__links">
+                                        <div class="offer__open button button--secondary open">Más info</div>
+                                        <a class="offer__receive button button--primary" href="#">Recibir dinero</a>
+                                    </div>
+                                </div>
+                                <div class="offer__repute repute">
+                                    <div class="repute__rating">
+                                        <img class="repute__rating-image" src="img/stars.svg" alt="stars">
+                                        <div class="repute__rating-number">4,2</div>
+                                    </div>
+                                    <div class="repute__comments">
+                                        Leer <a href="#" class="repute__comments-link">17 comentarios</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="offer__dropdown offer-dropdown">
+                        <div class="offer-dropdown__items">
+                            <div class="offer-dropdown__item offer-dropdown__repute">
+                                <ul class="offer-dropdown__repute-list">
+                                    <li class="offer-dropdown__repute-item">
+                                        <div class="offer-dropdown__repute-title">Nuestra calificación</div>
+                                        <div class="offer-dropdown__repute-rating">
+                                            <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                            <span class="offer-dropdown__repute-number">4,8</span>
+                                        </div>
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Interés & Costes</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Condiciones</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Atención al cliente</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Funcionalidad</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <a href="#" class="offer-dropdown__repute-link">Información precisa</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="offer-dropdown__item offer-dropdown__info">
+                                <ul class="offer-dropdown__info-list">
+                                    <li class="offer-dropdown__info-item">
+                                        <p class="offer-dropdown__info-text">Ser mayor de</p>
+                                        <div class="offer-dropdown__info-number">18</div>
+                                    </li>
+                                    <li class="offer-dropdown__info-item">
+                                        <p class="offer-dropdown__info-text">La tasa de interés</p>
+                                        <div class="offer-dropdown__info-number">5-15%</div>
+                                    </li>
+                                    <li class="offer-dropdown__info-item">
+                                        <p class="offer-dropdown__info-text">Acepta mal historial crediticio</p>
+                                        <img class="offer-dropdown__info-image" src="img/checkbox.svg" alt="checkbox">
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="offer-dropdown__item offer-dropdown__connection">
+                                <ul class="offer-dropdown__connection-list">
+                                    <li class="offer-dropdown__connection-item">
+                                        <p class="offer-dropdown__connection-text">Abierto 24/7</p>
+                                        <img class="offer-dropdown__connection-image" src="img/checkbox.svg" alt="checkbox">
+                                    </li>
+                                    <li class="offer-dropdown__connection-item offer-dropdown__connection-item--column">
+                                        <p class="offer-dropdown__connection-text">WhatsApp</p>
+                                        <a href="tel:+525580703990" class="offer-dropdown__connection-phone">+52 55 8070 3990</a>
+                                    </li>
+                                    <li class="offer-dropdown__connection-item">
+                                        <p class="offer-dropdown__connection-text">Tiene app</p>
+                                        <img class="offer-dropdown__connection-image" src="img/checkbox.svg" alt="checkbox">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="offer offer--hidden change-text">
+                    <div class="offer__row">
+                        <div class="offer__company">
+                            <div class="offer__company-line">Акция</div>
+                            <div class="offer__company-logo">
+                                <div class="offer__company-img"></div>
+                                <div class="repute">
+                                    <div class="repute__rating">
+                                        <img class="repute__rating-image" src="img/stars.svg" alt="stars">
+                                        <div class="repute__rating-number">4,1</div>
+                                    </div>
+                                    <div class="repute__comments">
+                                        Leer <a href="#" class="repute__comments-link">19 comentarios</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="offer__company-title">IDF Capital, S.A.P.I de C.V SOFOM, E.N.R.</div>
+                        </div>
+                        <div class="offer__content">
+                            <div class="offer__value">
+                                <ul class="offer__value-list">
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Monto del Préstamo, $</div>
+                                        <div class="offer__value-number">50</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Fecha de Pago, días</div>
+                                        <div class="offer__value-number">30</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Tasa de interés, %</div>
+                                        <div class="offer__value-number">12</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Total a Pagar, $</div>
+                                        <div class="offer__value-number">67</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            CAT, %</div>
+                                        <div class="offer__value-number">12</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Nuestra calificación</div>
+                                        <div class="offer__value-number">4,3</div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="offer__info">
+                                <div class="offer__buttons">
+                                    <input type="checkbox" checked class="checkbox">
+                                    <div class="offer__links">
+                                        <div class="offer__open button button--secondary open">Más info</div>
+                                        <a class="offer__receive button button--primary" href="#">Recibir dinero</a>
+                                    </div>
+                                </div>
+                                <div class="offer__repute repute">
+                                    <div class="repute__rating">
+                                        <img class="repute__rating-image" src="img/stars.svg" alt="stars">
+                                        <div class="repute__rating-number">4,1</div>
+                                    </div>
+                                    <div class="repute__comments">
+                                        Leer <a href="#" class="repute__comments-link">19 comentarios</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="offer__dropdown offer-dropdown">
+                        <div class="offer-dropdown__items">
+                            <div class="offer-dropdown__item offer-dropdown__repute">
+                                <ul class="offer-dropdown__repute-list">
+                                    <li class="offer-dropdown__repute-item">
+                                        <div class="offer-dropdown__repute-title">Nuestra calificación</div>
+                                        <div class="offer-dropdown__repute-rating">
+                                            <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                            <span class="offer-dropdown__repute-number">4,8</span>
+                                        </div>
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Interés & Costes</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Condiciones</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Atención al cliente</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Funcionalidad</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <a href="#" class="offer-dropdown__repute-link">Información precisa</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="offer-dropdown__item offer-dropdown__info">
+                                <ul class="offer-dropdown__info-list">
+                                    <li class="offer-dropdown__info-item">
+                                        <p class="offer-dropdown__info-text">Ser mayor de</p>
+                                        <div class="offer-dropdown__info-number">18</div>
+                                    </li>
+                                    <li class="offer-dropdown__info-item">
+                                        <p class="offer-dropdown__info-text">La tasa de interés</p>
+                                        <div class="offer-dropdown__info-number">5-15%</div>
+                                    </li>
+                                    <li class="offer-dropdown__info-item">
+                                        <p class="offer-dropdown__info-text">Acepta mal historial crediticio</p>
+                                        <img class="offer-dropdown__info-image" src="img/checkbox.svg" alt="checkbox">
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="offer-dropdown__item offer-dropdown__connection">
+                                <ul class="offer-dropdown__connection-list">
+                                    <li class="offer-dropdown__connection-item">
+                                        <p class="offer-dropdown__connection-text">Abierto 24/7</p>
+                                        <img class="offer-dropdown__connection-image" src="img/checkbox.svg" alt="checkbox">
+                                    </li>
+                                    <li class="offer-dropdown__connection-item offer-dropdown__connection-item--column">
+                                        <p class="offer-dropdown__connection-text">WhatsApp</p>
+                                        <a href="tel:+525580703990" class="offer-dropdown__connection-phone">+52 55 8070 3990</a>
+                                    </li>
+                                    <li class="offer-dropdown__connection-item">
+                                        <p class="offer-dropdown__connection-text">Tiene app</p>
+                                        <img class="offer-dropdown__connection-image" src="img/checkbox.svg" alt="checkbox">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="offer offer--hidden change-text">
+                    <div class="offer__row">
+                        <div class="offer__company">
+                            <div class="offer__company-line">Recomendado</div>
+                            <div class="offer__company-logo">
+                                <div class="offer__company-img">
+                                    <img src="img/cards/company/icon-1.png" alt="Credito.kz">
+                                </div>
+                                <div class="repute">
+                                    <div class="repute__rating">
+                                        <img class="repute__rating-image" src="img/stars.svg" alt="stars">
+                                        <div class="repute__rating-number">4,4</div>
+                                    </div>
+                                    <div class="repute__comments">
+                                        Leer <a href="#" class="repute__comments-link">25 comentarios</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="offer__company-title">IDF Capital, S.A.P.I de C.V SOFOM, E.N.R.</div>
+                        </div>
+                        <div class="offer__content">
+                            <div class="offer__value">
+                                <ul class="offer__value-list">
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Monto del Préstamo, $</div>
+                                        <div class="offer__value-number">50</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Fecha de Pago, días</div>
+                                        <div class="offer__value-number">30</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Tasa de interés, %</div>
+                                        <div class="offer__value-number">11</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Total a Pagar, $</div>
+                                        <div class="offer__value-number">61</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            CAT, %</div>
+                                        <div class="offer__value-number">11</div>
+                                    </li>
+                                    <li class="offer__value-item offer__value-item--last">
+                                        <div class="offer__value-title">
+                                            Nuestra calificación</div>
+                                        <div class="offer__value-number">4,8</div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="offer__info">
+                                <div class="offer__buttons">
+                                    <input type="checkbox" checked class="checkbox">
+                                    <div class="offer__links">
+                                        <div class="offer__open button button--secondary open">Más info</div>
+                                        <a class="offer__receive button button--primary" href="#">Recibir dinero</a>
+                                    </div>
+                                </div>
+                                <div class="offer__repute repute">
+                                    <div class="repute__rating">
+                                        <img class="repute__rating-image" src="img/stars.svg" alt="stars">
+                                        <div class="repute__rating-number">4,4</div>
+                                    </div>
+                                    <div class="repute__comments">
+                                        Leer <a href="#" class="repute__comments-link">25 comentarios</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="offer__dropdown offer-dropdown">
+                        <div class="offer-dropdown__items">
+                            <div class="offer-dropdown__item offer-dropdown__repute">
+                                <ul class="offer-dropdown__repute-list">
+                                    <li class="offer-dropdown__repute-item">
+                                        <div class="offer-dropdown__repute-title">Nuestra calificación</div>
+                                        <div class="offer-dropdown__repute-rating">
+                                            <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                            <span class="offer-dropdown__repute-number">4,8</span>
+                                        </div>
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Interés & Costes</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Condiciones</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Atención al cliente</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Funcionalidad</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <a href="#" class="offer-dropdown__repute-link">Información precisa</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="offer-dropdown__item offer-dropdown__info">
+                                <ul class="offer-dropdown__info-list">
+                                    <li class="offer-dropdown__info-item">
+                                        <p class="offer-dropdown__info-text">Ser mayor de</p>
+                                        <div class="offer-dropdown__info-number">18</div>
+                                    </li>
+                                    <li class="offer-dropdown__info-item">
+                                        <p class="offer-dropdown__info-text">La tasa de interés</p>
+                                        <div class="offer-dropdown__info-number">5-15%</div>
+                                    </li>
+                                    <li class="offer-dropdown__info-item">
+                                        <p class="offer-dropdown__info-text">Acepta mal historial crediticio</p>
+                                        <img class="offer-dropdown__info-image" src="img/checkbox.svg" alt="checkbox">
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="offer-dropdown__item offer-dropdown__connection">
+                                <ul class="offer-dropdown__connection-list">
+                                    <li class="offer-dropdown__connection-item">
+                                        <p class="offer-dropdown__connection-text">Abierto 24/7</p>
+                                        <img class="offer-dropdown__connection-image" src="img/checkbox.svg" alt="checkbox">
+                                    </li>
+                                    <li class="offer-dropdown__connection-item offer-dropdown__connection-item--column">
+                                        <p class="offer-dropdown__connection-text">WhatsApp</p>
+                                        <a href="tel:+525580703990" class="offer-dropdown__connection-phone">+52 55 8070 3990</a>
+                                    </li>
+                                    <li class="offer-dropdown__connection-item">
+                                        <p class="offer-dropdown__connection-text">Tiene app</p>
+                                        <img class="offer-dropdown__connection-image" src="img/checkbox.svg" alt="checkbox">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="offer offer--hidden change-text">
+                    <div class="offer__row">
+                        <div class="offer__company">
+                            <div class="offer__company-line">Лучший выбор</div>
+                            <div class="offer__company-logo">
+                                <div class="offer__company-img"></div>
+                                <div class="repute">
+                                    <div class="repute__rating">
+                                        <img class="repute__rating-image" src="img/stars.svg" alt="stars">
+                                        <div class="repute__rating-number">4,2</div>
+                                    </div>
+                                    <div class="repute__comments">
+                                        Leer <a href="#" class="repute__comments-link">14 comentarios</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="offer__company-title">Proximus Finance, S. de R.L. de C.V</div>
+                        </div>
+                        <div class="offer__content">
+                            <div class="offer__value">
+                                <ul class="offer__value-list">
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Monto del Préstamo, $</div>
+                                        <div class="offer__value-number">50</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Fecha de Pago, días</div>
+                                        <div class="offer__value-number">30</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Tasa de interés, %</div>
+                                        <div class="offer__value-number">18</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Total a Pagar, $</div>
+                                        <div class="offer__value-number">69</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            CAT, %</div>
+                                        <div class="offer__value-number">17</div>
+                                    </li>
+                                    <li class="offer__value-item offer__value-item--last">
+                                        <div class="offer__value-title">
+                                            Nuestra calificación</div>
+                                        <div class="offer__value-number">4,2</div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="offer__info">
+                                <div class="offer__buttons">
+                                    <input type="checkbox" checked class="checkbox">
+                                    <div class="offer__links">
+                                        <div class="offer__open button button--secondary open">Más info</div>
+                                        <a class="offer__receive button button--primary" href="#">Recibir dinero</a>
+                                    </div>
+                                </div>
+                                <div class="offer__repute repute">
+                                    <div class="repute__rating">
+                                        <img class="repute__rating-image" src="img/stars.svg" alt="stars">
+                                        <div class="repute__rating-number">4,2</div>
+                                    </div>
+                                    <div class="repute__comments">
+                                        Leer <a href="#" class="repute__comments-link">17 comentarios</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="offer__dropdown offer-dropdown">
+                        <div class="offer-dropdown__items">
+                            <div class="offer-dropdown__item offer-dropdown__repute">
+                                <ul class="offer-dropdown__repute-list">
+                                    <li class="offer-dropdown__repute-item">
+                                        <div class="offer-dropdown__repute-title">Nuestra calificación</div>
+                                        <div class="offer-dropdown__repute-rating">
+                                            <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                            <span class="offer-dropdown__repute-number">4,8</span>
+                                        </div>
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Interés & Costes</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Condiciones</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Atención al cliente</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Funcionalidad</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <a href="#" class="offer-dropdown__repute-link">Información precisa</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="offer-dropdown__item offer-dropdown__info">
+                                <ul class="offer-dropdown__info-list">
+                                    <li class="offer-dropdown__info-item">
+                                        <p class="offer-dropdown__info-text">Ser mayor de</p>
+                                        <div class="offer-dropdown__info-number">18</div>
+                                    </li>
+                                    <li class="offer-dropdown__info-item">
+                                        <p class="offer-dropdown__info-text">La tasa de interés</p>
+                                        <div class="offer-dropdown__info-number">5-15%</div>
+                                    </li>
+                                    <li class="offer-dropdown__info-item">
+                                        <p class="offer-dropdown__info-text">Acepta mal historial crediticio</p>
+                                        <img class="offer-dropdown__info-image" src="img/checkbox.svg" alt="checkbox">
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="offer-dropdown__item offer-dropdown__connection">
+                                <ul class="offer-dropdown__connection-list">
+                                    <li class="offer-dropdown__connection-item">
+                                        <p class="offer-dropdown__connection-text">Abierto 24/7</p>
+                                        <img class="offer-dropdown__connection-image" src="img/checkbox.svg" alt="checkbox">
+                                    </li>
+                                    <li class="offer-dropdown__connection-item offer-dropdown__connection-item--column">
+                                        <p class="offer-dropdown__connection-text">WhatsApp</p>
+                                        <a href="tel:+525580703990" class="offer-dropdown__connection-phone">+52 55 8070 3990</a>
+                                    </li>
+                                    <li class="offer-dropdown__connection-item">
+                                        <p class="offer-dropdown__connection-text">Tiene app</p>
+                                        <img class="offer-dropdown__connection-image" src="img/checkbox.svg" alt="checkbox">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="offer offer--hidden change-text">
+                    <div class="offer__row">
+                        <div class="offer__company">
+                            <div class="offer__company-line">Акция</div>
+                            <div class="offer__company-logo">
+                                <div class="offer__company-img">
+                                    <img src="img/cards/company/icon-3.png" alt="MoneyMan">
+                                </div>
+                                <div class="repute">
+                                    <div class="repute__rating">
+                                        <img class="repute__rating-image" src="img/stars.svg" alt="stars">
+                                        <div class="repute__rating-number">4,1</div>
+                                    </div>
+                                    <div class="repute__comments">
+                                        Leer <a href="#" class="repute__comments-link">19 comentarios</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="offer__company-title">IDF Capital, S.A.P.I de C.V SOFOM, E.N.R.</div>
+                        </div>
+                        <div class="offer__content">
+                            <div class="offer__value">
+                                <ul class="offer__value-list">
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Monto del Préstamo, $</div>
+                                        <div class="offer__value-number">50</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Fecha de Pago, días</div>
+                                        <div class="offer__value-number">30</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Tasa de interés, %</div>
+                                        <div class="offer__value-number">12</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            Total a Pagar, $</div>
+                                        <div class="offer__value-number">67</div>
+                                    </li>
+                                    <li class="offer__value-item">
+                                        <div class="offer__value-title">
+                                            CAT, %</div>
+                                        <div class="offer__value-number">12</div>
+                                    </li>
+                                    <li class="offer__value-item offer__value-item--last">
+                                        <div class="offer__value-title">
+                                            Nuestra calificación</div>
+                                        <div class="offer__value-number">4,3</div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="offer__info">
+                                <div class="offer__buttons">
+                                    <input type="checkbox" checked class="checkbox">
+                                    <div class="offer__links">
+                                        <div class="offer__open button button--secondary open">Más info</div>
+                                        <a class="offer__receive button button--primary" href="#">Recibir dinero</a>
+                                    </div>
+                                </div>
+                                <div class="offer__repute repute">
+                                    <div class="repute__rating">
+                                        <img class="repute__rating-image" src="img/stars.svg" alt="stars">
+                                        <div class="repute__rating-number">4,1</div>
+                                    </div>
+                                    <div class="repute__comments">
+                                        Leer <a href="#" class="repute__comments-link">19 comentarios</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="offer__dropdown offer-dropdown">
+                        <div class="offer-dropdown__items">
+                            <div class="offer-dropdown__item offer-dropdown__repute">
+                                <ul class="offer-dropdown__repute-list">
+                                    <li class="offer-dropdown__repute-item">
+                                        <div class="offer-dropdown__repute-title">Nuestra calificación</div>
+                                        <div class="offer-dropdown__repute-rating">
+                                            <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                            <span class="offer-dropdown__repute-number">4,8</span>
+                                        </div>
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Interés & Costes</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Condiciones</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Atención al cliente</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <p class="offer-dropdown__repute-text">Funcionalidad</p>
+                                        <img class="offer-dropdown__repute-image" src="img/stars.svg" alt="stars">
+                                    </li>
+                                    <li class="offer-dropdown__repute-item">
+                                        <a href="#" class="offer-dropdown__repute-link">Información precisa</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="offer-dropdown__item offer-dropdown__info">
+                                <ul class="offer-dropdown__info-list">
+                                    <li class="offer-dropdown__info-item">
+                                        <p class="offer-dropdown__info-text">Ser mayor de</p>
+                                        <div class="offer-dropdown__info-number">18</div>
+                                    </li>
+                                    <li class="offer-dropdown__info-item">
+                                        <p class="offer-dropdown__info-text">La tasa de interés</p>
+                                        <div class="offer-dropdown__info-number">5-15%</div>
+                                    </li>
+                                    <li class="offer-dropdown__info-item">
+                                        <p class="offer-dropdown__info-text">Acepta mal historial crediticio</p>
+                                        <img class="offer-dropdown__info-image" src="img/checkbox.svg" alt="checkbox">
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="offer-dropdown__item offer-dropdown__connection">
+                                <ul class="offer-dropdown__connection-list">
+                                    <li class="offer-dropdown__connection-item">
+                                        <p class="offer-dropdown__connection-text">Abierto 24/7</p>
+                                        <img class="offer-dropdown__connection-image" src="img/checkbox.svg" alt="checkbox">
+                                    </li>
+                                    <li class="offer-dropdown__connection-item offer-dropdown__connection-item--column">
+                                        <p class="offer-dropdown__connection-text">WhatsApp</p>
+                                        <a href="tel:+525580703990" class="offer-dropdown__connection-phone">+52 55 8070 3990</a>
+                                    </li>
+                                    <li class="offer-dropdown__connection-item">
+                                        <p class="offer-dropdown__connection-text">Tiene app</p>
+                                        <img class="offer-dropdown__connection-image" src="img/checkbox.svg" alt="checkbox">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="offer__all button button--secondary">Mostrar todas las ofertas</button>
+            </section>
+            <!-- <sidebar class="sidebar"></sidebar> -->
+        </div>
+    </div>
+</div>

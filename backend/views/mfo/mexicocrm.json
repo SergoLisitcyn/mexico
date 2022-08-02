@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "mexicocrm",
+  "private_key_id": "d704a62af6ba97eb98ceefca193784f40800da04",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCziq8cJbxlHuGV\n0RzUf+DnIClfpkxm7Lt0DJKs1BOiXWWYBP0zRTbSEZju7Vsk8eisqlY+ENRfXvSR\nWlNGIgno7ueKU2hd80fNOWvo0ubvogqkmu24MkP8EnLpvBLp6BPAhTHcsZ3tyjLV\nablJHE0al4e9frmppPkXAWqWgYEpj30syyXMzAqB9SIdH1CRMytEls+LyxS2rczh\nY4MaCfzld9SYH83IBK9aCySz7Q1STwWoKcs3RFS4DXlmuK+1x0QIq9vNddPRGp+G\n/vBF4fF01gFPJjgTvvidSelZ+TPwtWjpef4q9ROIeJpN4mEcn0B6r22Ox4txHqCb\nYtmknvCzAgMBAAECggEAOIYSUAm/UJSSz6BIc8wYqZsR+3d2+TZRY50rtjaEQesm\nd2AmuLPzKNp6a8oVFkIEjwuHYD3bJnVWCMbHjb5coVVJVt6gbmePdNg9lUyEgO/i\nauUNrx5AEgVa4SQhTjuOsF8ejgzrG/g63b5No2tCCPuos+tIF1UFSI1dGaoG2Ga4\nPf8jZvUUZ7SwpQ670o0mpFbraDieelts1nvxXjEA93FkqfM1vanEMfsrBCQgFXyV\nYNaPoy85jGlgoRbs4Zzj45Nc4bOdcVKofVDVAZewsu4Zydao0rZXwPMN2WwO/kte\nWD7tY/DsegCAPQh02vSaGk74byAh20pd9YBxhpTI6QKBgQD4UeDEMZRuRP58KpYv\nwOfBitfThBaCuN/Uc0IYT2XyYNDMz3x7y0HqgZRiZJ7O8eEy2Lk9ZySeIrvmgnPF\nOabgr4e2rPSjZ4SGHhzDStbPelBfub7uM4uqMJp7gy5GMJnQsnVaVlJqyViSF8gn\nGS6AEphpJCAB3Skpykasv8MWCQKBgQC5GD3cZaQyfArmONHwATls/r511w4G0/YL\najsnAdNBm86KhlCNjTj3L7WvKs6RCn3nyU4K4O6Dn5/EG1u6SxHVfHmVmE5tg7WU\nZoQPW8CNnPVtX4YptFZjqBOhE5jqKQWk0Dx/UQ+q0Dkcb3EZkZH0IPsiZGgJFfHD\neQE89JAf2wKBgQDW7G8hAFSbGEY3C9kPneQ5RMXGwbWGESNRyyxyxA3VueweyJrS\nvrrfkKXwf2xga0Ph8Whq9+HeqOt++HvhQSPppqNM/eeDoq42MsvsT9Maop/8KlVR\n7/U7KXQb4Q9lGt2Wn08pEDunR3vMfp7zED2KBg46OlUlp9jf3b5L+HGOmQKBgQCs\n6SeJB+6/Nr/b2ELOyeYCm2wDm7Y/zK0ydrfxtbPLu6jUIauIwN/xk0FP9VZpinqa\nGKVuZjiK/4h54/Dp9I0heZn/lPvXNM5hZu+BhX45DOL9nNoxhYWarX5A4JTeUxox\noFKTwX84XDKuDLGEaEgH3vOcal4B9t0Wdakhb3pgNwKBgHkKLeV8zuMUW2qQzsbI\nacH97yDpF/Zsuny7PI/wz+S1LdJy6fihuMTwdOX6hZaFYX1ozJFuWiQJSWg5Vi+W\n/LSo0j3idNIxM6wATvDBEGNHuOYoMNkhVDilTX79biy2ky9D0eRGRd/5Rzan1bPM\ntWSaIlqVnbKsUbGCtG3PTgNi\n-----END PRIVATE KEY-----\n",
+  "client_email": "mexicocrm-seracc@mexicocrm.iam.gserviceaccount.com",
+  "client_id": "106287338053180895857",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/mexicocrm-seracc%40mexicocrm.iam.gserviceaccount.com"
+}
