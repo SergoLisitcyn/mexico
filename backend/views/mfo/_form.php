@@ -9,7 +9,7 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="mfo">
+<div>
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -45,7 +45,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'status')->dropDownList([
         '1' => 'Активен',
-        '0' => 'Неактивен'
+        '0' => 'Не активен'
     ]) ?>
 
     <?= $form->field($model, 'sort')->textInput() ?>

@@ -16,24 +16,52 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Создать МФО', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <?= Html::a('Запустить обновление', ['mfo-new/sheet'], [
+        'class' => 'btn btn-success',
+        'data' => [
+            'confirm' => 'Вы точно хотите запустить обновление?',
+            'method' => 'post',
+        ],
+    ]) ?>
 
 
-    <?= GridView::widget([
+    <?= \kartik\grid\GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
             'name',
-            'url:url',
-            'title',
+            'url',
             [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Mfo $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                'class' => 'kartik\grid\EditableColumn',
+                'attribute' => 'status',
+                'hAlign' => 'center',
+                'filter' => false,
+                'editableOptions' =>  function ($model, $key, $index) {
+                    return [
+                        'header' => 'сортировку',
+                        'inputType' => 'dropDownList',
+                        'data' => [0 =>'Не активен',1 =>'Активен'],
+                    ];
+                },
+                'value' => function($model){
+                    if($model->status == 0){
+                        return 'Не активен';
+                    } elseif($model->status == 1) {
+                        return 'Активен';
+                    }
+
+                    return 'Неактивен';
+                },
+            ],
+            [
+                'label' => 'Действия',
+                'format' => 'raw',
+                'options' => ['width' => '200'],
+                'value' => function ($model, $index) {
+                    return Html::tag('a', 'Редактировать', ['href' => Url::toRoute(['mfo/update', 'id' => $index]), 'class' => 'btn btn-success', 'style' => 'font-weight: 100;margin-right:10px'])
+                        .Html::tag('a', 'Удалить', ['href' => Url::toRoute(['mfo/delete', 'id' => $index]), 'data-method' => 'post', 'data-confirm' => 'Вы точно хотите удалить?', 'class' => 'btn btn-order btn-danger', 'style' => 'font-weight: 100']);
+                },
             ],
         ],
     ]); ?>

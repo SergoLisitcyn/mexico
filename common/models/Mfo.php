@@ -139,80 +139,92 @@ class Mfo extends ActiveRecord
         $dataText = [];
         $countSave = 0;
         $countUpdate = 0;
+
         foreach($response->getSheets() as $sheet) {
             $sheetProperties = $sheet->getProperties();
             $range = $sheetProperties->title;
             $response = $service->spreadsheets_values->get($spreadsheetId, $range);
-
+            $mfoKey = 0;
             foreach ($response['values']  as $key => $value){
                 if($key == 0 || $key == 1 || $key == 2){
                     continue;
                 }
                 if($range == 'Condiciones de préstamos'){
-                    $data['condiciones'] = self::getCondiciones($value);
+                    $data[$mfoKey]['condiciones'] = self::getCondiciones($value);
                     if($key == 3){
                         $dataText['text']['condiciones'] = self::getCondiciones($value);
+                        continue;
                     }
                 }
                 if($range == 'Requisitos'){
-                    $data['requisitos'] = self::getRequisitos($value);
+                    $data[$mfoKey]['requisitos'] = self::getRequisitos($value);
                     if($key == 3){
                         $dataText['text']['requisitos'] = self::getRequisitos($value);
+                        continue;
                     }
                 }
                 if($range == 'Características de la compañía'){
-                    $data['characteristic'] = self::getCharacteristic($value);
+                    $data[$mfoKey]['characteristic'] = self::getCharacteristic($value);
                     if($key == 3){
                         $dataText['text']['characteristic'] = self::getCharacteristic($value);
+                        continue;
                     }
                 }
                 if($range == 'Medios de disposición del crédito'){
-                    $data['means'] = self::getMeans($value);
+                    $data[$mfoKey]['means'] = self::getMeans($value);
                     if($key == 3){
                         $dataText['text']['means'] = self::getMeans($value);
+                        continue;
                     }
                 }
                 if($range == 'Métodos de pago'){
-                    $data['payment_methods'] = self::getPaymentMethods($value);
+                    $data[$mfoKey]['payment_methods'] = self::getPaymentMethods($value);
                     if($key == 3){
                         $dataText['text']['payment_methods'] = self::getPaymentMethods($value);
+                        continue;
                     }
                 }
                 if($range == 'Datos de la compañia'){
-                    $data['data_company'] = self::getDataCompany($value);
+                    $data[$mfoKey]['data_company'] = self::getDataCompany($value);
                     if($key == 3){
                         $dataText['text']['data_company'] = self::getDataCompany($value);
+                        continue;
                     }
                 }
                 if($range == 'Empresa matriz'){
-                    $data['mother_company'] = self::getMotherCompany($value);
+                    $data[$mfoKey]['mother_company'] = self::getMotherCompany($value);
                     if($key == 3){
                         $dataText['text']['mother_company'] = self::getMotherCompany($value);
+                        continue;
                     }
                 }
                 if($range == 'La cuenta'){
-                    $data['account'] = self::getAccount($value);
+                    $data[$mfoKey]['account'] = self::getAccount($value);
                     if($key == 3){
                         $dataText['text']['account'] = self::getAccount($value);
+                        continue;
                     }
                 }
                 if($range == 'Atención al cliente'){
-                    $data['customer_support'] = self::getCustomerSupport($value);
+                    $data[$mfoKey]['customer_support'] = self::getCustomerSupport($value);
                     if($key == 3){
                         $dataText['text']['customer_support'] = self::getCustomerSupport($value);
+                        continue;
                     }
                 }
                 if($range == 'Contacto'){
-                    $data['contacts'] = self::getContacts($value);
+                    $data[$mfoKey]['contacts'] = self::getContacts($value);
                     if($key == 3){
                         $dataText['text']['contacts'] = self::getContacts($value);
+                        continue;
                     }
                 }
 
                 if($range == 'Meto'){
-                    $data['meta_tags'] = self::getMetaTags($value);
+                    $data[$mfoKey]['meta_tags'] = self::getMetaTags($value);
                     if($key == 3){
                         $dataText['text']['meta_tags'] = self::getMetaTags($value);
+                        continue;
                     }
 
                     if($key == 3){
@@ -222,7 +234,7 @@ class Mfo extends ActiveRecord
                             if($mfoText->save()){
                                 continue;
                             } else {
-                                echo 'Ошибка при обновлении таблицы MfoText ';
+                                echo 'Ошибка при обновлении таблицы MfoText';
                                 var_dump($mfoText->errors); die;
                             }
                         } else {
@@ -237,28 +249,34 @@ class Mfo extends ActiveRecord
                             }
                         }
                     }
-
-                    if($data['meta_tags']['url']){
-                        $mfo = Mfo::find()->where(['url' => $data['meta_tags']['url']])->one();
-                        if($mfo){
-                            $mfo->data = $data;
-                            $mfo->save();
-                            $countUpdate++;
-                        } else {
-                            $model = new Mfo();
-                            $model->name = $data['meta_tags']['url'];
-                            $model->url = $data['meta_tags']['url'];
-                            $model->title = $data['meta_tags']['title'];
-                            $model->data = $data;
-                            $model->save();
-                            $countSave++;
-                        }
+                }
+                $mfoKey++;
+            }
+        }
+        if($data){
+            foreach ($data as $datum){
+                if($datum['meta_tags']['url'] && $datum['meta_tags']['on']){
+                    $mfo = Mfo::find()->where(['url' => $datum['meta_tags']['url']])->one();
+                    if($mfo){
+                        $mfo->data = $datum;
+                        $mfo->save();
+                        $countUpdate++;
                     } else {
-                        $line = $key + 1;
-                        throw new HttpException(500, 'В строке '.$line.' отсутствует URL');
+                        $model = new Mfo();
+                        $model->name = $datum['meta_tags']['url'];
+                        $model->url = $datum['meta_tags']['url'];
+                        $model->title = $datum['meta_tags']['title'];
+                        $model->data = $datum;
+                        $model->save();
+                        $countSave++;
                     }
+                } else {
+                    $line = $key + 1;
+                    throw new HttpException(500, 'В строке '.$line.' отсутствует URL');
                 }
             }
+        } else {
+            throw new HttpException(500, 'Ошибка c Google таблицей');
         }
         return [
             'countSave' => $countSave,
@@ -344,7 +362,7 @@ class Mfo extends ActiveRecord
         $data['round_the_clock'] = $value[14]; // Круглосуточная (7/24) работа компании
         $data['tiene_app'] = $value[15]; // Tiene app
         $data['google_play'] = $value[16]; // Google Play
-        $data['app_store'] = $value[17]; // AppStore
+        $data['app_store'] = $value[17]; // App Store
 
         return $data;
     }
@@ -503,11 +521,12 @@ class Mfo extends ActiveRecord
      */
     public static function getMetaTags($value)
     {
+        $data['site'] = $value[0]; // site
         $data['url'] = $value[1]; // URL
         $data['on'] = $value[4]; // ON
         $data['h1'] = $value[5]; // H1
-        $data['title'] = $value[5]; // Title
-        $data['description'] = $value[5]; // Description
+        $data['title'] = $value[6]; // Title
+        $data['description'] = $value[7]; // Description
 
         return $data;
     }

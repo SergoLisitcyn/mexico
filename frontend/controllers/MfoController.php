@@ -63,6 +63,7 @@ class MfoController extends Controller
         if(!$mfo){
             throw new HttpException(404, 'Страница не существует.');
         }
+
         $reviewsModel = new Reviews();
 
         if ($reviewsModel->load(Yii::$app->request->post()) && $reviewsModel->save()) {

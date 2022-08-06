@@ -6,6 +6,7 @@ use common\models\Mfo;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\db\StaleObjectException;
+use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
@@ -35,11 +36,6 @@ class MfoController extends Controller
         );
     }
 
-    /**
-     * Lists all Mfo models.
-     *
-     * @return string
-     */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
@@ -55,6 +51,19 @@ class MfoController extends Controller
             ],
             */
         ]);
+        if (Yii::$app->request->post('hasEditable'))
+        {
+            $id=$_POST['editableKey'];
+            $model = $this->findModel($id);
+            $post = [];
+            $posted = current($_POST['Mfo']);
+            $post['Mfo'] = $posted;
+            if ($model->load($post)) {
+                $model->save();
+            }
+
+            return $this->refresh();
+        }
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
