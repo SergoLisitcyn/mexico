@@ -1,3 +1,4 @@
+<?php if($info->work) :?>
 <section class="main__block-checkbox block-checkbox">
     <div class="container">
         <div class="block-checkbox__row background-set">
@@ -10,3 +11,4 @@
         </div>
     </div>
 </section>
+<?php endif; ?>

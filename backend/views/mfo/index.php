@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= Html::a('Запустить обновление', ['mfo-new/sheet'], [
+    <?= Html::a('Запустить обновление', ['mfo/sheet'], [
         'class' => 'btn btn-success',
         'data' => [
             'confirm' => 'Вы точно хотите запустить обновление?',
