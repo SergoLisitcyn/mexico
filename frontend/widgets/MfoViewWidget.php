@@ -22,8 +22,7 @@ class MfoViewWidget extends Widget
 
     public function run()
     {
-        $text = MfoText::find()->where(['name' => 'Text'])->one();
-        $mfoText = json_decode($text->text_mfo,true);
+        $mfoText = MfoText::find()->where(['name' => 'Text'])->one();
         if($this->type == 'reviews') {
             return $this->render('mfo/'.$this->type,[
                 'reviewsModel' => $this->reviewsModel,
