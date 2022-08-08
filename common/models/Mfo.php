@@ -258,7 +258,7 @@ class Mfo extends ActiveRecord
                 if($datum['meta_tags']['url'] && $datum['meta_tags']['on']){
                     $mfo = Mfo::find()->where(['url' => $datum['meta_tags']['url']])->one();
                     if($mfo){
-                        $mfo->data = $datum;
+                        $mfo->data = json_encode($datum);
                         $mfo->save();
                         $countUpdate++;
                     } else {
@@ -266,7 +266,7 @@ class Mfo extends ActiveRecord
                         $model->name = $datum['meta_tags']['url'];
                         $model->url = $datum['meta_tags']['url'];
                         $model->title = $datum['meta_tags']['title'];
-                        $model->data = $datum;
+                        $model->data = json_encode($datum);
                         $model->save();
                         $countSave++;
                     }
