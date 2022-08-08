@@ -224,7 +224,6 @@ class Mfo extends ActiveRecord
                     $data[$mfoKey]['meta_tags'] = self::getMetaTags($value);
                     if($key == 3){
                         $dataText['text']['meta_tags'] = self::getMetaTags($value);
-                        continue;
                     }
 
                     if($key == 3){
