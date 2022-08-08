@@ -23,6 +23,7 @@ class MfoViewWidget extends Widget
     public function run()
     {
         $mfoText = MfoText::find()->where(['name' => 'Text'])->one();
+        $mfo = json_decode($mfoText->text_mfo,true);
         if($this->type == 'reviews') {
             return $this->render('mfo/'.$this->type,[
                 'reviewsModel' => $this->reviewsModel,
@@ -54,7 +55,7 @@ class MfoViewWidget extends Widget
         }
         return $this->render('mfo/mfo-view/'.$this->type,[
             'model' => $this->model,
-            'mfoText' => $mfoText->text_mfo['text'],
+            'mfoText' => $mfo['text'],
             'mfoRandoms' => $mfoRandoms,
         ]);
 
