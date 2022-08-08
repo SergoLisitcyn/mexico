@@ -230,7 +230,7 @@ class Mfo extends ActiveRecord
                     if($key == 3){
                         $mfoText = MfoText::find()->where(['name' => 'Text'])->one();
                         if($mfoText){
-                            $mfoText->text_mfo = $dataText;
+                            $mfoText->text_mfo = json_encode($dataText);
                             if($mfoText->save()){
                                 continue;
                             } else {
@@ -240,7 +240,7 @@ class Mfo extends ActiveRecord
                         } else {
                             $modelText = new MfoText();
                             $modelText->name = 'Text';
-                            $modelText->text_mfo = $dataText;
+                            $modelText->text_mfo = json_encode($dataText);
                             if($modelText->save()){
                                 continue;
                             } else {
