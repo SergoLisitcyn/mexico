@@ -54,7 +54,7 @@ class MfoViewWidget extends Widget
         }
         return $this->render('mfo/mfo-view/'.$this->type,[
             'model' => $this->model,
-            'mfoText' => $mfoText['text'],
+            'mfoText' => $mfoText->text_mfo['text'],
             'mfoRandoms' => $mfoRandoms,
         ]);
 
