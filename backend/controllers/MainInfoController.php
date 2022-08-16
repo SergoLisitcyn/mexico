@@ -3,7 +3,7 @@
 namespace backend\controllers;
 
 use common\models\MainInfo;
-use yii\data\ActiveDataProvider;
+use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -42,8 +42,16 @@ class MainInfoController extends Controller
         $model = new MainInfo();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['update', 'id' => $model->id]);
+            if ($model->load($this->request->post())) {
+                $model->work = Json::encode($model->work);
+                $model->text_main = $model->text_main;
+                $model->mission = Json::encode($model->mission);
+                if($model->save()){
+                    return $this->redirect(['update', 'id' => $model->id]);
+                } else {
+                    var_dump($model->errors);die;
+                }
+
             }
         } else {
             $model->loadDefaultValues();

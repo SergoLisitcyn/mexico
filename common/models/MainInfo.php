@@ -3,6 +3,7 @@
 namespace common\models;
 
 use yii\db\ActiveRecord;
+use yii\helpers\Json;
 
 /**
  * This is the model class for table "main_info".
@@ -44,5 +45,11 @@ class MainInfo extends ActiveRecord
             'mission' => 'Наши цели, миссия',
             'text_main' => 'О ценностях',
         ];
+    }
+
+    public function afterFind() {
+        parent::afterFind();
+        $this->work = Json::decode($this->work);
+        $this->mission = Json::decode($this->mission);
     }
 }
