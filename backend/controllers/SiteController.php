@@ -24,14 +24,18 @@ class SiteController extends Controller
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
-                    [
-                        'actions' => ['login', 'error'],
+                    [   'actions' => ['login'],
                         'allow' => true,
+                        'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout', 'index'],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['admin','manager'],
+                    ],
+                    [
+                        'allow' => false,
+                        'roles' => ['client'],
+                        'denyCallback' => function() { $this->redirect('/'); }
                     ],
                 ],
             ],

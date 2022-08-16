@@ -9,6 +9,7 @@ use yii\base\Exception;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\helpers\FileHelper;
+use yii\helpers\Json;
 use yii\web\HttpException;
 use yii\web\UploadedFile;
 
@@ -80,6 +81,10 @@ class Mfo extends ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
+    }
+    public function afterFind() {
+        parent::afterFind();
+        $this->data = Json::decode($this->data);
     }
 
     /**

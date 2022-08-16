@@ -121,41 +121,41 @@ $this->title = $model->title;
                                 </div>
 
                                 <!--  Características de la compañía -->
-                                <?= MfoViewWidget::widget(['type' => 'characteristic','model' => $mfoData]) ?>
+                                <?= MfoViewWidget::widget(['type' => 'characteristic','model' => $model->data]) ?>
 
                                 <!--  Condiciones de préstamos -->
-                                <?= MfoViewWidget::widget(['type' => 'condiciones','model' => $mfoData['condiciones']]) ?>
+                                <?= MfoViewWidget::widget(['type' => 'condiciones','model' => $model->data['condiciones']]) ?>
 
                                 <!--  Requisitos -->
-                                <?= MfoViewWidget::widget(['type' => 'requisitos','model' => $mfoData['requisitos']]) ?>
+                                <?= MfoViewWidget::widget(['type' => 'requisitos','model' => $model->data['requisitos']]) ?>
 
                                 <!--  Medios de disposición del crédito-->
-                                <?= MfoViewWidget::widget(['type' => 'means','model' => $mfoData['means']]) ?>
+                                <?= MfoViewWidget::widget(['type' => 'means','model' => $model->data['means']]) ?>
 
                                 <!--   Métodos de pago-->
-                                <?= MfoViewWidget::widget(['type' => 'payment_methods','model' => $mfoData['payment_methods']]) ?>
+                                <?= MfoViewWidget::widget(['type' => 'payment_methods','model' => $model->data['payment_methods']]) ?>
 
                                 <!--   Datos de la compañia-->
-                                <?= MfoViewWidget::widget(['type' => 'data_company','model' => $mfoData['data_company']]) ?>
+                                <?= MfoViewWidget::widget(['type' => 'data_company','model' => $model->data['data_company']]) ?>
 
                                 <div class="tabs-content__line line"></div>
 
                                 <!--   Empresa matriz-->
-                                <?= MfoViewWidget::widget(['type' => 'mother_company','model' => $mfoData['mother_company']]) ?>
+                                <?= MfoViewWidget::widget(['type' => 'mother_company','model' => $model->data['mother_company']]) ?>
 
                                 <div class="tabs-content__box tabs-content-box">
                                     <div class="tabs-content-box__columns">
                                         <!--   La cuenta-->
-                                        <?= MfoViewWidget::widget(['type' => 'account','model' => $mfoData['account']]) ?>
+                                        <?= MfoViewWidget::widget(['type' => 'account','model' => $model->data['account']]) ?>
 
                                         <!--   Atención al cliente-->
-                                        <?= MfoViewWidget::widget(['type' => 'customer_support','model' => $mfoData['customer_support']]) ?>
+                                        <?= MfoViewWidget::widget(['type' => 'customer_support','model' => $model->data['customer_support']]) ?>
 
                                     </div>
                                 </div>
 
                                 <!--   Contacto -->
-                                <?= MfoViewWidget::widget(['type' => 'contacts','model' => $mfoData['contacts']]) ?>
+                                <?= MfoViewWidget::widget(['type' => 'contacts','model' => $model->data['contacts']]) ?>
 
                                 <!--   Reviews -->
                                 <?= MfoViewWidget::widget(['type' => 'reviews','model' => $model,'reviewsModel' => $reviewsModel,'action' => '/mfo/'.$model->url]) ?>

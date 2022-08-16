@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use common\models\MainTeam;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -21,6 +22,24 @@ class MainTeamController extends Controller
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'rules' => [
+                        [   'actions' => ['login'],
+                            'allow' => true,
+                            'roles' => ['?'],
+                        ],
+                        [
+                            'allow' => true,
+                            'roles' => ['admin','manager'],
+                        ],
+                        [
+                            'allow' => false,
+                            'roles' => ['client'],
+                            'denyCallback' => function() { $this->redirect('/'); }
+                        ],
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [

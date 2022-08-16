@@ -63,7 +63,6 @@ class MfoController extends Controller
         if(!$mfo){
             throw new HttpException(404, 'Страница не существует.');
         }
-        $mfoData = json_decode($mfo->data,true);
 
         $reviewsModel = new Reviews();
 
@@ -74,7 +73,6 @@ class MfoController extends Controller
             return $this->render('view', [
                 'model' => $mfo,
                 'reviewsModel' => $reviewsModel,
-                'mfoData' => $mfoData,
             ]);
         }
     }

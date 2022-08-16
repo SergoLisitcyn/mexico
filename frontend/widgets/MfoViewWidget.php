@@ -7,6 +7,7 @@ use common\models\MfoText;
 use common\models\Reviews;
 use yii\bootstrap\Widget;
 use yii\db\Expression;
+use yii\helpers\Json;
 
 class MfoViewWidget extends Widget
 {
@@ -23,7 +24,6 @@ class MfoViewWidget extends Widget
     public function run()
     {
         $mfoText = MfoText::find()->where(['name' => 'Text'])->one();
-        $mfo = json_decode($mfoText->text_mfo,true);
         if($this->type == 'reviews') {
             return $this->render('mfo/'.$this->type,[
                 'reviewsModel' => $this->reviewsModel,
@@ -55,7 +55,7 @@ class MfoViewWidget extends Widget
         }
         return $this->render('mfo/mfo-view/'.$this->type,[
             'model' => $this->model,
-            'mfoText' => $mfo['text'],
+            'mfoText' => $mfoText->text_mfo['text'],
             'mfoRandoms' => $mfoRandoms,
         ]);
 

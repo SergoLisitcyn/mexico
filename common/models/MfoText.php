@@ -4,6 +4,7 @@ namespace common\models;
 
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\helpers\Json;
 
 /**
  * This is the model class for table "mfo_text".
@@ -56,5 +57,10 @@ class MfoText extends ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
+    }
+
+    public function afterFind() {
+        parent::afterFind();
+        $this->text_mfo = Json::decode($this->text_mfo);
     }
 }

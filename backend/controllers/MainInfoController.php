@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\models\MainInfo;
+use yii\filters\AccessControl;
 use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -21,6 +22,24 @@ class MainInfoController extends Controller
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'rules' => [
+                        [   'actions' => ['login'],
+                            'allow' => true,
+                            'roles' => ['?'],
+                        ],
+                        [
+                            'allow' => true,
+                            'roles' => ['admin','manager'],
+                        ],
+                        [
+                            'allow' => false,
+                            'roles' => ['client'],
+                            'denyCallback' => function() { $this->redirect('/'); }
+                        ],
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [

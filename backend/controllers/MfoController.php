@@ -6,6 +6,7 @@ use common\models\Mfo;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\db\StaleObjectException;
+use yii\filters\AccessControl;
 use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\HttpException;
@@ -26,6 +27,24 @@ class MfoController extends Controller
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'rules' => [
+                        [   'actions' => ['login'],
+                            'allow' => true,
+                            'roles' => ['?'],
+                        ],
+                        [
+                            'allow' => true,
+                            'roles' => ['admin','manager'],
+                        ],
+                        [
+                            'allow' => false,
+                            'roles' => ['client'],
+                            'denyCallback' => function() { $this->redirect('/'); }
+                        ],
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
