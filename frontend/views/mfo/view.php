@@ -1,5 +1,7 @@
 <?php
 use frontend\widgets\MfoViewWidget;
+use yii\helpers\Url;
+
 $this->title = $model->title;
 ?>
 <div class="main__page-info">
@@ -36,7 +38,7 @@ $this->title = $model->title;
                     <div class="repute__rating-number">4,8</div>
                 </div>
                 <div class="repute__comments">
-                    Leer <a href="#" class="repute__comments-link">25 comentarios</a>
+                    Leer <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $model->url]) ?>" class="repute__comments-link">25 comentarios</a>
                 </div>
             </div>
         </div>
@@ -196,7 +198,7 @@ $this->title = $model->title;
                                     <div class="repute__rating-number">4,8</div>
                                 </div>
                                 <div class="repute__comments">
-                                    Leer <a href="#" class="repute__comments-link">25 comentarios</a>
+                                    Leer <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $model->url]) ?>" class="repute__comments-link">25 comentarios</a>
                                 </div>
                             </div>
                             <ul class="rating-sidebar__list">
@@ -245,7 +247,7 @@ $this->title = $model->title;
                                             <div class="repute__rating-number">4,8</div>
                                         </div>
                                         <div class="repute__comments">
-                                            Leer <a href="#" class="repute__comments-link">25 comentarios</a>
+                                            Leer <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $model->url]) ?>" class="repute__comments-link">25 comentarios</a>
                                         </div>
                                     </div>
                                 </li>

@@ -44,6 +44,11 @@ return [
                 '/' => '/site/index',
                 'mfo' => '/mfo/index',
                 [
+                    'pattern' => 'mfo/<url:\S+>/reviews',
+                    'route' => '/mfo/reviews',
+                    'defaults' => ['url' => '']
+                ],
+                [
                     'pattern' => 'mfo/<url:\S+>',
                     'route' => '/mfo/view',
                     'defaults' => ['url' => '']

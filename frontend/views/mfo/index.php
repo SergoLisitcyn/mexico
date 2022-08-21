@@ -120,7 +120,7 @@ $this->title = 'Mfos';
                                             <div class="repute__rating-number">4,4</div>
                                         </div>
                                         <div class="repute__comments">
-                                            Leer <a href="#" class="repute__comments-link">25 comentarios</a>
+                                            Leer <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $mfo->url]) ?>" class="repute__comments-link">25 comentarios</a>
                                         </div>
                                     </div>
                                 </div>
@@ -177,7 +177,7 @@ $this->title = 'Mfos';
                                             <div class="repute__rating-number">4,4</div>
                                         </div>
                                         <div class="repute__comments">
-                                            Leer <a href="#" class="repute__comments-link">25 comentarios</a>
+                                            Leer <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $mfo->url]) ?>" class="repute__comments-link">25 comentarios</a>
                                         </div>
                                     </div>
                                 </div>

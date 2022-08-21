@@ -92,4 +92,24 @@ class MfoController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    /**
+     * @throws HttpException
+     */
+    public function actionReviews($url)
+    {
+        if(!$url){
+            return $this->redirect('/');
+        }
+        $mfo = Mfo::find()->where(['url' => $url])->one();
+        if(!$mfo){
+            throw new HttpException(404, 'Страница не существует.');
+        }
+        $reviews = Reviews::find()->where(['mfo_id' => $mfo->id,'status' => 1])->all();
+
+        return $this->render('reviews', [
+            'reviews' => $reviews,
+            'mfo' => $mfo,
+        ]);
+    }
 }
