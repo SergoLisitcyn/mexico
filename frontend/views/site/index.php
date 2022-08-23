@@ -38,13 +38,8 @@ $this->title = 'My Yii Application';
         </div>
     </div>
 
-    <section class="main__achievements achievements">
-        <div class="container">
-            <h2 class="achievements__title title">Наши достижения</h2>
-            <h3 class="achievements__subtitle subtitle">Сравнили и выдали займов:</h3>
-            <div class="achievements__number">10654</div>
-        </div>
-    </section>
+    <!--    Progress -->
+    <?= MainPageWidget::widget(['type' => 'progress']) ?>
 
     <!--    Works -->
     <?= MainPageWidget::widget(['type' => 'works']) ?>

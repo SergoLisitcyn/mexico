@@ -63,7 +63,6 @@ class MainInfoController extends Controller
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
                 $model->work = Json::encode($model->work);
-                $model->text_main = $model->text_main;
                 $model->mission = Json::encode($model->mission);
                 if($model->save()){
                     return $this->redirect(['update', 'id' => $model->id]);
@@ -92,8 +91,16 @@ class MainInfoController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['update', 'id' => $model->id]);
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post())) {
+                $model->work = Json::encode($model->work);
+                $model->mission = Json::encode($model->mission);
+                if($model->save()){
+                    return $this->redirect(['update', 'id' => $model->id]);
+                } else {
+                    var_dump($model->errors);die;
+                }
+            }
         }
 
         return $this->render('update', [

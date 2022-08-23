@@ -30,7 +30,8 @@ class MainPageWidget extends Widget
                 'teams' => $teams
             ]);
         }
-        if($this->type == 'mission' || $this->type == 'works' || $this->type == 'info'){
+
+        if($this->type == 'mission' || $this->type == 'works' || $this->type == 'info' || $this->type == 'progress'){
 
             return $this->render('main-page/'.$this->type,[
                 'info' => MainInfo::findOne(1)
