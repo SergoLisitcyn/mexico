@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => false,
                 'editableOptions' =>  function ($model, $key, $index) {
                     return [
-                        'header' => 'сортировку',
+                        'header' => 'статус',
                         'inputType' => 'dropDownList',
                         'data' => [0 =>'Не активен',1 =>'Активен'],
                     ];

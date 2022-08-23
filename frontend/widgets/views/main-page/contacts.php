@@ -1,3 +1,4 @@
+<?php if($contacts->status == 1 ) : ?>
 <section class="main__datas datas">
     <div class="container">
         <h2 class="datas__title title">Contacto</h2>
@@ -47,6 +48,7 @@
                     <p class="datas__text"><?= $contacts->whatsapp ?></p>
                 </li>
                 <?php endif; ?>
+                <?php if($contacts->facebook || $contacts->instagram || $contacts->youtube) : ?>
                 <li class="datas__col">
                     <div class="datas__caption">Las redes sociales</div>
                     <div class="datas__social">
@@ -77,7 +79,9 @@
                         <?php endif; ?>
                     </div>
                 </li>
+                <?php endif; ?>
             </ul>
         </div>
     </div>
 </section>
+<?php endif; ?>
