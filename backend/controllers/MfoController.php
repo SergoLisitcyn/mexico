@@ -135,6 +135,7 @@ class MfoController extends Controller
     {
         $model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post())) {
+            $model->data = Json::encode($model->data);
             if($model->save()){
                 Yii::$app->session->addFlash('success', 'Мфо обновлен');
                 return $this->redirect(['update', 'id' => $model->id]);
