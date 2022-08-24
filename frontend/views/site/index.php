@@ -7,36 +7,9 @@ use frontend\widgets\MainPageWidget;
 $this->title = 'My Yii Application';
 ?>
 <section class="main__main-sect main-sect">
-    <div class="container">
-        <h1 class="main-sect__title main-title">Solicita mejor, ahorra más</h1>
-        <h3 class="main-sect__subtitle subtitle">Compara los servicios financieros y empieza a ahorrar desde hoy</h3>
-        <div class="main-sect__items credit-items">
-            <div class="credit-items__item">
-                <div class="credit-items__image">
-                    <img src="/img/main-sect/main-sect-icon-1.svg" alt="main-sect-icon">
-                </div>
-                <p class="credit-items__text">Prestamos <br> en linea</p>
-            </div>
-            <div class="credit-items__item">
-                <div class="credit-items__image">
-                    <img src="/img/main-sect/main-sect-icon-2.svg" alt="main-sect-icon">
-                </div>
-                <p class="credit-items__text">Prestamos <br> rapidos</p>
-            </div>
-            <div class="credit-items__item">
-                <div class="credit-items__image">
-                    <img src="/img/main-sect/main-sect-icon-3.svg" alt="main-sect-icon">
-                </div>
-                <p class="credit-items__text">Prestamos <br> en linea sin buro</p>
-            </div>
-            <div class="credit-items__item">
-                <div class="credit-items__image">
-                    <img src="/img/main-sect/main-sect-icon-4.svg" alt="main-sect-icon">
-                </div>
-                <p class="credit-items__text">Prestamos <br> personales urgentes</p>
-            </div>
-        </div>
-    </div>
+
+    <!--    Solicita -->
+    <?= MainPageWidget::widget(['type' => 'solicita']) ?>
 
     <!--    Progress -->
     <?= MainPageWidget::widget(['type' => 'progress']) ?>
@@ -44,19 +17,8 @@ $this->title = 'My Yii Application';
     <!--    Works -->
     <?= MainPageWidget::widget(['type' => 'works']) ?>
 
-    <section class="main__about-us about-us">
-        <div class="about-us__container container">
-            <h2 class="about-us__title title">О нас пишут</h2>
-            <div class="about-us__companies">
-                <img class="about-us__image" src="/img/companies/forbes.svg" alt="forbes">
-                <img class="about-us__image" src="/img/companies/enterpreneur.svg" alt="enterpreneur">
-                <img class="about-us__image" src="/img/companies/business-insider.svg" alt="business-insider">
-                <img class="about-us__image" src="/img/companies/focus.svg" alt="focus">
-                <img class="about-us__image" src="/img/companies/dagens-industri.svg" alt="dagens-industri">
-                <img class="about-us__image" src="/img/companies/globo.svg" alt="globo">
-            </div>
-        </div>
-    </section>
+    <!--    About -->
+    <?= MainPageWidget::widget(['type' => 'about']) ?>
 
 
     <!--    Info -->
@@ -160,17 +122,8 @@ $this->title = 'My Yii Application';
         </div>
     </section>
 
-    <section class="main__employees employees">
-        <div class="employees__container container">
-            <h2 class="employees__title title">Nuestros colaboradores</h2>
-            <div class="employees__companies">
-                <img class="employees__image" src="/img/employees/olimp-trade.jpg" alt="olimp-trade">
-                <img class="employees__image" src="/img/employees/banco-azteca.jpg" alt="banco-azteca">
-                <img class="employees__image" src="/img/employees/inbest-me.jpg" alt="inbest-me">
-                <img class="employees__image" src="/img/employees/crediclic.jpg" alt="crediclic">
-            </div>
-        </div>
-    </section>
+    <!--    Partners -->
+    <?= MainPageWidget::widget(['type' => 'partners']) ?>
 
 
     <section class="main__comments comments">

@@ -2,8 +2,12 @@
 
 namespace frontend\widgets;
 
+use common\models\BlockManagement;
+use common\models\MainAbout;
 use common\models\MainContact;
 use common\models\MainInfo;
+use common\models\MainPartners;
+use common\models\MainSolicita;
 use common\models\MainTeam;
 use yii\bootstrap\Widget;
 
@@ -28,6 +32,25 @@ class MainPageWidget extends Widget
 
             return $this->render('main-page/'.$this->type,[
                 'teams' => $teams
+            ]);
+        }
+        if($this->type == 'solicita' || $this->type == 'about' || $this->type == 'partners'){
+            $blockManagement = BlockManagement::find()->where(['tag' => $this->type])->one();
+            $sols = null;
+
+            if($this->type == 'solicita'){
+                $sols = MainSolicita::find()->where(['status' => 1])->orderBy(['sort' => SORT_ASC])->all();
+            }
+            if($this->type == 'about'){
+                $sols = MainAbout::find()->where(['status' => 1])->orderBy(['sort' => SORT_ASC])->all();
+            }
+            if($this->type == 'partners'){
+                $sols = MainPartners::find()->where(['status' => 1])->orderBy(['sort' => SORT_ASC])->all();
+            }
+
+            return $this->render('main-page/'.$this->type,[
+                'blockManagement' => $blockManagement,
+                'sols' => $sols,
             ]);
         }
 

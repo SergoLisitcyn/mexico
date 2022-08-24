@@ -26,8 +26,24 @@
                     [
                         "label" => "Главная страница",
                         "url" => "#",
-                        "icon" => "users",
+                        "icon" => "home",
                         "items" => [
+                            [
+                                "label" => "Управление блоками",
+                                "url" => ["/block-management/index"],
+                            ],
+                            [
+                                "label" => "Блок Solicita",
+                                "url" => ["/main-solicita/index"],
+                            ],
+                            [
+                                "label" => "Блок О нас пишут",
+                                "url" => ["/main-about/index"],
+                            ],
+                            [
+                                "label" => "Блок Nuestros colaboradores",
+                                "url" => ["/main-partners/index"],
+                            ],
                             [
                                 "label" => "Контакты",
                                 "url" => ["/main-contact/update?id=1"],
