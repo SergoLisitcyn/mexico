@@ -9,6 +9,7 @@ use common\models\MainInfo;
 use common\models\MainPartners;
 use common\models\MainSolicita;
 use common\models\MainTeam;
+use common\models\Menu;
 use yii\bootstrap\Widget;
 
 class MainPageWidget extends Widget
@@ -22,6 +23,12 @@ class MainPageWidget extends Widget
 
     public function run()
     {
+        if($this->type == 'menu-footer'){
+            $menu = Menu::find()->where(['in', 'zone', [0,2]])->andWhere(['status' => 1])->orderBy(['sort' => SORT_ASC])->all();
+            return $this->render('main-page/'.$this->type,[
+                'menus' => $menu,
+            ]);
+        }
         if($this->type == 'contacts') {
             return $this->render('main-page/'.$this->type,[
                 'contacts' => MainContact::findOne(1)

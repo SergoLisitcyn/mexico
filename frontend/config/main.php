@@ -53,6 +53,11 @@ return [
                     'route' => '/mfo/view',
                     'defaults' => ['url' => '']
                 ],
+                [
+                    'pattern' => 'page/<slug:\S+>',
+                    'route' => '/pages/show-page',
+                    'defaults' => ['slug' => 'error']
+                ],
             ],
         ],
     ],

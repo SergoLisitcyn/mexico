@@ -5,6 +5,7 @@
 
 use common\widgets\Alert;
 use frontend\assets\AppAsset;
+use frontend\widgets\MainPageWidget;
 use yii\bootstrap4\Breadcrumbs;
 use yii\bootstrap4\Html;
 use yii\web\View;
@@ -126,38 +127,7 @@ AppAsset::register($this);
                 </li>
             </ul>
 
-            <ul class="footer-list footer-list__menu">
-                <li class="footer-list__item">
-                    <a href="#" class="footer-list__link">
-                        Политика конфиденциальности
-                    </a>
-                </li>
-                <li class="footer-list__item">
-                    <a href="#" class="footer-list__link">
-                        О сайте
-                    </a>
-                </li>
-                <li class="footer-list__item">
-                    <a href="#" class="footer-list__link">
-                        Публичная оферта
-                    </a>
-                </li>
-                <li class="footer-list__item">
-                    <a href="#" class="footer-list__link">
-                        Вакансии
-                    </a>
-                </li>
-                <li class="footer-list__item">
-                    <a href="#" class="footer-list__link">
-                        Контакты
-                    </a>
-                </li>
-                <li class="footer-list__item">
-                    <a href="#" class="footer-list__link">
-                        Политика обработки персональных данных
-                    </a>
-                </li>
-            </ul>
+            <?= MainPageWidget::widget(['type' => 'menu-footer']) ?>
 
             <ul class="footer-list">
                 <li class="footer-list__item">
