@@ -1,3 +1,4 @@
+<!--Contacts-->
 <?php if($contacts->status == 1 ) : ?>
 <section class="main__datas datas">
     <div class="container">

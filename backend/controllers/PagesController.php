@@ -5,6 +5,7 @@ namespace backend\controllers;
 use common\models\Pages;
 use common\models\PagesSearch;
 use Yii;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -22,6 +23,20 @@ class PagesController extends Controller
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'roles' => ['admin','manager'],
+                        ],
+                        [
+                            'allow' => false,
+                            'roles' => ['client'],
+                            'denyCallback' => function() { $this->redirect('/'); }
+                        ],
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [

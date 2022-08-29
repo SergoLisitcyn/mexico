@@ -1,3 +1,4 @@
+<!--Progress-->
 <?php if($info->progress_status == 1) : ?>
 <section class="main__achievements achievements">
     <div class="container">

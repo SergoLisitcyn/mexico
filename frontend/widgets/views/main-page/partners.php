@@ -1,3 +1,4 @@
+<!--Partners-->
 <?php if($blockManagement->status == 1 && $sols) : ?>
     <section class="main__employees employees">
         <div class="employees__container container">

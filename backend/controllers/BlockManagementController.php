@@ -26,10 +26,6 @@ class BlockManagementController extends Controller
                 'access' => [
                     'class' => AccessControl::className(),
                     'rules' => [
-                        [   'actions' => ['login'],
-                            'allow' => true,
-                            'roles' => ['?'],
-                        ],
                         [
                             'allow' => true,
                             'roles' => ['admin','manager'],
@@ -52,14 +48,25 @@ class BlockManagementController extends Controller
     }
 
     /**
-     * Lists all BlockManagement models.
-     *
-     * @return string
+     * @throws NotFoundHttpException
      */
     public function actionIndex()
     {
         $searchModel = new BlockManagementSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
+        if (Yii::$app->request->post('hasEditable'))
+        {
+            $id = $_POST['editableKey'];
+            $model = $this->findModel($id);
+            $post = [];
+            $posted = current($_POST['BlockManagement']);
+            $post['BlockManagement'] = $posted;
+            if ($model->load($post)) {
+                $model->save();
+            }
+
+            return $this->refresh();
+        }
 
         return $this->render('index', [
             'searchModel' => $searchModel,

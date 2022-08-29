@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         return 'Активен';
                     }
 
-                    return 'Неактивен';
+                    return 'Не активен';
                 },
             ],
             [

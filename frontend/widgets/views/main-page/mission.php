@@ -1,3 +1,4 @@
+<!--Mission-->
 <?php if($info->mission_status == 1 && $info->mission) : ?>
 <section class="main__block-checkbox block-checkbox">
     <div class="container">

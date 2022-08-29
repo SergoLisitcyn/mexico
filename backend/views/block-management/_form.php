@@ -18,6 +18,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'sub_title')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'sort')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'status')->dropDownList([
         '1' => 'Блок включен',
         '0' => 'Блок выключен'

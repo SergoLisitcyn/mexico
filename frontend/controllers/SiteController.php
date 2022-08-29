@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\BlockManagement;
 use common\models\MainInfo;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
@@ -76,7 +77,10 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $blocks = BlockManagement::find()->where(['status' => 1])->orderBy(['sort' => SORT_ASC])->all();
+        return $this->render('index', [
+            'blocks' => $blocks,
+        ]);
     }
 
     /**

@@ -13,7 +13,9 @@ use yii\db\ActiveRecord;
  * @property string $tag
  * @property string|null $title
  * @property string|null $sub_title
+ * @property string|null $link
  * @property int|null $status
+ * @property int|null $sort
  */
 class BlockManagement extends ActiveRecord
 {
@@ -32,8 +34,8 @@ class BlockManagement extends ActiveRecord
     {
         return [
             [['name', 'tag'], 'required'],
-            [['status'], 'integer'],
-            [['name', 'tag', 'title', 'sub_title'], 'string', 'max' => 255],
+            [['status','sort'], 'integer'],
+            [['name', 'tag', 'title', 'sub_title','link'], 'string', 'max' => 255],
         ];
     }
 
@@ -49,6 +51,8 @@ class BlockManagement extends ActiveRecord
             'title' => 'Заголовок',
             'sub_title' => 'Подзаголовок',
             'status' => 'Статус',
+            'sort' => 'Сортировка',
+            'link' => 'Ссылка на страницу',
         ];
     }
 }

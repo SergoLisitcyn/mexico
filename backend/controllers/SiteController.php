@@ -95,6 +95,11 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionApi()
+    {
+        return $this->render('api');
+    }
+
     /**
      * Logout action.
      *

@@ -17,16 +17,32 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Создать', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <?= \kartik\grid\GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'name',
-            'title',
+            [
+                'class' => 'kartik\grid\EditableColumn',
+                'attribute' => 'title',
+                'hAlign' => 'center',
+                'filter' => false,
+                'value' => function($model){ return $model->title; },
+            ],
+            [
+                'class' => 'kartik\grid\EditableColumn',
+                'attribute' => 'sub_title',
+                'hAlign' => 'center',
+                'filter' => false,
+                'value' => function($model){ return $model->sub_title; },
+            ],
+            [
+                'class' => 'kartik\grid\EditableColumn',
+                'attribute' => 'sort',
+                'hAlign' => 'center',
+                'filter' => false,
+                'value' => function($model){ return $model->sort; },
+            ],
             [
                 'class' => 'kartik\grid\EditableColumn',
                 'attribute' => 'status',
@@ -54,7 +70,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'raw',
                 'options' => ['width' => '200'],
                 'value' => function ($model, $index) {
-                    return Html::tag('a', 'Редактировать', ['href' => Url::toRoute(['block-management/update', 'id' => $index]), 'class' => 'btn btn-success', 'style' => 'font-weight: 100;margin-right:10px']);
+                    if($model->link){
+                        if($model->tag == 'info' || $model->tag == 'works' || $model->tag == 'progress' || $model->tag == 'mission' || $model->tag == 'contacts'){
+                            return Html::tag('a', 'Редактировать', ['href' => Url::toRoute([$model->link,'id'=> 1,'#'=> $model->tag]), 'class' => 'btn btn-success', 'style' => 'font-weight: 100;margin-right:10px']);
+                        }
+
+                        return Html::tag('a', 'Редактировать', ['href' => Url::toRoute([$model->link]), 'class' => 'btn btn-success', 'style' => 'font-weight: 100;margin-right:10px']);
+                    } else {
+                        return 'Раздел в разработке';
+                    }
                 },
             ],
         ],

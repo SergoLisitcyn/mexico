@@ -46,6 +46,11 @@ class BlockManagementSearch extends BlockManagement
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'sort' => SORT_ASC,
+                ]
+            ],
         ]);
 
         $this->load($params);

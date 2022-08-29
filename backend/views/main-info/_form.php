@@ -20,7 +20,7 @@ use vova07\imperavi\Widget;
 
     <?php $form = ActiveForm::begin(); ?>
     <input type="hidden" name="<?=Yii::$app->request->csrfParam; ?>" value="<?=Yii::$app->request->getCsrfToken(); ?>" />
-    <div class="main-info-form">
+    <div class="main-info-form" id="works">
         <h4 class="bold uppercase">1.Блок "Как мы работаем"</h4>
         <?php
         echo $form->field($model, 'work')->widget(MultipleInput::className(), [
@@ -38,7 +38,7 @@ use vova07\imperavi\Widget;
                 '0' => 'Блок выключен'
             ]) ?>
     </div>
-    <div class="main-info-form">
+    <div class="main-info-form"  id="mission">
         <h4 class="bold uppercase">2.Блок "Наши цели, миссия"</h4>
         <?php
         echo $form->field($model, 'mission')->widget(MultipleInput::className(), [
@@ -58,7 +58,7 @@ use vova07\imperavi\Widget;
         ]) ?>
     </div>
 
-    <div class="main-info-form">
+    <div class="main-info-form"   id="info">
         <h4 class="bold uppercase">3.Блок "О ценностях"</h4>
         <?= $form->field($model, 'text_main')->widget(Widget::className(), [
             'settings' => [
@@ -87,7 +87,7 @@ use vova07\imperavi\Widget;
         ]) ?>
     </div>
 
-    <div class="main-info-form">
+    <div class="main-info-form" id="progress">
         <h4 class="bold uppercase">4.Блок "Наши достижения"</h4>
         <?= $form->field($model, 'progress_title')->textInput(['maxlength' => true]) ?>
 

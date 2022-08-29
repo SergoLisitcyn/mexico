@@ -6,6 +6,7 @@ use common\models\Menu;
 use common\models\MenuSearch;
 use common\models\Pages;
 use Yii;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -23,6 +24,20 @@ class MenuController extends Controller
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'roles' => ['admin','manager'],
+                        ],
+                        [
+                            'allow' => false,
+                            'roles' => ['client'],
+                            'denyCallback' => function() { $this->redirect('/'); }
+                        ],
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
@@ -33,16 +48,23 @@ class MenuController extends Controller
         );
     }
 
-    /**
-     * Lists all Menu models.
-     *
-     * @return string
-     */
     public function actionIndex()
     {
         $searchModel = new MenuSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
+        if (Yii::$app->request->post('hasEditable'))
+        {
+            $id = $_POST['editableKey'];
+            $model = $this->findModel($id);
+            $post = [];
+            $posted = current($_POST['Menu']);
+            $post['Menu'] = $posted;
+            if ($model->load($post)) {
+                $model->save();
+            }
 
+            return $this->refresh();
+        }
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

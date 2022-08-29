@@ -1,3 +1,4 @@
+<!--About-->
 <?php if($blockManagement->status == 1 && $sols) : ?>
 <section class="main__about-us about-us">
     <div class="about-us__container container">

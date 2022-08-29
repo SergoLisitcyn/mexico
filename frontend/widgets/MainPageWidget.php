@@ -67,5 +67,7 @@ class MainPageWidget extends Widget
                 'info' => MainInfo::findOne(1)
             ]);
         }
+        return $this->render('main-page/'.$this->type,[
+        ]);
     }
 }

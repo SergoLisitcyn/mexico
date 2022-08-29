@@ -1,3 +1,4 @@
+<!--Works-->
 <?php if($info->work_status == 1 && $info->work) : ?>
 <section class="main__block-checkbox block-checkbox">
     <div class="container">

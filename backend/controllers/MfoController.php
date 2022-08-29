@@ -30,10 +30,6 @@ class MfoController extends Controller
                 'access' => [
                     'class' => AccessControl::className(),
                     'rules' => [
-                        [   'actions' => ['login'],
-                            'allow' => true,
-                            'roles' => ['?'],
-                        ],
                         [
                             'allow' => true,
                             'roles' => ['admin','manager'],
