@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use common\models\Reviews;
 use common\models\ReviewsSearch;
+use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -86,7 +87,8 @@ class ReviewsController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                Yii::$app->session->addFlash('success', 'Создан');
+                return $this->redirect(['update', 'id' => $model->id]);
             }
         } else {
             $model->loadDefaultValues();
@@ -109,7 +111,8 @@ class ReviewsController extends Controller
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            Yii::$app->session->addFlash('success', 'Обновлен');
+            return $this->redirect(['update', 'id' => $model->id]);
         }
 
         return $this->render('update', [

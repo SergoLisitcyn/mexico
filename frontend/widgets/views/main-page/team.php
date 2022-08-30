@@ -1,4 +1,5 @@
 <!--Team-->
+<?php if($teams) : ?>
 <section class="main__team team">
     <div class="container">
         <div class="team__row background-set">
@@ -19,3 +20,4 @@
         </div>
     </div>
 </section>
+<?php endif; ?>

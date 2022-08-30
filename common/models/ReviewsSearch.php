@@ -46,6 +46,11 @@ class ReviewsSearch extends Reviews
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'created_at' => SORT_DESC,
+                ]
+            ],
         ]);
 
         $this->load($params);
@@ -66,8 +71,8 @@ class ReviewsSearch extends Reviews
             'recommendation' => $this->recommendation,
             'status' => $this->status,
             'sort' => $this->sort,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+//            'created_at' => $this->created_at,
+//            'updated_at' => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'mfo_id', $this->mfo_id])

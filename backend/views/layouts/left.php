@@ -61,6 +61,7 @@
 //                    ],
                     ['label' => 'Создание страниц', 'icon' => 'file-o', 'url' => ['/pages']],
                     ['label' => 'Меню', 'icon' => 'reorder', 'url' => ['/menu']],
+                    ['label' => 'Отзывы', 'icon' => 'comments', 'url' => ['/reviews']],
                     [
                         "label" => "Управление пользователями",
                         "url" => "#",

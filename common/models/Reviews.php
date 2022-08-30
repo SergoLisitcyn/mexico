@@ -61,19 +61,19 @@ class Reviews extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'mfo_id' => 'Mfo ID',
+            'mfo_id' => 'МФО',
             'costs' => 'Interés & Costes',
             'conditions' => 'Condiciones',
             'support' => 'Atención al cliente',
             'functionality' => 'Funcionalidad',
-            'body' => 'Body',
-            'plus' => 'Plus',
-            'minus' => 'Minus',
+            'body' => 'Сообщение',
+            'plus' => 'Плюсы',
+            'minus' => 'Минусы',
             'recommendation' => 'Recommendation',
             'status' => 'Статус',
             'sort' => 'Сортировка',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
         ];
     }
 }

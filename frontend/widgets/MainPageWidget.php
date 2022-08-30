@@ -10,6 +10,8 @@ use common\models\MainPartners;
 use common\models\MainSolicita;
 use common\models\MainTeam;
 use common\models\Menu;
+use common\models\Mfo;
+use common\models\Reviews;
 use yii\bootstrap\Widget;
 
 class MainPageWidget extends Widget
@@ -65,6 +67,26 @@ class MainPageWidget extends Widget
 
             return $this->render('main-page/'.$this->type,[
                 'info' => MainInfo::findOne(1)
+            ]);
+        }
+        if($this->type == 'rating'){
+            $mfoData = Mfo::find()->where(['status'=> 1])->limit(3)->orderBy(['rating' => SORT_DESC])->all();
+            $data = [];
+            if($mfoData){
+                foreach ($mfoData as $mfo){
+                    $reviews = Reviews::find()->where(['mfo_id' => $mfo['id'], 'status' => 1])->count();
+                    $data[] = [
+                      'id' =>  $mfo['id'],
+                      'logo' =>  $mfo['logo'],
+                      'name' =>  $mfo['name'],
+                      'rating' =>  $mfo['rating'],
+                      'url' =>  $mfo['url'],
+                      'reviews_count' =>  $reviews,
+                    ];
+                }
+            }
+            return $this->render('main-page/'.$this->type,[
+                'mfo' => $data
             ]);
         }
         return $this->render('main-page/'.$this->type,[

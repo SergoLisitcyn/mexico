@@ -19,6 +19,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'rating')->textInput(['maxlength' => true]) ?>
+
     <div class="row">
         <div class="col-xs-6">
             <div class="form-group field-mfo-logo_file">

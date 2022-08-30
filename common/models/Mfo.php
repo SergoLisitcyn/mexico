@@ -26,6 +26,7 @@ use yii\web\UploadedFile;
  * @property int|null $sort
  * @property string|null $description
  * @property string|null $keywords
+ * @property string|null $rating
  * @property int $created_at
  * @property int $updated_at
  */
@@ -57,6 +58,7 @@ class Mfo extends ActiveRecord
             [['data'], 'safe'],
             [['status', 'sort', 'created_at', 'updated_at'], 'integer'],
             [['name', 'url', 'title', 'logo', 'description', 'keywords'], 'string', 'max' => 255],
+            [['rating'], 'string', 'max' => 11],
             [['logo_file'], 'file'],
         ];
     }
@@ -76,6 +78,7 @@ class Mfo extends ActiveRecord
             'logo_file' => 'Логотип',
             'status' => 'Статус',
             'sort' => 'Сортировка',
+            'rating' => 'Рейтинг',
             'description' => 'Description',
             'keywords' => 'Keywords',
             'created_at' => 'Created At',
