@@ -25,6 +25,12 @@ class MainPageWidget extends Widget
 
     public function run()
     {
+        if($this->type == 'menu-top'){
+            $menu = Menu::find()->where(['in', 'zone', [0,1]])->andWhere(['status' => 1])->orderBy(['sort' => SORT_ASC])->all();
+            return $this->render('main-page/'.$this->type,[
+                'menus' => $menu,
+            ]);
+        }
         if($this->type == 'menu-footer'){
             $menu = Menu::find()->where(['in', 'zone', [0,2]])->andWhere(['status' => 1])->orderBy(['sort' => SORT_ASC])->all();
             return $this->render('main-page/'.$this->type,[

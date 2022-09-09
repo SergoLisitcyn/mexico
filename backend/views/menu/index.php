@@ -25,9 +25,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= \kartik\grid\GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-
+            [
+                'class' => 'yii\grid\SerialColumn',
+                'options' => ['width' => '10'],
+            ],
             [
                 'class' => 'kartik\grid\EditableColumn',
                 'attribute' => 'name',
@@ -48,11 +49,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     ];
                 },
                 'value' => function($model){
-                    if($model->status == 0){
+                    if($model->zone == 0){
                         return 'Бургер и футер';
-                    } elseif($model->status == 1) {
+                    } elseif($model->zone == 1) {
                         return 'Бургер';
-                    } elseif($model->status == 2) {
+                    } elseif($model->zone == 2) {
                         return 'Футер';
                     }
 
@@ -60,6 +61,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             'link',
+            [
+                'class' => 'kartik\grid\EditableColumn',
+                'attribute' => 'sort',
+                'hAlign' => 'center',
+                'filter' => false,
+                'value' => function($model){ return $model->sort; },
+            ],
             [
                 'class' => 'kartik\grid\EditableColumn',
                 'attribute' => 'status',
