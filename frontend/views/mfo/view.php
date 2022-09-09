@@ -189,50 +189,8 @@ $this->title = $model->title;
                     </div>
                 </section>
                 <sidebar class="sidebar">
-                    <div class="rating-sidebar">
-                        <div class="rating-sidebar__row background-set">
-                            <h2 class="rating-sidebar__title title sidebar-title">Rating calificación</h2>
-                            <div class="rating-sidebar__repute repute">
-                                <div class="repute__rating">
-                                    <img class="repute__rating-image" src="/img/stars.svg" alt="stars">
-                                    <div class="repute__rating-number">4,8</div>
-                                </div>
-                                <div class="repute__comments">
-                                    Leer <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $model->url]) ?>" class="repute__comments-link">25 comentarios</a>
-                                </div>
-                            </div>
-                            <ul class="rating-sidebar__list">
-                                <li class="rating-sidebar__item">
-                                    <div class="rating-sidebar__text">Interés & Costes</div>
-                                    <div class="rating-sidebar__rating">
-                                        <img class="rating-sidebar__rating-image" src="/img/stars.svg" alt="stars">
-                                        <div class="rating-sidebar__rating-number">4</div>
-                                    </div>
-                                </li>
-                                <li class="rating-sidebar__item">
-                                    <div class="rating-sidebar__text">Condiciones</div>
-                                    <div class="rating-sidebar__rating">
-                                        <img class="rating-sidebar__rating-image" src="/img/stars.svg" alt="stars">
-                                        <div class="rating-sidebar__rating-number">4</div>
-                                    </div>
-                                </li>
-                                <li class="rating-sidebar__item">
-                                    <div class="rating-sidebar__text">Atención al cliente</div>
-                                    <div class="rating-sidebar__rating">
-                                        <img class="rating-sidebar__rating-image" src="/img/stars.svg" alt="stars">
-                                        <div class="rating-sidebar__rating-number">4</div>
-                                    </div>
-                                </li>
-                                <li class="rating-sidebar__item">
-                                    <div class="rating-sidebar__text">Funcionalidad</div>
-                                    <div class="rating-sidebar__rating">
-                                        <img class="rating-sidebar__rating-image" src="/img/stars.svg" alt="stars">
-                                        <div class="rating-sidebar__rating-number">4</div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    <!--   Rating calificación -->
+                    <?= MfoViewWidget::widget(['type' => 'rating','model' => $model]) ?>
                     <div class="entities entities-sidebar">
                         <div class="entities__row background-set">
                             <h2 class="entities__title title sidebar-title">TOP 3 Entidades</h2>

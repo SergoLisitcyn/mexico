@@ -1,4 +1,7 @@
 <?php
+
+use yii\helpers\Json;
+
 ini_set("display_errors", "on");
 ini_set('memory_limit', '2048M');
 // error_reporting(E_ALL);
@@ -100,7 +103,8 @@ $sheets = array(
 );
 
 $pagamsGroup = array(
-    "Условия / Interés & Costes" => array(
+//    "Условия / Interés & Costes" => array(
+    "interes_costes" => array(
         "Минимальный возраст" => array(
             4=>["between", [18, 19]], 3=>["between", [19, 21]], 2=>["between", [22, 23]], 1=>[">", 23],
         ),
@@ -126,7 +130,8 @@ $pagamsGroup = array(
             3=>[">", 40], 2=>["between", [30, 40]], 1=>["<", 30],
         ),
     ),
-    "Требования / Condiciones" => array(
+//    "Требования / Condiciones" => array(
+    "condiciones" => array(
         "Документы" => array(
             1=>["sum(if not null)=", 1], 2=>["sum(if not null)=", "2"], 3=>["sum(if not null)=", 3], 4=>["sum(if not null)>", 3],
         ),
@@ -137,7 +142,8 @@ $pagamsGroup = array(
             2=>["=", "Нет"], 1=>["=", "Да"],
         ),
     ),
-    "Поддержка / Atención al cliente" => array(
+//    "Поддержка / Atención al cliente" => array(
+    "atencion" => array(
         "Соцсети" => array(
             1=>["sum(if not null)<=", 1], 2=>["sum(if not null)between", [2, 3]], 3=>["sum(if not null)=", 4], 4=>["sum(if not null)>=", 5],
         ),
@@ -154,7 +160,8 @@ $pagamsGroup = array(
             2=>["=", "Да"], 1=>["=", "Нет"],
         ),
     ),
-    "Удобство / Funcionalidad" => array(
+//    "Удобство / Funcionalidad" => array(
+    "funcionalidad" => array(
         "Наличие приложения" => array(
             1=>["sum(if not null)=", 0], 2=>["sum(if not null)=", 1], 3=>["sum(if not null)>=", 2],
         ),
@@ -362,10 +369,23 @@ foreach($pagamsGroup_data as $group_name => $group_data) {
 if(!empty($orgName)) $_GET["only-mfo"] = $orgName;
 if(isset($_GET["only-mfo"]) && isset($service_params_data[$_GET["only-mfo"]])) $service_params_data = $service_params_data[$_GET["only-mfo"]];
 
-if(isset($_GET["html"])){
-    echo "<pre>";
-    print_r($service_params_data);
-} else {
-    header("Content-Type: application/json; charset=utf-8");
-    echo json_encode($service_params_data, JSON_UNESCAPED_UNICODE);
+foreach ($service_params_data as $key => $value){
+    $mfo = \common\models\Mfo::find()->where(['url' => $key])->one();
+    if($mfo){
+        $mfo->rating_auto = Json::encode($value);
+        $mfo->data = Json::encode($mfo->data);
+        if($mfo->save()){
+            echo $key.' добавлен!';
+        } else {
+            var_dump($mfo->errors);
+            die;
+        }
+    }
 }
+//if(isset($_GET["html"])){
+//    echo "<pre>";
+//    print_r($service_params_data);
+//} else {
+//    header("Content-Type: application/json; charset=utf-8");
+//    echo json_encode($service_params_data, JSON_UNESCAPED_UNICODE);
+//}

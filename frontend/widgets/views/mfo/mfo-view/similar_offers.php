@@ -5,16 +5,17 @@ use yii\helpers\Url;
 <div class="tabs-content__offer offers-sect">
     <h2 class="offers-sect__title title">Похожие предложения</h2>
     <div class="offers-sect__block">
-        <?php foreach ($mfoRandoms as $random) : ?>
+        <?php foreach ($mfoRandoms as $random) :?>
+
             <div class="offer change-text">
                 <div class="offer__row">
                     <div class="offer__company">
                         <div class="offer__company-line">Recomendado</div>
                         <div class="offer__company-logo">
-                            <?php if($random->logo) : ?>
+                            <?php if($random['params']['logo']) : ?>
                                 <div class="offer__company-img">
-                                    <a href="<?= Url::toRoute(['mfo/view', 'url' => $random->url]) ?>">
-                                        <img src="<?= $random->logo ?>" alt="<?= $random->name ?>">
+                                    <a href="<?= Url::toRoute(['mfo/view', 'url' => $random['params']['url']]) ?>">
+                                        <img src="<?= $random['params']['logo'] ?>" alt="<?= $random['params']['name'] ?>">
                                     </a>
                                 </div>
                             <?php endif; ?>
@@ -28,8 +29,8 @@ use yii\helpers\Url;
                                 </div>
                             </div>
                         </div>
-                        <?php if(isset($mfo->data['data_company']['legal_name_company']) && $random->data['data_company']['legal_name_company'] != '-') : ?>
-                            <div class="offer__company-title"><?= $random->data['data_company']['legal_name_company'] ?></div>
+                        <?php if(isset($random['params']['data']['data_company']['legal_name_company']) && $random['params']['data']['data_company']['legal_name_company'] != '-') : ?>
+                            <div class="offer__company-title"><?= $random['params']['data']['data_company']['legal_name_company'] ?></div>
                         <?php endif; ?>
                     </div>
                     <div class="offer__content">
@@ -100,37 +101,41 @@ use yii\helpers\Url;
                                 </li>
                                 <li class="offer-dropdown__repute-item">
                                     <p class="offer-dropdown__repute-text">Interés & Costes</p>
-                                    <img class="offer-dropdown__repute-image" src="/img/stars.svg" alt="stars">
+                                    <div class="rating__stars_similar" style="width:<?= $random['mfoRating']['interes_costes_rate'] ?>%"></div>
+<!--                                    <img class="offer-dropdown__repute-image" src="/img/stars.svg" alt="stars">-->
                                 </li>
                                 <li class="offer-dropdown__repute-item">
                                     <p class="offer-dropdown__repute-text">Condiciones</p>
-                                    <img class="offer-dropdown__repute-image" src="/img/stars.svg" alt="stars">
+                                    <div class="rating__stars_similar" style="width:<?= $random['mfoRating']['condiciones_rate'] ?>%"></div>
+<!--                                    <img class="offer-dropdown__repute-image" src="/img/stars.svg" alt="stars">-->
                                 </li>
                                 <li class="offer-dropdown__repute-item">
                                     <p class="offer-dropdown__repute-text">Atención al cliente</p>
-                                    <img class="offer-dropdown__repute-image" src="/img/stars.svg" alt="stars">
+                                    <div class="rating__stars_similar" style="width:<?= $random['mfoRating']['atencion_rate'] ?>%"></div>
+<!--                                    <img class="offer-dropdown__repute-image" src="/img/stars.svg" alt="stars">-->
                                 </li>
                                 <li class="offer-dropdown__repute-item">
                                     <p class="offer-dropdown__repute-text">Funcionalidad</p>
-                                    <img class="offer-dropdown__repute-image" src="/img/stars.svg" alt="stars">
+                                    <div class="rating__stars_similar" style="width:<?= $random['mfoRating']['funcionalidad_rate'] ?>%"></div>
+<!--                                    <img class="offer-dropdown__repute-image" src="/img/stars.svg" alt="stars">-->
                                 </li>
                                 <li class="offer-dropdown__repute-item">
-                                    <a href="<?= Url::toRoute(['mfo/view', 'url' => $random->url]) ?>" class="offer-dropdown__repute-link">Información precisa</a>
+                                    <a href="<?= Url::toRoute(['mfo/view', 'url' => $random['params']['url']]) ?>" class="offer-dropdown__repute-link">Información precisa</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="offer-dropdown__item offer-dropdown__info">
                             <ul class="offer-dropdown__info-list">
-                                <?php if(isset($random->data['requisitos']['older_than']) && $random->data['requisitos']['older_than'] != '-') : ?>
+                                <?php if(isset($random['params']['data']['requisitos']['older_than']) && $random['params']['data']['requisitos']['older_than'] != '-') : ?>
                                     <li class="offer-dropdown__info-item">
                                         <p class="offer-dropdown__info-text">Ser mayor de</p>
-                                        <div class="offer-dropdown__info-number"><?= $random->data['requisitos']['older_than'] ?></div>
+                                        <div class="offer-dropdown__info-number"><?= $random['params']['data']['requisitos']['older_than'] ?></div>
                                     </li>
                                 <?php endif; ?>
-                                <?php if(isset($random->data['condiciones']['rate_first']) && $random->data['condiciones']['rate_first'] != '-') : ?>
+                                <?php if(isset($random['params']['data']['condiciones']['rate_first']) && $random['params']['data']['condiciones']['rate_first'] != '-') : ?>
                                     <li class="offer-dropdown__info-item">
                                         <p class="offer-dropdown__info-text">La tasa de interés</p>
-                                        <div class="offer-dropdown__info-number"><?= $random->data['condiciones']['rate_first'] ?></div>
+                                        <div class="offer-dropdown__info-number"><?= $random['params']['data']['condiciones']['rate_first'] ?></div>
                                     </li>
                                 <?php endif; ?>
 
@@ -142,23 +147,23 @@ use yii\helpers\Url;
                         </div>
                         <div class="offer-dropdown__item offer-dropdown__connection">
                             <ul class="offer-dropdown__connection-list">
-                                <?php if(isset($mfo->data['characteristic']['round_the_clock']) && $mfo->data['characteristic']['round_the_clock'] != '-') : ?>
+                                <?php if(isset($random['params']['data']['characteristic']['round_the_clock']) && $random['params']['data']['characteristic']['round_the_clock'] != '-') : ?>
                                     <li class="offer-dropdown__connection-item">
                                         <p class="offer-dropdown__connection-text">Abierto 24/7</p>
-                                        <img class="offer-dropdown__connection-image" src="img/checkbox.svg" alt="checkbox">
+                                        <img class="offer-dropdown__connection-image" src="/img/checkbox.svg" alt="checkbox">
                                     </li>
                                 <?php endif; ?>
 
-                                <?php if(isset($random->data['contacts']['whatsapp']) && $random->data['contacts']['whatsapp'] != '-') : ?>
+                                <?php if(isset($random['params']['data']['contacts']['whatsapp']) && $random['params']['data']['contacts']['whatsapp'] != '-') : ?>
                                     <li class="offer-dropdown__connection-item offer-dropdown__connection-item--column">
                                         <p class="offer-dropdown__connection-text">WhatsApp</p>
-                                        <a href="tel:<?= $random->data['contacts']['whatsapp'] ?>" class="offer-dropdown__connection-phone"><?= $random->data['contacts']['whatsapp'] ?></a>
+                                        <a href="tel:<?= $random['params']['data']['contacts']['whatsapp'] ?>" class="offer-dropdown__connection-phone"><?= $random['params']['data']['contacts']['whatsapp'] ?></a>
                                     </li>
                                 <?php endif; ?>
-                                <?php if(isset($random->data['characteristic']['tiene_app']) && $random->data['characteristic']['tiene_app'] != '-') : ?>
+                                <?php if(isset($random['params']['data']['characteristic']['tiene_app']) && $random['params']['data']['characteristic']['tiene_app'] != '-') : ?>
                                     <li class="offer-dropdown__connection-item">
                                         <p class="offer-dropdown__connection-text">Tiene app</p>
-                                        <img class="offer-dropdown__connection-image" src="img/checkbox.svg" alt="checkbox">
+                                        <img class="offer-dropdown__connection-image" src="/img/checkbox.svg" alt="checkbox">
                                     </li>
                                 <?php endif; ?>
                             </ul>

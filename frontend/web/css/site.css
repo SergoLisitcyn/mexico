@@ -12,3 +12,38 @@
     line-height: 19px;
     color: #777;
 }
+
+.rating__stars {
+    min-width: 80px;
+    max-width: 80px;
+    background: url(../img/star-disable.svg) top left/contain repeat-x;
+    margin-top: 3px;
+}
+.rating__stars:before {
+    float: left;
+    width: inherit;
+    height: 100%;
+    /*background: url(../img/star--active.svg) top left/contain repeat-x;*/
+    background: url(../img/star.svg) top left/contain repeat-x;
+    left: 0;
+    content: '';
+    position: relative;
+}
+
+.rating__stars_similar {
+    min-width: 75px;
+    max-width: 75px;
+    background: url(../img/star-disable.svg) top left/contain repeat-x;
+    margin-top: 3px;
+    height: 15px;
+}
+.rating__stars_similar:before {
+    float: left;
+    width: inherit;
+    height: 15px;
+    /* background: url(../img/star--active.svg) top left/contain repeat-x; */
+    background: url(../img/star.svg) top left/contain repeat-x;
+    left: 0;
+    content: '';
+    position: relative;
+}

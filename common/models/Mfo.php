@@ -21,6 +21,7 @@ use yii\web\UploadedFile;
  * @property string $url
  * @property string $title
  * @property string|null $data
+ * @property string|null $rating_auto
  * @property string|null $logo
  * @property int|null $status
  * @property int|null $sort
@@ -55,7 +56,7 @@ class Mfo extends ActiveRecord
     {
         return [
             [['name', 'url', 'title'], 'required'],
-            [['data'], 'safe'],
+            [['data','rating_auto'], 'safe'],
             [['status', 'sort', 'created_at', 'updated_at'], 'integer'],
             [['name', 'url', 'title', 'logo', 'description', 'keywords'], 'string', 'max' => 255],
             [['rating'], 'string', 'max' => 11],
@@ -74,6 +75,7 @@ class Mfo extends ActiveRecord
             'url' => 'Url',
             'title' => 'Title',
             'data' => 'Data',
+            'rating_auto' => 'Автоматический рейтинг',
             'logo' => 'Логотип МФО',
             'logo_file' => 'Логотип',
             'status' => 'Статус',
@@ -88,6 +90,7 @@ class Mfo extends ActiveRecord
     public function afterFind() {
         parent::afterFind();
         $this->data = Json::decode($this->data);
+        $this->rating_auto = Json::decode($this->rating_auto);
     }
 
     /**
@@ -266,6 +269,7 @@ class Mfo extends ActiveRecord
                     $mfo = Mfo::find()->where(['url' => $datum['meta_tags']['url']])->one();
                     if($mfo){
                         $mfo->data = json_encode($datum);
+                        $mfo->rating_auto = json_encode($mfo->rating_auto);
                         $mfo->save();
                         $countUpdate++;
                     } else {
@@ -274,6 +278,7 @@ class Mfo extends ActiveRecord
                         $model->url = $datum['meta_tags']['url'];
                         $model->title = $datum['meta_tags']['title'];
                         $model->data = json_encode($datum);
+                        $model->rating_auto = null;
                         $model->save();
                         $countSave++;
                     }
