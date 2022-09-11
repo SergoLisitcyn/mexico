@@ -26,19 +26,19 @@
             <?php if(isset($model['phone']) && $model['phone'] != '-') : ?>
                 <li class="datas__col">
                     <div class="datas__caption"><?= $mfoText['contacts']['phone'] ?></div>
-                    <p class="datas__text"><?= $model['phone'] ?></p>
+                    <p class="datas__text"><a href="tel:<?= $model['phone'] ?>"><?= $model['phone'] ?></a></p>
                 </li>
             <?php endif; ?>
 
             <?php if(isset($model['phone_1']) && $model['phone_1'] != '-') : ?>
                 <li class="datas__col">
                     <div class="datas__caption"><?= $mfoText['contacts']['phone_1'] ?></div>
-                    <p class="datas__text"><?= $model['phone_1'] ?></p>
+                    <p class="datas__text"><a href="tel:<?= $model['phone_1'] ?>"><?= $model['phone_1'] ?></a></p>
                 </li>
             <?php endif; ?>
-            <li class="datas__col">
-                <div class="datas__caption">Google maps</div>
-            </li>
+<!--            <li class="datas__col">-->
+<!--                <div class="datas__caption">Google maps</div>-->
+<!--            </li>-->
         </ul>
         <ul class="datas__column">
             <?php if(isset($model['whatsapp']) && $model['whatsapp'] != '-') : ?>
@@ -96,6 +96,7 @@
     </div>
 </div>
 <?php if(isset($model['google_maps']) && $model['google_maps'] != '-') : ?>
+    <div class="datas__caption" style="margin-top: 30px;">Google maps</div>
 <div class="tabs-content__map map">
     <?= $model['google_maps'] ?>
 </div>

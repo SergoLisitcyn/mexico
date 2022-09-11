@@ -2,8 +2,8 @@
 
 namespace frontend\controllers;
 
+use common\models\MainSolicita;
 use common\models\Mfo;
-use common\models\MfoSearch;
 use common\models\Reviews;
 use Yii;
 use yii\web\Controller;
@@ -110,6 +110,33 @@ class MfoController extends Controller
         return $this->render('reviews', [
             'reviews' => $reviews,
             'mfo' => $mfo,
+        ]);
+    }
+
+    /**
+     * @throws HttpException
+     */
+    public function actionSolicita($url)
+    {
+        if($url != 'linea' && $url != 'rapidos' && $url != 'buro' && $url != 'personales'){
+            throw new HttpException(404, 'Страница не существует.');
+        }
+
+        $mfo = Mfo::find()->where(['status' => 1])->all();
+        $text = MainSolicita::find()->where(['url' => $url])->one();
+        $data = [];
+        foreach ($mfo as $key => $value){
+            if($value['data']['pages'][$url] == '-'){
+                continue;
+            }
+            $data[$value['data']['pages'][$url]] = [
+              'params' => $value
+            ];
+        }
+        ksort($data);
+        return $this->render('solicita', [
+            'mfos' => $data,
+            'text' => $text,
         ]);
     }
 }

@@ -1,3 +1,6 @@
+<?php
+use yii\helpers\Url;
+?>
 <!--Solicita-->
 <?php if($blockManagement->status == 1 && $sols) : ?>
 <div class="container">
@@ -10,31 +13,15 @@
 
     <div class="main-sect__items credit-items">
     <?php foreach ($sols as $sol) : ?>
-        <div class="credit-items__item">
-            <div class="credit-items__image">
-                <img src="<?= $sol->image ?>" alt="<?= $sol->alt ?>">
+        <a href="<?php if($sol->url) { echo Url::toRoute(['mfo/solicita', 'url' => $sol->url]); }  ?>">
+            <div class="credit-items__item">
+                <div class="credit-items__image">
+                    <img src="<?= $sol->image ?>" alt="<?= $sol->alt ?>">
+                </div>
+                <p class="credit-items__text"><?= $sol->text ?></p>
             </div>
-            <p class="credit-items__text"><?= $sol->text ?></p>
-        </div>
+        </a>
     <?php endforeach; ?>
-<!--        <div class="credit-items__item">-->
-<!--            <div class="credit-items__image">-->
-<!--                <img src="/img/main-sect/main-sect-icon-2.svg" alt="main-sect-icon">-->
-<!--            </div>-->
-<!--            <p class="credit-items__text">Prestamos <br> rapidos</p>-->
-<!--        </div>-->
-<!--        <div class="credit-items__item">-->
-<!--            <div class="credit-items__image">-->
-<!--                <img src="/img/main-sect/main-sect-icon-3.svg" alt="main-sect-icon">-->
-<!--            </div>-->
-<!--            <p class="credit-items__text">Prestamos <br> en linea sin buro</p>-->
-<!--        </div>-->
-<!--        <div class="credit-items__item">-->
-<!--            <div class="credit-items__image">-->
-<!--                <img src="/img/main-sect/main-sect-icon-4.svg" alt="main-sect-icon">-->
-<!--            </div>-->
-<!--            <p class="credit-items__text">Prestamos <br> personales urgentes</p>-->
-<!--        </div>-->
     </div>
 </div>
 <?php endif; ?>

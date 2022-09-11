@@ -42,14 +42,19 @@ return [
             'showScriptName' => false,
             'rules' => [
                 '/' => '/site/index',
-                'mfo' => '/mfo/index',
+                'entidad' => '/mfo/index',
                 [
-                    'pattern' => 'mfo/<url:\S+>/reviews',
+                    'pattern' => 'entidad/solicita/<url:\S+>',
+                    'route' => '/mfo/solicita',
+                    'defaults' => ['url' => '']
+                ],
+                [
+                    'pattern' => 'entidad/<url:\S+>/reviews',
                     'route' => '/mfo/reviews',
                     'defaults' => ['url' => '']
                 ],
                 [
-                    'pattern' => 'mfo/<url:\S+>',
+                    'pattern' => 'entidad/<url:\S+>',
                     'route' => '/mfo/view',
                     'defaults' => ['url' => '']
                 ],

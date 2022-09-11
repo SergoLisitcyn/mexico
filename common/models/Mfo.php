@@ -230,6 +230,13 @@ class Mfo extends ActiveRecord
                         continue;
                     }
                 }
+                if($range == 'Páginas Temáticas'){
+                    $data[$mfoKey]['pages'] = self::getThemePages($value);
+                    if($key == 3){
+                        $dataText['text']['pages'] = self::getThemePages($value);
+                        continue;
+                    }
+                }
 
                 if($range == 'Meto'){
                     $data[$mfoKey]['meta_tags'] = self::getMetaTags($value);
@@ -539,6 +546,21 @@ class Mfo extends ActiveRecord
         $data['h1'] = $value[5]; // H1
         $data['title'] = $value[6]; // Title
         $data['description'] = $value[7]; // Description
+
+        return $data;
+    }
+
+    /**
+     * Возвращает массив из таблицы 'Páginas Temáticas'
+     * @param string|null $value
+     * @return array
+     */
+    public static function getThemePages($value)
+    {
+        $data['linea'] = $value[4]; // Prestamos en linea
+        $data['rapidos'] = $value[5]; // Prestamos rapidos
+        $data['buro'] = $value[6]; // Prestamos en linea sin buro
+        $data['personales'] = $value[7]; // Prestamos personales urgentes
 
         return $data;
     }

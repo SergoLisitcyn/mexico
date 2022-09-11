@@ -15,6 +15,7 @@ use yii\web\UploadedFile;
  * @property string|null $image
  * @property string|null $alt
  * @property string|null $text
+ * @property string|null $url
  * @property int|null $sort
  * @property int|null $status
  */
@@ -36,7 +37,7 @@ class MainSolicita extends ActiveRecord
     {
         return [
             [['sort', 'status'], 'integer'],
-            [['image', 'alt', 'text'], 'string', 'max' => 255],
+            [['image', 'alt', 'text','url'], 'string', 'max' => 255],
         ];
     }
 
@@ -53,6 +54,7 @@ class MainSolicita extends ActiveRecord
             'image' => 'Картинка',
             'image_file' => 'Картинка',
             'status' => 'Статус',
+            'url' => 'Url',
         ];
     }
 
