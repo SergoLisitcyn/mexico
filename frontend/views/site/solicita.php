@@ -4,7 +4,9 @@ use yii\helpers\Url;
 
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Mfos';
+if(isset($text->title_seo) && !empty($text->title_seo)) { $this->title = $text->title_seo; }
+if(isset($text->keywords) && !empty($text->keywords)) { $this->registerMetaTag(['name' => 'keywords','content' => $text->keywords]); }
+if(isset($text->description) && !empty($text->description)) { $this->registerMetaTag(['name' => 'description','content' => $text->description]); }
 ?>
 <div class="breadcrumbs">
     <div class="container">
@@ -20,7 +22,14 @@ $this->title = 'Mfos';
 </div>
 <div class="content">
     <div class="container">
-        <h1 class="main__title main-title"><?= $text->text ?></h1>
+        <?php if($text->title_h1) :?>
+        <h1 class="main__title main-title"><?= $text->title_h1 ?></h1>
+        <?php endif; ?>
+        <?php if($text->text_top) : ?>
+            <div class="values__descr">
+                <?= $text->text_top ?>
+            </div>
+        <?php endif; ?>
         <div class="content__block">
             <div class="content__row">
                 <section class="cards">
@@ -191,5 +200,10 @@ $this->title = 'Mfos';
                 <!-- <sidebar class="sidebar"></sidebar> -->
             </div>
         </div>
+        <?php if($text->text_bottom) : ?>
+            <div class="values__descr">
+                <?= $text->text_bottom ?>
+            </div>
+        <?php endif; ?>
     </div>
 </div>

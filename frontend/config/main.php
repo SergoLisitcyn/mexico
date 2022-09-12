@@ -44,11 +44,6 @@ return [
                 '/' => '/site/index',
                 'entidad' => '/mfo/index',
                 [
-                    'pattern' => 'entidad/solicita/<url:\S+>',
-                    'route' => '/mfo/solicita',
-                    'defaults' => ['url' => '']
-                ],
-                [
                     'pattern' => 'entidad/<url:\S+>/reviews',
                     'route' => '/mfo/reviews',
                     'defaults' => ['url' => '']
@@ -61,6 +56,11 @@ return [
                 [
                     'pattern' => 'page/<slug:\S+>',
                     'route' => '/pages/show-page',
+                    'defaults' => ['slug' => 'error']
+                ],
+                [
+                    'pattern' => '/<url:\S+>',
+                    'route' => '/site/solicita',
                     'defaults' => ['slug' => 'error']
                 ],
             ],

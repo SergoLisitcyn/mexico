@@ -1,5 +1,4 @@
 <?php
-use yii\helpers\Url;
 ?>
 <!--Solicita-->
 <?php if($blockManagement->status == 1 && $sols) : ?>
@@ -13,7 +12,7 @@ use yii\helpers\Url;
 
     <div class="main-sect__items credit-items">
     <?php foreach ($sols as $sol) : ?>
-        <a href="<?php if($sol->url) { echo Url::toRoute(['mfo/solicita', 'url' => $sol->url]); }  ?>">
+        <a href="<?php if($sol->url) { echo $sol->url; }  ?>">
             <div class="credit-items__item">
                 <div class="credit-items__image">
                     <img src="<?= $sol->image ?>" alt="<?= $sol->alt ?>">

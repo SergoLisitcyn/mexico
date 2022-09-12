@@ -112,31 +112,4 @@ class MfoController extends Controller
             'mfo' => $mfo,
         ]);
     }
-
-    /**
-     * @throws HttpException
-     */
-    public function actionSolicita($url)
-    {
-        if($url != 'linea' && $url != 'rapidos' && $url != 'buro' && $url != 'personales'){
-            throw new HttpException(404, 'Страница не существует.');
-        }
-
-        $mfo = Mfo::find()->where(['status' => 1])->all();
-        $text = MainSolicita::find()->where(['url' => $url])->one();
-        $data = [];
-        foreach ($mfo as $key => $value){
-            if($value['data']['pages'][$url] == '-'){
-                continue;
-            }
-            $data[$value['data']['pages'][$url]] = [
-              'params' => $value
-            ];
-        }
-        ksort($data);
-        return $this->render('solicita', [
-            'mfos' => $data,
-            'text' => $text,
-        ]);
-    }
 }

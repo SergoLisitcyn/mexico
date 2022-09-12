@@ -557,10 +557,10 @@ class Mfo extends ActiveRecord
      */
     public static function getThemePages($value)
     {
-        $data['linea'] = $value[4]; // Prestamos en linea
-        $data['rapidos'] = $value[5]; // Prestamos rapidos
-        $data['buro'] = $value[6]; // Prestamos en linea sin buro
-        $data['personales'] = $value[7]; // Prestamos personales urgentes
+        $data['prestamos_en_linea'] = $value[4]; // Prestamos en linea
+        $data['prestamos_rapidos'] = $value[5]; // Prestamos rapidos
+        $data['prestamos_en_linea_sin_buro'] = $value[6]; // Prestamos en linea sin buro
+        $data['prestamos_personales_urgentes'] = $value[7]; // Prestamos personales urgentes
 
         return $data;
     }

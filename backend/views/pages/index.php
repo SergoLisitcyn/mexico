@@ -26,9 +26,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= \kartik\grid\GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-
+            [
+                'class' => 'yii\grid\SerialColumn',
+                'options' => ['width' => '10'],
+            ],
             [
                 'class' => 'kartik\grid\EditableColumn',
                 'attribute' => 'name',

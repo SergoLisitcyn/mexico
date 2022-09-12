@@ -4,6 +4,8 @@ namespace frontend\controllers;
 
 use common\models\BlockManagement;
 use common\models\MainInfo;
+use common\models\MainSolicita;
+use common\models\Mfo;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -17,6 +19,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use yii\web\HttpException;
 
 /**
  * Site controller
@@ -149,6 +152,34 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    /**
+     * @throws HttpException
+     */
+    public function actionSolicita($url)
+    {
+        $text = MainSolicita::find()->where(['url' => $url])->one();
+        if(!$text){
+            throw new HttpException(404, 'Страница не существует.');
+        }
+
+        $mfo = Mfo::find()->where(['status' => 1])->all();
+
+        $data = [];
+        foreach ($mfo as $key => $value){
+            if($value['data']['pages'][$url] == '-'){
+                continue;
+            }
+            $data[$value['data']['pages'][$url]] = [
+                'params' => $value
+            ];
+        }
+        ksort($data);
+        return $this->render('solicita', [
+            'mfos' => $data,
+            'text' => $text,
+        ]);
     }
 
     /**

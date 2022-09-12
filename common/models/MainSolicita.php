@@ -18,6 +18,12 @@ use yii\web\UploadedFile;
  * @property string|null $url
  * @property int|null $sort
  * @property int|null $status
+ * @property string|null $title_h1
+ * @property string|null $title_seo
+ * @property string|null $description
+ * @property string|null $keywords
+ * @property string|null $text_top
+ * @property string|null $text_bottom
  */
 class MainSolicita extends ActiveRecord
 {
@@ -36,8 +42,10 @@ class MainSolicita extends ActiveRecord
     public function rules()
     {
         return [
+            [['url'], 'required'],
             [['sort', 'status'], 'integer'],
-            [['image', 'alt', 'text','url'], 'string', 'max' => 255],
+            [['text_top', 'text_bottom'], 'string'],
+            [['image', 'alt', 'text', 'url', 'title_h1', 'title_seo', 'description', 'keywords'], 'string', 'max' => 255],
         ];
     }
 
@@ -50,11 +58,17 @@ class MainSolicita extends ActiveRecord
             'id' => 'ID',
             'alt' => 'Alt изображения',
             'sort' => 'Сортировка',
-            'text' => 'Текст',
+            'text' => 'Текст на главной',
             'image' => 'Картинка',
             'image_file' => 'Картинка',
             'status' => 'Статус',
             'url' => 'Url',
+            'title_h1' => 'Заголовок H1',
+            'title_seo' => 'Title Seo',
+            'description' => 'Description',
+            'keywords' => 'Keywords',
+            'text_top' => 'Текст внутри карточки вверху',
+            'text_bottom' => 'Текст внутри карточки внизу',
         ];
     }
 
