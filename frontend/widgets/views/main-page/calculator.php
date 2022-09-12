@@ -36,10 +36,6 @@
                     </div>
                 </div>
             </div>
-            <div class="calculator__sum calculator-sum">
-                <div class="calculator-sum__text">Сумма к возврату:</div>
-                <div class="calculator-sum__number">65</div> <span class="calculator-sum__number-span">$</span>
-            </div>
             <button type="button" class="calculator__button button button--primary">Recibir dinero</button>
         </div>
     </div>
