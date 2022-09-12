@@ -101,7 +101,7 @@ AppAsset::register($this);
                     </ul>
                 </li>
                 <li class="footer-list__item">
-                    <a href="#" class="footer-list__item-logo"></a>
+                    <a href="/" class="footer-list__item-logo"></a>
                 </li>
             </ul>
         </div>
