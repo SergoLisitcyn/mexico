@@ -23,6 +23,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'method' => 'post',
         ],
     ]) ?>
+    <?= Html::a('Запустить обновление рейтинга', ['site/api'], [
+        'class' => 'btn btn-warning',
+        'data' => [
+            'confirm' => 'Вы точно хотите запустить обновление?',
+            'method' => 'post',
+        ],
+    ]) ?>
 
 
     <?= \kartik\grid\GridView::widget([

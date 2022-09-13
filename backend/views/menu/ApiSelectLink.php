@@ -12,7 +12,7 @@
             echo '<tr>
                     <td>'.$page->name.'</td>
                     <td>'.$page->slug.'</td>
-                    <td><button type="button" pagelink="/page/'.$page->slug.'" class="SelectLink btn btn-primary" data-dismiss="modal"  onclick="selectPage(this)">выбрать</button>
+                    <td><button type="button" pagelink="/contenido/'.$page->slug.'" class="SelectLink btn btn-primary" data-dismiss="modal"  onclick="selectPage(this)">выбрать</button>
                     </td>
                  </tr>';
         }

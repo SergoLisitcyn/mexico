@@ -564,4 +564,48 @@ class Mfo extends ActiveRecord
 
         return $data;
     }
+
+    public static function generateRating($interesCostes = null,$condiciones = null,$atencion = null,$funcionalidad = null)
+    {
+        if(!$interesCostes && !$condiciones && !$atencion && !$funcionalidad){
+            return null;
+        }
+        $starRateInteresCostes = null;
+        $starRateCondiciones = null;
+        $starRateAtencion = null;
+        $starRateFuncionalidad = null;
+
+        if($interesCostes){
+            $interesCostes = number_format($interesCostes, 1, '.', '') * 5;
+            $starRateInteresCostes = (100 *  $interesCostes)/5;
+        }
+        if($condiciones){
+            $condiciones = number_format($condiciones, 1, '.', '') * 5;
+            $starRateCondiciones = (100 *  $condiciones)/5;
+        }
+        if($atencion){
+            $atencion = number_format($atencion, 1, '.', '') * 5;
+            $starRateAtencion = (100 *  $atencion)/5;
+        }
+        if($funcionalidad){
+            $funcionalidad = number_format($funcionalidad, 1, '.', '') * 5;
+            $starRateFuncionalidad = (100 *  $funcionalidad)/5;
+        }
+
+        $all = ($interesCostes + $condiciones + $atencion + $funcionalidad) / 4;
+        $allRating = number_format($all, 1, '.', '');
+        $starRateAll = (100 *  $allRating)/5;
+        return [
+            'interes_costes' => $interesCostes,
+            'condiciones' => $condiciones,
+            'atencion' => $atencion,
+            'funcionalidad' => $funcionalidad,
+            'interes_costes_rate' => $starRateInteresCostes,
+            'condiciones_rate' => $starRateCondiciones,
+            'atencion_rate' => $starRateAtencion,
+            'funcionalidad_rate' => $starRateFuncionalidad,
+            'allRating' => $allRating,
+            'allRating_rate' => $starRateAll,
+        ];
+    }
 }

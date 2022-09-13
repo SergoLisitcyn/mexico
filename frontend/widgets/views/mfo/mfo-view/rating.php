@@ -7,50 +7,50 @@ use yii\helpers\Url;
         <div class="rating-sidebar__repute repute">
             <div class="repute__rating">
                 <img class="repute__rating-image" src="/img/stars.svg" alt="stars">
-                <div class="repute__rating-number"><?= $model->rating ?></div>
+                <div class="repute__rating-number"><?= $model->rating_auto['rating']['allRating'] ?></div>
             </div>
             <div class="repute__comments">
                 Leer <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $model->url]) ?>" class="repute__comments-link">25 comentarios</a>
             </div>
         </div>
         <ul class="rating-sidebar__list">
-            <?php if($mfoRating && $mfoRating['interes_costes_rate']) :?>
+            <?php if($model->rating_auto['rating'] && $model->rating_auto['rating']['interes_costes_rate']) :?>
             <li class="rating-sidebar__item">
                 <div class="rating-sidebar__text">Interés & Costes</div>
                 <div class="rating-sidebar__rating">
-                    <div class="rating__stars" style="width:<?= $mfoRating['interes_costes_rate'] ?>%"></div>
+                    <div class="rating__stars" style="width:<?= $model->rating_auto['rating']['interes_costes_rate'] ?>%"></div>
                     <!--                                        <img class="rating-sidebar__rating-image" src="/img/stars.svg" alt="stars">-->
-                    <div class="rating-sidebar__rating-number"><?= $mfoRating['interes_costes'] ?></div>
+                    <div class="rating-sidebar__rating-number"><?= $model->rating_auto['rating']['interes_costes'] ?></div>
                 </div>
             </li>
             <?php endif; ?>
-            <?php if($mfoRating && $mfoRating['condiciones_rate']) :?>
+            <?php if($model->rating_auto['rating'] && $model->rating_auto['rating']['condiciones_rate']) :?>
             <li class="rating-sidebar__item">
                 <div class="rating-sidebar__text">Condiciones</div>
                 <div class="rating-sidebar__rating">
-                    <div class="rating__stars" style="width:<?= $mfoRating['condiciones_rate'] ?>%"></div>
+                    <div class="rating__stars" style="width:<?= $model->rating_auto['rating']['condiciones_rate'] ?>%"></div>
                     <!--                                        <img class="rating-sidebar__rating-image" src="/img/stars.svg" alt="stars">-->
-                    <div class="rating-sidebar__rating-number"><?= $mfoRating['condiciones'] ?></div>
+                    <div class="rating-sidebar__rating-number"><?= $model->rating_auto['rating']['condiciones'] ?></div>
                 </div>
             </li>
             <?php endif; ?>
-            <?php if($mfoRating && $mfoRating['atencion']) :?>
+            <?php if($model->rating_auto['rating'] && $model->rating_auto['rating']['atencion']) :?>
             <li class="rating-sidebar__item">
                 <div class="rating-sidebar__text">Atención al cliente</div>
                 <div class="rating-sidebar__rating">
-                    <div class="rating__stars" style="width:<?= $mfoRating['atencion_rate'] ?>%"></div>
+                    <div class="rating__stars" style="width:<?= $model->rating_auto['rating']['atencion_rate'] ?>%"></div>
                     <!--                                        <img class="rating-sidebar__rating-image" src="/img/stars.svg" alt="stars">-->
-                    <div class="rating-sidebar__rating-number"><?= $mfoRating['atencion'] ?></div>
+                    <div class="rating-sidebar__rating-number"><?= $model->rating_auto['rating']['atencion'] ?></div>
                 </div>
             </li>
             <?php endif; ?>
-            <?php if($mfoRating && $mfoRating['funcionalidad']) :?>
+            <?php if($model->rating_auto['rating'] && $model->rating_auto['rating']['funcionalidad']) :?>
             <li class="rating-sidebar__item">
                 <div class="rating-sidebar__text">Funcionalidad</div>
                 <div class="rating-sidebar__rating">
-                    <div class="rating__stars" style="width:<?= $mfoRating['funcionalidad_rate'] ?>%"></div>
+                    <div class="rating__stars" style="width:<?= $model->rating_auto['rating']['funcionalidad_rate'] ?>%"></div>
                     <!--                                        <img class="rating-sidebar__rating-image" src="/img/stars.svg" alt="stars">-->
-                    <div class="rating-sidebar__rating-number"><?= $mfoRating['funcionalidad'] ?></div>
+                    <div class="rating-sidebar__rating-number"><?= $model->rating_auto['rating']['funcionalidad'] ?></div>
                 </div>
             </li>
             <?php endif; ?>

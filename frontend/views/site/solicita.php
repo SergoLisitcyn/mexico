@@ -167,7 +167,7 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                                             <li class="offer__value-item offer__value-item--last">
                                                 <div class="offer__value-title">
                                                     Nuestra calificación</div>
-                                                <div class="offer__value-number">4,8</div>
+                                                <div class="offer__value-number"><?= $mfo['params']['rating_auto']['rating']['allRating'] ?></div>
                                             </li>
                                         </ul>
                                     </div>
@@ -198,25 +198,26 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                                             <li class="offer-dropdown__repute-item">
                                                 <div class="offer-dropdown__repute-title">Nuestra calificación</div>
                                                 <div class="offer-dropdown__repute-rating">
-                                                    <img class="offer-dropdown__repute-image" src="/img/stars.svg" alt="stars">
-                                                    <span class="offer-dropdown__repute-number">4,8</span>
+<!--                                                    <img class="offer-dropdown__repute-image" src="/img/stars.svg" alt="stars">-->
+                                                    <div class="rating__stars_similar" style="width:<?= $mfo['params']['rating_auto']['rating']['allRating_rate'] ?>%"></div>
+                                                    <span class="offer-dropdown__repute-number"><?= $mfo['params']['rating_auto']['rating']['allRating'] ?></span>
                                                 </div>
                                             </li>
                                             <li class="offer-dropdown__repute-item">
                                                 <p class="offer-dropdown__repute-text">Interés & Costes</p>
-                                                <img class="offer-dropdown__repute-image" src="/img/stars.svg" alt="stars">
+                                                <div class="rating__stars_similar" style="width:<?= $mfo['params']['rating_auto']['rating']['interes_costes_rate'] ?>%"></div>
                                             </li>
                                             <li class="offer-dropdown__repute-item">
                                                 <p class="offer-dropdown__repute-text">Condiciones</p>
-                                                <img class="offer-dropdown__repute-image" src="/img/stars.svg" alt="stars">
+                                                <div class="rating__stars_similar" style="width:<?= $mfo['params']['rating_auto']['rating']['condiciones_rate'] ?>%"></div>
                                             </li>
                                             <li class="offer-dropdown__repute-item">
                                                 <p class="offer-dropdown__repute-text">Atención al cliente</p>
-                                                <img class="offer-dropdown__repute-image" src="/img/stars.svg" alt="stars">
+                                                <div class="rating__stars_similar" style="width:<?= $mfo['params']['rating_auto']['rating']['atencion_rate'] ?>%"></div>
                                             </li>
                                             <li class="offer-dropdown__repute-item">
                                                 <p class="offer-dropdown__repute-text">Funcionalidad</p>
-                                                <img class="offer-dropdown__repute-image" src="/img/stars.svg" alt="stars">
+                                                <div class="rating__stars_similar" style="width:<?= $mfo['params']['rating_auto']['rating']['funcionalidad_rate'] ?>%"></div>
                                             </li>
                                             <li class="offer-dropdown__repute-item">
                                                 <a href="<?= Url::toRoute(['mfo/view', 'url' => $mfo['params']['url']]) ?>" class="offer-dropdown__repute-link">Información precisa</a>

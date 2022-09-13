@@ -54,7 +54,7 @@ return [
                     'defaults' => ['url' => '']
                 ],
                 [
-                    'pattern' => 'page/<slug:\S+>',
+                    'pattern' => 'contenido/<slug:\S+>',
                     'route' => '/pages/show-page',
                     'defaults' => ['slug' => 'error']
                 ],

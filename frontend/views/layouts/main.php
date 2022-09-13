@@ -30,7 +30,7 @@ AppAsset::register($this);
         <div class="container">
             <div class="main-menu">
                 <div class="logo">
-                    <a href="/"><img src="/img/logo.svg" alt="logo"></a>
+                    <a href="/"><img src="/img/logo-white-yellow.svg" alt="logo"></a>
                 </div>
             </div>
             <div class="menu__icon icon-menu">

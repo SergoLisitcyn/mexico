@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Mfo;
 use yii\helpers\Json;
 
 ini_set("display_errors", "on");
@@ -370,12 +371,18 @@ if(!empty($orgName)) $_GET["only-mfo"] = $orgName;
 if(isset($_GET["only-mfo"]) && isset($service_params_data[$_GET["only-mfo"]])) $service_params_data = $service_params_data[$_GET["only-mfo"]];
 
 foreach ($service_params_data as $key => $value){
-    $mfo = \common\models\Mfo::find()->where(['url' => $key])->one();
+    $mfo = Mfo::find()->where(['url' => $key])->one();
+    $mfoRating = Mfo::generateRating($value['interes_costes'],$value['condiciones'],$value['atencion'],$value['funcionalidad']);
+    if($mfoRating){
+        $value = [
+            'rating' => $mfoRating
+        ];
+    }
     if($mfo){
         $mfo->rating_auto = Json::encode($value);
         $mfo->data = Json::encode($mfo->data);
         if($mfo->save()){
-            echo $key.' добавлен!';
+            echo $key.' добавлен!<br>';
         } else {
             var_dump($mfo->errors);
             die;
