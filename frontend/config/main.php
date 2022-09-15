@@ -42,6 +42,7 @@ return [
             'showScriptName' => false,
             'rules' => [
                 '/' => '/site/index',
+                'empresas' => '/site/empresas',
                 'entidad' => '/mfo/index',
                 [
                     'pattern' => 'entidad/<url:\S+>/reviews',

@@ -381,6 +381,10 @@ foreach ($service_params_data as $key => $value){
     if($mfo){
         $mfo->rating_auto = Json::encode($value);
         $mfo->data = Json::encode($mfo->data);
+        if($mfoRating){
+            $mfo->rating = $mfoRating['allRating'];
+        }
+
         if($mfo->save()){
             echo $key.' добавлен!<br>';
         } else {

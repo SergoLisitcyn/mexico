@@ -154,6 +154,15 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
+    public function actionEmpresas()
+    {
+        $mfo = Mfo::find()->where(['status' => 1])->orderBy(['rating' => SORT_DESC])->all();
+
+        return $this->render('empresas', [
+            'mfos' => $mfo,
+        ]);
+    }
+
     /**
      * @throws HttpException
      */
