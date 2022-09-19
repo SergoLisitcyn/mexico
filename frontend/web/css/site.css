@@ -47,3 +47,16 @@
     content: '';
     position: relative;
 }
+
+.tabs-control__item {
+    padding: 25px 15px !important;
+    font-size: 20px !important;
+    line-height: 20px !important;
+}
+
+@media (max-width: 1000px){
+    .tabs-control__item {
+        font-size: 18px !important;
+        line-height: 18px !important;
+    }
+}
