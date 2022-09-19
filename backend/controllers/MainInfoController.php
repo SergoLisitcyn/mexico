@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\models\MainInfo;
+use Yii;
 use yii\filters\AccessControl;
 use yii\helpers\Json;
 use yii\web\Controller;
@@ -83,16 +84,17 @@ class MainInfoController extends Controller
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($name)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($name);
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
                 $model->work = Json::encode($model->work);
                 $model->mission = Json::encode($model->mission);
                 if($model->save()){
-                    return $this->redirect(['update', 'id' => $model->id]);
+                    Yii::$app->session->addFlash('success', 'Обновлено');
+                    return $this->redirect(['update', 'name' => $model->name]);
                 } else {
                     var_dump($model->errors);die;
                 }
@@ -107,13 +109,12 @@ class MainInfoController extends Controller
     /**
      * Finds the MainInfo model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id ID
      * @return MainInfo the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($name)
     {
-        if (($model = MainInfo::findOne(['id' => $id])) !== null) {
+        if (($model = MainInfo::findOne(['name' => $name])) !== null) {
             return $model;
         }
 

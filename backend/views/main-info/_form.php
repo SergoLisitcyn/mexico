@@ -18,10 +18,11 @@ use vova07\imperavi\Widget;
 </style>
 <div style="margin-top: 20px;">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin();?>
     <input type="hidden" name="<?=Yii::$app->request->csrfParam; ?>" value="<?=Yii::$app->request->getCsrfToken(); ?>" />
-    <div class="main-info-form" id="works">
-        <h4 class="bold uppercase">1.Блок "Как мы работаем"</h4>
+    <input type="hidden" name="MainInfo[name]" value="<?= $model->name ?>" />
+    <?php if($model->name == 'works') : ?>
+    <div class="main-info-form">
         <?php
         echo $form->field($model, 'work')->widget(MultipleInput::className(), [
                 'min'               => 1, // should be at least 2 rows
@@ -31,15 +32,21 @@ use vova07\imperavi\Widget;
             ])
                 ->label(false);
         ?>
-        <?= $form->field($model, 'work_title')->textInput(['maxlength' => true]) ?>
 
-        <?= $form->field($model, 'work_status')->dropDownList([
+        <?php
+        /*
+        $form->field($model, 'work_title')->textInput(['maxlength' => true]);
+
+        $form->field($model, 'work_status')->dropDownList([
                 '1' => 'Блок включен',
                 '0' => 'Блок выключен'
-            ]) ?>
+            ])
+        */
+        ?>
     </div>
-    <div class="main-info-form"  id="mission">
-        <h4 class="bold uppercase">2.Блок "Наши цели, миссия"</h4>
+    <?php endif; ?>
+    <?php if($model->name == 'mission') : ?>
+    <div class="main-info-form">
         <?php
         echo $form->field($model, 'mission')->widget(MultipleInput::className(), [
                 'min'               => 1, // should be at least 2 rows
@@ -50,16 +57,20 @@ use vova07\imperavi\Widget;
                 ->label(false);
         ?>
 
-        <?= $form->field($model, 'mission_title')->textInput(['maxlength' => true]) ?>
+        <?php
+        /*
+        $form->field($model, 'mission_title')->textInput(['maxlength' => true]);
 
-        <?= $form->field($model, 'mission_status')->dropDownList([
+        $form->field($model, 'mission_status')->dropDownList([
                 '1' => 'Блок включен',
                 '0' => 'Блок выключен'
-        ]) ?>
+        ])
+        */
+        ?>
     </div>
-
-    <div class="main-info-form"   id="info">
-        <h4 class="bold uppercase">3.Блок "О ценностях"</h4>
+    <?php endif; ?>
+    <?php if($model->name == 'info') : ?>
+    <div class="main-info-form">
         <?= $form->field($model, 'text_main')->widget(Widget::className(), [
             'settings' => [
                 'lang' => 'ru',
@@ -79,28 +90,37 @@ use vova07\imperavi\Widget;
             ]
         ])?>
 
-        <?= $form->field($model, 'text_main_title')->textInput(['maxlength' => true]) ?>
+        <?php
+        /*
+        $form->field($model, 'text_main_title')->textInput(['maxlength' => true]);
 
-        <?= $form->field($model, 'text_main_status')->dropDownList([
+         $form->field($model, 'text_main_status')->dropDownList([
             '1' => 'Блок включен',
             '0' => 'Блок выключен'
-        ]) ?>
+        ])
+        */
+         ?>
     </div>
+    <?php endif; ?>
 
-    <div class="main-info-form" id="progress">
-        <h4 class="bold uppercase">4.Блок "Наши достижения"</h4>
-        <?= $form->field($model, 'progress_title')->textInput(['maxlength' => true]) ?>
-
-        <?= $form->field($model, 'progress_text')->textInput(['maxlength' => true]) ?>
-
+    <?php if($model->name == 'progress') : ?>
+    <div class="main-info-form">
         <?= $form->field($model, 'progress_value')->textInput(['maxlength' => true]) ?>
 
-        <?= $form->field($model, 'progress_status')->dropDownList([
+
+        <?php
+        /*
+         $form->field($model, 'progress_title')->textInput(['maxlength' => true]);
+        $form->field($model, 'progress_text')->textInput(['maxlength' => true]);
+
+        $form->field($model, 'progress_status')->dropDownList([
             '1' => 'Блок включен',
             '0' => 'Блок выключен'
-        ]) ?>
+        ])
+        */
+        ?>
     </div>
-
+    <?php endif; ?>
 
 
 

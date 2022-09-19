@@ -47,16 +47,19 @@ class MainPageWidget extends Widget
                 'menus' => $menu,
             ]);
         }
+        $blockManagement = BlockManagement::find()->where(['tag' => $this->type])->one();
         if($this->type == 'contacts') {
             return $this->render('main-page/'.$this->type,[
-                'contacts' => MainContact::findOne(1)
+                'contacts' => MainContact::findOne(1),
+                'blockManagement' => $blockManagement,
             ]);
         }
         if($this->type == 'team') {
             $teams = MainTeam::find()->where(['status' => 1])->all();
 
             return $this->render('main-page/'.$this->type,[
-                'teams' => $teams
+                'teams' => $teams,
+                'blockManagement' => $blockManagement,
             ]);
         }
         if($this->type == 'solicita' || $this->type == 'about' || $this->type == 'partners'){
@@ -82,9 +85,11 @@ class MainPageWidget extends Widget
         if($this->type == 'mission' || $this->type == 'works' || $this->type == 'info' || $this->type == 'progress'){
 
             return $this->render('main-page/'.$this->type,[
-                'info' => MainInfo::findOne(1)
+                'info' => MainInfo::findOne(['name' => $this->type]),
+                'blockManagement' => $blockManagement,
             ]);
         }
+        $blockManagement = null;
         if($this->type == 'rating'){
             $mfoData = Mfo::find()->where(['status'=> 1])->limit(3)->orderBy(['rating' => SORT_DESC])->all();
             $data = [];

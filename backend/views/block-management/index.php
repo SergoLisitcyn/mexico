@@ -74,7 +74,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'options' => ['width' => '200'],
                 'value' => function ($model, $index) {
                     if($model->link){
-                        if($model->tag == 'info' || $model->tag == 'works' || $model->tag == 'progress' || $model->tag == 'mission' || $model->tag == 'contacts'){
+                        if($model->tag == 'contacts'){
                             return Html::tag('a', 'Редактировать', ['href' => Url::toRoute([$model->link,'id'=> 1,'#'=> $model->tag]), 'class' => 'btn btn-success', 'style' => 'font-weight: 100;margin-right:10px']);
                         }
 
