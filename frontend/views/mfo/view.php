@@ -26,11 +26,6 @@ $this->title = $model->title;
                         <img src="<?= $model->logo ?>" alt="<?= $model->name ?>">
                     </div>
                 <?php endif; ?>
-                <?php if(isset($model->data['meta_tags']['h1']) && $model->data['meta_tags']['site'] != '-') : ?>
-                    <div class="mfo-heading__name-link">
-                        <?= $model->data['meta_tags']['site'] ?>
-                    </div>
-                <?php endif; ?>
             </div>
             <div class="mfo-heading__repute repute">
                 <div class="repute__rating">
@@ -157,7 +152,7 @@ $this->title = $model->title;
                                 </div>
 
                                 <!--   Contacto -->
-                                <?= MfoViewWidget::widget(['type' => 'contacts','model' => $model->data['contacts']]) ?>
+                                <?= MfoViewWidget::widget(['type' => 'contacts','model' => $model]) ?>
 
                                 <!--   Reviews -->
                                 <?= MfoViewWidget::widget(['type' => 'reviews','model' => $model,'reviewsModel' => $reviewsModel,'action' => '/mfo/'.$model->url]) ?>
