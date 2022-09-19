@@ -12,6 +12,7 @@ use common\models\MainTeam;
 use common\models\Menu;
 use common\models\Mfo;
 use common\models\Reviews;
+use common\models\SeoTags;
 use yii\bootstrap\Widget;
 
 class MainPageWidget extends Widget
@@ -25,6 +26,15 @@ class MainPageWidget extends Widget
 
     public function run()
     {
+        if($this->type == 'seo') {
+            $model = SeoTags::findOne(['slug' => $_SERVER['REQUEST_URI'],'status'=> 1]);
+            if(!$model){
+                return null;
+            }
+            return $this->render('main-page/'.$this->type,[
+                'model' => $model
+            ]);
+        }
         if($this->type == 'menu-top'){
             $menu = Menu::find()->where(['in', 'zone', [0,1]])->andWhere(['status' => 1])->orderBy(['sort' => SORT_ASC])->all();
             return $this->render('main-page/'.$this->type,[
