@@ -12,9 +12,10 @@ $this->title = $name;
 <section class="not-found">
     <div class="container">
         <div class="not-found__info">
-            <h1 class="not-found__title">You’re in a land of the lost </h1>
-            <p class="not-found__descr">You can either stay and chill here, or go back to the beggining</p>
-            <a href="/" class="not-found__button button button--primary">Take a ride back home</a>
+            <h1 class="not-found__title">¡Estás en el mundo de los perdidos! </h1>
+            <p class="not-found__descr">La página que estabas buscando se perdió por aquí, en alguna parte…</p>
+            <p class="not-found__descr">Puedes quedarte aquí y relajarte, o levantarte, y regresar a encontrar el mejor crédito con Finjenios.</p>
+            <a href="/" class="not-found__button button button--primary">Comparar ofertas</a>
         </div>
     </div>
 </section>
