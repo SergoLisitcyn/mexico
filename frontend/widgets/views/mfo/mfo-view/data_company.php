@@ -83,8 +83,8 @@
 
             <?php if(isset($model['condusef_ficha']) && $model['condusef_ficha'] != '-') : ?>
                 <li class="datas__col">
-                    <div class="datas__caption ttu"><?= $mfoText['data_company']['condusef_ficha'] ?></div>
-                    <div class="datas__caption ttu"><?= $model['condusef_ficha'] ?></div>
+                    <div class="datas__caption ttu"><a href="<?= $model['condusef_ficha'] ?>"><?= $mfoText['data_company']['condusef_ficha'] ?></a></div>
+<!--                    <div class="datas__caption ttu"></div>-->
                 </li>
             <?php endif; ?>
 

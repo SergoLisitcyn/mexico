@@ -168,6 +168,15 @@ class SiteController extends Controller
      */
     public function actionSolicita($url)
     {
+
+        $request = Yii::$app->request;
+        $post = $request->post();
+        $sum = 50;
+        $term = 30;
+        if($post){
+            $sum = $request->post('rs_sum');
+            $term = $request->post('rs_term');
+        }
         $text = MainSolicita::find()->where(['url' => $url])->one();
         if(!$text){
             throw new HttpException(404, 'Страница не существует.');
@@ -188,6 +197,8 @@ class SiteController extends Controller
         return $this->render('solicita', [
             'mfos' => $data,
             'text' => $text,
+            'sum' => $sum,
+            'term' => $term,
         ]);
     }
 

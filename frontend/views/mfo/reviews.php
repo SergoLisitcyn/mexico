@@ -8,10 +8,10 @@ use yii\helpers\Url;
         <div class="main__breadcrumbs breadcrumbs">
             <ul class="breadcrumbs__items">
                 <li class="breadcrumbs__item">
-                    <a href="/" class="breadcrumbs__link">Займы онлайн</a>
+                    <a href="/" class="breadcrumbs__link">Inicio</a>
                 </li>
                 <li class="breadcrumbs__item">
-                    <a href="/mfo" class="breadcrumbs__link">МФО</a>
+                    <a href="/mfo" class="breadcrumbs__link">Empresas</a>
                 </li>
                 <li class="breadcrumbs__item">
                     <a href="<?= Url::toRoute(['mfo/view', 'url' => $mfo->url]) ?>" class="breadcrumbs__link"><?= $mfo->name ?></a>

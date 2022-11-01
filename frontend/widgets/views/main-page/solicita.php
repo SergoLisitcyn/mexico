@@ -12,7 +12,7 @@
 
     <div class="main-sect__items credit-items">
     <?php foreach ($sols as $sol) : ?>
-        <a href="<?php if($sol->url) { echo $sol->url; }  ?>">
+        <a href="<?php if($sol->url) { echo $sol->url; }  ?>" style="text-decoration: none">
             <div class="credit-items__item">
                 <div class="credit-items__image">
                     <img src="<?= $sol->image ?>" alt="<?= $sol->alt ?>">

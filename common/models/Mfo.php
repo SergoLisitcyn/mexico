@@ -30,6 +30,8 @@ use yii\web\UploadedFile;
  * @property string|null $rating
  * @property int $created_at
  * @property int $updated_at
+ * @property string|null $montos_title
+ * @property string|null $montos_text
  */
 class Mfo extends ActiveRecord
 {
@@ -58,7 +60,8 @@ class Mfo extends ActiveRecord
             [['name', 'url', 'title'], 'required'],
             [['data','rating_auto'], 'safe'],
             [['status', 'sort', 'created_at', 'updated_at'], 'integer'],
-            [['name', 'url', 'title', 'logo', 'description', 'keywords'], 'string', 'max' => 255],
+            [['name', 'url', 'title', 'logo', 'description', 'keywords', 'montos_title'], 'string', 'max' => 255],
+            [['montos_text'], 'string'],
             [['rating'], 'string', 'max' => 11],
             [['logo_file'], 'file'],
         ];
@@ -85,6 +88,8 @@ class Mfo extends ActiveRecord
             'keywords' => 'Keywords',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'montos_title' => 'Montos Title',
+            'montos_text' => 'Montos Текст',
         ];
     }
     public function afterFind() {
@@ -607,5 +612,29 @@ class Mfo extends ActiveRecord
             'allRating' => $allRating,
             'allRating_rate' => $starRateAll,
         ];
+    }
+
+    /**
+     * Возвращает данные по трем лучшим мфо по рейтингу(TOP3)
+     * @return array
+     */
+    public static function getTopRatingMfo()
+    {
+        $mfoData = Mfo::find()->where(['status'=> 1])->limit(3)->orderBy(['rating' => SORT_DESC])->all();
+        $data = [];
+        if($mfoData){
+            foreach ($mfoData as $mfo){
+                $reviews = Reviews::find()->where(['mfo_id' => $mfo['id'], 'status' => 1])->count();
+                $data[] = [
+                    'id' =>  $mfo['id'],
+                    'logo' =>  $mfo['logo'],
+                    'name' =>  $mfo['name'],
+                    'rating' =>  $mfo['rating'],
+                    'url' =>  $mfo['url'],
+                    'reviews_count' =>  $reviews,
+                ];
+            }
+        }
+        return $data;
     }
 }

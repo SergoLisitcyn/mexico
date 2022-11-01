@@ -3,6 +3,7 @@
 use kartik\file\FileInput;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use vova07\imperavi\Widget;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Mfo */
@@ -44,6 +45,27 @@ use yii\widgets\ActiveForm;
             ?>
         </div>
     </div>
+    <?= $form->field($model, 'montos_title')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'montos_text')->widget(Widget::className(), [
+        'settings' => [
+            'lang' => 'ru',
+            'minHeight' => 300,
+            'formatting' => ['p', 'blockquote', 'h2', 'h1'],
+            'attributes' => [
+                [
+                    'attribute' => 'text',
+                    'format' => 'html'
+                ]
+            ],
+            'plugins' => [
+                'clips',
+                'fullscreen'
+            ]
+
+        ]
+    ])?>
+
 
     <?= $form->field($model, 'status')->dropDownList([
         '1' => 'Активен',

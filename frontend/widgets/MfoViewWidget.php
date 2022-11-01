@@ -54,6 +54,12 @@ class MfoViewWidget extends Widget
                 ->all();
         }
         $mfoRating = [];
+        if($this->type == 'top_entidades'){
+            $data = Mfo::getTopRatingMfo();
+            return $this->render('mfo/mfo-view/'.$this->type,[
+                'mfo' => $data
+            ]);
+        }
 //        if($this->type == 'rating'){
 //            if($this->model->rating_auto){
 //                $mfoRating = self::generateRating($this->model->rating_auto['interes_costes'],$this->model->rating_auto['condiciones'],$this->model->rating_auto['atencion'],$this->model->rating_auto['funcionalidad']);

@@ -5,16 +5,16 @@ use yii\helpers\Url;
 
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Mfos';
+$this->title = 'Empresas';
 ?>
 <div class="breadcrumbs">
     <div class="container">
         <ul class="breadcrumbs__items">
             <li class="breadcrumbs__item">
-                <a href="/" class="breadcrumbs__link">Займы онлайн</a>
+                <a href="/" class="breadcrumbs__link">Inicio</a>
             </li>
             <li class="breadcrumbs__item">
-                МФО
+                Empresas
             </li>
         </ul>
     </div>

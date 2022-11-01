@@ -1,13 +1,11 @@
 <?php
 use yii\helpers\Url;
 ?>
-<!--Rating-->
-<section class="main__entities entities">
-    <div class="container">
-        <div class="entities__row background-set">
-            <h2 class="entities__title title">TOP 3 Entidades</h2>
-            <ul class="entities__list">
-                <?php foreach ($mfo as $item) : ?>
+<div class="entities entities-sidebar">
+    <div class="entities__row background-set">
+        <h2 class="entities__title title sidebar-title">TOP 3 Entidades</h2>
+        <ul class="entities__list">
+            <?php foreach ($mfo as $item) : ?>
                 <li class="entities__item">
                     <div class="entities__logo">
                         <a href="<?= Url::toRoute(['mfo/view', 'url' => $item['url']]) ?>">
@@ -24,8 +22,7 @@ use yii\helpers\Url;
                         </div>
                     </div>
                 </li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
+            <?php endforeach; ?>
+        </ul>
     </div>
-</section>
+</div>

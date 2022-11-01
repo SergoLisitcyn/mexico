@@ -1,5 +1,6 @@
 <?php
 
+use frontend\widgets\MainPageWidget;
 use yii\helpers\Url;
 
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -15,87 +16,12 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                 <a href="/" class="breadcrumbs__link">Займы онлайн</a>
             </li>
             <li class="breadcrumbs__item">
-                МФО
+                Empresas
             </li>
         </ul>
     </div>
 </div>
-<section class="calculator" style="margin-bottom: 30px;">
-    <div class="container">
-        <div class="calculator__main">
-            <div class="calculator__row background-set">
-                <div class="calculator__columns">
-                    <div class="calculator__col">
-                        <div class="calculator__range range">
-                            <label class="range__label">
-                                <span class="range__label-title">¿Cuánto dinero necesitas?</span>
-                            </label>
-                            <div class="range__inputs">
-                                <div class="range__result result-1">
-                                    <div class="range__result-input">
-                                        <input aria-invalid="false" type="text" slot="amount" aria-labelledby="input-amount-slider" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense" value="50" name="rs_sum_output" id="rs_sum_output">
-                                    </div>
-                                    <span class="range__result-span">$</span>
-                                </div>
-                                <input id="rs_sum" type="range" name="rs_sum" min="0" max="100" value="50" step="5" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="calculator__col">
-                        <div class="calculator__range range">
-                            <label class="range__label">
-                                <span class="range__label-title">¿En cuánto tiempo deseas pagarlo?</span>
-                            </label>
-                            <div class="range__inputs">
-                                <div class="range__result result-2">
-                                    <div class="range__result-input">
-                                        <input aria-invalid="false" type="text" slot="term" aria-labelledby="input-term-slider" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense" value="30" name="rs_term_output" id="rs_term_output">
-                                    </div>
-                                    <span class="range__result-span">días</span>
-                                </div>
-                                <input id="rs_term" type="range" name="rs_term" min="0" max="100" value="5" step="5" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button type="button" class="calculator__button button button--primary">Compara ofertas</button>
-            </div>
-        </div>
-        <div class="calculator__mini">
-            <div class="calculator__row background-set">
-                <div class="calculator__columns">
-                    <div class="calculator__col">
-                        <div class="calculator__range range">
-                            <label class="range__label">
-                                <span class="range__label-title">Monto:</span>
-                            </label>
-                            <div class="range__result result-1">
-                                <div class="range__result-input">
-                                    <input aria-invalid="false" type="text" slot="amount" aria-labelledby="input-amount-slider" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense" value="50" name="rs_sum_output" id="rs_sum_output">
-                                </div>
-                                <span class="range__result-span">$</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="calculator__col">
-                        <div class="calculator__range range">
-                            <label class="range__label">
-                                <span class="range__label-title">Período:</span>
-                            </label>
-                            <div class="range__result result-2">
-                                <div class="range__result-input">
-                                    <input aria-invalid="false" type="text" slot="term" aria-labelledby="input-term-slider" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense" value="30" name="rs_term_output" id="rs_term_output">
-                                </div>
-                                <span class="range__result-span">días</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button type="button" class="calculator__button button button--secondary">Más info</button>
-            </div>
-        </div>
-    </div>
-</section>
+<?= MainPageWidget::widget(['type' => 'solicita-calculator','sum'=> $sum,'term' => $term]); ?>
 <div class="content">
     <div class="container">
         <?php if($text->title_h1) :?>
@@ -142,17 +68,17 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                                             <li class="offer__value-item">
                                                 <div class="offer__value-title">
                                                     Monto del Préstamo, $</div>
-                                                <div class="offer__value-number">50</div>
+                                                <div class="offer__value-number"><?= $sum ?></div>
                                             </li>
                                             <li class="offer__value-item">
                                                 <div class="offer__value-title">
                                                     Fecha de Pago, días</div>
-                                                <div class="offer__value-number">30</div>
+                                                <div class="offer__value-number"><?= $term ?></div>
                                             </li>
                                             <li class="offer__value-item">
                                                 <div class="offer__value-title">
                                                     Tasa de interés, %</div>
-                                                <div class="offer__value-number">11</div>
+                                                <div class="offer__value-number"><?= $mfo['params']['data']['condiciones']['rate_first'] ?></div>
                                             </li>
                                             <li class="offer__value-item">
                                                 <div class="offer__value-title">
@@ -162,7 +88,19 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                                             <li class="offer__value-item">
                                                 <div class="offer__value-title">
                                                     CAT, %</div>
-                                                <div class="offer__value-number">11</div>
+                                                <?php
+                                                    $cat = 11;
+                                                    if($mfo['params']['data']['condiciones']['min_total_cost'] != '-'){
+                                                        $cat = $mfo['params']['data']['condiciones']['min_total_cost'];
+                                                    }
+                                                    if($mfo['params']['data']['condiciones']['max_total_cost'] != '-'){
+                                                        $cat = $mfo['params']['data']['condiciones']['max_total_cost'];
+                                                    }
+                                                    if($mfo['params']['data']['condiciones']['min_total_cost'] != '-' && $mfo['params']['data']['condiciones']['max_total_cost'] != '-'){
+                                                        $cat = $mfo['params']['data']['condiciones']['min_total_cost'].' - '.$mfo['params']['data']['condiciones']['max_total_cost'];
+                                                    }
+                                                ?>
+                                                <div class="offer__value-number"><?= $cat ?></div>
                                             </li>
                                             <li class="offer__value-item offer__value-item--last">
                                                 <div class="offer__value-title">
@@ -234,7 +172,7 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                                             <?php endif; ?>
                                             <?php if(isset($mfo['params']['data']['condiciones']['rate_first']) && $mfo['params']['data']['condiciones']['rate_first'] != '-') : ?>
                                                 <li class="offer-dropdown__info-item">
-                                                    <p class="offer-dropdown__info-text">La tasa de interés</p>
+                                                    <p class="offer-dropdown__info-text">Tasa de interés anual</p>
                                                     <div class="offer-dropdown__info-number"><?= $mfo['params']['data']['condiciones']['rate_first'] ?></div>
                                                 </li>
                                             <?php endif; ?>

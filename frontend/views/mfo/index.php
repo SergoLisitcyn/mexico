@@ -14,7 +14,7 @@ $this->title = 'Mfos';
                 <a href="/" class="breadcrumbs__link">Займы онлайн</a>
             </li>
             <li class="breadcrumbs__item">
-                МФО
+                Empresas
             </li>
         </ul>
     </div>

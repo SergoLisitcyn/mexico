@@ -54,6 +54,10 @@
     line-height: 20px !important;
 }
 
+.entities__logo img {
+    width: 100%;
+}
+
 @media (max-width: 1000px){
     .tabs-control__item {
         font-size: 18px !important;

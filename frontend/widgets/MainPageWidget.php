@@ -18,6 +18,8 @@ use yii\bootstrap\Widget;
 class MainPageWidget extends Widget
 {
     public $type;
+    public $term;
+    public $sum;
 
     public function init()
     {
@@ -26,6 +28,12 @@ class MainPageWidget extends Widget
 
     public function run()
     {
+        if($this->type == 'solicita-calculator'){
+            return $this->render('main-page/'.$this->type,[
+                'term' => $this->term,
+                'sum' => $this->sum,
+            ]);
+        }
         if($this->type == 'seo') {
             $model = SeoTags::findOne(['slug' => $_SERVER['REQUEST_URI'],'status'=> 1]);
             if(!$model){
@@ -91,21 +99,7 @@ class MainPageWidget extends Widget
         }
         $blockManagement = null;
         if($this->type == 'rating'){
-            $mfoData = Mfo::find()->where(['status'=> 1])->limit(3)->orderBy(['rating' => SORT_DESC])->all();
-            $data = [];
-            if($mfoData){
-                foreach ($mfoData as $mfo){
-                    $reviews = Reviews::find()->where(['mfo_id' => $mfo['id'], 'status' => 1])->count();
-                    $data[] = [
-                      'id' =>  $mfo['id'],
-                      'logo' =>  $mfo['logo'],
-                      'name' =>  $mfo['name'],
-                      'rating' =>  $mfo['rating'],
-                      'url' =>  $mfo['url'],
-                      'reviews_count' =>  $reviews,
-                    ];
-                }
-            }
+            $data = Mfo::getTopRatingMfo();
             return $this->render('main-page/'.$this->type,[
                 'mfo' => $data
             ]);
