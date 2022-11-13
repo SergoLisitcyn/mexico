@@ -10,7 +10,9 @@ use yii\helpers\Url;
             <div class="offer change-text">
                 <div class="offer__row">
                     <div class="offer__company">
-                        <div class="offer__company-line">Recomendado</div>
+                        <?php if(isset($random->color) && $random->color->name) : ?>
+                            <div class="offer__company-line" style="background: <?= $random->color->color ?>;"><?= $random->color->name ?></div>
+                        <?php endif; ?>
                         <div class="offer__company-logo">
                             <?php if($random->logo) : ?>
                                 <div class="offer__company-img">
@@ -73,7 +75,9 @@ use yii\helpers\Url;
                                 <input type="checkbox" checked class="checkbox">
                                 <div class="offer__links">
                                     <div class="offer__open button button--secondary open">Más info</div>
-                                    <a class="offer__receive button button--primary" href="#">Recibir dinero</a>
+                                    <?php if(isset($random->data['meta_tags']['affiliate']) && $random->data['meta_tags']['affiliate'] != '-') : ?>
+                                        <a class="offer__receive button button--primary" target="_blank" href="//<?= $random->data['meta_tags']['affiliate'] ?>">Recibir dinero</a>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                             <div class="offer__repute repute">

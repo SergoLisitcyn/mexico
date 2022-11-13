@@ -25,6 +25,7 @@ use yii\web\UploadedFile;
  * @property string|null $logo
  * @property int|null $status
  * @property int|null $sort
+ * @property int|null $color_id
  * @property string|null $description
  * @property string|null $keywords
  * @property string|null $rating
@@ -59,7 +60,7 @@ class Mfo extends ActiveRecord
         return [
             [['name', 'url', 'title'], 'required'],
             [['data','rating_auto'], 'safe'],
-            [['status', 'sort', 'created_at', 'updated_at'], 'integer'],
+            [['status', 'sort', 'created_at', 'updated_at','color_id'], 'integer'],
             [['name', 'url', 'title', 'logo', 'description', 'keywords', 'montos_title'], 'string', 'max' => 255],
             [['montos_text'], 'string'],
             [['rating'], 'string', 'max' => 11],
@@ -90,6 +91,7 @@ class Mfo extends ActiveRecord
             'updated_at' => 'Updated At',
             'montos_title' => 'Montos Title',
             'montos_text' => 'Montos Текст',
+            'color_id' => 'Плашка',
         ];
     }
     public function afterFind() {
@@ -153,6 +155,7 @@ class Mfo extends ActiveRecord
 
         $data = [];
         $dataText = [];
+        $dataPagesSeo = [];
         $countSave = 0;
         $countUpdate = 0;
 
@@ -235,10 +238,17 @@ class Mfo extends ActiveRecord
                         continue;
                     }
                 }
-                if($range == 'Páginas Temáticas'){
+                if($range == 'Páginas temáticos'){
                     $data[$mfoKey]['pages'] = self::getThemePages($value);
                     if($key == 3){
                         $dataText['text']['pages'] = self::getThemePages($value);
+                        continue;
+                    }
+                }
+
+                if($range == 'Meto por las páginas temáticos'){
+                    $dataPagesSeo[$mfoKey]['pages_seo'] = self::getThemePagesSeo($value);
+                    if($key == 3){
                         continue;
                     }
                 }
@@ -301,6 +311,23 @@ class Mfo extends ActiveRecord
             }
         } else {
             throw new HttpException(500, 'Ошибка c Google таблицей');
+        }
+        if($dataPagesSeo){
+            foreach ($dataPagesSeo as $pageSeo){
+                $mainSolicita = MainSolicita::findOne(['url' => $pageSeo['pages_seo']['url']]);
+                if($mainSolicita){
+                    if(isset($pageSeo['pages_seo']['url']) && $pageSeo['pages_seo']['url'] != '-'){
+                        $mainSolicita->title_h1 = $pageSeo['pages_seo']['h1'];
+                    }
+                    if(isset($pageSeo['pages_seo']['title']) && $pageSeo['pages_seo']['title'] != '-'){
+                        $mainSolicita->title_seo = $pageSeo['pages_seo']['title'];
+                    }
+                    if(isset($pageSeo['pages_seo']['description']) && $pageSeo['pages_seo']['description'] != '-'){
+                        $mainSolicita->description = $pageSeo['pages_seo']['description'];
+                    }
+                    $mainSolicita->save();
+                }
+            }
         }
         return [
             'countSave' => $countSave,
@@ -475,8 +502,9 @@ class Mfo extends ActiveRecord
         $data['president'] = $value[6]; // Presidente
         $data['director'] = $value[7]; // Director Ejecutivo
         $data['linkedin'] = $value[8]; // linkedin
-        $data['office_locations'] = $value[9]; // Headquarters and office locations
-        $data['direction'] = $value[10]; // La dirección
+        $data['pais'] = $value[9]; // País
+        $data['la_ciudad'] = $value[10]; // La ciudad
+        $data['direction'] = $value[11]; // La dirección
 
         return $data;
     }
@@ -547,6 +575,7 @@ class Mfo extends ActiveRecord
     {
         $data['site'] = $value[0]; // site
         $data['url'] = $value[1]; // URL
+        $data['affiliate'] = $value[2]; // Affiliate link
         $data['on'] = $value[4]; // ON
         $data['h1'] = $value[5]; // H1
         $data['title'] = $value[6]; // Title
@@ -566,6 +595,21 @@ class Mfo extends ActiveRecord
         $data['prestamos_rapidos'] = $value[5]; // Prestamos rapidos
         $data['prestamos_en_linea_sin_buro'] = $value[6]; // Prestamos en linea sin buro
         $data['prestamos_personales_urgentes'] = $value[7]; // Prestamos personales urgentes
+
+        return $data;
+    }
+
+    /**
+     * Возвращает массив из таблицы 'Meto por las páginas temáticos'
+     * @param string|null $value
+     * @return array
+     */
+    public static function getThemePagesSeo($value)
+    {
+        $data['url'] = $value[0]; // URL
+        $data['h1'] = $value[4]; // H1
+        $data['title'] = $value[5]; // Title
+        $data['description'] = $value[6]; // Description
 
         return $data;
     }
@@ -636,5 +680,10 @@ class Mfo extends ActiveRecord
             }
         }
         return $data;
+    }
+
+    public function getColor()
+    {
+        return $this->hasOne(BlockRec::className(), ['id' => 'color_id']);
     }
 }

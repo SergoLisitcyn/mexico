@@ -2,7 +2,8 @@
 use frontend\widgets\MfoViewWidget;
 use yii\helpers\Url;
 
-$this->title = $model->title;
+if(isset($model->data['meta_tags']['title']) && !empty($model->data['meta_tags']['title'])) { $this->title = $model->data['meta_tags']['title']; }
+if(isset($model->data['meta_tags']['description']) && !empty($model->data['meta_tags']['description'])) { $this->registerMetaTag(['name' => 'description','content' => $model->data['meta_tags']['description']]); }
 ?>
 <div class="main__page-info">
     <div class="container">
@@ -11,9 +12,11 @@ $this->title = $model->title;
                 <li class="breadcrumbs__item">
                     <a href="/empresas" class="breadcrumbs__link">Empresas</a>
                 </li>
+                <?php if(isset($model->data['meta_tags']['h1']) && $model->data['meta_tags']['h1'] != '-') : ?>
                 <li class="breadcrumbs__item">
-                    <?= $model->name ?>
+                    <?= $model->data['meta_tags']['h1'] ?>
                 </li>
+                <?php endif; ?>
             </ul>
         </div>
         <?php if(isset($model->data['meta_tags']['h1']) && $model->data['meta_tags']['h1'] != '-') : ?>

@@ -92,17 +92,28 @@
                     <a href="mailto:<?= $model->data['contacts']['email'] ?>" class="datas__email"><?= $model->data['contacts']['email'] ?></a>
                 </li>
             <?php endif; ?>
-            <?php if(isset($model->data['meta_tags']['site']) && $model->data['meta_tags']['site'] != '-') : ?>
+            <?php if(isset($model->data['meta_tags']['affiliate']) && $model->data['meta_tags']['affiliate'] != '-') : ?>
                 <li class="datas__col">
-                    <div class="datas__caption"><?= $mfoText['meta_tags']['site'] ?></div>
-                    <a href="<?= $model->data['meta_tags']['site'] ?>" class="datas__email"><?= $model->data['meta_tags']['site'] ?></a>
+                    <div class="datas__caption"><?= $mfoText['mother_company']['sitio'] ?></div>
+                    <a href="//<?= $model->data['meta_tags']['affiliate'] ?>" target="_blank" class="datas__email"><?= $model->data['meta_tags']['affiliate'] ?></a>
+                </li>
+            <?php elseif (isset($model->data['mother_company']['sitio']) && $model->data['mother_company']['sitio'] != '-') : ?>
+                <li class="datas__col">
+                    <div class="datas__caption"><?= $mfoText['mother_company']['sitio'] ?></div>
+                    <a href="//<?= $model->data['mother_company']['sitio'] ?>" target="_blank" class="datas__email"><?= $model->data['mother_company']['sitio'] ?></a>
+                </li>
+            <?php elseif (isset($model->data['meta_tags']['site']) && $model->data['meta_tags']['site'] != '-') : ?>
+                <li class="datas__col">
+                    <div class="datas__caption"><?= $mfoText['mother_company']['sitio'] ?></div>
+                    <a href="//<?= $model->data['meta_tags']['site'] ?>" target="_blank" class="datas__email"><?= $model->data['meta_tags']['site'] ?></a>
                 </li>
             <?php endif; ?>
+
         </ul>
     </div>
 </div>
 <?php if(isset($model->data['contacts']['google_maps']) && $model->data['contacts']['google_maps'] != '-') : ?>
-    <div class="datas__caption" style="margin-top: 30px;">Google maps</div>
+<!--    <div class="datas__caption" style="margin-top: 30px;">Google maps</div>-->
 <div class="tabs-content__map map">
     <?= $model->data['contacts']['google_maps'] ?>
 </div>

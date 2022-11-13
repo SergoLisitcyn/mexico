@@ -38,10 +38,16 @@
                     </div>
                 </li>
             <?php endif; ?>
-            <?php if(isset($model['office_locations']) && $model['office_locations'] != '-') : ?>
+            <?php if(isset($model['pais']) && $model['pais'] != '-') : ?>
                 <li class="datas__col">
-                    <div class="datas__caption"><?= $mfoText['mother_company']['office_locations'] ?></div>
-                    <p class="datas__text"><?= $model['office_locations'] ?></p>
+                    <div class="datas__caption"><?= $mfoText['mother_company']['pais'] ?></div>
+                    <p class="datas__text"><?= $model['pais'] ?></p>
+                </li>
+            <?php endif; ?>
+            <?php if(isset($model['la_ciudad']) && $model['la_ciudad'] != '-') : ?>
+                <li class="datas__col">
+                    <div class="datas__caption"><?= $mfoText['mother_company']['la_ciudad'] ?></div>
+                    <p class="datas__text"><?= $model['la_ciudad'] ?></p>
                 </li>
             <?php endif; ?>
             <?php if(isset($model['direction']) && $model['direction'] != '-') : ?>

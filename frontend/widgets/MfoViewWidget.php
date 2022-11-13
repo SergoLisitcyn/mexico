@@ -47,6 +47,7 @@ class MfoViewWidget extends Widget
         $mfoRandoms = null;
         if($this->type == 'similar_offers'){
             $mfoRandoms = Mfo::find()
+                ->with('color')
                 ->where(['status' => 1])
                 ->andWhere(['!=','id', $this->model['id']])
                 ->orderBy(new Expression('rand()'))

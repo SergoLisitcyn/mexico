@@ -1,9 +1,12 @@
 <?php
 
 use kartik\file\FileInput;
+use kartik\select2\Select2;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use vova07\imperavi\Widget;
+use \common\models\BlockRec;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Mfo */
@@ -65,6 +68,16 @@ use vova07\imperavi\Widget;
 
         ]
     ])?>
+
+    <?php
+    $blockRec = BlockRec::find()->where(['status' => 1])->all();
+    $items = ArrayHelper::map($blockRec,'id','name');
+    $params = [
+        'prompt' => 'Выбрать плашку'
+    ];
+    echo $form->field($model, 'color_id')->dropDownList($items,$params);
+
+     ?>
 
 
     <?= $form->field($model, 'status')->dropDownList([

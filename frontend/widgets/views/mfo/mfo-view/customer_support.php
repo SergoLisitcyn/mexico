@@ -45,7 +45,7 @@
             <div class="tabs-content-box__item-left">
                 <div class="tabs-content-box__item-title"><?= $mfoText['customer_support']['unidad'] ?></div>
             </div>
-            <div class="tabs-content-box__item-right"></div>
+            <div class="tabs-content-box__item-right"><a class="tabs-content-box__emails-link" href="mailto:<?= $model['unidad'] ?>"><?= $model['unidad'] ?></a></div>
         </div>
     <?php endif; ?>
     <?php if(isset($model['unidad_1']) && $model['unidad_1'] != '-') : ?>

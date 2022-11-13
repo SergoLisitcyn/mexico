@@ -156,8 +156,7 @@ class SiteController extends Controller
 
     public function actionEmpresas()
     {
-        $mfo = Mfo::find()->where(['status' => 1])->orderBy(['rating' => SORT_DESC])->all();
-
+        $mfo = Mfo::find()->with('color')->where(['status' => 1])->orderBy(['rating' => SORT_DESC])->all();
         return $this->render('empresas', [
             'mfos' => $mfo,
         ]);
@@ -182,7 +181,7 @@ class SiteController extends Controller
             throw new HttpException(404, 'Страница не существует.');
         }
 
-        $mfo = Mfo::find()->where(['status' => 1])->all();
+        $mfo = Mfo::find()->with('color')->where(['status' => 1])->all();
 
         $data = [];
         foreach ($mfo as $key => $value){

@@ -62,6 +62,7 @@
                     ['label' => 'Создание страниц', 'icon' => 'file-o', 'url' => ['/pages']],
                     ['label' => 'Меню', 'icon' => 'reorder', 'url' => ['/menu']],
                     ['label' => 'Отзывы', 'icon' => 'comments', 'url' => ['/reviews']],
+                    ['label' => 'Плашки для МФО', 'icon' => 'paint-brush', 'url' => ['/block-rec']],
                     ['label' => 'SEO', 'icon' => 'area-chart', 'url' => ['/seo-tags']],
                     [
                         "label" => "Управление пользователями",

@@ -105,7 +105,9 @@ $this->title = 'Mfos';
                     <div class="offer change-text">
                         <div class="offer__row">
                             <div class="offer__company">
-                                <div class="offer__company-line">Recomendado</div>
+                                <?php if(isset($mfo->color) && $mfo->color->name) : ?>
+                                    <div class="offer__company-line" style="background: <?= $mfo->color->color ?>;"><?= $mfo->color->name ?></div>
+                                <?php endif; ?>
                                 <div class="offer__company-logo">
                                     <?php if($mfo->logo) : ?>
                                     <div class="offer__company-img">
@@ -168,7 +170,9 @@ $this->title = 'Mfos';
                                         <input type="checkbox" checked class="checkbox">
                                         <div class="offer__links">
                                             <div class="offer__open button button--secondary open">Más info</div>
-                                            <a class="offer__receive button button--primary" href="#">Recibir dinero</a>
+                                            <?php if(isset($mfo->data['meta_tags']['affiliate']) && $mfo->data['meta_tags']['affiliate'] != '-') : ?>
+                                                <a class="offer__receive button button--primary" target="_blank" href="//<?= $mfo->data['meta_tags']['affiliate'] ?>">Recibir dinero</a>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                     <div class="offer__repute repute">

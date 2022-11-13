@@ -11,7 +11,7 @@ use yii\helpers\Html;
             <?php echo Yii::$app->session->getFlash('successReviews'); ?>
         </div>
     <?php endif;?>
-    <h2 class="reviews-form__title title">Свой отзыв</h2>
+    <h2 class="reviews-form__title title">Tu opinión</h2>
     <?php
     $form = ActiveForm::begin(
         [
@@ -180,16 +180,16 @@ use yii\helpers\Html;
                 ?>
             </li>
         </ul>
-        <?= $form->field($reviewsModel, 'body')->textarea(['class' => 'reviews-form__textarea','placeholder' => "Оставьте свой отзыв"])->label(false) ?>
-        <?= $form->field($reviewsModel, 'plus')->textarea(['class' => 'reviews-form__textarea','placeholder' => "Плюсы"])->label(false) ?>
-        <?= $form->field($reviewsModel, 'minus')->textarea(['class' => 'reviews-form__textarea','placeholder' => "Минусы"])->label(false) ?>
+        <?= $form->field($reviewsModel, 'body')->textarea(['class' => 'reviews-form__textarea','placeholder' => "Danos tu opinión"])->label(false) ?>
+        <?= $form->field($reviewsModel, 'plus')->textarea(['class' => 'reviews-form__textarea','placeholder' => "Ventajas"])->label(false) ?>
+        <?= $form->field($reviewsModel, 'minus')->textarea(['class' => 'reviews-form__textarea','placeholder' => "Desventajas"])->label(false) ?>
 
 <!--    <label class="reviews-form__checkbox">-->
 <!--        <input type="checkbox" name="">-->
 <!--        <span class="reviews-form__checkbox-text">Recomendacion</span>-->
 <!--    </label>-->
         <?= $form->field($reviewsModel, 'recommendation')->checkbox(['value' => 1, 'uncheck' => 0])?>
-        <?= Html::submitButton('Оставить отзыв', ['class' => 'reviews-form__button button button--primary']) ?>
+        <?= Html::submitButton('Danos tu opinión', ['class' => 'reviews-form__button button button--primary']) ?>
 
     <!--    </form>-->
     <?php ActiveForm::end(); ?>
