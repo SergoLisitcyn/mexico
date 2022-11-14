@@ -46,6 +46,7 @@ return [
             'rules' => [
                 '/' => '/site/index',
                 'empresas' => '/site/empresas',
+                'review-information' => '/site/review-information',
                 'entidad' => '/mfo/index',
                 [
                     'pattern' => 'entidad/<url:\S+>/reviews',

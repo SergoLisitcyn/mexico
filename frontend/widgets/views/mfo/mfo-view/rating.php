@@ -3,15 +3,15 @@ use yii\helpers\Url;
 ?>
 <div class="rating-sidebar">
     <div class="rating-sidebar__row background-set">
-        <h2 class="rating-sidebar__title title sidebar-title">Rating calificación</h2>
+        <h2 class="rating-sidebar__title title sidebar-title">Nuestra calificación</h2>
         <div class="rating-sidebar__repute repute">
             <div class="repute__rating">
                 <img class="repute__rating-image" src="/img/stars.svg" alt="stars">
                 <div class="repute__rating-number"><?= $model->rating_auto['rating']['allRating'] ?></div>
             </div>
-            <div class="repute__comments">
-                Leer <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $model->url]) ?>" class="repute__comments-link">25 comentarios</a>
-            </div>
+<!--            <div class="repute__comments">-->
+<!--                Leer <a href="--><?php //Url::toRoute(['mfo/reviews', 'url' => $model->url]) ?><!--" class="repute__comments-link">25 comentarios</a>-->
+<!--            </div>-->
         </div>
         <ul class="rating-sidebar__list">
             <?php if($model->rating_auto['rating'] && $model->rating_auto['rating']['interes_costes_rate']) :?>
@@ -52,6 +52,9 @@ use yii\helpers\Url;
                     <!--                                        <img class="rating-sidebar__rating-image" src="/img/stars.svg" alt="stars">-->
                     <div class="rating-sidebar__rating-number"><?= $model->rating_auto['rating']['funcionalidad'] ?></div>
                 </div>
+            </li>
+            <li class="offer-dropdown__repute-item">
+                <a href="/review-information" class="offer-dropdown__repute-link">Información precisa</a>
             </li>
             <?php endif; ?>
         </ul>

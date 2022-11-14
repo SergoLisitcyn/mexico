@@ -6,6 +6,7 @@ use common\models\BlockManagement;
 use common\models\MainInfo;
 use common\models\MainSolicita;
 use common\models\Mfo;
+use common\models\ReviewInformation;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -154,6 +155,14 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
+    public function actionReviewInformation()
+    {
+        $review = ReviewInformation::findOne(['url' != null]);
+        return $this->render('review-information', [
+            'review' => $review,
+        ]);
+    }
+
     public function actionEmpresas()
     {
         $mfo = Mfo::find()->with('color')->where(['status' => 1])->orderBy(['rating' => SORT_DESC])->all();
@@ -167,7 +176,6 @@ class SiteController extends Controller
      */
     public function actionSolicita($url)
     {
-
         $request = Yii::$app->request;
         $post = $request->post();
         $sum = 50;

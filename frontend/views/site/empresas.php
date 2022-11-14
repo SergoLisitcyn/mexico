@@ -220,7 +220,7 @@ $this->title = 'Empresas';
                                                 <!--                                    <img class="offer-dropdown__repute-image" src="/img/stars.svg" alt="stars">-->
                                             </li>
                                             <li class="offer-dropdown__repute-item">
-                                                <a href="<?= Url::toRoute(['mfo/view', 'url' => $random->url]) ?>" class="offer-dropdown__repute-link">Información precisa</a>
+                                                <a href="/review-information" class="offer-dropdown__repute-link">Información precisa</a>
                                             </li>
                                         </ul>
                                     </div>

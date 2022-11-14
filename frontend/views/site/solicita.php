@@ -162,7 +162,7 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                                                 <div class="rating__stars_similar" style="width:<?= $mfo['params']['rating_auto']['rating']['funcionalidad_rate'] ?>%"></div>
                                             </li>
                                             <li class="offer-dropdown__repute-item">
-                                                <a href="<?= Url::toRoute(['mfo/view', 'url' => $mfo['params']['url']]) ?>" class="offer-dropdown__repute-link">Información precisa</a>
+                                                <a href="/review-information" class="offer-dropdown__repute-link">Información precisa</a>
                                             </li>
                                         </ul>
                                     </div>

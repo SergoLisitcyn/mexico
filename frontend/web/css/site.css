@@ -57,10 +57,49 @@
 .entities__logo img {
     width: 100%;
 }
+.main__page-info{
+    background: #fff;
+    padding: 25px;
+}
+
+.main__page-info li::before {
+    position: absolute;
+    content: "";
+    top: 11px;
+    left: 0;
+    width: 23px;
+    height: 23px;
+    background-image: url(../img/checkbox.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 5px;
+}
+
+.main__page-info li {
+    font-size: 16px;
+    line-height: 19px;
+    color: #777;
+    width: 100%;
+    padding: 10px 10px 10px 37px;
+    position: relative;
+}
+
+.main__page-info p {
+    font-size: 16px;
+    line-height: 19px;
+    color: #777;
+    padding-bottom: 15px;
+}
 
 @media (max-width: 1000px){
     .tabs-control__item {
         font-size: 18px !important;
         line-height: 18px !important;
+    }
+    .entities-sidebar {
+        margin-bottom: 30px;
+    }
+    .tabs-content-block__item:last-child{
+        border-bottom: 1px solid #d8d8d8;
     }
 }

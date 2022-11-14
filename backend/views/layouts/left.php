@@ -60,6 +60,7 @@
 //                        ],
 //                    ],
                     ['label' => 'Создание страниц', 'icon' => 'file-o', 'url' => ['/pages']],
+                    ['label' => 'Información precisa', 'icon' => 'info', 'url' => ['/review-information/create']],
                     ['label' => 'Меню', 'icon' => 'reorder', 'url' => ['/menu']],
                     ['label' => 'Отзывы', 'icon' => 'comments', 'url' => ['/reviews']],
                     ['label' => 'Плашки для МФО', 'icon' => 'paint-brush', 'url' => ['/block-rec']],
