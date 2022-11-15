@@ -3,7 +3,7 @@ if(isset($model->title_seo) && !empty($model->title_seo)) { $this->title = $mode
 if(isset($model->keywords) && !empty($model->keywords)) { $this->registerMetaTag(['name' => 'keywords','content' => $model->keywords]); }
 if(isset($model->description) && !empty($model->description)) { $this->registerMetaTag(['name' => 'description','content' => $model->description]); }
 ?>
-<div class="main__page-info">
+<div class="main__page-information">
     <div class="container">
         <h1 class="main__title main-title"><?= $model->name ?></h1>
         <div class="tabs-content">

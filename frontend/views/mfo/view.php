@@ -156,7 +156,7 @@ if(isset($model->data['meta_tags']['description']) && !empty($model->data['meta_
                                 <?= MfoViewWidget::widget(['type' => 'contacts','model' => $model]) ?>
 
                                 <!--   Reviews -->
-                                <?= MfoViewWidget::widget(['type' => 'reviews','model' => $model,'reviewsModel' => $reviewsModel,'action' => '/mfo/'.$model->url]) ?>
+                                <?= MfoViewWidget::widget(['type' => 'reviews','model' => $model,'reviewsModel' => $reviewsModel,'action' => '/entidad/'.$model->url]) ?>
 
                                 <!--  Comentarios-->
                                 <?= MfoViewWidget::widget(['type' => 'reviews_mfo_view','model' => $model]) ?>

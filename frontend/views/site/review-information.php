@@ -3,7 +3,7 @@ if(isset($review->title_seo) && !empty($review->title_seo)) { $this->title = $re
 if(isset($review->keywords) && !empty($review->keywords)) { $this->registerMetaTag(['name' => 'keywords','content' => $review->keywords]); }
 if(isset($review->description) && !empty($review->description)) { $this->registerMetaTag(['name' => 'description','content' => $review->description]); }
 ?>
-<div class="main__page-info">
+<div class="main__page-information">
     <div class="container">
         <h1 class="main__title main-title"><?= $review->title ?></h1>
         <div class="tabs-content">
