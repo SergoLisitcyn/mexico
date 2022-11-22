@@ -13,7 +13,7 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
     <div class="container">
         <ul class="breadcrumbs__items">
             <li class="breadcrumbs__item">
-                <a href="/" class="breadcrumbs__link">Займы онлайн</a>
+                <a href="/" class="breadcrumbs__link">Inicio</a>
             </li>
             <li class="breadcrumbs__item">
                 Empresas

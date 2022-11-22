@@ -118,28 +118,22 @@ if(isset($model->data['meta_tags']['description']) && !empty($model->data['meta_
                                     <?php endif; ?>
                                 </div>
 
+                                <!--   Offers -->
+                                <?= MfoViewWidget::widget(['type' => 'similar_offers','model' => $model]) ?>
+
+                            </div>
+                            <div class="tabs-content__item" data-tab-content="2">
                                 <!--  Características de la compañía -->
                                 <?= MfoViewWidget::widget(['type' => 'characteristic','model' => $model->data]) ?>
 
                                 <!--  Condiciones de préstamos -->
                                 <?= MfoViewWidget::widget(['type' => 'condiciones','model' => $model->data['condiciones']]) ?>
 
-                                <!--  Requisitos -->
-                                <?= MfoViewWidget::widget(['type' => 'requisitos','model' => $model->data['requisitos']]) ?>
-
                                 <!--  Medios de disposición del crédito-->
                                 <?= MfoViewWidget::widget(['type' => 'means','model' => $model->data['means']]) ?>
 
                                 <!--   Métodos de pago-->
                                 <?= MfoViewWidget::widget(['type' => 'payment_methods','model' => $model->data['payment_methods']]) ?>
-
-                                <!--   Datos de la compañia-->
-                                <?= MfoViewWidget::widget(['type' => 'data_company','model' => $model->data['data_company']]) ?>
-
-                                <div class="tabs-content__line line"></div>
-
-                                <!--   Empresa matriz-->
-                                <?= MfoViewWidget::widget(['type' => 'mother_company','model' => $model->data['mother_company']]) ?>
 
                                 <div class="tabs-content__box tabs-content-box">
                                     <div class="tabs-content-box__columns">
@@ -151,35 +145,28 @@ if(isset($model->data['meta_tags']['description']) && !empty($model->data['meta_
 
                                     </div>
                                 </div>
+                            </div>
+                            <div class="tabs-content__item" data-tab-content="3">
+                                <!--  Requisitos -->
+                                <?= MfoViewWidget::widget(['type' => 'requisitos','model' => $model->data['requisitos']]) ?>
+
+                                <!--   Datos de la compañia-->
+                                <?= MfoViewWidget::widget(['type' => 'data_company','model' => $model->data['data_company']]) ?>
+
+                                <div class="tabs-content__line line"></div>
+
+                                <!--   Empresa matriz-->
+                                <?= MfoViewWidget::widget(['type' => 'mother_company','model' => $model->data['mother_company']]) ?>
 
                                 <!--   Contacto -->
                                 <?= MfoViewWidget::widget(['type' => 'contacts','model' => $model]) ?>
-
+                            </div>
+                            <div class="tabs-content__item" data-tab-content="4">
                                 <!--   Reviews -->
                                 <?= MfoViewWidget::widget(['type' => 'reviews','model' => $model,'reviewsModel' => $reviewsModel,'action' => '/entidad/'.$model->url]) ?>
 
                                 <!--  Comentarios-->
                                 <?= MfoViewWidget::widget(['type' => 'reviews_mfo_view','model' => $model]) ?>
-
-
-                                <!--   Offers -->
-                                <?= MfoViewWidget::widget(['type' => 'similar_offers','model' => $model]) ?>
-
-                            </div>
-                            <div class="tabs-content__item" data-tab-content="2">
-                                <h2 class="tabs-lk__title">
-                                    2
-                                </h2>
-                            </div>
-                            <div class="tabs-content__item" data-tab-content="3">
-                                <h2 class="tabs-reviews__title">
-                                    3
-                                </h2>
-                            </div>
-                            <div class="tabs-content__item" data-tab-content="4">
-                                <h2 class="tabs-reviews__title">
-                                    4
-                                </h2>
                             </div>
                         </div>
                     </div>

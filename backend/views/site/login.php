@@ -22,10 +22,10 @@ $fieldOptions2 = [
 ?>
 <div class="login-box">
     <div class="login-logo">
-        <b>Админ Панель</b>
+        <b>Admin Panel</b>
     </div>
     <div class="login-box-body">
-        <p class="login-box-msg">Войдите, чтобы начать сеанс</p>
+        <p class="login-box-msg">Login to start session</p>
 
         <?php $form = ActiveForm::begin(['id' => 'login-form', 'enableClientValidation' => false]); ?>
 
@@ -44,7 +44,7 @@ $fieldOptions2 = [
                 <?= $form->field($model, 'rememberMe')->checkbox() ?>
             </div>
             <div class="col-xs-4">
-                <?= Html::submitButton('Войти', ['class' => 'btn btn-primary btn-block btn-flat', 'name' => 'login-button']) ?>
+                <?= Html::submitButton('Sign', ['class' => 'btn btn-primary btn-block btn-flat', 'name' => 'login-button']) ?>
             </div>
         </div>
         <?php ActiveForm::end(); ?>
