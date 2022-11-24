@@ -90,7 +90,8 @@ class MainPageWidget extends Widget
             ]);
         }
 
-        if($this->type == 'mission' || $this->type == 'works' || $this->type == 'info' || $this->type == 'progress'){
+        if($this->type == 'mission' || $this->type == 'works' || $this->type == 'info' || $this->type == 'progress'
+            || $this->type == 'como' || $this->type == 'finjenios'){
 
             return $this->render('main-page/'.$this->type,[
                 'info' => MainInfo::findOne(['name' => $this->type]),
