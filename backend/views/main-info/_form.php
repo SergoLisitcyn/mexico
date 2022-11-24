@@ -69,7 +69,7 @@ use vova07\imperavi\Widget;
         ?>
     </div>
     <?php endif; ?>
-    <?php if($model->name == 'info') : ?>
+    <?php if($model->name == 'info' || $model->name == 'finjenios' || $model->name == 'como') : ?>
     <div class="main-info-form">
         <?= $form->field($model, 'text_main')->widget(Widget::className(), [
             'settings' => [

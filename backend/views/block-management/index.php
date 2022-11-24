@@ -67,6 +67,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     return 'Не активен';
                 },
+                'contentOptions' => function ($model) {
+                    if($model->status == 0){
+                        $class = 'danger';
+                    } elseif($model->status == 1) {
+                        $class = 'success';
+                    } else {
+                        $class = 'warning';
+                    }
+                    return ['class' => $class];
+                },
             ],
             [
                 'label' => 'Действия',
