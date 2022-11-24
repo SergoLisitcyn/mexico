@@ -15,9 +15,11 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
             <li class="breadcrumbs__item">
                 <a href="/" class="breadcrumbs__link">Inicio</a>
             </li>
+            <?php if($text->title_h1) :?>
             <li class="breadcrumbs__item">
-                Empresas
+                <?= $text->title_h1 ?>
             </li>
+            <?php endif; ?>
         </ul>
     </div>
 </div>
