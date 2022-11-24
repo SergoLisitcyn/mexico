@@ -246,12 +246,12 @@ class Mfo extends ActiveRecord
                     }
                 }
 
-                if($range == 'Meto por las páginas temáticos'){
-                    $dataPagesSeo[$mfoKey]['pages_seo'] = self::getThemePagesSeo($value);
-                    if($key == 3){
-                        continue;
-                    }
-                }
+//                if($range == 'Meto por las páginas temáticos'){
+//                    $dataPagesSeo[$mfoKey]['pages_seo'] = self::getThemePagesSeo($value);
+//                    if($key == 3){
+//                        continue;
+//                    }
+//                }
 
                 if($range == 'Meto'){
                     $data[$mfoKey]['meta_tags'] = self::getMetaTags($value);

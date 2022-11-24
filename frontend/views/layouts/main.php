@@ -30,8 +30,11 @@ AppAsset::register($this);
     <div class="top-menu">
         <div class="container">
             <div class="main-menu">
-                <div class="logo">
+                <div class="logo mobile_view">
                     <a href="/"><img src="/img/finjenios-logo.svg" alt="logo"></a>
+                </div>
+                <div class="logo desktop_view">
+                    <a href="/"><img src="/img/logo-white-yellow.svg" alt="logo"></a>
                 </div>
             </div>
             <div class="menu__icon icon-menu">
@@ -64,8 +67,8 @@ AppAsset::register($this);
                     Все права защищены
                 </li>
                 <li class="footer-list__item">
-                    <a class="footer__tel" href="tel:+74996579635">
-                        +7 499 657-96-35
+                    <a class="footer__tel" href="tel:+52 55 90 63 02 52">
+                        + 52 55 90 63 02 52
                     </a>
                 </li>
                 <li class="footer-list__item">

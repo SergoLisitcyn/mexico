@@ -3,7 +3,7 @@
 use yii\helpers\Url;
 ?>
 <div class="tabs-content__offer offers-sect">
-    <h2 class="offers-sect__title title">Похожие предложения</h2>
+    <h2 class="offers-sect__title title">Ofertas similares</h2>
     <div class="offers-sect__block">
         <?php foreach ($mfoRandoms as $random) :?>
 

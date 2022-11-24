@@ -91,6 +91,14 @@
     padding-bottom: 15px;
 }
 
+.main__main-sect{
+    margin-bottom: 30px;
+}
+
+.mobile_view{
+    display: none;
+}
+
 @media (max-width: 1000px){
     .tabs-control__item {
         font-size: 18px !important;
@@ -106,6 +114,12 @@
 
 @media (max-width: 1279px){
     .top-menu {
-        background-color: #FFF8F8;
+        background-color: #F0EFEF;
+    }
+    .desktop_view{
+        display: none;
+    }
+    .mobile_view{
+        display: block;
     }
 }

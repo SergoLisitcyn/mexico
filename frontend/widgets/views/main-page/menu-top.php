@@ -12,6 +12,6 @@
                 <?php endforeach; ?>
             </ul>
         </li>
-        <li class="phone"><a href="tel:+78003334788">8-800-333-47-88</a></li>
+        <li class="phone"><a href="tel:+525590630252">+ 52 55 90 63 02 52</a></li>
     </ul>
 </div>
