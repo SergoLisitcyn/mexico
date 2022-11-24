@@ -71,7 +71,7 @@ use vova07\imperavi\Widget;
     <?php endif; ?>
     <?php if($model->name == 'info' || $model->name == 'finjenios' || $model->name == 'como') : ?>
     <div class="main-info-form">
-        <?= $form->field($model, 'text_main')->widget(Widget::className(), [
+        <?= $form->field($model, 'text_main')->label(false)->widget(Widget::className(), [
             'settings' => [
                 'lang' => 'ru',
                 'minHeight' => 200,
