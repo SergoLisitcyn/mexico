@@ -246,12 +246,12 @@ class Mfo extends ActiveRecord
                     }
                 }
 
-//                if($range == 'Meto por las páginas temáticos'){
-//                    $dataPagesSeo[$mfoKey]['pages_seo'] = self::getThemePagesSeo($value);
-//                    if($key == 3){
-//                        continue;
-//                    }
-//                }
+                if($range == 'Meto por las páginas temáticos'){
+                    $dataPagesSeo[$mfoKey]['pages_seo'] = self::getThemePagesSeo($value);
+                    if($key == 3){
+                        continue;
+                    }
+                }
 
                 if($range == 'Meto'){
                     $data[$mfoKey]['meta_tags'] = self::getMetaTags($value);
@@ -314,19 +314,45 @@ class Mfo extends ActiveRecord
         }
         if($dataPagesSeo){
             foreach ($dataPagesSeo as $pageSeo){
-                $mainSolicita = MainSolicita::findOne(['url' => $pageSeo['pages_seo']['url']]);
-                if($mainSolicita){
+                $findUrl = SeoTags::findOne(['slug' => $pageSeo['pages_seo']['url']]);
+                if($findUrl){
                     if(isset($pageSeo['pages_seo']['url']) && $pageSeo['pages_seo']['url'] != '-'){
-                        $mainSolicita->title_h1 = $pageSeo['pages_seo']['h1'];
+                        $findUrl->title_h1 = $pageSeo['pages_seo']['h1'];
                     }
                     if(isset($pageSeo['pages_seo']['title']) && $pageSeo['pages_seo']['title'] != '-'){
-                        $mainSolicita->title_seo = $pageSeo['pages_seo']['title'];
+                        $findUrl->title_seo = $pageSeo['pages_seo']['title'];
                     }
                     if(isset($pageSeo['pages_seo']['description']) && $pageSeo['pages_seo']['description'] != '-'){
-                        $mainSolicita->description = $pageSeo['pages_seo']['description'];
+                        $findUrl->description = $pageSeo['pages_seo']['description'];
                     }
-                    $mainSolicita->save();
+                    $findUrl->save();
+                } else {
+                    $modelUrl = new SeoTags();
+                    $modelUrl->slug = $pageSeo['pages_seo']['url'];
+                    if(isset($pageSeo['pages_seo']['url']) && $pageSeo['pages_seo']['url'] != '-'){
+                        $modelUrl->title_h1 = $pageSeo['pages_seo']['h1'];
+                    }
+                    if(isset($pageSeo['pages_seo']['title']) && $pageSeo['pages_seo']['title'] != '-'){
+                        $modelUrl->title_seo = $pageSeo['pages_seo']['title'];
+                    }
+                    if(isset($pageSeo['pages_seo']['description']) && $pageSeo['pages_seo']['description'] != '-'){
+                        $modelUrl->description = $pageSeo['pages_seo']['description'];
+                    }
+                    $modelUrl->save();
                 }
+//                $mainSolicita = MainSolicita::findOne(['url' => $pageSeo['pages_seo']['url']]);
+//                if($mainSolicita){
+//                    if(isset($pageSeo['pages_seo']['url']) && $pageSeo['pages_seo']['url'] != '-'){
+//                        $mainSolicita->title_h1 = $pageSeo['pages_seo']['h1'];
+//                    }
+//                    if(isset($pageSeo['pages_seo']['title']) && $pageSeo['pages_seo']['title'] != '-'){
+//                        $mainSolicita->title_seo = $pageSeo['pages_seo']['title'];
+//                    }
+//                    if(isset($pageSeo['pages_seo']['description']) && $pageSeo['pages_seo']['description'] != '-'){
+//                        $mainSolicita->description = $pageSeo['pages_seo']['description'];
+//                    }
+//                    $mainSolicita->save();
+//                }
             }
         }
         return [

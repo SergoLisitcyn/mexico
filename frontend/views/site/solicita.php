@@ -216,7 +216,7 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                             </div>
                         </div>
                     <?php endforeach; ?>
-                    <button class="offer__all button button--secondary">Mostrar todas las ofertas</button>
+<!--                    <button class="offer__all button button--secondary">Mostrar todas las ofertas</button>-->
                 </section>
                 <!-- <sidebar class="sidebar"></sidebar> -->
             </div>
