@@ -325,7 +325,7 @@ class SiteController extends Controller
     {
         $info = MainInfo::findOne(['name' => 'progress']);
         if($info && $info->progress_value){
-            $value = rand(0, 25);
+            $value = rand(0, 20);
             $sum = $info->progress_value + $value;
             $sum = (string)$sum;
             $info->progress_value = $sum;
