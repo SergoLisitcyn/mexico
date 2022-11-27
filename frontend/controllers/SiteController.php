@@ -11,6 +11,7 @@ use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
 use yii\base\InvalidArgumentException;
+use yii\helpers\Json;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -318,5 +319,19 @@ class SiteController extends Controller
         return $this->render('resendVerificationEmail', [
             'model' => $model
         ]);
+    }
+
+    public function actionProgressValue()
+    {
+        $info = MainInfo::findOne(['name' => 'progress']);
+        if($info && $info->progress_value){
+            $value = rand(0, 25);
+            $sum = $info->progress_value + $value;
+            $sum = (string)$sum;
+            $info->progress_value = $sum;
+            $info->work = Json::encode($info->work);
+            $info->mission = Json::encode($info->mission);
+            $info->save();
+        }
     }
 }

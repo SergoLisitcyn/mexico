@@ -46,6 +46,7 @@ return [
             'rules' => [
                 '/' => '/site/index',
                 'empresas' => '/site/empresas',
+                'progress-value' => '/site/progress-value',
                 'review-information' => '/site/review-information',
                 'entidad' => '/mfo/index',
                 [

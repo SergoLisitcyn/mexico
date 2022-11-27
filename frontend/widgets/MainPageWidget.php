@@ -89,10 +89,21 @@ class MainPageWidget extends Widget
                 'sols' => $sols,
             ]);
         }
+        if($this->type == 'progress'){
+            $info = MainInfo::findOne(['name' => $this->type]);
+            $mfoCount = Mfo::find()->count();
+            $reviewsCount = Reviews::find()->count();
+            $countZaim = $info->progress_value;
+            return $this->render('main-page/'.$this->type,[
+                'info' => $info,
+                'blockManagement' => $blockManagement,
+                'mfoCount' => $mfoCount,
+                'reviewsCount' => $reviewsCount,
+                'countZaim' => $countZaim,
+            ]);
+        }
 
-        if($this->type == 'mission' || $this->type == 'works' || $this->type == 'info' || $this->type == 'progress'
-            || $this->type == 'como' || $this->type == 'finjenios'){
-
+        if($this->type == 'mission' || $this->type == 'works' || $this->type == 'info' || $this->type == 'como' || $this->type == 'finjenios'){
             return $this->render('main-page/'.$this->type,[
                 'info' => MainInfo::findOne(['name' => $this->type]),
                 'blockManagement' => $blockManagement,

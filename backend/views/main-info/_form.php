@@ -105,8 +105,25 @@ use vova07\imperavi\Widget;
 
     <?php if($model->name == 'progress') : ?>
     <div class="main-info-form">
-        <?= $form->field($model, 'progress_value')->textInput(['maxlength' => true]) ?>
+        <?php
 
+        echo $form->field($model, 'work')->widget(MultipleInput::className(), [
+            'max' => 3,
+            'min' => 3,
+            'columns' => [
+                [
+                    'name'  => 'text',
+                    'title' => 'Текст',
+                    'enableError' => true,
+                ],
+                [
+                    'name'  => 'name',
+                    'title' => 'Название переменной',
+                    'enableError' => true,
+                ]
+            ]
+        ])->label(false);
+        ?>
 
         <?php
         /*
