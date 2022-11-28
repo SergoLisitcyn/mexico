@@ -18,7 +18,12 @@ use yii\helpers\Url;
                             <div class="repute__rating-number"><?= $item['rating'] ?></div>
                         </div>
                         <div class="repute__comments">
-                            Leer <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $item['url']]) ?>" class="repute__comments-link"><?= $item['reviews_count'] ?> comentarios</a>
+                            <?php if($item['reviews_count'] > 0) : ?>
+                                Leer <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $item['url']]) ?>" class="repute__comments-link"><?= $item['reviews_count'] ?> comentarios</a>
+                            <?php else: ?>
+                                <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $item['url']]) ?>" class="repute__comments-link">Danos tu opinión
+                                </a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </li>

@@ -41,7 +41,7 @@ class MfoController extends Controller
      */
     public function actionIndex()
     {
-        $mfo = Mfo::find()->with('color')->where(['status' => 1])->all();
+        $mfo = Mfo::find()->with('color')->where(['status' => 1])->orderBy(['rating' => SORT_DESC])->all();
 
         return $this->render('index', [
             'mfos' => $mfo,

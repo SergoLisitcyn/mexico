@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Reviews;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
@@ -101,7 +102,9 @@ $this->title = 'Mfos';
         <div class="content__block">
             <div class="content__row">
                 <section class="cards">
-                    <?php foreach ($mfos as $mfo) : ?>
+                    <?php foreach ($mfos as $mfo) :
+                        $reviewsCount = Reviews::find()->where(['mfo_id' => $mfo->id, 'status' => 1])->count();
+                        ?>
                     <div class="offer change-text">
                         <div class="offer__row">
                             <div class="offer__company">
@@ -122,7 +125,12 @@ $this->title = 'Mfos';
                                             <div class="repute__rating-number">4,4</div>
                                         </div>
                                         <div class="repute__comments">
-                                            Leer <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $mfo->url]) ?>" class="repute__comments-link">25 comentarios</a>
+                                            <?php if($reviewsCount > 0) : ?>
+                                                Leer <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $mfo->url]) ?>" class="repute__comments-link"><?= $reviewsCount ?> comentarios</a>
+                                            <?php else: ?>
+                                                <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $mfo->url]) ?>" class="repute__comments-link">Danos tu opinión
+                                                </a>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>
@@ -146,7 +154,7 @@ $this->title = 'Mfos';
                                         <li class="offer__value-item">
                                             <div class="offer__value-title">
                                                 Tasa de interés, %</div>
-                                            <div class="offer__value-number">11</div>
+                                            <div class="offer__value-number"><?= $mfo->data['condiciones']['rate_first'] ?></div>
                                         </li>
                                         <li class="offer__value-item">
                                             <div class="offer__value-title">
@@ -156,12 +164,24 @@ $this->title = 'Mfos';
                                         <li class="offer__value-item">
                                             <div class="offer__value-title">
                                                 CAT, %</div>
-                                            <div class="offer__value-number">11</div>
+                                            <?php
+                                            $cat = 11;
+                                            if($mfo->data['condiciones']['min_total_cost'] != '-'){
+                                                $cat = $mfo->data['condiciones']['min_total_cost'];
+                                            }
+                                            if($mfo->data['condiciones']['max_total_cost'] != '-'){
+                                                $cat = $mfo->data['condiciones']['max_total_cost'];
+                                            }
+                                            if($mfo->data['condiciones']['min_total_cost'] != '-' && $mfo->data['condiciones']['max_total_cost'] != '-'){
+                                                $cat = $mfo->data['condiciones']['min_total_cost'].' - '.$mfo->data['condiciones']['max_total_cost'];
+                                            }
+                                            ?>
+                                            <div class="offer__value-number"><?= $cat ?></div>
                                         </li>
                                         <li class="offer__value-item offer__value-item--last">
                                             <div class="offer__value-title">
                                                 Nuestra calificación</div>
-                                            <div class="offer__value-number">4,8</div>
+                                            <div class="offer__value-number"><?= $mfo->rating_auto['rating']['allRating'] ?></div>
                                         </li>
                                     </ul>
                                 </div>
@@ -181,7 +201,12 @@ $this->title = 'Mfos';
                                             <div class="repute__rating-number">4,4</div>
                                         </div>
                                         <div class="repute__comments">
-                                            Leer <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $mfo->url]) ?>" class="repute__comments-link">25 comentarios</a>
+                                            <?php if($reviewsCount > 0) : ?>
+                                                Leer <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $mfo->url]) ?>" class="repute__comments-link"><?= $reviewsCount ?> comentarios</a>
+                                            <?php else: ?>
+                                                <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $mfo->url]) ?>" class="repute__comments-link">Danos tu opinión
+                                                </a>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>
@@ -194,25 +219,26 @@ $this->title = 'Mfos';
                                         <li class="offer-dropdown__repute-item">
                                             <div class="offer-dropdown__repute-title">Nuestra calificación</div>
                                             <div class="offer-dropdown__repute-rating">
-                                                <img class="offer-dropdown__repute-image" src="/img/stars.svg" alt="stars">
-                                                <span class="offer-dropdown__repute-number">4,8</span>
+                                                <!--                                                    <img class="offer-dropdown__repute-image" src="/img/stars.svg" alt="stars">-->
+                                                <div class="rating__stars_similar" style="width:<?= $mfo->rating_auto['rating']['allRating_rate'] ?>%"></div>
+                                                <span class="offer-dropdown__repute-number"><?= $mfo->rating_auto['rating']['allRating'] ?></span>
                                             </div>
                                         </li>
                                         <li class="offer-dropdown__repute-item">
                                             <p class="offer-dropdown__repute-text">Interés & Costes</p>
-                                            <img class="offer-dropdown__repute-image" src="/img/stars.svg" alt="stars">
+                                            <div class="rating__stars_similar" style="width:<?= $mfo->rating_auto['rating']['interes_costes_rate'] ?>%"></div>
                                         </li>
                                         <li class="offer-dropdown__repute-item">
                                             <p class="offer-dropdown__repute-text">Condiciones</p>
-                                            <img class="offer-dropdown__repute-image" src="/img/stars.svg" alt="stars">
+                                            <div class="rating__stars_similar" style="width:<?= $mfo->rating_auto['rating']['condiciones_rate'] ?>%"></div>
                                         </li>
                                         <li class="offer-dropdown__repute-item">
                                             <p class="offer-dropdown__repute-text">Atención al cliente</p>
-                                            <img class="offer-dropdown__repute-image" src="/img/stars.svg" alt="stars">
+                                            <div class="rating__stars_similar" style="width:<?= $mfo->rating_auto['rating']['atencion_rate'] ?>%"></div>
                                         </li>
                                         <li class="offer-dropdown__repute-item">
                                             <p class="offer-dropdown__repute-text">Funcionalidad</p>
-                                            <img class="offer-dropdown__repute-image" src="/img/stars.svg" alt="stars">
+                                            <div class="rating__stars_similar" style="width:<?= $mfo->rating_auto['rating']['funcionalidad_rate'] ?>%"></div>
                                         </li>
                                         <li class="offer-dropdown__repute-item">
                                             <a href="/review-information" class="offer-dropdown__repute-link">Información precisa</a>
