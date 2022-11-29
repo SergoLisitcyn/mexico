@@ -20,6 +20,7 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <?php $this->registerCsrfMetaTags() ?>
     <?= MainPageWidget::widget(['type' => 'seo']) ?>
+    <?= MainPageWidget::widget(['type' => 'seo_code','zone' => 'header']) ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
@@ -112,7 +113,7 @@ AppAsset::register($this);
         </div>
     </div>
 </footer>
-
+<?= MainPageWidget::widget(['type' => 'seo_code','zone' => 'footer']) ?>
 <?php $this->endBody() ?>
 </body>
 </html>

@@ -12,6 +12,7 @@ use common\models\MainTeam;
 use common\models\Menu;
 use common\models\Mfo;
 use common\models\Reviews;
+use common\models\SeoCodes;
 use common\models\SeoTags;
 use yii\bootstrap\Widget;
 
@@ -20,6 +21,7 @@ class MainPageWidget extends Widget
     public $type;
     public $term;
     public $sum;
+    public $zone;
 
     public function init()
     {
@@ -34,6 +36,25 @@ class MainPageWidget extends Widget
                 'sum' => $this->sum,
             ]);
         }
+
+        if($this->type == 'seo_code') {
+            $model = SeoCodes::findOne(['name' => 'CODE']);
+            $value = null;
+            if($this->zone == 'header' && $model->seo_codes_top_status == 1 && $model->seo_codes_top){
+                $value = $model->seo_codes_top;
+            }
+            if($this->zone == 'footer' && $model->seo_codes_bottom_status == 1 && $model->seo_codes_bottom){
+                $value = $model->seo_codes_bottom;
+            }
+
+            if(!$value){
+                return null;
+            }
+            return $this->render('main-page/'.$this->type,[
+                'value' => $value
+            ]);
+        }
+
         if($this->type == 'seo') {
             $model = SeoTags::findOne(['slug' => $_SERVER['REQUEST_URI'],'status'=> 1]);
             if(!$model){
