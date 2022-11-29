@@ -32,11 +32,17 @@ if(isset($model->data['meta_tags']['description']) && !empty($model->data['meta_
             </div>
             <div class="mfo-heading__repute repute">
                 <div class="repute__rating">
-                    <img class="repute__rating-image" src="/img/stars.svg" alt="stars">
-                    <div class="repute__rating-number">4,8</div>
+<!--                    <img class="repute__rating-image" src="/img/stars.svg" alt="stars">-->
+                    <div class="rating__stars_similar" style="width:<?= $model->rating_auto['rating']['allRating_rate'] ?>%;margin-right: 15px"></div>
+                    <div class="repute__rating-number"><?= $model->rating_auto['rating']['allRating'] ?></div>
                 </div>
                 <div class="repute__comments">
-                    Leer <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $model->url]) ?>" class="repute__comments-link">25 comentarios</a>
+                    <?php if($reviewsCount > 0) : ?>
+                        Leer <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $model->url]) ?>" class="repute__comments-link"><?= $reviewsCount ?> comentarios</a>
+                    <?php else: ?>
+                        <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $model->url]) ?>" class="repute__comments-link">Danos tu opinión
+                        </a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

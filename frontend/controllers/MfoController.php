@@ -63,6 +63,7 @@ class MfoController extends Controller
         if(!$mfo){
             throw new HttpException(404, 'Страница не существует.');
         }
+        $reviewsCount = Reviews::find()->where(['mfo_id' => $mfo->id, 'status' => 1])->count();
 
         $reviewsModel = new Reviews();
 
@@ -73,6 +74,7 @@ class MfoController extends Controller
             return $this->render('view', [
                 'model' => $mfo,
                 'reviewsModel' => $reviewsModel,
+                'reviewsCount' => $reviewsCount,
             ]);
         }
     }
