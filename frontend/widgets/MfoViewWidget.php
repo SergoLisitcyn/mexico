@@ -61,6 +61,14 @@ class MfoViewWidget extends Widget
                 'mfo' => $data
             ]);
         }
+
+        if($this->type == 'analysist'){
+
+            $text = Mfo::getAnalysistText($this->model);
+            return $this->render('mfo/mfo-view/'.$this->type,[
+                'text' => $text
+            ]);
+        }
 //        if($this->type == 'rating'){
 //            if($this->model->rating_auto){
 //                $mfoRating = self::generateRating($this->model->rating_auto['interes_costes'],$this->model->rating_auto['condiciones'],$this->model->rating_auto['atencion'],$this->model->rating_auto['funcionalidad']);

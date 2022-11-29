@@ -123,7 +123,8 @@ if(isset($model->data['meta_tags']['description']) && !empty($model->data['meta_
                                         <?= $model->montos_text ?>
                                     <?php endif; ?>
                                 </div>
-
+                                <!--   Analysist -->
+                                <?= MfoViewWidget::widget(['type' => 'analysist','model' => $model]) ?>
                                 <!--   Offers -->
                                 <?= MfoViewWidget::widget(['type' => 'similar_offers','model' => $model]) ?>
 

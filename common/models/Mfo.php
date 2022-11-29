@@ -712,4 +712,50 @@ class Mfo extends ActiveRecord
     {
         return $this->hasOne(BlockRec::className(), ['id' => 'color_id']);
     }
+
+    public static function getAnalysistText($model)
+    {
+         $text = self::getAnalysistTextStr();
+         $templates = [
+             'NOMBRE_EMPRESA' => $model->url,
+             'ANO' => $model->data['data_company']['year_foundation'],
+             'NOMBRE_EMPRESA_MATRIZ' => $model->data['mother_company']['mother_company'],
+             'NOMBRE_PAIS' => $model->data['mother_company']['pais'],
+         ];
+        if (!empty($templates)) {
+            foreach ($templates as $k => $v) {
+                $text = str_replace('{' . $k . '}', $v, $text);
+            }
+        }
+
+        return $text;
+    }
+
+    public static function getAnalysistTextStr()
+    {
+        return '<div class="tabs-content__info tabs-content-info">
+                <h2 class="tabs-content-info__title title"  style="margin-bottom: 20px;margin-top: 20px">Company Analysis</h2>
+                La empresa {NOMBRE_EMPRESA} lleva más de {ANO} operando en México
+                Propiedad de la empresa matriz/grupo financiero internacional{NOMBRE_EMPRESA_MATRIZ} de {NOMBRE_PAIS}
+                Una característica especial de la empresa es {UTP}
+                <h2 class="tabs-content-info__title title"  style="margin-bottom: 20px;margin-top: 20px">Loan Analysis</h2>
+                Los préstamos se emiten hasta {DAY_MAX} que es {DIFF_DAY} más largo/corto que la mayoría de las empresas
+                El importe del préstamo puede llegar hasta {SUMM_MAX}, que es {DIFF_SUMM} más que la mayoría de las empresas
+                El tipo de interés medio por préstamo es {PROCENT}, que es {DIFF_PROCENT} más que la media del mercado
+                La empresa se compromete a tomar una decisión de desembolso en {CUENTA_MINUTOS} minutos, que es {DIFF_MINUTOS} más/menos que la media
+                Su historial de crédito puede importar o no {CRED_HISTORY}
+                La edad del cliente puede ser a partir de {AGE_MIN}, estas condiciones sólo las ofrecen las empresas {18_AGE_MIN}
+                <h2 class="tabs-content-info__title title"  style="margin-bottom: 20px;margin-top: 20px">Rating Analysis</h2>
+                {NOMBRE_EMPRESA} ocupa el {LUGAR} en el ranking de Fíngenios, siendo los clientes los que más mencionan (Interés & Costes OR Condiciones OR Atención al cliente OR Funcionalidad)
+                Los visitantes de Fíngenios han escrito {COMENTARIOS_SUMM} comentarios sobre {NOMBRE_EMPRESA}, lo que la sitúa en {COMENTARIOS_SUMM_CALIFICACIÓN} en el ranking de discusión de Fíngenios.
+                Valoración de la empresa {NOMBRE_EMPRESA} en otros sitios web:<br>
+                Google:<br>
+                Financer:<br>
+                HelpMyCash:<br>
+                Facebook:<br>
+                {COMPANY_NAME} tiene una aplicación móvil para Android\IOS
+                La aplicación para Android se ha descargado más de {APP_DOWNLOAD_COUNT} veces y la puntuación media en Google Play Market es de {APP_RATING_COUNT}
+                La aplicación para iOS se ha descargado más de {APP_DOWNLOAD_COUNT} veces y la puntuación media en la AppStore de Apple es de {APP_RATING_COUNT}
+            </div>';
+    }
 }
