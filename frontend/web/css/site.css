@@ -98,6 +98,9 @@
 .mobile_view{
     display: none;
 }
+.main__staff{
+    margin-top: 42px;
+}
 
 @media (max-width: 1000px){
     .tabs-control__item {

@@ -9,9 +9,11 @@
             <h3 class="main-sect__subtitle subtitle"><?= $blockManagement->sub_title ?></h3>
         <?php endif; ?>
 
-        <div class="about-us__companies">
+        <div class="about-us-slider">
             <?php foreach ($sols as $sol) : ?>
-                <img class="about-us__image" src="<?= $sol->image ?>" alt="<?= $sol->alt ?>">
+            <div class="about-us-slider__item">
+                <img class="about-us-slider__image" src="<?= $sol->image ?>" alt="<?= $sol->alt ?>">
+            </div>
             <?php endforeach; ?>
         </div>
     </div>
