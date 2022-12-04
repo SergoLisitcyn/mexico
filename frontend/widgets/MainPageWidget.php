@@ -3,6 +3,7 @@
 namespace frontend\widgets;
 
 use common\models\BlockManagement;
+use common\models\FooterText;
 use common\models\MainAbout;
 use common\models\MainContact;
 use common\models\MainInfo;
@@ -77,10 +78,16 @@ class MainPageWidget extends Widget
             ]);
         }
         $blockManagement = BlockManagement::find()->where(['tag' => $this->type])->one();
-        if($this->type == 'contacts') {
+        if($this->type == 'contacts' || $this->type == 'contacts-footer') {
             return $this->render('main-page/'.$this->type,[
                 'contacts' => MainContact::findOne(1),
                 'blockManagement' => $blockManagement,
+            ]);
+        }
+        if($this->type == 'footer-text') {
+            return $this->render('main-page/'.$this->type,[
+                'footer' => FooterText::findOne(1),
+                'zone' => $this->zone,
             ]);
         }
         if($this->type == 'team') {

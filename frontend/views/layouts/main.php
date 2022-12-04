@@ -61,55 +61,85 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <div class="footer__row">
-            <ul class="footer-list">
-                <li class="footer-list__item">
-                    © Zaimomat.ru <?= date('Y') ?>.<br>
-                    Все права защищены
-                </li>
-                <li class="footer-list__item">
-                    <a class="footer__tel" href="tel:+52 55 90 63 02 52">
-                        + 52 55 90 63 02 52
-                    </a>
-                </li>
-                <li class="footer-list__item">
-                    Содержание сайта носит исключительно информационно-справочный характер.
-                    Сервис Zaimomat.ru не является кредитной организацией и не выдает кредиты.
-                </li>
-            </ul>
+        <div class="footer__content footer__content--desktop">
+            <a href="/" class="footer__logo">
+                <img src="/img/logo-footer.svg" alt="Logo">
+            </a>
+            <?= MainPageWidget::widget(['type' => 'footer-text','zone' => 'title']) ?>
+            <div class="footer__columns">
+                <?= MainPageWidget::widget(['type' => 'footer-text','zone' => 'text_top']) ?>
+                <div class="footer__col footer__col--links">
+                    <div class="footer__links">
+                        <?= MainPageWidget::widget(['type' => 'menu-footer']) ?>
+                        <div class="footer__lists">
+                            <ul class="footer__list">
+                                <li class="footer__item">
+                                    <a href="#" class="footer__item-link">
+                                        <img src="/img/condusef1.svg" alt="Condusef" class="footer__item-logo">
+                                        <span>condusef.gob.mx</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="footer__list">
+                                <li class="footer__item">
+                                    <a href="#" class="footer__item-link">
+                                        <img src="/img/buro.svg" alt="Buro" class="footer__item-logo">
+                                        <span>buro.gob.mx</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--                Contacto-->
+                <?= MainPageWidget::widget(['type' => 'contacts-footer']) ?>
+            </div>
+            <?= MainPageWidget::widget(['type' => 'footer-text','zone' => 'text_bottom']) ?>
+<!--            <p class="footer__descr">Finjenios es un servicio independiente, enfocado a categorizar y ofrecer la mejor opción de créditos. Finjenios no es quien administra las solicitudes, pagos ni la disponibilidad de las ofertas. Utilizamos un agloritmo avanzado para poder comparar y ofrecer las mejores opciones. Al momento de realizarse una solicitud, Finjenios recibe una comisión por medio de un link de afiliación. Nos encargamos de que la información de todas las compañías está actualizada, pero la información definitiva se encontrará disponible en la página de la empresa financiera. </p>-->
 
-            <ul class="footer-list">
-                <li class="footer-list__item">
-                    Все представленные компании имеют лицензии на соответствующую деятельность.
-                </li>
-                <li class="footer-list__item">
-                    При использовании материалов активная гиперссылка на Zaimomat.ru обязательна.
-                </li>
-            </ul>
+            <p class="footer__copyright">©FINJENIOS.COM.MX <?= date('Y') ?></p>
+        </div>
+        <div class="footer__content footer__content--mobile">
+            <a href="/" class="footer__logo">
+                <img src="/img/logo-footer.svg" alt="Logo">
+            </a>
+            <?= MainPageWidget::widget(['type' => 'footer-text','zone' => 'title']) ?>
 
-            <?= MainPageWidget::widget(['type' => 'menu-footer']) ?>
-
-            <ul class="footer-list">
-                <li class="footer-list__item">
-                    Мы в социальных сетях
-                </li>
-                <li class="footer-list__item">
-                    <ul class="footer-list-soc">
-                        <li class="footer-list-soc__item footer-list-soc__item--inst">
-                            <a href="#"></a>
-                        </li>
-                        <li class="footer-list-soc__item footer-list-soc__item--youtube">
-                            <a href="#"></a>
-                        </li>
-                        <li class="footer-list-soc__item footer-list-soc__item--facebook">
-                            <a href="#"></a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="footer-list__item">
-                    <a href="/" class="footer-list__item-logo"></a>
-                </li>
-            </ul>
+            <div class="footer__columns">
+                <div class="footer__col footer__col--text">
+                    <p class="footer__text">Ayudamos a comparar cientas de empresas y compañías financieras que brindan servicios de préstamos, créditos, liquidación de deudas, entre muchos otros. Con información actualizada al momento, podrás acceder a tasas y comisiones, requisitos y ofertas vigentes de todas las compañías. Y ¡no te preocupes! Promovemos únicamente a prestamistas y compañías financieras verificadas, con el fin de mantener una alta protección del usuario y de sus finanzas.</p>
+                    <p class="footer__text">Nuestra manera de trabajar es muy sencilla– recolectamos información de las compañías financieras, la procesamos usando redes neutrales y expertos en el ámbito, generamos una calificación utilizando un algoritmo con elementos de inteligencia artifical y, posteriormente, los comparamos con diferentes ofertas, para poder ofrecer la que mejor se ajusta al usuario y sus necesidades.</p>
+                    <p class="footer__descr">Finjenios es un servicio independiente, enfocado a categorizar y ofrecer la mejor opción de créditos. Finjenios no es quien administra las solicitudes, pagos ni la disponibilidad de las ofertas. Utilizamos un agloritmo avanzado para poder comparar y ofrecer las mejores opciones. Al momento de realizarse una solicitud, Finjenios recibe una comisión por medio de un link de afiliación. Nos encargamos de que la información de todas las compañías está actualizada, pero la información definitiva se encontrará disponible en la página de la empresa financiera. </p>
+                </div>
+                <div class="footer__col footer__col--links">
+                    <div class="footer__links">
+                        <div class="footer__lists">
+                            <ul class="footer__list">
+                                <li class="footer__item">
+                                    <a href="#" class="footer__item-link">
+                                        <img src="/img/condusef1.svg" alt="Condusef" class="footer__item-logo">
+                                        <span>condusef.gob.mx</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="footer__list">
+                                <li class="footer__item">
+                                    <a href="#" class="footer__item-link">
+                                        <img src="/img/buro.svg" alt="Buro" class="footer__item-logo">
+                                        <span>buro.gob.mx</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="footer__line"></div>
+                        <?= MainPageWidget::widget(['type' => 'menu-footer']) ?>
+                    </div>
+                </div>
+<!--                Contacto-->
+                <?= MainPageWidget::widget(['type' => 'contacts-footer']) ?>
+            </div>
+            <div class="footer__line"></div>
+            <p class="footer__copyright">©FINJENIOS.COM.MX <?= date('Y') ?></p>
         </div>
     </div>
 </footer>

@@ -1,8 +1,10 @@
-<ul class="footer-list footer-list__menu">
-    <?php foreach ($menus as $menu) :?>
-        <li class="footer-list__item">
-            <a href="<?= $menu->link; ?>"  class="footer-list__link">
-                <?= $menu->name; ?></a>
-        </li>
-    <?php endforeach; ?>
-</ul>
+<div class="footer__lists">
+    <ul class="footer__list">
+        <?php foreach ($menus as $menu) :?>
+            <li class="footer__item">
+                <a href="<?= $menu->link; ?>"  class="footer__link">
+                    <?= $menu->name; ?></a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</div>

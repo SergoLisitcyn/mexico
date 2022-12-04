@@ -17,13 +17,13 @@
                     <p class="datas__text"><?= $contacts->direction ?></p>
                 </li>
                 <?php endif; ?>
-                <?php if($contacts->direction) : ?>
+                <?php if($contacts->postal_code) : ?>
                 <li class="datas__col">
                     <div class="datas__caption">Código Postal</div>
                     <p class="datas__text"><?= $contacts->postal_code ?></p>
                 </li>
                 <?php endif; ?>
-                <?php if($contacts->direction) : ?>
+                <?php if($contacts->phone) : ?>
                 <li class="datas__col">
                     <div class="datas__caption">Teléfono</div>
                     <p class="datas__text"><?= $contacts->phone ?></p>
