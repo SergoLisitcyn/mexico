@@ -4,25 +4,28 @@ use kartik\rating\StarRating;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 ?>
-<div class="tabs-content__reviews-form reviews-form background-set">
+<div class="tabs-content__reviews reviews">
     <?php if( Yii::$app->session->hasFlash('successReviews') ): ?>
         <div class="alert alert-success alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <?php echo Yii::$app->session->getFlash('successReviews'); ?>
         </div>
     <?php endif;?>
-    <?php
-    echo StarRating::widget([
-        'name' => 'rating_full',
-        'pluginOptions' => [
-            'step' => 1,
-            'showClear' => false,
-            'showCaption' => false,
+    <div class="reviews__poll background-set">
+        <h2 class="reviews__title title">Оцените Credito</h2>
+        <div class="rating-stars">
+            <?php
+            echo StarRating::widget([
+                'name' => 'rating_full',
+                'pluginOptions' => [
+                    'step' => 1,
+                    'showClear' => false,
+                    'showCaption' => false,
 //                'filledStar' => '<i class="fas fa-heart"></i>',
 //                'emptyStar' => '<i class="fas fa-heart-empty"></i>',
-        ],
-        'pluginEvents' => [
-            'rating:change' => "function(event, value, caption){
+                ],
+                'pluginEvents' => [
+                    'rating:change' => "function(event, value, caption){
                 console.log(value);
                 $('#reviews-support').rating('update', value);
                 $('#reviews-functionality').rating('update', value);
@@ -41,9 +44,12 @@ use yii\helpers\Html;
                     }
                 }
         }"
-        ]
-    ]);
-    ?>
+                ]
+            ]);
+            ?>
+        </div>
+    </div>
+
 </div>
 <style>
     .modal {
@@ -94,14 +100,14 @@ use yii\helpers\Html;
                 [
                     'action' =>[$action],
                     'options' => [
-                        'class' => 'review-form',
+                        'class' => 'main-form',
                         'id' => 'review'
                     ]
                 ]
             ); ?>
         <input type="hidden" name="_csrf" value="<?=Yii::$app->request->getCsrfToken()?>" />
         <input type="hidden" id="review-cat_id" name="Reviews[mfo_id]" value="<?= $model->id ?>"/>
-        <ul class="reviews-form__rating-list rating-list">
+        <ul class="main-form__rating-list rating-list">
             <li class="rating-list__item">
                 <div class="rating-list__title">
                     Interés & Costes
@@ -112,8 +118,8 @@ use yii\helpers\Html;
                     'step' => 1,
                     'showClear' => false,
                     'showCaption' => false,
-                    'filledStar' => '<span class="star-label star star--small star--active"></span>',
-                    'emptyStar' => '<span class="star-label star star--small"></span>',
+//                    'filledStar' => '<span class="star-label star star--small star--active"></span>',
+//                    'emptyStar' => '<span class="star-label star star--small"></span>',
                 ],
             ]);
             ?>
@@ -128,8 +134,8 @@ use yii\helpers\Html;
                         'step' => 1,
                         'showClear' => false,
                         'showCaption' => false,
-                        'filledStar' => '<span class="star-label star star--small star--active"></span>',
-                        'emptyStar' => '<span class="star-label star star--small"></span>',
+//                        'filledStar' => '<span class="star-label star star--small star--active"></span>',
+//                        'emptyStar' => '<span class="star-label star star--small"></span>',
                     ],
                 ]);
                 ?>
@@ -144,8 +150,8 @@ use yii\helpers\Html;
                     'step' => 1,
                     'showClear' => false,
                     'showCaption' => false,
-                    'filledStar' => '<span class="star-label star star--small star--active"></span>',
-                    'emptyStar' => '<span class="star-label star star--small"></span>',
+//                    'filledStar' => '<span class="star-label star star--small star--active"></span>',
+//                    'emptyStar' => '<span class="star-label star star--small"></span>',
                 ],
             ]);
             ?>
@@ -160,24 +166,27 @@ use yii\helpers\Html;
                     'step' => 1,
                     'showClear' => false,
                     'showCaption' => false,
-                    'filledStar' => '<span class="star-label star star--small star--active"></span>',
-                    'emptyStar' => '<span class="star-label star star--small"></span>',
+//                    'filledStar' => '<span class="star-label star star--small star--active"></span>',
+//                    'emptyStar' => '<span class="star-label star star--small"></span>',
                 ],
             ]);
             ?>
             </li>
         </ul>
-
-        <?= $form->field($reviewsModel, 'body')->textarea(['class' => 'reviews-form__textarea','placeholder' => "Danos tu opinión"])->label(false) ?>
-        <?= $form->field($reviewsModel, 'plus')->textarea(['class' => 'reviews-form__textarea','placeholder' => "Ventajas"])->label(false) ?>
-        <?= $form->field($reviewsModel, 'minus')->textarea(['class' => 'reviews-form__textarea','placeholder' => "Desventajas"])->label(false) ?>
+        <div class="main-form__box">
+            <input class="main-form__input main-form__input--person" name="Reviews[name]" placeholder="Name"></input>
+            <input class="main-form__input main-form__input--person" name="Reviews[email]" placeholder="E-mail"></input>
+        </div>
+        <?= $form->field($reviewsModel, 'body')->textarea(['class' => 'main-form__input','placeholder' => "Danos tu opinión"])->label(false) ?>
+        <?= $form->field($reviewsModel, 'plus')->textarea(['class' => 'main-form__input','placeholder' => "Ventajas"])->label(false) ?>
+        <?= $form->field($reviewsModel, 'minus')->textarea(['class' => 'main-form__input','placeholder' => "Desventajas"])->label(false) ?>
 
         <!--    <label class="reviews-form__checkbox">-->
         <!--        <input type="checkbox" name="">-->
         <!--        <span class="reviews-form__checkbox-text">Recomendacion</span>-->
         <!--    </label>-->
         <?= $form->field($reviewsModel, 'recommendation')->checkbox(['value' => 1, 'uncheck' => 0])?>
-        <?= Html::submitButton('Danos tu opinión', ['class' => 'reviews-form__button button button--primary']) ?>
+        <?= Html::submitButton('Danos tu opinión', ['class' => 'main-form__button button button--primary']) ?>
         <?php ActiveForm::end(); ?>
     </div>
 

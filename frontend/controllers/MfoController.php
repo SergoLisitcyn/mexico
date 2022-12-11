@@ -109,9 +109,19 @@ class MfoController extends Controller
         }
         $reviews = Reviews::find()->where(['mfo_id' => $mfo->id,'status' => 1])->all();
 
-        return $this->render('reviews', [
-            'reviews' => $reviews,
-            'mfo' => $mfo,
-        ]);
+        $reviewsModel = new Reviews();
+
+        if ($reviewsModel->load(Yii::$app->request->post())) {
+            $reviewsModel->save();
+            Yii::$app->session->setFlash('successReviews', 'Tu comentario ha sido enviado. ¡Gracias por ponerte en contacto!');
+            return $this->refresh();
+        } else {
+            return $this->render('reviews', [
+                'model' => $mfo,
+                'reviewsModel' => $reviewsModel,
+                'reviews' => $reviews,
+                'mfo' => $mfo,
+            ]);
+        }
     }
 }
