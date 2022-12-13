@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Reviews;
 use frontend\widgets\MainPageWidget;
 use yii\helpers\Url;
 
@@ -37,7 +38,9 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
         <div class="content__block">
             <div class="content__row">
                 <section class="cards">
-                    <?php foreach ($mfos as $key => $mfo) : ?>
+                    <?php foreach ($mfos as $key => $mfo) :
+                        $reviewsCount = Reviews::find()->where(['mfo_id' => $mfo['params']['id'], 'status' => 1])->count();
+                        ?>
                         <div class="offer change-text">
                             <div class="offer__row">
                                 <div class="offer__company">
@@ -58,8 +61,14 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                                                 <div class="repute__rating-number">4,4</div>
                                             </div>
                                             <div class="repute__comments">
-                                                Leer <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $mfo['params']['url']]) ?>" class="repute__comments-link">25 comentarios</a>
+                                                <?php if($reviewsCount > 0) : ?>
+                                                    Leer <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $mfo['params']['url']]) ?>" class="repute__comments-link"><?= $reviewsCount ?> comentarios</a>
+                                                <?php else: ?>
+                                                    <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $mfo['params']['url']]) ?>" class="repute__comments-link">Danos tu opinión
+                                                    </a>
+                                                <?php endif; ?>
                                             </div>
+
                                         </div>
                                     </div>
                                     <?php if(isset($mfo['params']['data']['data_company']['legal_name_company']) && $mfo['params']['data']['data_company']['legal_name_company'] != '-') : ?>
@@ -129,7 +138,12 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                                                 <div class="repute__rating-number">4,4</div>
                                             </div>
                                             <div class="repute__comments">
-                                                Leer <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $mfo['params']['url']]) ?>" class="repute__comments-link">25 comentarios</a>
+                                                <?php if($reviewsCount > 0) : ?>
+                                                    Leer <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $mfo['params']['url']]) ?>" class="repute__comments-link"><?= $reviewsCount ?> comentarios</a>
+                                                <?php else: ?>
+                                                    <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $mfo['params']['url']]) ?>" class="repute__comments-link">Danos tu opinión
+                                                    </a>
+                                                <?php endif; ?>
                                             </div>
                                         </div>
                                     </div>

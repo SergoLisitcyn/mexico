@@ -1,11 +1,14 @@
 <?php
 
+use common\models\Reviews;
 use yii\helpers\Url;
 ?>
 <div class="tabs-content__offer offers-sect">
     <h2 class="offers-sect__title title">Ofertas similares</h2>
     <div class="offers-sect__block">
-        <?php foreach ($mfoRandoms as $random) :?>
+        <?php foreach ($mfoRandoms as $random) :
+            $reviewsCount = Reviews::find()->where(['mfo_id' => $random->id, 'status' => 1])->count();
+            ?>
 
             <div class="offer change-text">
                 <div class="offer__row">
@@ -27,7 +30,12 @@ use yii\helpers\Url;
                                     <div class="repute__rating-number">4,4</div>
                                 </div>
                                 <div class="repute__comments">
-                                    Leer <a href="#" class="repute__comments-link">25 comentarios</a>
+                                    <?php if($reviewsCount > 0) : ?>
+                                        Leer <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $random->url]) ?>" class="repute__comments-link"><?= $reviewsCount ?> comentarios</a>
+                                    <?php else: ?>
+                                        <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $random->url]) ?>" class="repute__comments-link">Danos tu opinión
+                                        </a>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
@@ -86,7 +94,12 @@ use yii\helpers\Url;
                                     <div class="repute__rating-number">4,4</div>
                                 </div>
                                 <div class="repute__comments">
-                                    Leer <a href="#" class="repute__comments-link">25 comentarios</a>
+                                    <?php if($reviewsCount > 0) : ?>
+                                        Leer <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $random->url]) ?>" class="repute__comments-link"><?= $reviewsCount ?> comentarios</a>
+                                    <?php else: ?>
+                                        <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $random->url]) ?>" class="repute__comments-link">Danos tu opinión
+                                        </a>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>

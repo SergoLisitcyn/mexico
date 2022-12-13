@@ -1,7 +1,7 @@
 <!--Calculator-->
 <section class="main__calculator calculator">
     <div class="container">
-        <form action="/empresas" method="post">
+        <form action="/entidad" method="post">
             <input type="hidden" name="_csrf" value="<?=Yii::$app->request->getCsrfToken()?>" />
             <div class="calculator__row background-set">
                 <div class="calculator__columns">
