@@ -98,6 +98,9 @@
 .mobile_view{
     display: none;
 }
+.menu-top-desktop{
+    display: none;
+}
 .main__staff{
     margin-top: 42px;
 }
@@ -146,6 +149,9 @@
         display: none;
     }
     .mobile_view{
+        display: block;
+    }
+    .menu-top-desktop{
         display: block;
     }
 }
