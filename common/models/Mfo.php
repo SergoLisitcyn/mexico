@@ -702,6 +702,7 @@ class Mfo extends ActiveRecord
                     'rating' =>  $mfo['rating'],
                     'url' =>  $mfo['url'],
                     'reviews_count' =>  $reviews,
+                    'rating_auto' =>  $mfo['rating_auto'],
                 ];
             }
         }

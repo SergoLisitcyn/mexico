@@ -26,8 +26,10 @@ use yii\helpers\Url;
                             <?php endif; ?>
                             <div class="repute">
                                 <div class="repute__rating">
-                                    <img class="repute__rating-image" src="/img/stars.svg" alt="stars">
-                                    <div class="repute__rating-number">4,4</div>
+<!--                                    <img class="repute__rating-image" src="/img/stars.svg" alt="stars">-->
+<!--                                    <div class="repute__rating-number">4,4</div>-->
+                                    <div class="rating__stars_similar" style="width:<?= $random->rating_auto['rating']['allRating_rate'] ?>%"></div>
+                                    <span class="offer-dropdown__repute-number"><?= $random->rating_auto['rating']['allRating'] ?></span>
                                 </div>
                                 <div class="repute__comments">
                                     <?php if($reviewsCount > 0) : ?>
@@ -90,8 +92,10 @@ use yii\helpers\Url;
                             </div>
                             <div class="offer__repute repute">
                                 <div class="repute__rating">
-                                    <img class="repute__rating-image" src="/img/stars.svg" alt="stars">
-                                    <div class="repute__rating-number">4,4</div>
+<!--                                    <img class="repute__rating-image" src="/img/stars.svg" alt="stars">-->
+<!--                                    <div class="repute__rating-number">4,4</div>-->
+                                    <div class="rating__stars_similar" style="width:<?= $random->rating_auto['rating']['allRating_rate'] ?>%"></div>
+                                    <span class="offer-dropdown__repute-number"><?= $random->rating_auto['rating']['allRating'] ?></span>
                                 </div>
                                 <div class="repute__comments">
                                     <?php if($reviewsCount > 0) : ?>

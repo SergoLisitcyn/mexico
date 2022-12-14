@@ -92,8 +92,13 @@ use yii\helpers\Html;
 <div id="myModal" class="modal">
 
     <!-- Модальное содержание -->
-    <div class="modal-content">
-        <span class="close">&times;</span>
+    <div class="modal-content reviews-form background-set">
+<!--        <span class="close">&times;</span>-->
+<!--    <div class="reviews-modal reviews-form background-set">-->
+        <div class="reviews-modal__close">
+            <span></span>
+            <span></span>
+        </div>
         <h2 class="reviews-form__title title">Tu opinión</h2>
         <?php
         $form = ActiveForm::begin(

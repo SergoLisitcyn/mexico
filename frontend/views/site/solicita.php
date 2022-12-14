@@ -134,8 +134,10 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                                         </div>
                                         <div class="offer__repute repute">
                                             <div class="repute__rating">
-                                                <img class="repute__rating-image" src="/img/stars.svg" alt="stars">
-                                                <div class="repute__rating-number">4,4</div>
+<!--                                                <img class="repute__rating-image" src="/img/stars.svg" alt="stars">-->
+<!--                                                <div class="repute__rating-number">4,4</div>-->
+                                                <div class="rating__stars_similar" style="width:<?= $mfo['params']['rating_auto']['rating']['allRating_rate'] ?>%"></div>
+                                                <span class="offer-dropdown__repute-number"><?= $mfo['params']['rating_auto']['rating']['allRating'] ?></span>
                                             </div>
                                             <div class="repute__comments">
                                                 <?php if($reviewsCount > 0) : ?>

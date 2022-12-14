@@ -14,8 +14,10 @@ use yii\helpers\Url;
                     </div>
                     <div class="entities__repute repute">
                         <div class="repute__rating">
-                            <img class="repute__rating-image" src="/img/stars.svg" alt="stars">
-                            <div class="repute__rating-number"><?= $item['rating'] ?></div>
+<!--                            <img class="repute__rating-image" src="/img/stars.svg" alt="stars">-->
+<!--                            <div class="repute__rating-number">--><?php //= $item['rating'] ?><!--</div>-->
+                            <div class="rating__stars_similar" style="width:<?= $item['rating_auto']['rating']['allRating_rate'] ?>%"></div>
+                            <span class="offer-dropdown__repute-number"><?= $item['rating_auto']['rating']['allRating'] ?></span>
                         </div>
                         <div class="repute__comments">
                             <?php if($item['reviews_count'] > 0) : ?>
