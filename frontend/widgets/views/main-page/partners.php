@@ -8,11 +8,10 @@
             <?php if($blockManagement->sub_title) : ?>
                 <h3 class="main-sect__subtitle subtitle"><?= $blockManagement->sub_title ?></h3>
             <?php endif; ?>
-
             <div class="employees-slider">
                 <?php foreach ($sols as $sol) : ?>
                     <div class="employees-slider__item">
-                        <img class="employees__image" src="<?= $sol->image ?>" alt="<?= $sol->alt ?>">
+                        <img class="employees-slider__image" src="<?= $sol->image ?>" alt="<?= $sol->alt ?>">
                     </div>
                 <?php endforeach; ?>
             </div>
