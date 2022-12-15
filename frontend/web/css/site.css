@@ -148,6 +148,17 @@
         border-bottom: 1px solid #d8d8d8;
     }
 }
+@media (max-width: 600px){
+    .theme-krajee-svg .filled-stars .krajee-icon-star {
+        margin-right: 4px;
+    }
+    .theme-krajee-svg .empty-stars .krajee-icon-star{
+        margin-right: 4px;
+    }
+}
+.rating-stars__star:nth-child(n+2) {
+    margin-left: 4px;
+}
 
 @media (max-width: 1279px){
     .top-menu {
