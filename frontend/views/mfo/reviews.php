@@ -14,10 +14,7 @@ use yii\helpers\Html;
                     <a href="/" class="breadcrumbs__link">Inicio</a>
                 </li>
                 <li class="breadcrumbs__item">
-                    <a href="/mfo" class="breadcrumbs__link">Empresas</a>
-                </li>
-                <li class="breadcrumbs__item">
-                    <a href="<?= Url::toRoute(['mfo/view', 'url' => $mfo->url]) ?>" class="breadcrumbs__link"><?= $mfo->name ?></a>
+                    <a href="<?= Url::toRoute(['mfo/view', 'url' => $mfo->url]) ?>" class="breadcrumbs__link"><?= $mfo->data['meta_tags']['h1'] ?></a>
                 </li>
                 <li class="breadcrumbs__item">
                     Comentarios sobre <?= $mfo->name ?>
@@ -60,7 +57,7 @@ use yii\helpers\Html;
                     </div>
                     <?php endforeach; ?>
                     <div class="content__reviews-form reviews-form background-set">
-                        <h2 class="reviews__title title">Оцените Credito</h2>
+                        <h2 class="reviews__title title">Tu opinión <?= $mfo->data['meta_tags']['h1'] ?></h2>
                         <?php
                         $form = ActiveForm::begin(
                             [

@@ -130,6 +130,21 @@
     /*margin: 0 15px 0 0;*/
 }
 
+.rating-list__item{
+    margin-bottom: 0;
+}
+.main-form__box{
+    margin-top: 0;
+}
+
+.rating-list__item .form-control{
+    height: 0;
+}
+
+.reviews__poll{
+    margin-bottom: 30px;
+}
+
 .rating-stars {
     cursor: pointer;
     position: relative;

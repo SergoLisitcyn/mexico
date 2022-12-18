@@ -10,7 +10,7 @@ if(isset($model->data['meta_tags']['description']) && !empty($model->data['meta_
         <div class="main__breadcrumbs breadcrumbs">
             <ul class="breadcrumbs__items">
                 <li class="breadcrumbs__item">
-                    <a href="/entidad" class="breadcrumbs__link">Empresas</a>
+                    <a href="/" class="breadcrumbs__link">Inicio</a>
                 </li>
                 <?php if(isset($model->data['meta_tags']['h1']) && $model->data['meta_tags']['h1'] != '-') : ?>
                 <li class="breadcrumbs__item">
