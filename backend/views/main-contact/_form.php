@@ -18,6 +18,16 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'postal_code')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'company_name')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'bin')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'ocde')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'registration_date')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'certificate')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'phone_second')->textInput(['maxlength' => true]) ?>

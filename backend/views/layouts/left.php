@@ -24,6 +24,7 @@
                         ],
                     ],
                     ['label' => 'Управление блоками', 'icon' => 'home', 'url' => ['/block-management/index']],
+                    ['label' => 'Адрес компании', 'icon' => 'tasks', 'url' => ['/main-contact/update?id=1#contacts']],
 //                    [
 //                        "label" => "Главная страница",
 //                        "url" => "#",

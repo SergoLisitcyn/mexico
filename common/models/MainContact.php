@@ -20,6 +20,11 @@ use yii\db\ActiveRecord;
  * @property string|null $twitter
  * @property string|null $youtube
  * @property string|null $linkedin
+ * @property string|null $company_name
+ * @property string|null $bin
+ * @property string|null $ocde
+ * @property string|null $registration_date
+ * @property string|null $certificate
  */
 class MainContact extends ActiveRecord
 {
@@ -38,7 +43,8 @@ class MainContact extends ActiveRecord
     {
         return [
             [['city', 'direction', 'postal_code', 'phone', 'phone_second', 'email', 'whatsapp', 'facebook', 'instagram',
-                'twitter', 'youtube', 'linkedin'], 'string', 'max' => 255],
+                'twitter', 'youtube', 'linkedin','company_name', 'bin',
+                'ocde', 'registration_date', 'certificate'], 'string', 'max' => 255],
         ];
     }
 
@@ -61,6 +67,11 @@ class MainContact extends ActiveRecord
             'twitter' => 'Twitter',
             'youtube' => 'YouTube',
             'linkedin' => 'Linkedin',
+            'company_name' => 'Nombre de la empresa',
+            'bin' => 'BIN',
+            'ocde' => 'OCDE',
+            'registration_date' => 'Fecha de inscripción',
+            'certificate' => 'Certificado de IVA',
         ];
     }
 }
