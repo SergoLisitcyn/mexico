@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\models\MainContact;
+use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -120,7 +121,8 @@ class MainContactController extends Controller
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            Yii::$app->session->addFlash('success', 'Обновлено');
+            return $this->redirect(['update', 'id' => $model->id]);
         }
 
         return $this->render('update', [
