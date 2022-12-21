@@ -189,3 +189,44 @@
         display: block;
     }
 }
+
+.offer-dropdown__items {
+    align-items: flex-start;
+}
+
+.offer-dropdown__connection-item {
+    align-items: center;
+}
+
+.offer-dropdown__connection-item:not(:first-child) {
+    padding-bottom: 27px;
+}
+
+.offer-dropdown__connection-item:not(:last-child) {
+    padding-top: 23px;
+}
+
+.offer-dropdown__info-item {
+    align-items: center;
+}
+
+.offer-dropdown__info-item:not(:first-child) {
+    padding-bottom: 27px;
+}
+
+.offer-dropdown__info-item:not(:last-child) {
+    padding-top: 27px;
+}
+
+@media (max-width: 900px) {
+    .offer-dropdown__connection-item:not(:last-child) {
+        padding-top: 0;
+    }
+    .offer-dropdown__connection-item:not(:first-child) {
+        padding-bottom: 0;
+    }
+
+    .offer-dropdown__info-item:last-child {
+        padding-bottom: 0;
+    }
+}
