@@ -74,7 +74,7 @@ AppAsset::register($this);
                         <div class="footer__lists">
                             <ul class="footer__list">
                                 <li class="footer__item">
-                                    <a href="#" class="footer__item-link">
+                                    <a href="https://www.condusef.gob.mx/" target="_blank" class="footer__item-link"  rel="nofollow">
                                         <img src="/img/condusef1.svg" alt="Condusef" class="footer__item-logo">
                                         <span>condusef.gob.mx</span>
                                     </a>
@@ -82,7 +82,7 @@ AppAsset::register($this);
                             </ul>
                             <ul class="footer__list">
                                 <li class="footer__item">
-                                    <a href="#" class="footer__item-link">
+                                    <a href="https://www.buro.gob.mx/" target="_blank" class="footer__item-link"  rel="nofollow">
                                         <img src="/img/buro.svg" alt="Buro" class="footer__item-logo">
                                         <span>buro.gob.mx</span>
                                     </a>
@@ -116,7 +116,7 @@ AppAsset::register($this);
                         <div class="footer__lists">
                             <ul class="footer__list">
                                 <li class="footer__item">
-                                    <a href="#" class="footer__item-link">
+                                    <a href="https://www.condusef.gob.mx/" target="_blank" class="footer__item-link"  rel="nofollow">
                                         <img src="/img/condusef1.svg" alt="Condusef" class="footer__item-logo">
                                         <span>condusef.gob.mx</span>
                                     </a>
@@ -124,7 +124,7 @@ AppAsset::register($this);
                             </ul>
                             <ul class="footer__list">
                                 <li class="footer__item">
-                                    <a href="#" class="footer__item-link">
+                                    <a href="https://www.buro.gob.mx/" target="_blank" class="footer__item-link"  rel="nofollow">
                                         <img src="/img/buro.svg" alt="Buro" class="footer__item-logo">
                                         <span>buro.gob.mx</span>
                                     </a>
