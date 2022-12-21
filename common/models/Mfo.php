@@ -385,6 +385,7 @@ class Mfo extends ActiveRecord
         $data['term_transfer'] = $value[18]; // Срок перевода денежных средст
         $data['initial_fee'] = $value[19]; // Первоначальный взнос
         $data['extension'] = $value[20]; // Продление
+        $data['for_calculator'] = $value[21]; // Для калькулятора
 
         return $data;
     }

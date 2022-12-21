@@ -1,7 +1,7 @@
 <section class="main__faq faq">
     <div class="container">
         <div class="faq__row background-set">
-            <h2 class="faq__title title">FAQ</h2>
+            <h2 class="faq__title title">Preguntas Frecuentes</h2>
             <ul class="faq__accordion accordion-menu">
                 <li class="accordion-menu__item">
                     <div class="accordion-menu__link">¿Qué es (nombre de la empresa)?

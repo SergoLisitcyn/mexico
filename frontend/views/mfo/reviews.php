@@ -17,11 +17,11 @@ use yii\helpers\Html;
                     <a href="<?= Url::toRoute(['mfo/view', 'url' => $mfo->url]) ?>" class="breadcrumbs__link"><?= $mfo->data['meta_tags']['h1'] ?></a>
                 </li>
                 <li class="breadcrumbs__item">
-                    Comentarios sobre <?= $mfo->name ?>
+                    Comentarios sobre <?= $mfo->data['meta_tags']['h1'] ?>
                 </li>
             </ul>
         </div>
-        <h1 class="main__title main-title">Comentarios sobre <?= $mfo->name ?></h1>
+        <h1 class="main__title main-title">Comentarios sobre <?= $mfo->data['meta_tags']['h1'] ?></h1>
     </div>
 </div>
 <div class="content">

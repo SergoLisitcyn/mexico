@@ -65,11 +65,11 @@ if(isset($model->data['meta_tags']['description']) && !empty($model->data['meta_
                                         <div class="range__inputs">
                                             <div class="range__result result-1">
                                                 <div class="range__result-input">
-                                                    <input aria-invalid="false" type="text" slot="amount" aria-labelledby="input-amount-slider" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense" value="50" name="rs_sum_output" id="rs_sum_output">
+                                                    <input aria-invalid="false" type="text" slot="amount" aria-labelledby="input-amount-slider" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense" value="<?= $sum ?>" name="rs_sum_output" id="rs_sum_output">
                                                 </div>
                                                 <span class="range__result-span">$</span>
                                             </div>
-                                            <input id="rs_sum" type="range" name="rs_sum" min="0" max="100" value="50" step="5" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
+                                            <input id="rs_sum" type="range" name="rs_sum" oninput="fun1()" min="0" max="<?= $sum ?>" value="<?= $sum ?>" step="5" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
                                         </div>
                                     </div>
                                 </div>
@@ -81,20 +81,23 @@ if(isset($model->data['meta_tags']['description']) && !empty($model->data['meta_
                                         <div class="range__inputs">
                                             <div class="range__result result-2">
                                                 <div class="range__result-input">
-                                                    <input aria-invalid="false" type="text" slot="term" aria-labelledby="input-term-slider" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense" value="30" name="rs_term_output" id="rs_term_output">
+                                                    <input aria-invalid="false" type="text" slot="term" aria-labelledby="input-term-slider" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense" value="<?= $term ?>" name="rs_term_output" id="rs_term_output">
                                                 </div>
                                                 <span class="range__result-span">días</span>
                                             </div>
-                                            <input id="rs_term" type="range" name="rs_term" min="0" max="100" value="5" step="5" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
+                                            <input id="rs_term" type="range" name="rs_term" oninput="fun1()" min="0" max="<?= $term ?>" value="<?= $term ?>" step="5" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
+                                            <input type="hidden" id="procent" name="procent" value="<?= $procent ?>" />
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="calculator__sum calculator-sum">
                                 <div class="calculator-sum__text">Total a Pagar:</div>
-                                <div class="calculator-sum__number">65</div> <span class="calculator-sum__number-span">$</span>
+                                <div class="calculator-sum__number" id="cost"><?= $total ?></div> <span class="calculator-sum__number-span">$</span>
                             </div>
-                            <button type="button" class="calculator__button button button--primary">Recibir dinero</button>
+                            <?php if(isset($model->data['meta_tags']['affiliate']) && $model->data['meta_tags']['affiliate'] != '-') : ?>
+                                <a class="calculator__button button button--primary" target="_blank" href="//<?= $model->data['meta_tags']['affiliate'] ?>">Recibir dinero</a>
+                            <?php endif; ?>
                         </div>
                     </div>
                     <div class="mfo-about__list mfo-list">

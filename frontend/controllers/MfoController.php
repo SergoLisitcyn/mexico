@@ -60,6 +60,10 @@ class MfoController extends Controller
         }
 
         $mfo = Mfo::find()->where(['url' => $url])->one();
+        $formatSum = intval($mfo->data['condiciones']['for_calculator']);
+        $procent = intval($mfo->data['condiciones']['rate_first']);
+        $term = intval($mfo->data['condiciones']['plazo_max']);
+        $total = $formatSum + $formatSum * ($procent/100) * $term;
         if(!$mfo){
             throw new HttpException(404, 'Страница не существует.');
         }
@@ -75,6 +79,10 @@ class MfoController extends Controller
                 'model' => $mfo,
                 'reviewsModel' => $reviewsModel,
                 'reviewsCount' => $reviewsCount,
+                'sum' => $formatSum,
+                'term' => $term,
+                'total' => $total,
+                'procent' => $procent,
             ]);
         }
     }
