@@ -292,6 +292,8 @@ class Mfo extends ActiveRecord
                     if($mfo){
                         $mfo->data = json_encode($datum);
                         $mfo->rating_auto = json_encode($mfo->rating_auto);
+                        $mfo->sum = $datum['condiciones']['for_calculator'];
+                        $mfo->term = $datum['condiciones']['plazo_max'];
                         $mfo->save();
                         $countUpdate++;
                     } else {
@@ -301,6 +303,8 @@ class Mfo extends ActiveRecord
                         $model->title = $datum['meta_tags']['title'];
                         $model->data = json_encode($datum);
                         $model->rating_auto = null;
+                        $model->sum = $datum['condiciones']['for_calculator'];
+                        $model->term = $datum['condiciones']['plazo_max'];
                         $model->save();
                         $countSave++;
                     }

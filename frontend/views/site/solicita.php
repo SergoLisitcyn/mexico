@@ -40,6 +40,12 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                 <section class="cards">
                     <?php foreach ($mfos as $key => $mfo) :
                         $reviewsCount = Reviews::find()->where(['mfo_id' => $mfo['params']['id'], 'status' => 1])->count();
+                        if(!$isPost){
+                            $sum = $mfo['params']['sum'];
+                            $term = $mfo['params']['term'];
+                        }
+                        $total = $sum + $sum * ($mfo['params']['data']['condiciones']['rate_first']/100) * $term;
+                        $totalFormat = number_format($total, 2, '.', '');
                         ?>
                         <div class="offer change-text">
                             <div class="offer__row">
@@ -96,7 +102,7 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                                             <li class="offer__value-item">
                                                 <div class="offer__value-title">
                                                     Total a Pagar, $</div>
-                                                <div class="offer__value-number">61</div>
+                                                <div class="offer__value-number"><?= $totalFormat ?></div>
                                             </li>
                                             <li class="offer__value-item">
                                                 <div class="offer__value-title">

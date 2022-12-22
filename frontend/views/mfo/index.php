@@ -6,7 +6,7 @@ use yii\helpers\Url;
 
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Mfos';
+$this->title = 'Empresas';
 ?>
 <div class="breadcrumbs">
     <div class="container">
@@ -22,6 +22,8 @@ $this->title = 'Mfos';
 </div>
 <section class="calculator">
     <div class="container">
+        <form action="/entidad" method="post">
+        <input type="hidden" name="_csrf" value="<?=Yii::$app->request->getCsrfToken()?>" />
         <div class="calculator__main">
             <div class="calculator__row background-set">
                 <div class="calculator__columns">
@@ -33,11 +35,13 @@ $this->title = 'Mfos';
                             <div class="range__inputs">
                                 <div class="range__result result-1">
                                     <div class="range__result-input">
-                                        <input aria-invalid="false" type="text" slot="amount" aria-labelledby="input-amount-slider" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense" value="50" name="rs_sum_output" id="rs_sum_output">
+                                        <input aria-invalid="false" type="text" slot="amount" aria-labelledby="input-amount-slider"
+                                               class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+                                               value="<?= $sum ?>" name="rs_sum_output" id="rs_sum_output">
                                     </div>
                                     <span class="range__result-span">$</span>
                                 </div>
-                                <input id="rs_sum" type="range" name="rs_sum" min="0" max="100" value="50" step="5" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
+                                <input id="rs_sum" type="range" name="rs_sum" min="0" max="100" value="<?= $sum ?>" step="5" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
                             </div>
                         </div>
                     </div>
@@ -49,18 +53,23 @@ $this->title = 'Mfos';
                             <div class="range__inputs">
                                 <div class="range__result result-2">
                                     <div class="range__result-input">
-                                        <input aria-invalid="false" type="text" slot="term" aria-labelledby="input-term-slider" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense" value="30" name="rs_term_output" id="rs_term_output">
+                                        <input aria-invalid="false" type="text" slot="term" aria-labelledby="input-term-slider"
+                                               class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+                                               value="<?= $term ?>" name="rs_term_output" id="rs_term_output">
                                     </div>
                                     <span class="range__result-span">días</span>
                                 </div>
-                                <input id="rs_term" type="range" name="rs_term" min="0" max="100" value="5" step="5" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
+                                <input id="rs_term" type="range" name="rs_term" min="0" max="100" value="<?= $term ?>" step="5" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
                             </div>
                         </div>
                     </div>
                 </div>
-                <button type="button" class="calculator__button button button--primary">Compara ofertas</button>
+                <button type="submit" class="calculator__button button button--primary">Compara ofertas</button>
             </div>
         </div>
+        </form>
+        <form action="/entidad" method="post">
+        <input type="hidden" name="_csrf" value="<?=Yii::$app->request->getCsrfToken()?>" />
         <div class="calculator__mini">
             <div class="calculator__row background-set">
                 <div class="calculator__columns">
@@ -71,7 +80,9 @@ $this->title = 'Mfos';
                             </label>
                             <div class="range__result result-1">
                                 <div class="range__result-input">
-                                    <input aria-invalid="false" type="text" slot="amount" aria-labelledby="input-amount-slider" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense" value="50" name="rs_sum_output" id="rs_sum_output">
+                                    <input aria-invalid="false" type="text" slot="amount" aria-labelledby="input-amount-slider"
+                                           class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+                                           value="<?= $sum ?>" name="rs_sum_output" id="rs_sum_output">
                                 </div>
                                 <span class="range__result-span">$</span>
                             </div>
@@ -84,7 +95,10 @@ $this->title = 'Mfos';
                             </label>
                             <div class="range__result result-2">
                                 <div class="range__result-input">
-                                    <input aria-invalid="false" type="text" slot="term" aria-labelledby="input-term-slider" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense" value="30" name="rs_term_output" id="rs_term_output">
+                                    <input aria-invalid="false" type="text" slot="term"
+                                           aria-labelledby="input-term-slider"
+                                           class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+                                           value="<?= $term ?>" name="rs_term_output" id="rs_term_output">
                                 </div>
                                 <span class="range__result-span">días</span>
                             </div>
@@ -94,6 +108,7 @@ $this->title = 'Mfos';
                 <button type="button" class="calculator__button button button--secondary">Más info</button>
             </div>
         </div>
+        </form>
     </div>
 </section>
 
@@ -104,6 +119,8 @@ $this->title = 'Mfos';
                 <section class="cards">
                     <?php foreach ($mfos as $mfo) :
                         $reviewsCount = Reviews::find()->where(['mfo_id' => $mfo->id, 'status' => 1])->count();
+                        $total = $sum + $sum * ($mfo->data['condiciones']['rate_first']/100) * $term;
+                        $totalFormat = number_format($total, 2, '.', '');
                         ?>
                     <div class="offer change-text">
                         <div class="offer__row">
@@ -144,12 +161,12 @@ $this->title = 'Mfos';
                                         <li class="offer__value-item">
                                             <div class="offer__value-title">
                                                 Monto del Préstamo, $</div>
-                                            <div class="offer__value-number">50</div>
+                                            <div class="offer__value-number"><?= $sum ?></div>
                                         </li>
                                         <li class="offer__value-item">
                                             <div class="offer__value-title">
                                                 Fecha de Pago, días</div>
-                                            <div class="offer__value-number">30</div>
+                                            <div class="offer__value-number"><?= $term ?></div>
                                         </li>
                                         <li class="offer__value-item">
                                             <div class="offer__value-title">
@@ -159,7 +176,7 @@ $this->title = 'Mfos';
                                         <li class="offer__value-item">
                                             <div class="offer__value-title">
                                                 Total a Pagar, $</div>
-                                            <div class="offer__value-number">61</div>
+                                            <div class="offer__value-number"><?= $totalFormat ?></div>
                                         </li>
                                         <li class="offer__value-item">
                                             <div class="offer__value-title">

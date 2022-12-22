@@ -34,17 +34,31 @@ class MfoController extends Controller
         );
     }
 
-    /**
-     * Lists all Mfo models.
-     *
-     * @return string
-     */
+
     public function actionIndex()
     {
-        $mfo = Mfo::find()->with('color')->where(['status' => 1])->orderBy(['rating' => SORT_DESC])->all();
+        $request = Yii::$app->request;
+        $post = $request->post();
+
+        if($post){
+            $sum = $request->post('rs_sum');
+            $term = $request->post('rs_term');
+        } else {
+            return Yii::$app->response->redirect(['/']);
+        }
+
+        $mfo = Mfo::find()
+            ->with('color')
+            ->where(['status' => 1])
+            ->andWhere(['>=', 'term', $term])
+            ->andWhere(['>=', 'sum', $sum])
+            ->orderBy(['rating' => SORT_DESC])
+            ->all();
 
         return $this->render('index', [
             'mfos' => $mfo,
+            'sum' => $sum,
+            'term' => $term,
         ]);
     }
 

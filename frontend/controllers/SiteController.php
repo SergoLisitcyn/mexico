@@ -181,9 +181,11 @@ class SiteController extends Controller
         $post = $request->post();
         $sum = 50;
         $term = 30;
+        $isPost = false;
         if($post){
             $sum = $request->post('rs_sum');
             $term = $request->post('rs_term');
+            $isPost = true;
         }
         $text = MainSolicita::find()->where(['url' => $url])->one();
         if(!$text){
@@ -207,6 +209,7 @@ class SiteController extends Controller
             'text' => $text,
             'sum' => $sum,
             'term' => $term,
+            'isPost' => $isPost,
         ]);
     }
 
