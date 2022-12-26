@@ -292,8 +292,10 @@ class Mfo extends ActiveRecord
                     if($mfo){
                         $mfo->data = json_encode($datum);
                         $mfo->rating_auto = json_encode($mfo->rating_auto);
-                        $mfo->sum = $datum['condiciones']['for_calculator'];
+                        $mfo->sum = $datum['condiciones']['first_loan_max'];
+                        $mfo->min_sum = $datum['condiciones']['first_loan_min'];
                         $mfo->term = $datum['condiciones']['plazo_max'];
+                        $mfo->min_term = $datum['condiciones']['plazo_min'];
                         $mfo->save();
                         $countUpdate++;
                     } else {
@@ -303,8 +305,10 @@ class Mfo extends ActiveRecord
                         $model->title = $datum['meta_tags']['title'];
                         $model->data = json_encode($datum);
                         $model->rating_auto = null;
-                        $model->sum = $datum['condiciones']['for_calculator'];
+                        $model->sum = $datum['condiciones']['first_loan_max'];
+                        $model->min_sum = $datum['condiciones']['first_loan_min'];
                         $model->term = $datum['condiciones']['plazo_max'];
+                        $model->min_term = $datum['condiciones']['plazo_min'];
                         $model->save();
                         $countSave++;
                     }
@@ -721,12 +725,36 @@ class Mfo extends ActiveRecord
 
     public static function getAnalysistText($model)
     {
-         $text = self::getAnalysistTextStr();
+         $text = self::getAnalysistTextStr($model);
+         $reviewsCount = Reviews::find()->where(['mfo_id' => $model->id, 'status' => 1])->count();
+         $social = self::getSocial($model->url);
+        $mfo = self::find()->where(['status' => 1])->orderBy(['rating' => SORT_DESC])->all();
+        $place = 1;
+        foreach ($mfo as $key => $item){
+            if($item['url'] == $model->url){
+                $place = $key+1;
+            }
+        }
          $templates = [
              'NOMBRE_EMPRESA' => $model->url,
              'ANO' => $model->data['data_company']['year_foundation'],
              'NOMBRE_EMPRESA_MATRIZ' => $model->data['mother_company']['mother_company'],
              'NOMBRE_PAIS' => $model->data['mother_company']['pais'],
+             'DAY_MAX' => $model->data['condiciones']['plazo_max'],
+             'SUMM_MAX' => $model->data['condiciones']['repeat_loan_max'],
+             'PROCENT' => $model->data['condiciones']['rate_first'],
+             'CUENTA_MINUTOS' => $model->data['condiciones']['decision_time'],
+             'AGE_MIN' => $model->data['requisitos']['older_than'],
+             'COMENTARIOS_SUMM' => $reviewsCount,
+             'GOOGLE_CALIFICACIÓN' => $social['google'],
+             'FINANCER_CALIFICACIÓN' => $social['financer'],
+             'FACEBOOK_CALIFICACIÓN' => $social['facebook'],
+             'Android_APP_DOWNLOAD_COUNT' => $social['android_count'],
+             'Android_APP_RATING_COUNT' => $social['android_rating'],
+             'IOs_APP_DOWNLOAD_COUNT' => $social['ios_count'],
+             'IOs_APP_RATING_COUNT' => $social['ios_rating'],
+             'UTP' => $social['utp'],
+             'LUGAR' => $place,
          ];
         if (!empty($templates)) {
             foreach ($templates as $k => $v) {
@@ -737,31 +765,294 @@ class Mfo extends ActiveRecord
         return $text;
     }
 
-    public static function getAnalysistTextStr()
+    public static function getAnalysistTextStr($model)
     {
-        return '<div class="tabs-content__info tabs-content-info">
+        $reviewsCount = Reviews::find()->where(['mfo_id' => $model->id, 'status' => 1])->count();
+        $social = self::getSocial($model->url);
+
+        $text = '<div class="tabs-content__info tabs-content-info">
                 <h2 class="tabs-content-info__title title"  style="margin-bottom: 20px;margin-top: 20px">Company Analysis</h2>
-                La empresa {NOMBRE_EMPRESA} lleva más de {ANO} operando en México
-                Propiedad de la empresa matriz/grupo financiero internacional{NOMBRE_EMPRESA_MATRIZ} de {NOMBRE_PAIS}
-                Una característica especial de la empresa es {UTP}
-                <h2 class="tabs-content-info__title title"  style="margin-bottom: 20px;margin-top: 20px">Loan Analysis</h2>
-                Los préstamos se emiten hasta {DAY_MAX} que es {DIFF_DAY} más largo/corto que la mayoría de las empresas
-                El importe del préstamo puede llegar hasta {SUMM_MAX}, que es {DIFF_SUMM} más que la mayoría de las empresas
-                El tipo de interés medio por préstamo es {PROCENT}, que es {DIFF_PROCENT} más que la media del mercado
-                La empresa se compromete a tomar una decisión de desembolso en {CUENTA_MINUTOS} minutos, que es {DIFF_MINUTOS} más/menos que la media
-                Su historial de crédito puede importar o no {CRED_HISTORY}
-                La edad del cliente puede ser a partir de {AGE_MIN}, estas condiciones sólo las ofrecen las empresas {18_AGE_MIN}
-                <h2 class="tabs-content-info__title title"  style="margin-bottom: 20px;margin-top: 20px">Rating Analysis</h2>
-                {NOMBRE_EMPRESA} ocupa el {LUGAR} en el ranking de Fíngenios, siendo los clientes los que más mencionan (Interés & Costes OR Condiciones OR Atención al cliente OR Funcionalidad)
-                Los visitantes de Fíngenios han escrito {COMENTARIOS_SUMM} comentarios sobre {NOMBRE_EMPRESA}, lo que la sitúa en {COMENTARIOS_SUMM_CALIFICACIÓN} en el ranking de discusión de Fíngenios.
-                Valoración de la empresa {NOMBRE_EMPRESA} en otros sitios web:<br>
-                Google:<br>
-                Financer:<br>
-                HelpMyCash:<br>
-                Facebook:<br>
-                {COMPANY_NAME} tiene una aplicación móvil para Android\IOS
-                La aplicación para Android se ha descargado más de {APP_DOWNLOAD_COUNT} veces y la puntuación media en Google Play Market es de {APP_RATING_COUNT}
-                La aplicación para iOS se ha descargado más de {APP_DOWNLOAD_COUNT} veces y la puntuación media en la AppStore de Apple es de {APP_RATING_COUNT}
-            </div>';
+                <p>La empresa {NOMBRE_EMPRESA} lleva más de {ANO} año(s) operando en México.</p>';
+
+        if($model->data['mother_company']['mother_company'] != 'Una empresa 100% mexicana' && $model->data['mother_company']['pais'] != '-'){
+            $text .= '<p>Propiedad de la empresa matriz/grupo financiero internacional {NOMBRE_EMPRESA_MATRIZ} de {NOMBRE_PAIS}</p>';
+        }
+        if($model->data['mother_company']['mother_company'] == 'Una empresa 100% mexicana'){
+            $text .= '<p>Una empresa 100% mexicana.</p>';
+        }
+        $text .= '<p>Una característica especial de la empresa es {UTP}</p>
+                  <h2 class="tabs-content-info__title title"  style="margin-bottom: 20px;margin-top: 20px">Loan Analysis</h2>';
+
+        // {DAY_MAX} && {DIFF_DAY}
+        if($model->data['condiciones']['plazo_max'] != 0){
+            $text .= '<p>Los préstamos se emiten en hasta {DAY_MAX} días que es {DIFF_DAY} días más largo que la mayoría de las empresas</p>';
+        }
+        if($model->data['condiciones']['plazo_max'] != 0){
+            $text .= '<p>Los préstamos se emiten en hasta {DAY_MAX} días que es {DIFF_DAY} días más corto que la mayoría de las empresas</p>';
+        }
+        if($model->data['condiciones']['plazo_max'] != 0){
+            $text .= '<p>Los préstamos se emiten en hasta {DAY_MAX} días.</p>';
+        }
+
+//        {SUMM_MAX} && {DIFF_SUMM}
+        if($model->data['condiciones']['repeat_loan_max'] != 0){
+            $text .= '<p>El importe del préstamo puede llegar hasta {SUMM_MAX} pesos, que es {DIFF_SUMM} pesos menos que la mayoría de las empresas.</p>';
+        }
+        if($model->data['condiciones']['repeat_loan_max'] != 0){
+            $text .= '<p>El importe del préstamo puede llegar hasta {SUMM_MAX} pesos, que es {DIFF_SUMM} pesos más que la mayoría de las empresas</p>';
+        }
+        if($model->data['condiciones']['repeat_loan_max'] != 0){
+            $text .= '<p>El importe del préstamo puede llegar hasta {SUMM_MAX} pesos.</p>';
+        }
+//        {PROCENT} && {DIFF_PROCENT}
+        if($model->data['condiciones']['rate_first'] != 0){
+            $text .= '<p>El tipo de interés medio por préstamo es del {PROCENT}%, que es {DIFF_PROCENT}% menos que la media del mercado</p>';
+        }
+        if($model->data['condiciones']['rate_first'] != 0){
+            $text .= '<p>El tipo de interés medio por préstamo es del {PROCENT}%, que es {DIFF_PROCENT} % más que la media del mercado</p>';
+        }
+        if($model->data['condiciones']['rate_first'] != 0){
+            $text .= '<p>El tipo de interés medio por préstamo es del {PROCENT}%.</p>';
+        }
+
+        //        {CUENTA_MINUTOS} && {DIFF_MINUTOS}
+        if($model->data['condiciones']['decision_time'] != 0){
+            $text .= '<p>La empresa se compromete a tomar una decisión de desembolso en {CUENTA_MINUTOS} minutos, que es {DIFF_MINUTOS} minutos menos que la media</p>';
+        }
+        if($model->data['condiciones']['decision_time'] != 0){
+            $text .= '<p>La empresa se compromete a tomar una decisión de desembolso en {CUENTA_MINUTOS} minutos, que es {DIFF_MINUTOS} minutos más que la media.</p>';
+        }
+        if($model->data['condiciones']['decision_time'] != 0){
+            $text .= '<p>La empresa se compromete a tomar una decisión de desembolso en {CUENTA_MINUTOS} minutos.</p>';
+        }
+
+//        {CRED_HISTORY}
+        if($model->data['requisitos']['have_credit_history'] == '+'){
+            $text .= '<p>Su historial de crédito no importará.</p>';
+        }
+        if($model->data['requisitos']['have_credit_history'] == '-'){
+            $text .= '<p>Su historial de crédito puede sí importar.</p>';
+        }
+
+//        {AGE_MIN} {AGE_SIMILAR}
+        if($model->data['requisitos']['older_than'] != 0){
+            $text .= '<p>La edad del cliente puede ser a partir de {AGE_MIN} años, estas condiciones sólo las ofrecen las empresas {AGE_SIMILAR}.</p>';
+        }
+        if($model->data['requisitos']['older_than'] != 0){
+            $text .= '<p>La edad del cliente puede ser a partir de {AGE_MIN} años. Es de las mejores condiciones en el mercado.</p>';
+        }
+
+//        {LUGAR}
+        $text .= '<h2 class="tabs-content-info__title title"  style="margin-bottom: 20px;margin-top: 20px">Rating Analysis</h2>
+                    <p>{NOMBRE_EMPRESA} ocupa el {LUGAR} lugar en el ranking de Fíngenios, siendo los clientes los que más mencionan 
+                        (Interés & Costes OR Condiciones OR Atención al cliente OR Funcionalidad)</p>';
+
+        if($reviewsCount != 0){
+            $text .= '<p>Los visitantes de Fíngenios han escrito {COMENTARIOS_SUMM} comentarios sobre {NOMBRE_EMPRESA}, lo que 
+            la sitúa en {COMENTARIOS_SUMM_CALIFICACIÓN} en el ranking de discusión de Fíngenios.</p>';
+        }
+
+        if($social['google'] || $social['financer'] || $social['facebook']){
+            $text .= '<p>Valoración de la empresa {NOMBRE_EMPRESA} en otros sitios web:</p><ul>';
+            if($social['google']){
+                $text .= '<li>Google: {GOOGLE_CALIFICACIÓN}</li>';
+            }
+            if($social['financer']){
+                $text .= '<li>Financer: {FINANCER_CALIFICACIÓN}</li>';
+            }
+            if($social['facebook']){
+                $text .= '<li>Facebook: {FACEBOOK_CALIFICACIÓN}</li>';
+            }
+            $text .= '</ul>';
+        }
+
+        if($social['android'] == '+' && $social['ios']  == '+'){
+            $text .= '<p>{NOMBRE_EMPRESA} Existe una aplicación para Android e iOS.</p>';
+        }
+
+        if($social['android'] == '+' && $social['ios']  == '-'){
+            $text .= '<p>{NOMBRE_EMPRESA} Existe una aplicación para Android.</p>';
+        }
+
+        if($social['android'] == '-' && $social['ios']  == '+'){
+            $text .= '<p>{NOMBRE_EMPRESA} Existe una aplicación para iOS.</p>';
+        }
+
+        if($social['android'] == '+' && $social['android_count']  != '-' && $social['android_rating']  != '-'){
+            $text .= '<p>La aplicación para Android se ha descargado más de {Android_APP_DOWNLOAD_COUNT} veces y la 
+            puntuación media en Google Play Market es de {Android_APP_RATING_COUNT}.</p>';
+        }
+
+        if($social['android'] == '+' && $social['android_count']  != '-' && $social['android_rating']  == '-'){
+            $text .= '<p>La aplicación para Android se ha descargado más de {Android_APP_DOWNLOAD_COUNT} veces.</p>';
+        }
+
+        if($social['android'] == '+' && $social['android_count']  == '-' && $social['android_rating']  != '-'){
+            $text .= '<p>La puntuación media en Google Play Market es de {Android_APP_RATING_COUNT}.</p>';
+        }
+
+        if($social['ios'] == '+' && $social['ios_count']  != '-' && $social['ios_rating']  != '-'){
+            $text .= '<p>La aplicación para iOS se ha descargado más de {IOs_APP_DOWNLOAD_COUNT} veces y la puntuación media en la 
+AppStore de Apple es de {IOs_APP_RATING_COUNT}.</p>';
+        }
+
+        if($social['ios'] == '+' && $social['ios_count']  != '-' && $social['ios_rating']  == '-'){
+            $text .= '<p>La aplicación para iOS se ha descargado más de {IOs_APP_DOWNLOAD_COUNT} veces.</p>';
+        }
+
+        if($social['ios'] == '+' && $social['ios_count']  == '-' && $social['ios_rating']  != '-'){
+            $text .= '<p>La puntuación media en la AppStore de Apple es de {IOs_APP_RATING_COUNT}.</p>';
+        }
+
+
+
+
+        return $text;
+    }
+
+    public static function getMinMaxValues($maxSum = false,$maxTerm = false,$minSum = false,$minTerm = false)
+    {
+        if($maxSum){
+            return self::find()->max('sum');
+        }
+        if($maxTerm){
+            return self::find()->max('term');
+        }
+        if($minSum){
+            return self::find()->min('min_sum');
+        }
+        if($minTerm){
+            return self::find()->min('min_term');
+        }
+        return null;
+    }
+
+    /**
+     * @throws HttpException
+     */
+    public static function getFaqUpdate()
+    {
+        $service = self::getResponseSheet();
+        $spreadsheetId = Yii::$app->params['mfoFaq'];
+        $response = $service->spreadsheets->get($spreadsheetId);
+
+        if (!$response) {
+            throw new HttpException(500, 'Что-то пошло не так.');
+        }
+
+        $response = $service->spreadsheets_values->get($spreadsheetId, 'Preguntas Frecuentes');
+        Faq::deleteAll();
+        foreach ($response['values']  as $key => $value){
+            if($key == 0 || $key == 1 || $key == 2){
+                continue;
+            }
+            $model = new Faq();
+            $model->title = $value[1];
+            $model->text = $value[2];
+            $model->save();
+        }
+    }
+
+    public static function getSocial($url){
+        if($url == 'moneyman'){
+            return [
+              'google' => 2.2,
+              'financer' => 3.3,
+              'facebook' => null,
+              'android' =>'+',
+              'android_count' =>'1,000,000+',
+              'android_rating' => '-',
+              'ios' => '-',
+              'ios_count' => '-',
+              'ios_rating' => '-',
+              'utp' => 'primer préstamo en línea hasta $4,000 MXN ¡sin intreses!'
+            ];
+        }
+        if($url == 'credilike'){
+            return [
+                'google' => 4.5,
+                'financer' => 4.3,
+                'facebook' => null,
+                'android' =>'+',
+                'android_count' =>'500,000+',
+                'android_rating' => '-',
+                'ios' => '-',
+                'ios_count' => '-',
+                'ios_rating' => '-',
+                'utp' => 'como en el juego, sube de nivel para obtener mejores condiciones.'
+            ];
+        }
+        if($url == 'vivus'){
+            return [
+                'google' => 1.8,
+                'financer' => 3.7,
+                'facebook' => null,
+                'android' =>'+',
+                'android_count' =>'5,000+',
+                'android_rating' => '-',
+                'ios' => '-',
+                'ios_count' => '-',
+                'ios_rating' => '-',
+                'utp' => 'hasta $8.000 para clientes habituales.'
+            ];
+        }
+        if($url == 'lime'){
+            return [
+                'google' => 3.6,
+                'financer' => 3.9,
+                'facebook' => null,
+                'android' =>'-',
+                'android_count' =>'-',
+                'android_rating' => '-',
+                'ios' => '-',
+                'ios_count' => '-',
+                'ios_rating' => '-',
+                'utp' => 'proceso 100% en linea.'
+            ];
+        }
+        if($url == 'dineria'){
+            return [
+                'google' => 2.6,
+                'financer' => 2.8,
+                'facebook' => null,
+                'android' =>'-',
+                'android_count' =>'-',
+                'android_rating' => '-',
+                'ios' => '-',
+                'ios_count' => '-',
+                'ios_rating' => '-',
+                'utp' => 'hasta $10.000 en tu primer prestamo.'
+            ];
+        }
+        if($url == 'kueski'){
+            return [
+                'google' => 3.7,
+                'financer' => 4.1,
+                'facebook' => null,
+                'android' =>'+',
+                'android_count' =>'100 000+',
+                'android_rating' => 4.5,
+                'ios' => '+',
+                'ios_count' => '-',
+                'ios_rating' => 3.3,
+                'utp' => 'tu primer prestamo de hasta $2000.'
+            ];
+        }
+        if($url == 'lendon'){
+            return [
+                'google' => 1.7,
+                'financer' => 4.0,
+                'facebook' => null,
+                'android' =>'+',
+                'android_count' =>'1,000,000+',
+                'android_rating' => '-',
+                'ios' => '-',
+                'ios_count' => '-',
+                'ios_rating' => '-',
+                'utp' => 'promociones frecuentes con descuentos en los préstamos.'
+            ];
+        }
+
+        return null;
     }
 }

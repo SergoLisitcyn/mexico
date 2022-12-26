@@ -13,11 +13,12 @@
                             <div class="range__inputs">
                                 <div class="range__result result-1">
                                     <div class="range__result-input">
-                                        <input aria-invalid="false" type="text" slot="amount" aria-labelledby="input-amount-slider" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense" value="50" name="rs_sum_output" id="rs_sum_output">
+                                        <input aria-invalid="false" type="text" slot="amount" aria-labelledby="input-amount-slider" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+                                               value="1000" name="rs_sum_output" id="rs_sum_output">
                                     </div>
                                     <span class="range__result-span">$</span>
                                 </div>
-                                <input id="rs_sum" type="range" name="rs_sum" min="0" max="100" value="50" step="5" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
+                                <input id="rs_sum" type="range" name="rs_sum" min="<?= $sumMin ?>" max="<?= $sum ?>" value="1000" step="100" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
                             </div>
                         </div>
                     </div>
@@ -33,7 +34,7 @@
                                     </div>
                                     <span class="range__result-span">días</span>
                                 </div>
-                                <input id="rs_term" type="range" name="rs_term" min="0" max="100" value="5" step="5" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
+                                <input id="rs_term" type="range" name="rs_term" min="<?= $termMin ?>" max="<?= $term ?>" value="30" step="1" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
                             </div>
                         </div>
                     </div>

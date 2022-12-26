@@ -3,6 +3,7 @@
 namespace frontend\widgets;
 
 use common\models\BlockManagement;
+use common\models\Faq;
 use common\models\FooterText;
 use common\models\MainAbout;
 use common\models\MainContact;
@@ -31,6 +32,14 @@ class MainPageWidget extends Widget
 
     public function run()
     {
+        if($this->type == 'calculator'){
+            return $this->render('main-page/'.$this->type,[
+                'term' => Mfo::getMinMaxValues(false,true),
+                'sum' => Mfo::getMinMaxValues(true),
+                'sumMin' => Mfo::getMinMaxValues(false,false,true),
+                'termMin' => Mfo::getMinMaxValues(false,false,false,true),
+            ]);
+        }
         if($this->type == 'solicita-calculator'){
             return $this->render('main-page/'.$this->type,[
                 'term' => $this->term,
@@ -142,6 +151,11 @@ class MainPageWidget extends Widget
             $data = Mfo::getTopRatingMfo();
             return $this->render('main-page/'.$this->type,[
                 'mfo' => $data
+            ]);
+        }
+        if($this->type == 'faq'){
+            return $this->render('main-page/'.$this->type,[
+                'data' => Faq::find()->all()
             ]);
         }
         return $this->render('main-page/'.$this->type,[

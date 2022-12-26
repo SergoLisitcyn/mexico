@@ -31,6 +31,14 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+    <?= Html::a('Обновить FAQ', ['mfo/faq'], [
+        'class' => 'btn btn-warning',
+        'data' => [
+            'confirm' => 'Вы точно хотите запустить обновление?',
+            'method' => 'post',
+        ],
+    ]) ?>
+
 
     <?= \kartik\grid\GridView::widget([
         'dataProvider' => $dataProvider,

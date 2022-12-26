@@ -79,8 +79,6 @@ AppAsset::register($this);
                                         <span>condusef.gob.mx</span>
                                     </a>
                                 </li>
-                            </ul>
-                            <ul class="footer__list">
                                 <li class="footer__item">
                                     <a href="https://www.buro.gob.mx/" target="_blank" class="footer__item-link"  rel="nofollow">
                                         <img src="/img/buro.svg" alt="Buro" class="footer__item-logo">
@@ -121,8 +119,6 @@ AppAsset::register($this);
                                         <span>condusef.gob.mx</span>
                                     </a>
                                 </li>
-                            </ul>
-                            <ul class="footer__list">
                                 <li class="footer__item">
                                     <a href="https://www.buro.gob.mx/" target="_blank" class="footer__item-link"  rel="nofollow">
                                         <img src="/img/buro.svg" alt="Buro" class="footer__item-logo">

@@ -187,4 +187,14 @@ class MfoController extends Controller
             'data' => $data,
         ]);
     }
+
+    /**
+     * @throws HttpException
+     */
+    public function actionFaq()
+    {
+        Mfo::getFaqUpdate();
+        return $this->render('faq', [
+        ]);
+    }
 }

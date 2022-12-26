@@ -75,7 +75,7 @@ class MfoController extends Controller
 
         $mfo = Mfo::find()->where(['url' => $url])->one();
         $formatSum = intval($mfo->data['condiciones']['for_calculator']);
-        $procent = intval($mfo->data['condiciones']['rate_first']);
+        $procent = $mfo->data['condiciones']['rate_first'];
         $term = intval($mfo->data['condiciones']['plazo_max']);
         $total = $formatSum + $formatSum * ($procent/100) * $term;
         if(!$mfo){
