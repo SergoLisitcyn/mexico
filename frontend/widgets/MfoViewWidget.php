@@ -15,6 +15,8 @@ class MfoViewWidget extends Widget
     public $model;
     public $reviewsModel;
     public $action;
+    public $procent = 0;
+    public $total = 0;
 
     public function init()
     {
@@ -79,6 +81,8 @@ class MfoViewWidget extends Widget
             'mfoText' => $mfoText->text_mfo['text'],
             'mfoRandoms' => $mfoRandoms,
             'mfoRating' => $mfoRating,
+            'procent' => $this->procent,
+            'total' => $this->total,
         ]);
     }
 }

@@ -296,6 +296,18 @@ class Mfo extends ActiveRecord
                         $mfo->min_sum = $datum['condiciones']['first_loan_min'];
                         $mfo->term = $datum['condiciones']['plazo_max'];
                         $mfo->min_term = $datum['condiciones']['plazo_min'];
+                        $procent = 0;
+                        if($datum['condiciones']['rate_first'] != '-'){
+                            $procent = (float)str_replace(',', '.', $datum['condiciones']['rate_first']);
+                        }
+                        $mfo->percent = $procent;
+                        $mfo->decision = $datum['condiciones']['decision_time'];
+
+                        $old = 0;
+                        if($datum['requisitos']['older_than'] != '-'){
+                            $old = $datum['requisitos']['older_than'];
+                        }
+                        $mfo->old = $old;
                         $mfo->save();
                         $countUpdate++;
                     } else {
@@ -309,6 +321,18 @@ class Mfo extends ActiveRecord
                         $model->min_sum = $datum['condiciones']['first_loan_min'];
                         $model->term = $datum['condiciones']['plazo_max'];
                         $model->min_term = $datum['condiciones']['plazo_min'];
+                        $procent = 0;
+                        if($datum['requisitos']['rate_first'] != '-'){
+                            $procent = (float)str_replace(',', '.', $datum['condiciones']['rate_first']);
+                        }
+                        $model->percent = $procent;
+                        $model->decision = $datum['condiciones']['decision_time'];
+
+                        $old = 0;
+                        if($datum['requisitos']['older_than'] != '-'){
+                            $old = $datum['requisitos']['older_than'];
+                        }
+                        $model->old = $old;
                         $model->save();
                         $countSave++;
                     }
@@ -725,14 +749,23 @@ class Mfo extends ActiveRecord
 
     public static function getAnalysistText($model)
     {
-         $text = self::getAnalysistTextStr($model);
-         $reviewsCount = Reviews::find()->where(['mfo_id' => $model->id, 'status' => 1])->count();
-         $social = self::getSocial($model->url);
+        $text = self::getAnalysistTextStr($model);
+        $reviewsCount = Reviews::find()->where(['mfo_id' => $model->id, 'status' => 1])->count();
+        $social = self::getSocial($model->url);
         $mfo = self::find()->where(['status' => 1])->orderBy(['rating' => SORT_DESC])->all();
-        $place = 1;
+        $sumMax = self::getSum($model,true);
+        $dayMax = self::getSum($model,false,true);
+        $dayPercent = self::getSum($model,false,false,true);
+        $sumDecision = self::getSum($model,false,false,false,true);
+        $place = self::getPlaceForReviews($model->id);
+        $mfoOlderThan = self::find()->where(['status' => 1])->andWhere(['old' => $model->data['requisitos']['older_than']])->count();
+        if ($mfoOlderThan == 1){
+            $mfoOlderThan = 0;
+        }
+        $placeLugar = 1;
         foreach ($mfo as $key => $item){
             if($item['url'] == $model->url){
-                $place = $key+1;
+                $placeLugar = $key+1;
             }
         }
          $templates = [
@@ -754,7 +787,13 @@ class Mfo extends ActiveRecord
              'IOs_APP_DOWNLOAD_COUNT' => $social['ios_count'],
              'IOs_APP_RATING_COUNT' => $social['ios_rating'],
              'UTP' => $social['utp'],
-             'LUGAR' => $place,
+             'LUGAR' => $placeLugar,
+             'DIFF_SUMM' => $sumMax['diffSum'],
+             'DIFF_DAY' => abs($dayMax['diffDay']),
+             'DIFF_PROCENT' => $dayPercent['diffPercent'],
+             'DIFF_MINUTOS' => abs($sumDecision['diffDecision']),
+             'AGE_SIMILAR' => $mfoOlderThan,
+             'COMENTARIOS_SUMM_CALIFICACIÓN' => $place,
          ];
         if (!empty($templates)) {
             foreach ($templates as $k => $v) {
@@ -769,87 +808,97 @@ class Mfo extends ActiveRecord
     {
         $reviewsCount = Reviews::find()->where(['mfo_id' => $model->id, 'status' => 1])->count();
         $social = self::getSocial($model->url);
-
+        $sumMax = self::getSum($model,true);
+        $dayMax = self::getSum($model,false,true);
+        $dayPercent = self::getSum($model,false,false,true);
+        $sumDecision = self::getSum($model,false,false,false,true);
+        $mfoOlderThan = self::find()->where(['status' => 1])->andWhere(['old' => $model->data['requisitos']['older_than']])->count();
+        if ($mfoOlderThan == 1){
+            $mfoOlderThan = 0;
+        }
+        $place = self::getPlaceForReviews($model->id);
         $text = '<div class="tabs-content__info tabs-content-info">
-                <h2 class="tabs-content-info__title title"  style="margin-bottom: 20px;margin-top: 20px">Company Analysis</h2>
-                <p>La empresa {NOMBRE_EMPRESA} lleva más de {ANO} año(s) operando en México.</p>';
+                <h2 class="tabs-content-info__title title"  style="margin-top: 20px">Company Analysis</h2>
+                <p>La empresa {NOMBRE_EMPRESA} lleva más de {ANO} año(s) operando en México.';
 
         if($model->data['mother_company']['mother_company'] != 'Una empresa 100% mexicana' && $model->data['mother_company']['pais'] != '-'){
-            $text .= '<p>Propiedad de la empresa matriz/grupo financiero internacional {NOMBRE_EMPRESA_MATRIZ} de {NOMBRE_PAIS}</p>';
+            $text .= ' Propiedad de la empresa matriz/grupo financiero internacional {NOMBRE_EMPRESA_MATRIZ} de {NOMBRE_PAIS}.';
         }
         if($model->data['mother_company']['mother_company'] == 'Una empresa 100% mexicana'){
-            $text .= '<p>Una empresa 100% mexicana.</p>';
+            $text .= ' Una empresa 100% mexicana.';
         }
-        $text .= '<p>Una característica especial de la empresa es {UTP}</p>
-                  <h2 class="tabs-content-info__title title"  style="margin-bottom: 20px;margin-top: 20px">Loan Analysis</h2>';
+        $text .= ' Una característica especial de la empresa es {UTP}</p>
+                  <h2 class="tabs-content-info__title title"  style="margin-top: 20px">Loan Analysis</h2><p>';
 
         // {DAY_MAX} && {DIFF_DAY}
-        if($model->data['condiciones']['plazo_max'] != 0){
-            $text .= '<p>Los préstamos se emiten en hasta {DAY_MAX} días que es {DIFF_DAY} días más largo que la mayoría de las empresas</p>';
+        if($model->data['condiciones']['plazo_max'] != 0 && $dayMax['diffDay'] > 0){
+            $text .= 'Los préstamos se emiten en hasta {DAY_MAX} días que es {DIFF_DAY} días más largo que la mayoría de las empresas. ';
         }
-        if($model->data['condiciones']['plazo_max'] != 0){
-            $text .= '<p>Los préstamos se emiten en hasta {DAY_MAX} días que es {DIFF_DAY} días más corto que la mayoría de las empresas</p>';
+        if($model->data['condiciones']['plazo_max'] != 0 && $dayMax['diffDay'] < 0){
+            $text .= 'Los préstamos se emiten en hasta {DAY_MAX} días que es {DIFF_DAY} días más corto que la mayoría de las empresas. ';
         }
-        if($model->data['condiciones']['plazo_max'] != 0){
-            $text .= '<p>Los préstamos se emiten en hasta {DAY_MAX} días.</p>';
+        if($model->data['condiciones']['plazo_max'] != 0 && $dayMax['diffDay'] == 0){
+            $text .= 'Los préstamos se emiten en hasta {DAY_MAX} días. ';
         }
 
 //        {SUMM_MAX} && {DIFF_SUMM}
-        if($model->data['condiciones']['repeat_loan_max'] != 0){
-            $text .= '<p>El importe del préstamo puede llegar hasta {SUMM_MAX} pesos, que es {DIFF_SUMM} pesos menos que la mayoría de las empresas.</p>';
+
+        if($model->data['condiciones']['repeat_loan_max'] != 0 && $sumMax['diffSum'] > 0){
+            $text .= 'El importe del préstamo puede llegar hasta {SUMM_MAX} pesos, que es {DIFF_SUMM} pesos menos que la mayoría de las empresas. ';
         }
-        if($model->data['condiciones']['repeat_loan_max'] != 0){
-            $text .= '<p>El importe del préstamo puede llegar hasta {SUMM_MAX} pesos, que es {DIFF_SUMM} pesos más que la mayoría de las empresas</p>';
+        if($model->data['condiciones']['repeat_loan_max'] != 0  && $sumMax['diffSum'] < 0){
+            $text .= 'El importe del préstamo puede llegar hasta {SUMM_MAX} pesos, que es {DIFF_SUMM} pesos más que la mayoría de las empresas. ';
         }
-        if($model->data['condiciones']['repeat_loan_max'] != 0){
-            $text .= '<p>El importe del préstamo puede llegar hasta {SUMM_MAX} pesos.</p>';
+        if($model->data['condiciones']['repeat_loan_max'] != 0 && $sumMax['diffSum'] == 0){
+            $text .= 'El importe del préstamo puede llegar hasta {SUMM_MAX} pesos. ';
         }
+
 //        {PROCENT} && {DIFF_PROCENT}
-        if($model->data['condiciones']['rate_first'] != 0){
-            $text .= '<p>El tipo de interés medio por préstamo es del {PROCENT}%, que es {DIFF_PROCENT}% menos que la media del mercado</p>';
+        if($model->data['condiciones']['rate_first'] != 0  && $dayPercent['diffPercent'] > 0){
+            $text .= 'El tipo de interés medio por préstamo es del {PROCENT}%, que es {DIFF_PROCENT}% menos que la media del mercado. ';
         }
-        if($model->data['condiciones']['rate_first'] != 0){
-            $text .= '<p>El tipo de interés medio por préstamo es del {PROCENT}%, que es {DIFF_PROCENT} % más que la media del mercado</p>';
+        if($model->data['condiciones']['rate_first'] != 0  && $dayPercent['diffPercent'] < 0){
+            $text .= 'El tipo de interés medio por préstamo es del {PROCENT}%, que es {DIFF_PROCENT} % más que la media del mercado. ';
         }
-        if($model->data['condiciones']['rate_first'] != 0){
-            $text .= '<p>El tipo de interés medio por préstamo es del {PROCENT}%.</p>';
+        if($model->data['condiciones']['rate_first'] != 0 && $dayPercent['diffPercent'] == 0){
+            $text .= 'El tipo de interés medio por préstamo es del {PROCENT}%. ';
         }
 
         //        {CUENTA_MINUTOS} && {DIFF_MINUTOS}
-        if($model->data['condiciones']['decision_time'] != 0){
-            $text .= '<p>La empresa se compromete a tomar una decisión de desembolso en {CUENTA_MINUTOS} minutos, que es {DIFF_MINUTOS} minutos menos que la media</p>';
+        if($model->data['condiciones']['decision_time'] != 0  && $sumDecision['diffDecision'] > 0){
+            $text .= 'La empresa se compromete a tomar una decisión de desembolso en {CUENTA_MINUTOS} minutos, que es {DIFF_MINUTOS} minutos menos que la media. ';
         }
-        if($model->data['condiciones']['decision_time'] != 0){
-            $text .= '<p>La empresa se compromete a tomar una decisión de desembolso en {CUENTA_MINUTOS} minutos, que es {DIFF_MINUTOS} minutos más que la media.</p>';
+        if($model->data['condiciones']['decision_time'] != 0  && $sumDecision['diffDecision'] < 0){
+            $text .= 'La empresa se compromete a tomar una decisión de desembolso en {CUENTA_MINUTOS} minutos, que es {DIFF_MINUTOS} minutos más que la media. ';
         }
-        if($model->data['condiciones']['decision_time'] != 0){
-            $text .= '<p>La empresa se compromete a tomar una decisión de desembolso en {CUENTA_MINUTOS} minutos.</p>';
+        if($model->data['condiciones']['decision_time'] != 0 && $sumDecision['diffDecision'] == 0){
+            $text .= 'La empresa se compromete a tomar una decisión de desembolso en {CUENTA_MINUTOS} minutos. ';
         }
 
 //        {CRED_HISTORY}
         if($model->data['requisitos']['have_credit_history'] == '+'){
-            $text .= '<p>Su historial de crédito no importará.</p>';
+            $text .= 'Su historial de crédito no importará. ';
         }
         if($model->data['requisitos']['have_credit_history'] == '-'){
-            $text .= '<p>Su historial de crédito puede sí importar.</p>';
+            $text .= 'Su historial de crédito puede sí importar. ';
         }
 
 //        {AGE_MIN} {AGE_SIMILAR}
-        if($model->data['requisitos']['older_than'] != 0){
-            $text .= '<p>La edad del cliente puede ser a partir de {AGE_MIN} años, estas condiciones sólo las ofrecen las empresas {AGE_SIMILAR}.</p>';
+        if($model->data['requisitos']['older_than'] != 0 && $mfoOlderThan > 0){
+            $text .= 'La edad del cliente puede ser a partir de {AGE_MIN} años, estas condiciones sólo las ofrecen las empresas {AGE_SIMILAR}. ';
         }
-        if($model->data['requisitos']['older_than'] != 0){
-            $text .= '<p>La edad del cliente puede ser a partir de {AGE_MIN} años. Es de las mejores condiciones en el mercado.</p>';
+        if($model->data['requisitos']['older_than'] != 0  && $mfoOlderThan == 0){
+            $text .= 'La edad del cliente puede ser a partir de {AGE_MIN} años. Es de las mejores condiciones en el mercado.';
         }
 
 //        {LUGAR}
-        $text .= '<h2 class="tabs-content-info__title title"  style="margin-bottom: 20px;margin-top: 20px">Rating Analysis</h2>
+        $text .= '</p><h2 class="tabs-content-info__title title"  style="margin-top: 20px">Rating Analysis</h2>
                     <p>{NOMBRE_EMPRESA} ocupa el {LUGAR} lugar en el ranking de Fíngenios, siendo los clientes los que más mencionan 
-                        (Interés & Costes OR Condiciones OR Atención al cliente OR Funcionalidad)</p>';
+                        (Interés & Costes OR Condiciones OR Atención al cliente OR Funcionalidad). ';
 
         if($reviewsCount != 0){
-            $text .= '<p>Los visitantes de Fíngenios han escrito {COMENTARIOS_SUMM} comentarios sobre {NOMBRE_EMPRESA}, lo que 
-            la sitúa en {COMENTARIOS_SUMM_CALIFICACIÓN} en el ranking de discusión de Fíngenios.</p>';
+            $text .= 'Los visitantes de Fíngenios han escrito {COMENTARIOS_SUMM} comentarios sobre {NOMBRE_EMPRESA}, lo que 
+            la sitúa en {COMENTARIOS_SUMM_CALIFICACIÓN} en el ranking de discusión de Fíngenios. ';
         }
 
         if($social['google'] || $social['financer'] || $social['facebook']){
@@ -865,49 +914,93 @@ class Mfo extends ActiveRecord
             }
             $text .= '</ul>';
         }
-
+        $text .= '<p>';
         if($social['android'] == '+' && $social['ios']  == '+'){
-            $text .= '<p>{NOMBRE_EMPRESA} Existe una aplicación para Android e iOS.</p>';
+            $text .= '{NOMBRE_EMPRESA} Existe una aplicación para Android e iOS. ';
         }
 
         if($social['android'] == '+' && $social['ios']  == '-'){
-            $text .= '<p>{NOMBRE_EMPRESA} Existe una aplicación para Android.</p>';
+            $text .= '{NOMBRE_EMPRESA} Existe una aplicación para Android. ';
         }
 
         if($social['android'] == '-' && $social['ios']  == '+'){
-            $text .= '<p>{NOMBRE_EMPRESA} Existe una aplicación para iOS.</p>';
+            $text .= '{NOMBRE_EMPRESA} Existe una aplicación para iOS. ';
         }
 
         if($social['android'] == '+' && $social['android_count']  != '-' && $social['android_rating']  != '-'){
-            $text .= '<p>La aplicación para Android se ha descargado más de {Android_APP_DOWNLOAD_COUNT} veces y la 
-            puntuación media en Google Play Market es de {Android_APP_RATING_COUNT}.</p>';
+            $text .= 'La aplicación para Android se ha descargado más de {Android_APP_DOWNLOAD_COUNT} veces y la 
+            puntuación media en Google Play Market es de {Android_APP_RATING_COUNT}. ';
         }
 
         if($social['android'] == '+' && $social['android_count']  != '-' && $social['android_rating']  == '-'){
-            $text .= '<p>La aplicación para Android se ha descargado más de {Android_APP_DOWNLOAD_COUNT} veces.</p>';
+            $text .= 'La aplicación para Android se ha descargado más de {Android_APP_DOWNLOAD_COUNT} veces. ';
         }
 
         if($social['android'] == '+' && $social['android_count']  == '-' && $social['android_rating']  != '-'){
-            $text .= '<p>La puntuación media en Google Play Market es de {Android_APP_RATING_COUNT}.</p>';
+            $text .= 'La puntuación media en Google Play Market es de {Android_APP_RATING_COUNT}. ';
         }
 
         if($social['ios'] == '+' && $social['ios_count']  != '-' && $social['ios_rating']  != '-'){
-            $text .= '<p>La aplicación para iOS se ha descargado más de {IOs_APP_DOWNLOAD_COUNT} veces y la puntuación media en la 
-AppStore de Apple es de {IOs_APP_RATING_COUNT}.</p>';
+            $text .= 'La aplicación para iOS se ha descargado más de {IOs_APP_DOWNLOAD_COUNT} veces y la puntuación media en la 
+AppStore de Apple es de {IOs_APP_RATING_COUNT}. ';
         }
 
         if($social['ios'] == '+' && $social['ios_count']  != '-' && $social['ios_rating']  == '-'){
-            $text .= '<p>La aplicación para iOS se ha descargado más de {IOs_APP_DOWNLOAD_COUNT} veces.</p>';
+            $text .= 'La aplicación para iOS se ha descargado más de {IOs_APP_DOWNLOAD_COUNT} veces. ';
         }
 
         if($social['ios'] == '+' && $social['ios_count']  == '-' && $social['ios_rating']  != '-'){
-            $text .= '<p>La puntuación media en la AppStore de Apple es de {IOs_APP_RATING_COUNT}.</p>';
+            $text .= 'La puntuación media en la AppStore de Apple es de {IOs_APP_RATING_COUNT}.';
         }
-
+        $text .= '</p>';
 
 
 
         return $text;
+    }
+
+    public static function getSum($mfo,$sumMax = false,$dayMax = false,$percentMax = false,$decisionMax = false)
+    {
+        $mfoCount = self::find()->where(['status' => 1])->count();
+        if($sumMax){
+            $maxSum = self::find()->sum('sum');
+            $averageValue = $maxSum / $mfoCount;
+            $diffSum = $mfo->data['condiciones']['repeat_loan_max'] - $averageValue;
+            return [
+                'averageValue' => number_format($averageValue, 2, '.', ' '),
+                'diffSum' => number_format($diffSum, 2, '.', ' '),
+            ];
+        }
+        if($dayMax){
+            $maxDay = self::find()->sum('term');
+            $averageValue = $maxDay / $mfoCount;
+            $diffDay = $mfo->data['condiciones']['plazo_max'] - $averageValue;
+            return [
+                'averageValue' => number_format($averageValue, 2, '.', ' '),
+                'diffDay' => ceil($diffDay),
+            ];
+        }
+        if($percentMax){
+            $maxPercent = self::find()->sum('percent');
+            $averageValue = $maxPercent / $mfoCount;
+            $procent = (float)str_replace(',', '.', $mfo->data['condiciones']['rate_first']);
+            $diff = $procent - $averageValue;
+            return [
+                'averageValue' => number_format($averageValue, 2, '.', ' '),
+                'diffPercent' => number_format($diff, 3, '.', ' '),
+            ];
+        }
+        if($decisionMax){
+            $maxDecision = self::find()->sum('decision');
+            $averageValue = $maxDecision / $mfoCount;
+            $diffDecision = $mfo->data['condiciones']['decision_time'] - $averageValue;
+            return [
+                'averageValue' => number_format($averageValue, 2, '.', ' '),
+                'diffDecision' => ceil($diffDecision),
+            ];
+        }
+
+        return null;
     }
 
     public static function getMinMaxValues($maxSum = false,$maxTerm = false,$minSum = false,$minTerm = false)
@@ -1054,5 +1147,22 @@ AppStore de Apple es de {IOs_APP_RATING_COUNT}.</p>';
         }
 
         return null;
+    }
+
+    public static function getPlaceForReviews($mfoId)
+    {
+        $place = Reviews::find()
+            ->select(['mfo_id as mfo','COUNT(id) as count'])
+            ->where(['status' => 1])
+            ->groupBy(['mfo'])
+            ->orderBy(['count' => SORT_DESC])
+            ->asArray()
+            ->all();
+        foreach ($place as $key => $value){
+            if($mfoId == $value['mfo']){
+                return $key+1;
+            }
+        }
+        return 0;
     }
 }

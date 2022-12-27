@@ -217,6 +217,23 @@
 .offer-dropdown__info-item:not(:last-child) {
     padding-top: 27px;
 }
+.range__result-input input {
+    width: 86px;
+}
+
+.analysist p{
+    font-size: 16px;
+    line-height: 19px;
+    color: #777;
+    padding: 10px 0;
+}
+
+.analysist li{
+    font-size: 16px;
+    line-height: 19px;
+    color: #777;
+    padding: 10px 0;
+}
 
 @media (max-width: 900px) {
     .offer-dropdown__connection-item:not(:last-child) {
@@ -228,5 +245,9 @@
 
     .offer-dropdown__info-item:last-child {
         padding-bottom: 0;
+    }
+    .range__result-input input {
+        font-size: 20px;
+        width: 60px;
     }
 }
