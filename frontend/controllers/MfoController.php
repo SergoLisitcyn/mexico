@@ -77,7 +77,11 @@ class MfoController extends Controller
         $formatSum = intval($mfo->data['condiciones']['for_calculator']);
         $procent = (float)str_replace(',', '.', $mfo->data['condiciones']['rate_first']);
         $term = intval($mfo->data['condiciones']['plazo_max']);
-        $total = $formatSum + $formatSum * ($procent/100) * $term;
+        $vat = 0.16;
+        $sum = $formatSum * ($procent/100) * $term;
+        $sumWithVat = $sum * $vat;
+        $totalSum = $sum + $sumWithVat;
+        $total = $formatSum + $totalSum;
         if(!$mfo){
             throw new HttpException(404, 'Страница не существует.');
         }
