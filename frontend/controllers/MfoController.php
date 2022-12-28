@@ -2,7 +2,6 @@
 
 namespace frontend\controllers;
 
-use common\models\MainSolicita;
 use common\models\Mfo;
 use common\models\Reviews;
 use Yii;
@@ -59,6 +58,10 @@ class MfoController extends Controller
             'mfos' => $mfo,
             'sum' => $sum,
             'term' => $term,
+            'termMax' => Mfo::getMinMaxValues(false,true),
+            'sumMax' => Mfo::getMinMaxValues(true),
+            'sumMin' => Mfo::getMinMaxValues(false,false,true),
+            'termMin' => Mfo::getMinMaxValues(false,false,false,true),
         ]);
     }
 
@@ -81,7 +84,8 @@ class MfoController extends Controller
         $sum = $formatSum * ($procent/100) * $term;
         $sumWithVat = $sum * $vat;
         $totalSum = $sum + $sumWithVat;
-        $total = $formatSum + $totalSum;
+        $totalFormat = $formatSum + $totalSum;
+        $total = number_format($totalFormat, 2, '.', ' ');
         if(!$mfo){
             throw new HttpException(404, 'Страница не существует.');
         }

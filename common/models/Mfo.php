@@ -759,6 +759,8 @@ class Mfo extends ActiveRecord
         $sumDecision = self::getSum($model,false,false,false,true);
         $place = self::getPlaceForReviews($model->id);
         $mfoOlderThan = self::find()->where(['status' => 1])->andWhere(['old' => $model->data['requisitos']['older_than']])->count();
+        $procent = (float)str_replace(',', '.', $model->data['condiciones']['rate_first']);
+        $diffSum = str_replace ('-','',$sumMax['diffSum']);
         if ($mfoOlderThan == 1){
             $mfoOlderThan = 0;
         }
@@ -769,13 +771,13 @@ class Mfo extends ActiveRecord
             }
         }
          $templates = [
-             'NOMBRE_EMPRESA' => $model->url,
+             'NOMBRE_EMPRESA' => $model->data['meta_tags']['h1'],
              'ANO' => $model->data['data_company']['year_foundation'],
              'NOMBRE_EMPRESA_MATRIZ' => $model->data['mother_company']['mother_company'],
              'NOMBRE_PAIS' => $model->data['mother_company']['pais'],
              'DAY_MAX' => $model->data['condiciones']['plazo_max'],
              'SUMM_MAX' => $model->data['condiciones']['repeat_loan_max'],
-             'PROCENT' => $model->data['condiciones']['rate_first'],
+             'PROCENT' => number_format($procent, 2, '.', ' '),
              'CUENTA_MINUTOS' => $model->data['condiciones']['decision_time'],
              'AGE_MIN' => $model->data['requisitos']['older_than'],
              'COMENTARIOS_SUMM' => $reviewsCount,
@@ -788,7 +790,7 @@ class Mfo extends ActiveRecord
              'IOs_APP_RATING_COUNT' => $social['ios_rating'],
              'UTP' => $social['utp'],
              'LUGAR' => $placeLugar,
-             'DIFF_SUMM' => $sumMax['diffSum'],
+             'DIFF_SUMM' => $diffSum,
              'DIFF_DAY' => abs($dayMax['diffDay']),
              'DIFF_PROCENT' => $dayPercent['diffPercent'],
              'DIFF_MINUTOS' => abs($sumDecision['diffDecision']),
@@ -817,13 +819,22 @@ class Mfo extends ActiveRecord
             $mfoOlderThan = 0;
         }
         $place = self::getPlaceForReviews($model->id);
+        $ratingMfo = [
+            "interes_costes" => $model->rating_auto['rating']['interes_costes'],
+            "condiciones" => $model->rating_auto['rating']['condiciones'],
+            "atencion" => $model->rating_auto['rating']['atencion'],
+            "funcionalidad" => $model->rating_auto['rating']['funcionalidad']
+        ];
+        $nuestra = array_search(max($ratingMfo),$ratingMfo);
+
         $text = '<div class="tabs-content__info tabs-content-info">
                 <h2 class="tabs-content-info__title title"  style="margin-top: 20px">Company Analysis</h2>
                 <p>La empresa {NOMBRE_EMPRESA} lleva más de {ANO} año(s) operando en México.';
 
         if($model->data['mother_company']['mother_company'] != 'Una empresa 100% mexicana' && $model->data['mother_company']['pais'] != '-'){
-            $text .= ' Propiedad de la empresa matriz/grupo financiero internacional {NOMBRE_EMPRESA_MATRIZ} de {NOMBRE_PAIS}.';
+            $text .= ' Propiedad de la grupo financiero internacional {NOMBRE_EMPRESA_MATRIZ} de {NOMBRE_PAIS}.';
         }
+
         if($model->data['mother_company']['mother_company'] == 'Una empresa 100% mexicana'){
             $text .= ' Una empresa 100% mexicana.';
         }
@@ -893,8 +904,20 @@ class Mfo extends ActiveRecord
 
 //        {LUGAR}
         $text .= '</p><h2 class="tabs-content-info__title title"  style="margin-top: 20px">Rating Analysis</h2>
-                    <p>{NOMBRE_EMPRESA} ocupa el {LUGAR} lugar en el ranking de Fíngenios, siendo los clientes los que más mencionan 
-                        (Interés & Costes OR Condiciones OR Atención al cliente OR Funcionalidad). ';
+                    <p>{NOMBRE_EMPRESA} ocupa el {LUGAR} lugar en el ranking de Finjenios. ';
+
+        if($nuestra == 'interes_costes'){
+            $text .= 'Siendo lo que más gusta a los clientes el interés y los costes. ';
+        }
+        if($nuestra == 'condiciones'){
+            $text .= 'La mayoría de los clientes mencionan las mejores condiciones de préstamo. ';
+        }
+        if($nuestra == 'atencion'){
+            $text .= 'Сon las mejores Atención al cliente. ';
+        }
+        if($nuestra == 'funcionalidad'){
+            $text .= 'Siendo los clientes los que más mencionan su buena funcionalidad. ';
+        }
 
         if($reviewsCount != 0){
             $text .= 'Los visitantes de Fíngenios han escrito {COMENTARIOS_SUMM} comentarios sobre {NOMBRE_EMPRESA}, lo que 
@@ -902,15 +925,15 @@ class Mfo extends ActiveRecord
         }
 
         if($social['google'] || $social['financer'] || $social['facebook']){
-            $text .= '<p>Valoración de la empresa {NOMBRE_EMPRESA} en otros sitios web:</p><ul>';
+            $text .= '<p>Valoración de la empresa {NOMBRE_EMPRESA} en otros sitios web:</p><ul class="mfo-list__list">';
             if($social['google']){
-                $text .= '<li>Google: {GOOGLE_CALIFICACIÓN}</li>';
+                $text .= '<li class="mfo-list__item">Google: {GOOGLE_CALIFICACIÓN}</li>';
             }
             if($social['financer']){
-                $text .= '<li>Financer: {FINANCER_CALIFICACIÓN}</li>';
+                $text .= '<li class="mfo-list__item">Financer: {FINANCER_CALIFICACIÓN}</li>';
             }
             if($social['facebook']){
-                $text .= '<li>Facebook: {FACEBOOK_CALIFICACIÓN}</li>';
+                $text .= '<li class="mfo-list__item">Facebook: {FACEBOOK_CALIFICACIÓN}</li>';
             }
             $text .= '</ul>';
         }
@@ -987,7 +1010,7 @@ AppStore de Apple es de {IOs_APP_RATING_COUNT}. ';
             $diff = $procent - $averageValue;
             return [
                 'averageValue' => number_format($averageValue, 2, '.', ' '),
-                'diffPercent' => number_format($diff, 3, '.', ' '),
+                'diffPercent' => number_format($diff, 2, '.', ' '),
             ];
         }
         if($decisionMax){

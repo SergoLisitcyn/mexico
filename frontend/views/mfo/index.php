@@ -41,7 +41,7 @@ $this->title = 'Empresas';
                                     </div>
                                     <span class="range__result-span">$</span>
                                 </div>
-                                <input id="rs_sum" type="range" name="rs_sum" min="0" max="100" value="<?= $sum ?>" step="5" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
+                                <input id="rs_sum" type="range" name="rs_sum" min="<?= $sumMin ?>" max="<?= $sumMax ?>" value="<?= $sum ?>" step="5" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
                             </div>
                         </div>
                     </div>
@@ -59,7 +59,7 @@ $this->title = 'Empresas';
                                     </div>
                                     <span class="range__result-span">días</span>
                                 </div>
-                                <input id="rs_term" type="range" name="rs_term" min="0" max="100" value="<?= $term ?>" step="5" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
+                                <input id="rs_term" type="range" name="rs_term" min="<?= $termMin ?>" max="<?= $termMax ?>" value="<?= $term ?>" step="1" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
                             </div>
                         </div>
                     </div>
@@ -119,7 +119,14 @@ $this->title = 'Empresas';
                 <section class="cards">
                     <?php foreach ($mfos as $mfo) :
                         $reviewsCount = Reviews::find()->where(['mfo_id' => $mfo->id, 'status' => 1])->count();
-                        $total = $sum + $sum * ($mfo->data['condiciones']['rate_first']/100) * $term;
+                        $formatSum = intval($mfo->data['condiciones']['for_calculator']);
+                        $procent = (float)str_replace(',', '.', $mfo->data['condiciones']['rate_first']);
+                        $term = intval($mfo->data['condiciones']['plazo_max']);
+                        $vat = 0.16;
+                        $sum = $formatSum * ($procent/100) * $term;
+                        $sumWithVat = $sum * $vat;
+                        $totalSum = $sum + $sumWithVat;
+                        $total = $formatSum + $totalSum;
                         $totalFormat = number_format($total, 2, '.', '');
                         ?>
                     <div class="offer change-text">
