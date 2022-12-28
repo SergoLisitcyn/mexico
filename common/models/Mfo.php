@@ -770,9 +770,15 @@ class Mfo extends ActiveRecord
                 $placeLugar = $key+1;
             }
         }
+        $diffDate = date('Y') - $model->data['data_company']['year_foundation'];
+        $diffDateAno = 'año';
+        if($diffDate > 1){
+            $diffDateAno = 'años';
+        }
+
          $templates = [
              'NOMBRE_EMPRESA' => $model->data['meta_tags']['h1'],
-             'ANO' => $model->data['data_company']['year_foundation'],
+             'ANO' => $diffDate.' '.$diffDateAno,
              'NOMBRE_EMPRESA_MATRIZ' => $model->data['mother_company']['mother_company'],
              'NOMBRE_PAIS' => $model->data['mother_company']['pais'],
              'DAY_MAX' => $model->data['condiciones']['plazo_max'],
@@ -827,9 +833,9 @@ class Mfo extends ActiveRecord
         ];
         $nuestra = array_search(max($ratingMfo),$ratingMfo);
 
-        $text = '<div class="tabs-content__info tabs-content-info">
+        $text = '<div class="company_analysis">
                 <h2 class="tabs-content-info__title title"  style="margin-top: 20px">Company Analysis</h2>
-                <p>La empresa {NOMBRE_EMPRESA} lleva más de {ANO} año(s) operando en México.';
+                <p>La empresa {NOMBRE_EMPRESA} lleva más de {ANO} operando en México.';
 
         if($model->data['mother_company']['mother_company'] != 'Una empresa 100% mexicana' && $model->data['mother_company']['pais'] != '-'){
             $text .= ' Propiedad de la grupo financiero internacional {NOMBRE_EMPRESA_MATRIZ} de {NOMBRE_PAIS}.';
@@ -975,7 +981,7 @@ AppStore de Apple es de {IOs_APP_RATING_COUNT}. ';
         if($social['ios'] == '+' && $social['ios_count']  == '-' && $social['ios_rating']  != '-'){
             $text .= 'La puntuación media en la AppStore de Apple es de {IOs_APP_RATING_COUNT}.';
         }
-        $text .= '</p>';
+        $text .= '</p></div>';
 
 
 
