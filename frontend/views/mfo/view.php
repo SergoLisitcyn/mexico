@@ -55,7 +55,7 @@ if(isset($model->data['meta_tags']['description']) && !empty($model->data['meta_
             <div class="content__row">
                 <section class="content__mfo-about mfo-about">
                     <!--  Características de la compañía -->
-                    <?= MfoViewWidget::widget(['type' => 'mfo_calculator','model' => $model,'procent' => $procent,'total' => $total]) ?>
+                    <?= MfoViewWidget::widget(['type' => 'mfo_calculator','model' => $model,'procent' => $procent,'total' => $total,'firstLoan' => $firstLoan]) ?>
                     <div class="mfo-about__list mfo-list">
                         <h2 class="mfo-list__title title">Visión general de Credito</h2>
                         <ul class="mfo-list__list">

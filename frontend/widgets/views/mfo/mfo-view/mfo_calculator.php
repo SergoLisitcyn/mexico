@@ -35,6 +35,7 @@
                         </div>
                         <input id="rs_term" type="range" name="rs_term" oninput="fun1()" min="<?= $model->min_term ?>" max="<?= $model->term ?>" value="<?= $model->term ?>" step="1" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
                         <input type="hidden" id="procent" name="procent" value="<?= $procent ?>" />
+                        <input type="hidden" id="first_loan" name="first_loan" value="<?= $firstLoan ?>" />
                     </div>
                 </div>
             </div>

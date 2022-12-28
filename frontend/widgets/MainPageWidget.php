@@ -44,6 +44,10 @@ class MainPageWidget extends Widget
             return $this->render('main-page/'.$this->type,[
                 'term' => $this->term,
                 'sum' => $this->sum,
+                'termMax' => Mfo::getMinMaxValues(false,true),
+                'sumMax' => Mfo::getMinMaxValues(true),
+                'sumMin' => Mfo::getMinMaxValues(false,false,true),
+                'termMin' => Mfo::getMinMaxValues(false,false,false,true),
             ]);
         }
 

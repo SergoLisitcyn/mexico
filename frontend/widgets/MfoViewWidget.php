@@ -17,6 +17,7 @@ class MfoViewWidget extends Widget
     public $action;
     public $procent = 0;
     public $total = 0;
+    public $firstLoan = 0;
 
     public function init()
     {
@@ -83,6 +84,7 @@ class MfoViewWidget extends Widget
             'mfoRating' => $mfoRating,
             'procent' => $this->procent,
             'total' => $this->total,
+            'firstLoan' => $this->firstLoan,
         ]);
     }
 }

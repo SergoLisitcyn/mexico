@@ -418,6 +418,7 @@ class Mfo extends ActiveRecord
         $data['initial_fee'] = $value[19]; // Первоначальный взнос
         $data['extension'] = $value[20]; // Продление
         $data['for_calculator'] = $value[21]; // Для калькулятора
+        $data['first_loan_zero_percent'] = $value[22]; // Первый займ под 0%
 
         return $data;
     }

@@ -119,12 +119,11 @@ $this->title = 'Empresas';
                 <section class="cards">
                     <?php foreach ($mfos as $mfo) :
                         $reviewsCount = Reviews::find()->where(['mfo_id' => $mfo->id, 'status' => 1])->count();
-                        $formatSum = intval($mfo->data['condiciones']['for_calculator']);
+                        $formatSum = intval($mfo->data['condiciones']['first_loan_max']);
                         $procent = (float)str_replace(',', '.', $mfo->data['condiciones']['rate_first']);
                         $term = intval($mfo->data['condiciones']['plazo_max']);
-                        $vat = 0.16;
                         $sum = $formatSum * ($procent/100) * $term;
-                        $sumWithVat = $sum * $vat;
+                        $sumWithVat = $sum * 0.16;
                         $totalSum = $sum + $sumWithVat;
                         $total = $formatSum + $totalSum;
                         $totalFormat = number_format($total, 2, '.', '');

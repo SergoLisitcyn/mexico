@@ -44,7 +44,13 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                             $sum = $mfo['params']['sum'];
                             $term = $mfo['params']['term'];
                         }
-                        $total = $sum + $sum * ($mfo['params']['data']['condiciones']['rate_first']/100) * $term;
+                        $procent = (float)str_replace(',', '.', $mfo['params']['data']['condiciones']['rate_first']);
+
+                        $sumAll = $sum * ($procent/100) * $term;
+                        $sumWithVat = $sumAll * 0.16;
+                        $totalSum = $sumAll + $sumWithVat;
+                        $total = $sum + $totalSum;
+
                         $totalFormat = number_format($total, 2, '.', '');
                         ?>
                         <div class="offer change-text">
