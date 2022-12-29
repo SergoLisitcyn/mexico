@@ -228,6 +228,20 @@
     padding: 10px 0;
 }
 
+.employees-slider,
+.about-us-slider {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s ease;
+}
+
+
+.about-us-slider.slick-initialized,
+.employees-slider.slick-initialized {
+    visibility: visible;
+    opacity: 1;
+}
+
 /*.analysist li{*/
 /*    font-size: 16px;*/
 /*    line-height: 19px;*/
@@ -249,5 +263,23 @@
     .range__result-input input {
         font-size: 20px;
         width: 60px;
+    }
+}
+
+.credit-items {
+    justify-content: space-between;
+}
+
+@media (max-width: 1000px){
+    .main-sect__items {
+        margin-top: 23px;
+        gap: 25px 5px; <-- добавить
+    }
+}
+
+
+@media (max-width: 335px){
+    .credit-items {
+        justify-content: center;
     }
 }

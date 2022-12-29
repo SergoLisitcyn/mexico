@@ -45,6 +45,7 @@ return [
             'showScriptName' => false,
             'rules' => [
                 '/' => '/site/index',
+                'signup' => '/site/signup',
 //                'empresas' => '/site/empresas',
                 'progress-value' => '/site/progress-value',
                 'review-information' => '/site/review-information',
