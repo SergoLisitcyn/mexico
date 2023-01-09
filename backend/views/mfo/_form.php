@@ -1,12 +1,12 @@
 <?php
 
 use kartik\file\FileInput;
-use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use vova07\imperavi\Widget;
 use \common\models\BlockRec;
+use \yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Mfo */
@@ -62,6 +62,7 @@ use \common\models\BlockRec;
             'lang' => 'ru',
             'minHeight' => 300,
             'formatting' => ['p', 'blockquote', 'h2', 'h1'],
+            'imageUpload' => Url::to(['/mfo/save-redactor-img','sub'=>'content']),
             'attributes' => [
                 [
                     'attribute' => 'text',
