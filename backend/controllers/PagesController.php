@@ -5,10 +5,16 @@ namespace backend\controllers;
 use common\models\Pages;
 use common\models\PagesSearch;
 use Yii;
+use yii\base\DynamicModel;
+use yii\base\Exception;
 use yii\filters\AccessControl;
+use yii\helpers\FileHelper;
+use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
+use yii\web\UploadedFile;
 
 /**
  * PagesController implements the CRUD actions for Pages model.
@@ -79,7 +85,7 @@ class PagesController extends Controller
     /**
      * Creates a new Pages model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
+     * @return string|Response
      */
     public function actionCreate()
     {
@@ -103,7 +109,7 @@ class PagesController extends Controller
      * Updates an existing Pages model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
-     * @return string|\yii\web\Response
+     * @return string|Response
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
@@ -124,7 +130,7 @@ class PagesController extends Controller
      * Deletes an existing Pages model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
-     * @return \yii\web\Response
+     * @return Response
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
@@ -148,5 +154,46 @@ class PagesController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * @throws Exception
+     * @throws BadRequestHttpException
+     */
+    public function actionSaveRedactorImg ($sub='main')
+    {
+        $this -> enableCsrfValidation = false;
+        if (Yii::$app->request->isPost) {
+            $dir = Yii::getAlias('@frontend/web') . '/uploads/images/pages' . $sub . '/';
+            if (!file_exists($dir)){
+                FileHelper::createDirectory($dir);
+            }
+
+            $result_link = Yii::$app->params['link'].'uploads/images/pages' . $sub . '/';
+            $file = UploadedFile::getInstanceByName('file');
+            $model = new DynamicModel (compact ('file'));
+            $model->addRule ('file', 'image')->validate();
+
+            if ($model ->hasErrors()) {
+                $result = [
+                    'error' => $model -> getFirstError ('file')
+                ];
+            } else {
+                $model->file->name = strtotime('now').'_'.Yii::$app->getSecurity()->generateRandomString(6) . '.' . $model->file->extension;
+
+                if ($model->file->saveAs ($dir . $model->file->name)) {
+                    $result = ['filelink' => $result_link . $model->file->name,'filename'=>$model->file->name];
+                } else {
+                    $result = [
+                        'error' => Yii::t ('vova07/imperavi', 'ERROR_CAN_NOT_UPLOAD_FILE')
+                    ];
+                }
+            }
+            Yii::$app->response->format = Response::FORMAT_JSON;
+
+            return $result;
+        } else {
+            throw new BadRequestHttpException ('Only Post is allowed');
+        }
     }
 }

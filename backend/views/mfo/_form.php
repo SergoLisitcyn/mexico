@@ -20,7 +20,14 @@ use \common\models\BlockRec;
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
+    <?php if($model && $model->url) :
+        $link = Yii::$app->params['link'].'entidad/'.$model->url;
+        ?>
+    <div style="margin-bottom: 20px">
+        <b>Link - <a href="<?= $link ?>" target="_blank"><?= $link ?></a> </b>
+    </div>
 
+    <?php endif; ?>
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'rating')->textInput(['maxlength' => true]) ?>

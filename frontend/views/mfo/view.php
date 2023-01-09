@@ -74,16 +74,16 @@ if(isset($model->data['meta_tags']['description']) && !empty($model->data['meta_
                         </ul>
                         <div class="tabs-content">
                             <div class="tabs-content__item" data-tab-content="1">
+                                <!--   Analysist -->
+                                <?= MfoViewWidget::widget(['type' => 'analysist','model' => $model]) ?>
                                 <div class="tabs-content__info tabs-content-info">
                                     <?php if($model->montos_title) :  ?>
-                                    <h2 class="tabs-content-info__title title"><?= $model->montos_title ?></h2>
+                                        <h2 class="tabs-content-info__title title"><?= $model->montos_title ?></h2>
                                     <?php endif; ?>
                                     <?php if($model->montos_title) :  ?>
                                         <?= $model->montos_text ?>
                                     <?php endif; ?>
                                 </div>
-                                <!--   Analysist -->
-                                <?= MfoViewWidget::widget(['type' => 'analysist','model' => $model]) ?>
                                 <!--   Offers -->
                                 <?= MfoViewWidget::widget(['type' => 'similar_offers','model' => $model]) ?>
 

@@ -24,7 +24,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => 'yii\grid\SerialColumn',
                 'options' => ['width' => '10'],
             ],
-            'name',
+            [
+                'class' => 'kartik\grid\EditableColumn',
+                'attribute' => 'name',
+                'hAlign' => 'center',
+                'filter' => false,
+                'value' => function($model){ return $model->name; },
+            ],
             [
                 'class' => 'kartik\grid\EditableColumn',
                 'attribute' => 'title',

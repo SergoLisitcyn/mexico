@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use vova07\imperavi\Widget;
-
+use \yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $model common\models\Pages */
 /* @var $form yii\widgets\ActiveForm */
@@ -22,6 +22,7 @@ use vova07\imperavi\Widget;
             'lang' => 'ru',
             'minHeight' => 300,
             'formatting' => ['p', 'blockquote', 'h2', 'h1'],
+            'imageUpload' => Url::to(['/pages/save-redactor-img','sub'=>'content']),
             'attributes' => [
                 [
                     'attribute' => 'text',
