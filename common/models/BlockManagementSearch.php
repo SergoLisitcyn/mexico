@@ -40,7 +40,7 @@ class BlockManagementSearch extends BlockManagement
      */
     public function search($params)
     {
-        $query = BlockManagement::find();
+        $query = BlockManagement::find()->where(['!=' ,'status', 2]);
 
         // add conditions that should always apply here
 

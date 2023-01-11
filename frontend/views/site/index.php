@@ -4,7 +4,7 @@
 
 use frontend\widgets\MainPageWidget;
 
-$this->title = 'My Yii Application';
+$this->title = '';
 ?>
 <section class="main__main-sect main-sect">
     <?php

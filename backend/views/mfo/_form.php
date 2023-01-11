@@ -71,7 +71,11 @@ use \yii\helpers\Url;
             ],
             'plugins' => [
                 'clips',
-                'fullscreen'
+                'fullscreen',
+                'imageupload',
+                'imagemanager',
+                'filemanager',
+                'fontcolor',
             ]
 
         ]
