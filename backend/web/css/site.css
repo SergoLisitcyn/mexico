@@ -443,4 +443,8 @@ a.desc:after {
     padding: 15px;
     margin-top: 10px;
 }
+
+.block-management-index .table-bordered>tbody>tr>td{
+    text-align: left;
+}
 /*Profile END*/
