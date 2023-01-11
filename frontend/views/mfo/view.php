@@ -76,7 +76,7 @@ if(isset($model->data['meta_tags']['description']) && !empty($model->data['meta_
                             <div class="tabs-content__item" data-tab-content="1">
                                 <!--   Analysist -->
                                 <?= MfoViewWidget::widget(['type' => 'analysist','model' => $model]) ?>
-                                <div class="tabs-content__info tabs-content-info">
+                                <div class="tabs-content__info tabs-content-info montos">
                                     <?php if($model->montos_title) :  ?>
                                         <h2 class="tabs-content-info__title title"><?= $model->montos_title ?></h2>
                                     <?php endif; ?>

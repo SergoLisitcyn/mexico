@@ -270,6 +270,45 @@
     justify-content: space-between;
 }
 
+.montos ul{
+    margin-top: 10px;
+}
+.montos li{
+    font-size: 16px;
+    line-height: 19px;
+    color: #777;
+    padding: 10px 10px 10px 37px;
+    position: relative;
+}
+
+.montos li::before {
+    position: absolute;
+    content: "";
+    top: 50%;
+    left: 0;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 23px;
+    height: 23px;
+    background-image: url(../img/checkbox.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 5px;
+}
+
+.montos p {
+    font-size: 16px;
+    line-height: 19px;
+    color: #777;
+    padding: 10px 0;
+}
+
+.montos h2{
+    text-align: left;
+    margin-top: 20px;
+}
+
 @media (max-width: 1000px){
     .main-sect__items {
         margin-top: 23px;
