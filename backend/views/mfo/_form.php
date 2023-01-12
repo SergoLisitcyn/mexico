@@ -15,8 +15,8 @@ use \yii\helpers\Url;
 
 <div>
 
-    <?php $form = ActiveForm::begin(); ?>
-
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data'],]); ?>
+    <input type="hidden" name="_csrf" value="<?=Yii::$app->request->getCsrfToken()?>" />
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
