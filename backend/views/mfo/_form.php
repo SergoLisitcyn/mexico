@@ -61,7 +61,7 @@ use \yii\helpers\Url;
         'settings' => [
             'lang' => 'ru',
             'minHeight' => 300,
-            'formatting' => ['p', 'blockquote', 'h2', 'h1'],
+            'formatting' => ['p', 'blockquote', 'h2', 'h1','h3'],
             'imageUpload' => Url::to(['/mfo/save-redactor-img','sub'=>'content']),
             'attributes' => [
                 [

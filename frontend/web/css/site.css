@@ -1,3 +1,6 @@
+img {
+    max-width: 100%;
+}
 .footer-list__link {
     text-decoration: underline !important;
     color: #fff !important;

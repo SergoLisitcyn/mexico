@@ -12,15 +12,15 @@ if(isset($model->data['meta_tags']['description']) && !empty($model->data['meta_
                 <li class="breadcrumbs__item">
                     <a href="/" class="breadcrumbs__link">Inicio</a>
                 </li>
-                <?php if(isset($model->data['meta_tags']['title']) && $model->data['meta_tags']['title'] != '-') : ?>
+                <?php if($model->name) : ?>
                 <li class="breadcrumbs__item">
-                    <?= $model->data['meta_tags']['title'] ?>
+                    <?= $model->name ?>
                 </li>
                 <?php endif; ?>
             </ul>
         </div>
-        <?php if(isset($model->data['meta_tags']['h1']) && $model->data['meta_tags']['title'] != '-') : ?>
-            <h1 class="main__title main-title"><?= $model->data['meta_tags']['title'] ?></h1>
+        <?php if($model->title) : ?>
+            <h1 class="main__title main-title"><?= $model->title ?></h1>
         <?php endif; ?>
         <div class="main__mfo-heading mfo-heading">
             <div class="mfo-heading__name">
