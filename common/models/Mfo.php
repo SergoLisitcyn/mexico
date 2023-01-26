@@ -169,7 +169,11 @@ class Mfo extends ActiveRecord
                     continue;
                 }
                 if($range == 'Condiciones de préstamos'){
+                    if(!isset($value[4])){
+                        continue;
+                    }
                     $data[$mfoKey]['condiciones'] = self::getCondiciones($value);
+
                     if($key == 3){
                         $dataText['text']['condiciones'] = self::getCondiciones($value);
                         continue;
@@ -254,6 +258,9 @@ class Mfo extends ActiveRecord
                 }
 
                 if($range == 'Meto'){
+                    if((isset($value[4]) && $value[4] != '+') || !isset($value[0]) || !isset($value[4])){
+                        continue;
+                    }
                     $data[$mfoKey]['meta_tags'] = self::getMetaTags($value);
                     if($key == 3){
                         $dataText['text']['meta_tags'] = self::getMetaTags($value);
