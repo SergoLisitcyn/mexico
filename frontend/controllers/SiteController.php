@@ -6,6 +6,7 @@ use common\models\BlockManagement;
 use common\models\MainInfo;
 use common\models\MainSolicita;
 use common\models\Mfo;
+use common\models\MfoText;
 use common\models\ReviewInformation;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
@@ -204,8 +205,11 @@ class SiteController extends Controller
             ];
         }
         ksort($data);
+        $mfoText = MfoText::find()->where(['name' => 'Text'])->one();
+
         return $this->render('solicita', [
             'mfos' => $data,
+            'mfoText' => $mfoText->text_mfo['text'],
             'text' => $text,
             'sum' => $sum,
             'term' => $term,

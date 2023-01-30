@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\Mfo;
+use common\models\MfoText;
 use common\models\Reviews;
 use Yii;
 use yii\web\Controller;
@@ -53,11 +54,13 @@ class MfoController extends Controller
             ->andWhere(['>=', 'sum', $sum])
             ->orderBy(['rating' => SORT_DESC])
             ->all();
+        $mfoText = MfoText::find()->where(['name' => 'Text'])->one();
 
         return $this->render('index', [
             'mfos' => $mfo,
             'sum' => $sum,
             'term' => $term,
+            'mfoText' => $mfoText->text_mfo['text'],
             'termMax' => Mfo::getMinMaxValues(false,true),
             'sumMax' => Mfo::getMinMaxValues(true),
             'sumMin' => Mfo::getMinMaxValues(false,false,true),

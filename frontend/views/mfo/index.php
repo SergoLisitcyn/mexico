@@ -306,7 +306,7 @@ $this->title = 'Empresas';
                                         <?php endif; ?>
                                         <?php if(isset($mfo->data['characteristic']['tiene_app']) && $mfo->data['characteristic']['tiene_app'] != '-') : ?>
                                         <li class="offer-dropdown__connection-item">
-                                            <p class="offer-dropdown__connection-text">Tiene app</p>
+                                            <p class="offer-dropdown__connection-text"><?= $mfoText['characteristic']['tiene_app'] ?></p>
                                             <img class="offer-dropdown__connection-image" src="/img/checkbox.svg" alt="checkbox">
                                         </li>
                                         <?php endif; ?>
