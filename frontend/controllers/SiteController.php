@@ -197,7 +197,7 @@ class SiteController extends Controller
 
         $data = [];
         foreach ($mfo as $key => $value){
-            if($value['data']['pages'][$url] == '-'){
+            if(!isset($value['data']['pages'][$url]) || $value['data']['pages'][$url] == '-'){
                 continue;
             }
             $data[$value['data']['pages'][$url]] = [

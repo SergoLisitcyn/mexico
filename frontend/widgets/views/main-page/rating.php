@@ -15,12 +15,14 @@ use yii\helpers\Url;
                         </a>
                     </div>
                     <div class="entities__repute repute">
+                        <?php if(isset($item['rating_auto']))  : ?>
                         <div class="repute__rating">
 <!--                            <img class="repute__rating-image" src="/img/stars.svg" alt="stars">-->
 <!--                            <div class="repute__rating-number">--><?php //= $item['rating'] ?><!--</div>-->
                             <div class="rating__stars_similar" style="width:<?= $item['rating_auto']['rating']['allRating_rate'] ?>%"></div>
                             <span class="offer-dropdown__repute-number"><?= $item['rating_auto']['rating']['allRating'] ?></span>
                         </div>
+                        <?php endif; ?>
                         <div class="repute__comments">
                             <?php if($item['reviews_count'] > 0) : ?>
                             Leer <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $item['url']]) ?>" class="repute__comments-link"><?= $item['reviews_count'] ?> comentarios</a>

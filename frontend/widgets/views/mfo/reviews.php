@@ -3,10 +3,14 @@
 use kartik\rating\StarRating;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
+$title = $model->name;
+if(isset($model->data['meta_tags']['h1'])){
+    $title = $model->data['meta_tags']['h1'];
+}
 ?>
 <div class="tabs-content__reviews reviews">
     <div class="reviews__poll background-set">
-        <h2 class="reviews__title title">Tu opinión <?= $model->data['meta_tags']['h1'] ?></h2>
+        <h2 class="reviews__title title">Tu opinión <?= $title ?></h2>
         <div class="rating-stars">
             <?php
             echo StarRating::widget([
@@ -41,7 +45,7 @@ use yii\helpers\Html;
             <span></span>
             <span></span>
         </div>
-        <h2 class="reviews__title title">Tu opinión <?= $model->data['meta_tags']['h1'] ?></h2>
+        <h2 class="reviews__title title">Tu opinión <?= $title ?></h2>
         <?php
         $form = ActiveForm::begin(
             [

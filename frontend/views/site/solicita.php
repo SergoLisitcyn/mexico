@@ -145,12 +145,14 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                                             </div>
                                         </div>
                                         <div class="offer__repute repute">
+                                            <?php if(isset($item['rating_auto']))  : ?>
                                             <div class="repute__rating">
 <!--                                                <img class="repute__rating-image" src="/img/stars.svg" alt="stars">-->
 <!--                                                <div class="repute__rating-number">4,4</div>-->
                                                 <div class="rating__stars_similar" style="width:<?= $mfo['params']['rating_auto']['rating']['allRating_rate'] ?>%"></div>
                                                 <span class="offer-dropdown__repute-number"><?= $mfo['params']['rating_auto']['rating']['allRating'] ?></span>
                                             </div>
+                                            <?php endif; ?>
                                             <div class="repute__comments">
                                                 <?php if($reviewsCount > 0) : ?>
                                                     Leer <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $mfo['params']['url']]) ?>" class="repute__comments-link"><?= $reviewsCount ?> comentarios</a>
@@ -169,11 +171,13 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                                         <ul class="offer-dropdown__repute-list">
                                             <li class="offer-dropdown__repute-item">
                                                 <div class="offer-dropdown__repute-title">Nuestra calificación</div>
+                                                <?php if(isset($item['rating_auto']))  : ?>
                                                 <div class="offer-dropdown__repute-rating">
 <!--                                                    <img class="offer-dropdown__repute-image" src="/img/stars.svg" alt="stars">-->
                                                     <div class="rating__stars_similar" style="width:<?= $mfo['params']['rating_auto']['rating']['allRating_rate'] ?>%"></div>
                                                     <span class="offer-dropdown__repute-number"><?= $mfo['params']['rating_auto']['rating']['allRating'] ?></span>
                                                 </div>
+                                                <?php endif; ?>
                                             </li>
                                             <li class="offer-dropdown__repute-item">
                                                 <p class="offer-dropdown__repute-text">Interés & Costes</p>

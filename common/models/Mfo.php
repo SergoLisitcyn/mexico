@@ -757,6 +757,9 @@ class Mfo extends ActiveRecord
 
     public static function getAnalysistText($model)
     {
+        if(!$model->data){
+            return null;
+        }
         $text = self::getAnalysistTextStr($model);
         $reviewsCount = Reviews::find()->where(['mfo_id' => $model->id, 'status' => 1])->count();
         $social = self::getSocial($model->url);
@@ -998,6 +1001,9 @@ AppStore de Apple es de {IOs_APP_RATING_COUNT}. ';
 
     public static function getSum($mfo,$sumMax = false,$dayMax = false,$percentMax = false,$decisionMax = false)
     {
+        if(!isset($mfo->data['condiciones'])){
+            return null;
+        }
         $mfoCount = self::find()->where(['status' => 1])->count();
         if($sumMax){
             $maxSum = self::find()->sum('sum');

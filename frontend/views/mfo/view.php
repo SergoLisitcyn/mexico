@@ -31,11 +31,13 @@ if(isset($model->data['meta_tags']['description']) && !empty($model->data['meta_
                 <?php endif; ?>
             </div>
             <div class="mfo-heading__repute repute">
+                <?php if(isset($item['rating_auto']))  : ?>
                 <div class="repute__rating">
 <!--                    <img class="repute__rating-image" src="/img/stars.svg" alt="stars">-->
                     <div class="rating__stars_similar" style="width:<?= $model->rating_auto['rating']['allRating_rate'] ?>%;margin-right: 15px"></div>
                     <div class="repute__rating-number"><?= $model->rating_auto['rating']['allRating'] ?></div>
                 </div>
+                <?php endif; ?>
                 <div class="repute__comments">
                     <?php if($reviewsCount > 0) : ?>
                         Leer <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $model->url]) ?>" class="repute__comments-link"><?= $reviewsCount ?> comentarios</a>
@@ -93,36 +95,53 @@ if(isset($model->data['meta_tags']['description']) && !empty($model->data['meta_
                                 <?= MfoViewWidget::widget(['type' => 'characteristic','model' => $model->data]) ?>
 
                                 <!--  Condiciones de préstamos -->
-                                <?= MfoViewWidget::widget(['type' => 'condiciones','model' => $model->data['condiciones']]) ?>
+                                <?php if(isset($model->data['condiciones'])) : ?>
+                                    <?= MfoViewWidget::widget(['type' => 'condiciones','model' => $model->data['condiciones']]) ?>
+                                <?php endif; ?>
 
                                 <!--  Medios de disposición del crédito-->
-                                <?= MfoViewWidget::widget(['type' => 'means','model' => $model->data['means']]) ?>
+                                <?php if(isset($model->data['means'])) : ?>
+                                    <?= MfoViewWidget::widget(['type' => 'means','model' => $model->data['means']]) ?>
+                                <?php endif; ?>
 
                                 <!--   Métodos de pago-->
-                                <?= MfoViewWidget::widget(['type' => 'payment_methods','model' => $model->data['payment_methods']]) ?>
+                                <?php if(isset($model->data['payment_methods'])) : ?>
+                                    <?= MfoViewWidget::widget(['type' => 'payment_methods','model' => $model->data['payment_methods']]) ?>
+                                <?php endif; ?>
 
                                 <div class="tabs-content__box tabs-content-box">
                                     <div class="tabs-content-box__columns">
                                         <!--   La cuenta-->
-                                        <?= MfoViewWidget::widget(['type' => 'account','model' => $model->data['account']]) ?>
+                                        <?php if(isset($model->data['account'])) : ?>
+                                            <?= MfoViewWidget::widget(['type' => 'account','model' => $model->data['account']]) ?>
+                                        <?php endif; ?>
 
                                         <!--   Atención al cliente-->
-                                        <?= MfoViewWidget::widget(['type' => 'customer_support','model' => $model->data['customer_support']]) ?>
+                                        <?php if(isset($model->data['customer_support'])) : ?>
+                                            <?= MfoViewWidget::widget(['type' => 'customer_support','model' => $model->data['customer_support']]) ?>
+                                        <?php endif; ?>
+
 
                                     </div>
                                 </div>
                             </div>
                             <div class="tabs-content__item" data-tab-content="3">
                                 <!--  Requisitos -->
-                                <?= MfoViewWidget::widget(['type' => 'requisitos','model' => $model->data['requisitos']]) ?>
+                                <?php if(isset($model->data['requisitos'])) : ?>
+                                    <?= MfoViewWidget::widget(['type' => 'requisitos','model' => $model->data['requisitos']]) ?>
+                                <?php endif; ?>
 
                                 <!--   Datos de la compañia-->
-                                <?= MfoViewWidget::widget(['type' => 'data_company','model' => $model->data['data_company']]) ?>
+                                <?php if(isset($model->data['data_company'])) : ?>
+                                    <?= MfoViewWidget::widget(['type' => 'data_company','model' => $model->data['data_company']]) ?>
+                                <?php endif; ?>
 
                                 <div class="tabs-content__line line"></div>
 
                                 <!--   Empresa matriz-->
-                                <?= MfoViewWidget::widget(['type' => 'mother_company','model' => $model->data['mother_company']]) ?>
+                                <?php if(isset($model->data['mother_company'])) : ?>
+                                    <?= MfoViewWidget::widget(['type' => 'mother_company','model' => $model->data['mother_company']]) ?>
+                                <?php endif; ?>
 
                                 <!--   Contacto -->
                                 <?= MfoViewWidget::widget(['type' => 'contacts','model' => $model]) ?>

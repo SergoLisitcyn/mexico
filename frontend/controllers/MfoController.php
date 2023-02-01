@@ -80,21 +80,29 @@ class MfoController extends Controller
         }
 
         $mfo = Mfo::find()->where(['url' => $url])->one();
-        $formatSum = intval($mfo->data['condiciones']['first_loan_max']);
-        $procent = (float)str_replace(',', '.', $mfo->data['condiciones']['rate_first']);
-        $term = intval($mfo->data['condiciones']['plazo_max']);
-        $vat = 0.16;
-        $sum = $formatSum * ($procent/100) * $term;
-        $sumWithVat = $sum * $vat;
-        $totalSum = $sum + $sumWithVat;
-        $totalFormat = $formatSum + $totalSum;
+        $formatSum = 0;
+        $procent = 0;
+        $term = 0;
+        $total = 0;
         $firstLoan = 0;
+        if(isset($mfo->data['condiciones'])){
+            $formatSum = intval($mfo->data['condiciones']['first_loan_max']);
+            $procent = (float)str_replace(',', '.', $mfo->data['condiciones']['rate_first']);
+            $term = intval($mfo->data['condiciones']['plazo_max']);
+            $vat = 0.16;
+            $sum = $formatSum * ($procent/100) * $term;
+            $sumWithVat = $sum * $vat;
+            $totalSum = $sum + $sumWithVat;
+            $totalFormat = $formatSum + $totalSum;
 
-        $total = number_format($totalFormat, 2, '.', ' ');
-        if($mfo->data['condiciones']['first_loan_zero_percent'] == '+'){
-            $total = ceil($formatSum);
-            $firstLoan = 1;
+
+            $total = number_format($totalFormat, 2, '.', ' ');
+            if($mfo->data['condiciones']['first_loan_zero_percent'] == '+'){
+                $total = ceil($formatSum);
+                $firstLoan = 1;
+            }
         }
+
         if(!$mfo){
             throw new HttpException(404, 'Страница не существует.');
         }

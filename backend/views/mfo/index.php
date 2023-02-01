@@ -15,7 +15,9 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="mfo-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
+    <p>
+        <?= Html::a('Создать МФО', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
     <?= Html::a('Запустить обновление', ['mfo/sheet'], [
         'class' => 'btn btn-success',
         'data' => [

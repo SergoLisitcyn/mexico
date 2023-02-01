@@ -1,6 +1,9 @@
 <?php
 use yii\helpers\Url;
 ?>
+<?php
+if(isset($model->rating_auto)) :
+?>
 <div class="rating-sidebar">
     <div class="rating-sidebar__row background-set">
         <h2 class="rating-sidebar__title title sidebar-title">Nuestra calificación</h2>
@@ -60,3 +63,4 @@ use yii\helpers\Url;
         </ul>
     </div>
 </div>
+<?php endif; ?>
