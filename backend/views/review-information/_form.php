@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use vova07\imperavi\Widget;
+use \yii\helpers\Url;
 /** @var yii\web\View $this */
 /** @var common\models\ReviewInformation $model */
 /** @var yii\widgets\ActiveForm $form */
@@ -19,6 +20,7 @@ use vova07\imperavi\Widget;
             'lang' => 'ru',
             'minHeight' => 300,
             'formatting' => ['p', 'blockquote', 'h2', 'h1','h3','div'],
+            'imageUpload' => Url::to(['/review-information/save-redactor-img','sub'=>'content']),
             'attributes' => [
                 [
                     'attribute' => 'text',
@@ -27,7 +29,11 @@ use vova07\imperavi\Widget;
             ],
             'plugins' => [
                 'clips',
-                'fullscreen'
+                'fullscreen',
+                'imageupload',
+                'imagemanager',
+                'filemanager',
+                'fontcolor',
             ]
 
         ]
