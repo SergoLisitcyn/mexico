@@ -50,10 +50,13 @@
     <?php endif; ?>
     <?php if(isset($model['unidad_1']) && $model['unidad_1'] != '-') : ?>
         <div class="tabs-content-box__item">
+            <div class="tabs-content-box__item-left">
+                <div class="tabs-content-box__item-title"></div>
+            </div>
             <div class="tabs-content-box__emails">
                 <a class="tabs-content-box__emails-link" href="mailto:<?= $model['unidad_1'] ?>"><?= $model['unidad_1'] ?></a>
                 <?php if(isset($model['unidad_2']) && $model['unidad_2'] != '-') : ?>
-                    <a class="tabs-content-box__emails-link" href="mailto:<?= $model['unidad_2'] ?>"><?= $model['unidad_2'] ?></a>
+                    <a class="tabs-content-box__emails-link" href="mailto:<?= $model['unidad_2']?>"><?= $model['unidad_2'] ?></a>
                 <?php endif; ?>
             </div>
         </div>
