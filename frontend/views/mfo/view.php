@@ -82,7 +82,7 @@ if(isset($model->data['meta_tags']['description']) && !empty($model->data['meta_
                                     <?php if($model->montos_title) :  ?>
                                         <h2 class="tabs-content-info__title title"><?= $model->montos_title ?></h2>
                                     <?php endif; ?>
-                                    <?php if($model->montos_title) :  ?>
+                                    <?php if($model->montos_text) :  ?>
                                         <?= $model->montos_text ?>
                                     <?php endif; ?>
                                 </div>

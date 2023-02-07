@@ -312,6 +312,11 @@ img {
     margin-top: 20px;
 }
 
+.montos td{
+    padding: 15px;
+    border: 1px solid #777;
+}
+
 @media (max-width: 1000px){
     .main-sect__items {
         margin-top: 23px;
