@@ -68,6 +68,7 @@
                     ['label' => 'Плашки для МФО', 'icon' => 'paint-brush', 'url' => ['/block-rec']],
                     ['label' => 'SEO', 'icon' => 'area-chart', 'url' => ['/seo-tags']],
                     ['label' => 'Код счетчика', 'icon' => 'area-chart', 'url' => ['/seo-codes/update?id=1']],
+                    ['label' => 'Форма обратной связи', 'icon' => 'address-book', 'url' => ['/contacts/index']],
                     [
                         "label" => "Управление пользователями",
                         "url" => "#",

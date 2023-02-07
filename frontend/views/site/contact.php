@@ -9,37 +9,51 @@ use yii\bootstrap4\ActiveForm;
 use yii\captcha\Captcha;
 
 $this->title = 'Contact';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-contact">
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="main__page-info">
+    <div class="container">
+        <div class="main__breadcrumbs breadcrumbs">
+            <ul class="breadcrumbs__items">
+                <li class="breadcrumbs__item">
+                    <a href="/" class="breadcrumbs__link">Inicio</a>
+                </li>
+                <li class="breadcrumbs__item">
+                    Contacto
+                </li>
+            </ul>
+        </div>
+        <h1 class="main__title main-title">Contacto</h1>
+    </div>
+</div>
+<div class="content">
+    <div class="container">
+        <div class="content__block">
+            <div class="content__row">
+                <section class="content__comments-sect comments-sect" style="margin-bottom: 30px">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <?php $form = ActiveForm::begin([
+                                'options' => [
+                                    'class' => 'main-form',
+                                    'id' => 'contacts-form'
+                                ]
+                            ]); ?>
+                            <input type="hidden" name="_csrf" value="<?=Yii::$app->request->getCsrfToken()?>" />
+                            <?= $form->field($model, 'name')->textInput(['class' => 'main-form__input main-form__input--person','placeholder' => "Nombre"]) ?>
+                            <?= $form->field($model, 'email')->textInput(['class' => 'main-form__input main-form__input--person','placeholder' => "Email"]) ?>
+                            <?= $form->field($model, 'body')->textarea(['rows' => 6,'placeholder' => "Mensaje",'class' => 'main-form__input']) ?>
 
-    <p>
-        If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.
-    </p>
+                            <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
+                                'template' => '<div class="row"><div class="col-lg-6">{image}</div><div class="col-lg-6">{input}</div></div>',
+                            ]) ?>
 
-    <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
+                            <?= Html::submitButton('Danos tu opinión', ['class' => 'main-form__button button button--primary']) ?>
 
-                <?= $form->field($model, 'name')->textInput(['autofocus' => true]) ?>
-
-                <?= $form->field($model, 'email') ?>
-
-                <?= $form->field($model, 'subject') ?>
-
-                <?= $form->field($model, 'body')->textarea(['rows' => 6]) ?>
-
-                <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
-                    'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
-                ]) ?>
-
-                <div class="form-group">
-                    <?= Html::submitButton('Submit', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
-                </div>
-
-            <?php ActiveForm::end(); ?>
+                            <?php ActiveForm::end(); ?>
+                        </div>
+                    </div>
+                </section>
+            </div>
         </div>
     </div>
-
 </div>

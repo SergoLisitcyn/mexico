@@ -317,6 +317,14 @@ img {
     border: 1px solid #777;
 }
 
+#contacts-form .main-form__input--person{
+    width: 100%;
+}
+
+#contacts-form .main-form__input{
+    resize: auto;
+}
+
 @media (max-width: 1000px){
     .main-sect__items {
         margin-top: 23px;

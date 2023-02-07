@@ -46,11 +46,13 @@ return [
             'showScriptName' => false,
             'rules' => [
                 '/' => '/site/index',
+                'contacto' => '/site/contact',
                 'signup' => '/site/signup',
 //                'empresas' => '/site/empresas',
                 'progress-value' => '/site/progress-value',
                 'review-information' => '/site/review-information',
                 'entidad' => '/mfo/index',
+                'captcha' => '/site/captcha',
                 [
                     'pattern' => 'entidad/<url:\S+>/reviews',
                     'route' => '/mfo/reviews',
