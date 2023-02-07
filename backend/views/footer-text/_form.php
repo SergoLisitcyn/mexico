@@ -19,7 +19,7 @@ use vova07\imperavi\Widget;
         'settings' => [
             'lang' => 'ru',
             'minHeight' => 300,
-            'formatting' => ['p', 'blockquote', 'h2', 'h1'],
+            'formatting' => ['p', 'blockquote', 'h2', 'h1','h3','div'],
             'attributes' => [
                 [
                     'attribute' => 'text',
@@ -37,7 +37,7 @@ use vova07\imperavi\Widget;
         'settings' => [
             'lang' => 'ru',
             'minHeight' => 300,
-            'formatting' => ['p', 'blockquote', 'h2', 'h1'],
+            'formatting' => ['p', 'blockquote', 'h2', 'h1','h3','div'],
             'attributes' => [
                 [
                     'attribute' => 'text',
