@@ -47,7 +47,7 @@ $this->title = 'Contact';
                                 'template' => '<div class="row"><div class="col-lg-6">{image}</div><div class="col-lg-6">{input}</div></div>',
                             ]) ?>
 
-                            <?= Html::submitButton('Danos tu opinión', ['class' => 'main-form__button button button--primary']) ?>
+                            <?= Html::submitButton('Enviar un mensaje', ['class' => 'main-form__button button button--primary']) ?>
 
                             <?php ActiveForm::end(); ?>
                         </div>

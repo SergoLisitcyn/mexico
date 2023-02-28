@@ -845,7 +845,7 @@ class Mfo extends ActiveRecord
         $nuestra = array_search(max($ratingMfo),$ratingMfo);
 
         $text = '<div class="company_analysis">
-                <h2 class="tabs-content-info__title title"  style="margin-top: 20px">Company Analysis</h2>
+                <h2 class="tabs-content-info__title title"  style="margin-top: 20px">Análisis de la compañía</h2>
                 <p>La empresa {NOMBRE_EMPRESA} lleva más de {ANO} operando en México.';
 
         if($model->data['mother_company']['mother_company'] != 'Una empresa 100% mexicana' && $model->data['mother_company']['pais'] != '-'){
@@ -856,7 +856,7 @@ class Mfo extends ActiveRecord
             $text .= ' Una empresa 100% mexicana.';
         }
         $text .= ' Una característica especial de la empresa es {UTP}</p>
-                  <h2 class="tabs-content-info__title title"  style="margin-top: 20px">Loan Analysis</h2><p>';
+                  <h2 class="tabs-content-info__title title"  style="margin-top: 20px">Análisis del préstamo</h2><p>';
 
         // {DAY_MAX} && {DIFF_DAY}
         if($model->data['condiciones']['plazo_max'] != 0 && $dayMax['diffDay'] > 0){
@@ -920,7 +920,7 @@ class Mfo extends ActiveRecord
         }
 
 //        {LUGAR}
-        $text .= '</p><h2 class="tabs-content-info__title title"  style="margin-top: 20px">Rating Analysis</h2>
+        $text .= '</p><h2 class="tabs-content-info__title title"  style="margin-top: 20px">Análisis del rating</h2>
                     <p>{NOMBRE_EMPRESA} ocupa el {LUGAR} lugar en el ranking de Finjenios. ';
 
         if($nuestra == 'interes_costes'){

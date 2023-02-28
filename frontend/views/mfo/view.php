@@ -59,7 +59,7 @@ if(isset($model->data['meta_tags']['description']) && !empty($model->data['meta_
                     <!--  Características de la compañía -->
                     <?= MfoViewWidget::widget(['type' => 'mfo_calculator','model' => $model,'procent' => $procent,'total' => $total,'firstLoan' => $firstLoan]) ?>
                     <div class="mfo-about__list mfo-list">
-                        <h2 class="mfo-list__title title">Visión general de Credito</h2>
+                        <h2 class="mfo-list__title title">Visión general de Crédito</h2>
                         <ul class="mfo-list__list">
                             <li class="mfo-list__item">Proceso 100% online</li>
                             <li class="mfo-list__item">Financiación de $1.000 a $10.000.000 pesos</li>

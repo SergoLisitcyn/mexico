@@ -45,7 +45,6 @@ if(isset($model->data['meta_tags']['h1'])){
             <span></span>
             <span></span>
         </div>
-        <h2 class="reviews__title title">Tu opinión <?= $title ?></h2>
         <?php
         $form = ActiveForm::begin(
             [

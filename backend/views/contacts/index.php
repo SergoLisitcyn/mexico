@@ -21,13 +21,37 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
 
-    <?= GridView::widget([
+    <?= \kartik\grid\GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'name',
             'email:email',
             'body:ntext',
+            'created_at:datetime',
+            [
+                'class' => 'kartik\grid\EditableColumn',
+                'attribute' => 'status',
+                'hAlign' => 'center',
+                'filter' => false,
+                'editableOptions' =>  function ($model, $key, $index) {
+                    return [
+                        'header' => 'сортировку',
+                        'inputType' => 'dropDownList',
+                        'data' => [0 =>'Не прочитано',1 =>'Прочитано'],
+                    ];
+                },
+                'value' => function($model){
+                    if($model->status == 0){
+                        $value = 'Не прочитано';
+                        return $value;
+                    } else {
+                        $value = 'Прочитано';
+                        return $value;
+                    }
+
+                },
+            ],
             [
                 'label' => 'Действия',
                 'format' => 'raw',

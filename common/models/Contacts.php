@@ -2,7 +2,8 @@
 
 namespace common\models;
 
-use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "contacts".
@@ -11,8 +12,10 @@ use Yii;
  * @property string $name
  * @property string $email
  * @property string $body
+ * @property integer $created_at
+ * @property integer $updated_at
  */
-class Contacts extends \yii\db\ActiveRecord
+class Contacts extends ActiveRecord
 {
     public $verifyCode;
     /**
@@ -21,6 +24,15 @@ class Contacts extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'contacts';
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
     }
 
     /**
@@ -48,6 +60,7 @@ class Contacts extends \yii\db\ActiveRecord
             'email' => 'Email',
             'body' => 'Mensaje',
             'verifyCode' => 'Verification Code',
+            'created_at' => 'Дата',
         ];
     }
 }

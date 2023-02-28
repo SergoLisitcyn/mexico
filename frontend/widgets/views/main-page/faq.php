@@ -1,4 +1,4 @@
-<section class="main__faq faq">
+<section class="main__faq faq" id="faq_main">
     <div class="container">
         <div class="faq__row background-set">
             <h2 class="faq__title title">Preguntas Frecuentes</h2>

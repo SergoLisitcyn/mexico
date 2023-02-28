@@ -32,11 +32,7 @@ class ContactsController extends Controller
         );
     }
 
-    /**
-     * Lists all Contacts models.
-     *
-     * @return string
-     */
+
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
@@ -52,6 +48,19 @@ class ContactsController extends Controller
             ],
             */
         ]);
+        if (Yii::$app->request->post('hasEditable'))
+        {
+            $id = $_POST['editableKey'];
+            $model = $this->findModel($id);
+            $post = [];
+            $posted = current($_POST['Contacts']);
+            $post['Contacts'] = $posted;
+            if ($model->load($post)) {
+                $model->save();
+            }
+
+            return $this->refresh();
+        }
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
