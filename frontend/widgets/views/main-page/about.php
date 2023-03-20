@@ -12,7 +12,13 @@
         <div class="about-us-slider">
             <?php foreach ($sols as $sol) : ?>
             <div class="about-us-slider__item">
-                <img class="about-us-slider__image" src="<?= $sol->image ?>" alt="<?= $sol->alt ?>">
+                <?php if($sol->url) : ?>
+                    <a href="<?= $sol->url ?>" target="_blank">
+                        <img class="about-us-slider__image" src="<?= $sol->image ?>" alt="<?= $sol->alt ?>">
+                    </a>
+                <?php else: ?>
+                    <img class="about-us-slider__image" src="<?= $sol->image ?>" alt="<?= $sol->alt ?>">
+                <?php endif; ?>
             </div>
             <?php endforeach; ?>
         </div>
