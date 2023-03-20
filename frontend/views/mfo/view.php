@@ -19,8 +19,8 @@ if(isset($model->data['meta_tags']['description']) && !empty($model->data['meta_
                 <?php endif; ?>
             </ul>
         </div>
-        <?php if($model->title) : ?>
-            <h1 class="main__title main-title"><?= $model->title ?></h1>
+        <?php if(isset($model->data['meta_tags']['h1']) && $model->data['meta_tags']['h1'] != '-') : ?>
+            <h1 class="main__title main-title"><?= $model->data['meta_tags']['h1'] ?></h1>
         <?php endif; ?>
         <div class="main__mfo-heading mfo-heading">
             <div class="mfo-heading__name">
