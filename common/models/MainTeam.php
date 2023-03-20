@@ -18,6 +18,7 @@ use yii\web\UploadedFile;
  * @property string|null $facebook
  * @property string|null $twitter
  * @property string|null $instagram
+ * @property string|null $linkedin
  * @property int|null $status
  */
 class MainTeam extends ActiveRecord
@@ -39,7 +40,7 @@ class MainTeam extends ActiveRecord
         return [
             [['name', 'text'], 'required'],
             [['status'], 'integer'],
-            [['name', 'text', 'image','facebook','instagram','twitter'], 'string', 'max' => 255],
+            [['name', 'text', 'image','facebook','instagram','twitter','linkedin'], 'string', 'max' => 255],
         ];
     }
 
@@ -58,6 +59,7 @@ class MainTeam extends ActiveRecord
             'facebook' => 'Facebook',
             'instagram' => 'Instagram',
             'twitter' => 'Twitter',
+            'linkedin' => 'Linkedin',
         ];
     }
 
