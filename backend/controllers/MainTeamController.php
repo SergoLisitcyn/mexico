@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\models\MainTeam;
+use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -118,6 +119,7 @@ class MainTeamController extends Controller
     {
         $model = $this->findModel($id);
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            Yii::$app->session->addFlash('success', 'Обновлено');
             return $this->redirect(['update', 'id' => $model->id]);
         }
 
