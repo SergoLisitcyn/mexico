@@ -9,9 +9,15 @@
                 <h3 class="main-sect__subtitle subtitle"><?= $blockManagement->sub_title ?></h3>
             <?php endif; ?>
             <div class="employees-slider">
-                <?php foreach ($sols as $sol) : ?>
+                <?php foreach ($sols as $sol) :  ?>
                     <div class="employees-slider__item">
-                        <img class="employees-slider__image" src="<?= $sol->image ?>" alt="<?= $sol->alt ?>">
+                        <?php if($sol->url) : ?>
+                        <a href="<?= $sol->url ?>" target="_blank">
+                            <img class="employees-slider__image" src="<?= $sol->image ?>" alt="<?= $sol->alt ?>">
+                        </a>
+                        <?php else: ?>
+                            <img class="employees-slider__image" src="<?= $sol->image ?>" alt="<?= $sol->alt ?>">
+                        <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
             </div>
