@@ -168,6 +168,9 @@ class Mfo extends ActiveRecord
                 if($key == 0 || $key == 1 || $key == 2){
                     continue;
                 }
+                if(!isset($value[4]) || !isset($value[2])){
+                    continue;
+                }
                 if($range == 'Condiciones de préstamos'){
                     if(!isset($value[4])){
                         continue;
@@ -200,7 +203,7 @@ class Mfo extends ActiveRecord
                         continue;
                     }
                 }
-                if($range == 'Métodos de pago'){
+                if($range == 'Métodos de pago (v.2)'){
                     $data[$mfoKey]['payment_methods'] = self::getPaymentMethods($value);
                     if($key == 3){
                         $dataText['text']['payment_methods'] = self::getPaymentMethods($value);
@@ -265,36 +268,34 @@ class Mfo extends ActiveRecord
                     if($key == 3){
                         $dataText['text']['meta_tags'] = self::getMetaTags($value);
                     }
-
-                    if($key == 3){
-                        $mfoText = MfoText::find()->where(['name' => 'Text'])->one();
-                        if($mfoText){
-                            $mfoText->text_mfo = json_encode($dataText);
-                            if($mfoText->save()){
-                                continue;
-                            } else {
-                                echo 'Ошибка при обновлении таблицы MfoText';
-                                var_dump($mfoText->errors); die;
-                            }
-                        } else {
-                            $modelText = new MfoText();
-                            $modelText->name = 'Text';
-                            $modelText->text_mfo = json_encode($dataText);
-                            if($modelText->save()){
-                                continue;
-                            } else {
-                                echo 'Ошибка при формировании таблицы MfoText ';
-                                var_dump($modelText->errors); die;
-                            }
-                        }
-                    }
                 }
                 $mfoKey++;
             }
         }
+        if($dataText){
+            $mfoText = MfoText::find()->where(['name' => 'Text'])->one();
+            if($mfoText){
+                $mfoText->text_mfo = json_encode($dataText);
+                if($mfoText->save()){
+                } else {
+                    echo 'Ошибка при обновлении таблицы MfoText';
+                    var_dump($mfoText->errors); die;
+                }
+            } else {
+                $modelText = new MfoText();
+                $modelText->name = 'Text';
+                $modelText->text_mfo = json_encode($dataText);
+                if($modelText->save()){
+                } else {
+                    echo 'Ошибка при формировании таблицы MfoText ';
+                    var_dump($modelText->errors); die;
+                }
+            }
+        }
+
         if($data){
             foreach ($data as $datum){
-                if($datum['meta_tags']['url'] && $datum['meta_tags']['on']){
+                if($datum['meta_tags']['url'] && $datum['meta_tags']['on'] == '+'){
                     $mfo = Mfo::find()->where(['url' => $datum['meta_tags']['url']])->one();
                     if($mfo){
                         $mfo->data = json_encode($datum);
@@ -303,6 +304,7 @@ class Mfo extends ActiveRecord
                         $mfo->min_sum = $datum['condiciones']['first_loan_min'];
                         $mfo->term = $datum['condiciones']['plazo_max'];
                         $mfo->min_term = $datum['condiciones']['plazo_min'];
+                        $mfo->type = $datum['condiciones']['type'];;
                         $procent = 0;
                         if($datum['condiciones']['rate_first'] != '-'){
                             $procent = (float)str_replace(',', '.', $datum['condiciones']['rate_first']);
@@ -328,8 +330,9 @@ class Mfo extends ActiveRecord
                         $model->min_sum = $datum['condiciones']['first_loan_min'];
                         $model->term = $datum['condiciones']['plazo_max'];
                         $model->min_term = $datum['condiciones']['plazo_min'];
+                        $model->type = $datum['condiciones']['type'];
                         $procent = 0;
-                        if($datum['requisitos']['rate_first'] != '-'){
+                        if($datum['condiciones']['rate_first'] != '-'){
                             $procent = (float)str_replace(',', '.', $datum['condiciones']['rate_first']);
                         }
                         $model->percent = $procent;
@@ -407,6 +410,7 @@ class Mfo extends ActiveRecord
      */
     public static function getCondiciones($value)
     {
+        $data['type'] = $value[2]; //Тип
         $data['plazo_min'] = $value[4]; //Срок, min
         $data['plazo_max'] = $value[5]; // Срок, max
         $data['rate_first'] = $value[6]; // Ставка, первый заем
@@ -426,6 +430,35 @@ class Mfo extends ActiveRecord
         $data['extension'] = $value[20]; // Продление
         $data['for_calculator'] = $value[21]; // Для калькулятора
         $data['first_loan_zero_percent'] = $value[22]; // Первый займ под 0%
+        //  для компаний других типов
+        $data['other_loan_min'] = $value[23]; // Сумма займа, min
+        $data['other_loan_max'] = $value[24]; // Сумма займа, max
+        $data['other_loan_msb_min'] = $value[25]; // Сумма займа для МСБ, min
+        $data['other_loan_msb_max'] = $value[26]; // Сумма займа для МСБ, max
+        $data['other_term_months_min'] = $value[27]; // Срок, месяцы, min
+        $data['other_term_months_max'] = $value[28]; // Срок, месяцы, max
+        $data['other_term_credit'] = $value[29]; // Срок кредита, месяцы:
+        $data['other_term_weeks_min'] = $value[30]; // Срок, 2 недели, min
+        $data['other_term_weeks_max'] = $value[31]; // Срок, 2 недели, max
+        $data['other_payment_every_week'] = $value[32]; // Оплата каждую неделю
+        $data['other_payment_every_two_week'] = $value[33]; // Оплата каждые 2 недели
+        $data['other_payment_every_month'] = $value[34]; // Оплата каждый месяц
+        $data['other_early_repayment'] = $value[35]; // Досрочное погашение
+        $data['other_total_loan_cost'] = $value[36]; // Полная стоимость кредита, в среднем
+        $data['other_total_loan_cost_min'] = $value[37]; // Полная стоимость кредита, min
+        $data['other_total_loan_cost_max'] = $value[38]; // Полная стоимость кредита, max
+        $data['other_promedio_via'] = $value[39]; // Tasa de interés anua, promedio, sin VIA (%)
+        $data['other_fija_via'] = $value[40]; // Tasa de interés anual y fija, sin VIA (%)
+        $data['other_fija_via_min'] = $value[41]; // Tasa de interés anual y fija, sin VIA, min (%)
+        $data['other_opening_fee'] = $value[42]; // Комиссия за открытие счета
+        $data['other_management_fee'] = $value[43]; // Комиссия за ведение счета
+        $data['other_collection_costs'] = $value[44]; // Расходы на взыскание
+        $data['other_method_fee'] = $value[45]; // Комиссия способа платежа:
+        $data['other_late'] = $value[46]; // Ставка на сумму просроченного платежа:
+        $data['other_pre_approval'] = $value[47]; // Предварительное одобрение
+        $data['other_time_to_receive'] = $value[48]; // Время получение финансирования
+        $data['other_refinancing'] = $value[49]; // Рефинансирование кредитов в ругих организациях
+
 
         return $data;
     }
@@ -501,27 +534,56 @@ class Mfo extends ActiveRecord
     }
 
     /**
-     * Возвращает массив из таблицы 'Métodos de pago'
+     * Возвращает массив из таблицы 'Métodos de pago 2'
      * @param string|null $value
      * @return array
      */
     public static function getPaymentMethods($value)
     {
-        $data['payment_prolongation'] = $value[4]; // Продление
-        $data['full_repayment'] = $value[5]; // Полное погашение
-        $data['payment_by_card'] = $value[6]; // Оплата картой
-        $data['bank_account'] = $value[7]; // Банковский счёт / Перевод /Национальная система межбанковских переводов
-        $data['payment_phone_operator'] = $value[8]; // Оплата по телефону через оператора
-        $data['qr_code'] = $value[9]; // Национальная система платежей через QR-коды/Телефон
-        $data['bank_teller'] = $value[10]; // Погашение через кассу банка
-        $data['shops'] = $value[11]; // Магазины "у дома", аналог Пятерочки
-        $data['largest_bank'] = $value[12]; // Крупнейший банк / платёж через интернет-банк
-        $data['payment_terminals'] = $value[13]; // Банкоматы или платёжные терминалы
-        $data['wallet'] = $value[14]; // Кошелёк / Платёжка
-        $data['lata'] = $value[15]; // Система денежных переводов по ЛАТАм
-        $data['own_payment'] = $value[16]; // Собственная платёжка
-        $data['wallet_payment'] = $value[17]; // Кошелёк / Платёжка
-        $data['direct_debit'] = $value[18]; // Прямой дебет /(безакцептное списание) / подписка
+//        $data['payment_prolongation'] = $value[4]; // Продление
+//        $data['full_repayment'] = $value[5]; // Полное погашение
+//        $data['payment_by_card'] = $value[6]; // Оплата картой
+//        $data['bank_account'] = $value[7]; // Банковский счёт / Перевод /Национальная система межбанковских переводов
+//        $data['payment_phone_operator'] = $value[8]; // Оплата по телефону через оператора
+//        $data['qr_code'] = $value[9]; // Национальная система платежей через QR-коды/Телефон
+//        $data['bank_teller'] = $value[10]; // Погашение через кассу банка
+//        $data['shops'] = $value[11]; // Магазины "у дома", аналог Пятерочки
+//        $data['largest_bank'] = $value[12]; // Крупнейший банк / платёж через интернет-банк
+//        $data['payment_terminals'] = $value[13]; // Банкоматы или платёжные терминалы
+//        $data['wallet'] = $value[14]; // Кошелёк / Платёжка
+//        $data['lata'] = $value[15]; // Система денежных переводов по ЛАТАм
+//        $data['own_payment'] = $value[16]; // Собственная платёжка
+//        $data['wallet_payment'] = $value[17]; // Кошелёк / Платёжка
+//        $data['direct_debit'] = $value[18]; // Прямой дебет /(безакцептное списание) / подписка
+
+        $data['bank_mexico'] = $value[4]; // Межбанковская система электронных платежей Banco de México
+        $data['payment_by_card'] = $value[5]; // Оплата картой
+        $data['direct_debit'] = $value[6]; // Прямой дебет (безакцептное списание или "подписка")
+        $data['payment_prolongation'] = $value[7]; // Продление
+        $data['full_repayment'] = $value[8]; // Полное погашение
+        $data['advance_payments'] = $value[9]; // Авансовые платежи
+        $data['chdp'] = $value[10]; // ЧДП основного долга без изменения срока кредита  для уменьшения процентных платежей.
+        $data['payment_phone_operator'] = $value[11]; // Оплата по телефону через оператора
+        $data['electronic_payments'] = $value[12]; // Электронные платежи
+        $data['cash_payments'] = $value[13]; // Наличные платежи в кассах, платежных терминалах и сетевых магазинах
+        $data['largest_bank'] = $value[14]; // Крупнейший банк / платёж через интернет-банк
+        $data['qr_code'] = $value[15]; // Национальная система платежей через QR-коды/Телефон
+        $data['wallet'] = $value[16]; // Мексиканская платежная система
+        $data['lata'] = $value[17]; // Система денежных переводов по ЛАТАм
+        $data['own_payment'] = $value[18]; // Собственная платёжка
+        $data['wallet_payment'] = $value[19]; // Платежная система, похожая на  PayPal. Часть аргентинской e-com группы компаний Mercado Libre.
+        $data['mexican_provider'] = $value[20]; // Мексиканский провайдер платежей. Платежи в реальном времени, платежи оп QR-rкодам и чековые платежи.
+        $data['payment_terminals'] = $value[21]; // Банкоматы или платёжные терминалы
+        $data['bank_teller'] = $value[22]; // Погашение через кассу банка
+        $data['bank_branches'] = $value[23]; // Отделения банка
+        $data['shops'] = $value[24]; // Мексиканская сеть круглосуточных магазинов
+        $data['telecomm'] = $value[25]; // Сеть госсударственных отделений связи
+        $data['eleven'] = $value[26]; // Сеть небольших магазинов
+        $data['store_chain'] = $value[27]; // Сеть продуктовых магазинов
+        $data['pharmacy'] = $value[28]; // Аптечная сеть
+        $data['offline_payment'] = $value[29]; // Платежная офлайновая сеть
+        $data['hsbc'] = $value[30]; // Терминал HSBC
+        $data['non_store'] = $value[31]; // Сеть не продовальственных магазинов
 
         return $data;
     }
@@ -757,7 +819,7 @@ class Mfo extends ActiveRecord
 
     public static function getAnalysistText($model)
     {
-        if(!$model->data){
+        if(!$model->data || !$model->rating_auto){
             return null;
         }
         $text = self::getAnalysistTextStr($model);
@@ -836,6 +898,9 @@ class Mfo extends ActiveRecord
             $mfoOlderThan = 0;
         }
         $place = self::getPlaceForReviews($model->id);
+        if(!$model->rating_auto){
+            return null;
+        }
         $ratingMfo = [
             "interes_costes" => $model->rating_auto['rating']['interes_costes'],
             "condiciones" => $model->rating_auto['rating']['condiciones'],
@@ -1001,7 +1066,9 @@ AppStore de Apple es de {IOs_APP_RATING_COUNT}. ';
 
     public static function getSum($mfo,$sumMax = false,$dayMax = false,$percentMax = false,$decisionMax = false)
     {
-        if(!isset($mfo->data['condiciones'])){
+        if(!isset($mfo->data['condiciones']) || $mfo->data['condiciones']['repeat_loan_max'] == '-' ||
+            $mfo->data['condiciones']['plazo_max']  == '-' || $mfo->data['condiciones']['rate_first']  == '-' ||
+            $mfo->data['condiciones']['decision_time']  == '-'){
             return null;
         }
         $mfoCount = self::find()->where(['status' => 1])->count();

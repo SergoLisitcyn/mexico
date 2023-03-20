@@ -41,10 +41,10 @@
                 </div>
             <?php endif; ?>
 
-            <?php if(isset($model['bank_account']) && $model['bank_account'] != '-') : ?>
+            <?php if(isset($model['advance_payments']) && $model['advance_payments'] != '-') : ?>
                 <div class="tabs-content-block__item">
                     <div class="tabs-content-block__item-left">
-                        <div class="tabs-content-block__item-title"><?= $mfoText['payment_methods']['bank_account'] ?></div>
+                        <div class="tabs-content-block__item-title"><?= $mfoText['payment_methods']['advance_payments'] ?></div>
                     </div>
                     <div class="tabs-content-block__item-right">
                         <div class="tabs-content-block__item-image">
@@ -97,6 +97,78 @@
                 <div class="tabs-content-block__item">
                     <div class="tabs-content-block__item-image">
                         <img src="/img/tabs/oxxo.png" alt="oxxo">
+                    </div>
+                    <div class="tabs-content-block__item-right">
+                        <div class="tabs-content-block__item-image">
+                            <img src="/img/checkbox.svg" alt="checkbox">
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <?php if(isset($model['chdp']) && $model['chdp'] != '-') : ?>
+                <div class="tabs-content-block__item">
+                    <div class="tabs-content-block__item-left">
+                        <div class="tabs-content-block__item-title"><?= $mfoText['payment_methods']['chdp'] ?></div>
+                    </div>
+                    <div class="tabs-content-block__item-right">
+                        <div class="tabs-content-block__item-image">
+                            <img src="/img/checkbox.svg" alt="checkbox">
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <?php if(isset($model['cash_payments']) && $model['cash_payments'] != '-') : ?>
+                <div class="tabs-content-block__item">
+                    <div class="tabs-content-block__item-left">
+                        <div class="tabs-content-block__item-title"><?= $mfoText['payment_methods']['cash_payments'] ?></div>
+                    </div>
+                    <div class="tabs-content-block__item-right">
+                        <div class="tabs-content-block__item-image">
+                            <img src="/img/checkbox.svg" alt="checkbox">
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <?php if(isset($model['bank_branches']) && $model['bank_branches'] != '-') : ?>
+                <div class="tabs-content-block__item">
+                    <div class="tabs-content-block__item-left">
+                        <div class="tabs-content-block__item-title"><?= $mfoText['payment_methods']['bank_branches'] ?></div>
+                    </div>
+                    <div class="tabs-content-block__item-right">
+                        <div class="tabs-content-block__item-image">
+                            <img src="/img/checkbox.svg" alt="checkbox">
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <?php if(isset($model['eleven']) && $model['eleven'] != '-') : ?>
+                <div class="tabs-content-block__item">
+                    <div class="tabs-content-block__item-left">
+                        <div class="tabs-content-block__item-title"><?= $mfoText['payment_methods']['eleven'] ?></div>
+                    </div>
+                    <div class="tabs-content-block__item-right">
+                        <div class="tabs-content-block__item-image">
+                            <img src="/img/checkbox.svg" alt="checkbox">
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <?php if(isset($model['pharmacy']) && $model['pharmacy'] != '-') : ?>
+                <div class="tabs-content-block__item">
+                    <div class="tabs-content-block__item-left">
+                        <div class="tabs-content-block__item-title"><?= $mfoText['payment_methods']['pharmacy'] ?></div>
+                    </div>
+                    <div class="tabs-content-block__item-right">
+                        <div class="tabs-content-block__item-image">
+                            <img src="/img/checkbox.svg" alt="checkbox">
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <?php if(isset($model['hsbc']) && $model['hsbc'] != '-') : ?>
+                <div class="tabs-content-block__item">
+                    <div class="tabs-content-block__item-left">
+                        <div class="tabs-content-block__item-title"><?= $mfoText['payment_methods']['hsbc'] ?></div>
                     </div>
                     <div class="tabs-content-block__item-right">
                         <div class="tabs-content-block__item-image">
@@ -191,6 +263,91 @@
                 <div class="tabs-content-block__item">
                     <div class="tabs-content-block__item-left">
                         <div class="tabs-content-block__item-title"><?= $mfoText['payment_methods']['direct_debit'] ?></div>
+                    </div>
+                    <div class="tabs-content-block__item-right">
+                        <div class="tabs-content-block__item-image">
+                            <img src="/img/checkbox.svg" alt="checkbox">
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <?php if(isset($model['bank_mexico']) && $model['bank_mexico'] != '-') : ?>
+                <div class="tabs-content-block__item">
+                    <div class="tabs-content-block__item-left">
+                        <div class="tabs-content-block__item-title"><?= $mfoText['payment_methods']['bank_mexico'] ?></div>
+                    </div>
+                    <div class="tabs-content-block__item-right">
+                        <div class="tabs-content-block__item-image">
+                            <img src="/img/checkbox.svg" alt="checkbox">
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <?php if(isset($model['electronic_payments']) && $model['electronic_payments'] != '-') : ?>
+                <div class="tabs-content-block__item">
+                    <div class="tabs-content-block__item-left">
+                        <div class="tabs-content-block__item-title"><?= $mfoText['payment_methods']['electronic_payments'] ?></div>
+                    </div>
+                    <div class="tabs-content-block__item-right">
+                        <div class="tabs-content-block__item-image">
+                            <img src="/img/checkbox.svg" alt="checkbox">
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            <?php if(isset($model['mexican_provider']) && $model['mexican_provider'] != '-') : ?>
+                <div class="tabs-content-block__item">
+                    <div class="tabs-content-block__item-left">
+                        <div class="tabs-content-block__item-title"><?= $mfoText['payment_methods']['mexican_provider'] ?></div>
+                    </div>
+                    <div class="tabs-content-block__item-right">
+                        <div class="tabs-content-block__item-image">
+                            <img src="/img/checkbox.svg" alt="checkbox">
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <?php if(isset($model['telecomm']) && $model['telecomm'] != '-') : ?>
+                <div class="tabs-content-block__item">
+                    <div class="tabs-content-block__item-left">
+                        <div class="tabs-content-block__item-title"><?= $mfoText['payment_methods']['telecomm'] ?></div>
+                    </div>
+                    <div class="tabs-content-block__item-right">
+                        <div class="tabs-content-block__item-image">
+                            <img src="/img/checkbox.svg" alt="checkbox">
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <?php if(isset($model['store_chain']) && $model['store_chain'] != '-') : ?>
+                <div class="tabs-content-block__item">
+                    <div class="tabs-content-block__item-left">
+                        <div class="tabs-content-block__item-title"><?= $mfoText['payment_methods']['store_chain'] ?></div>
+                    </div>
+                    <div class="tabs-content-block__item-right">
+                        <div class="tabs-content-block__item-image">
+                            <img src="/img/checkbox.svg" alt="checkbox">
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <?php if(isset($model['offline_payment']) && $model['offline_payment'] != '-') : ?>
+                <div class="tabs-content-block__item">
+                    <div class="tabs-content-block__item-left">
+                        <div class="tabs-content-block__item-title"><?= $mfoText['payment_methods']['offline_payment'] ?></div>
+                    </div>
+                    <div class="tabs-content-block__item-right">
+                        <div class="tabs-content-block__item-image">
+                            <img src="/img/checkbox.svg" alt="checkbox">
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <?php if(isset($model['non_store']) && $model['non_store'] != '-') : ?>
+                <div class="tabs-content-block__item">
+                    <div class="tabs-content-block__item-left">
+                        <div class="tabs-content-block__item-title"><?= $mfoText['payment_methods']['non_store'] ?></div>
                     </div>
                     <div class="tabs-content-block__item-right">
                         <div class="tabs-content-block__item-image">

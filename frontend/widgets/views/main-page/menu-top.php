@@ -4,6 +4,7 @@
         <li><a href="/prestamos_rapidos">Prestamos rapidos</a></li>
         <li><a href="/prestamos_en_linea_sin_buro">Prestamos en linea sin buró</a></li>
         <li><a href="/prestamos_en_linea">Prestamos en linea</a></li>
+        <li><a href="/p2p">Préstamos P2P</a></li>
         <?php foreach ($menus as $menu) :?>
             <li class="menu-top-desktop">
                 <a href="<?= $menu->link; ?>">
