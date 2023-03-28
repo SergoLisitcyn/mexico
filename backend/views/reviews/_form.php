@@ -21,7 +21,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'support')->textInput() ?>
 
     <?= $form->field($model, 'functionality')->textInput() ?>
-
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'body')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'plus')->textarea(['rows' => 6]) ?>
@@ -31,9 +32,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'recommendation')->textInput() ?>
 
     <?= $form->field($model, 'status')->dropDownList([
-        '0' => 'Ожидает проверки',
-        '1' => 'Опубликован',
-        '2' => 'Не опубликован',
+        '0' => 'На проверке',
+        '1' => 'Опубликован'
     ]) ?>
 
     <?= $form->field($model, 'sort')->textInput() ?>

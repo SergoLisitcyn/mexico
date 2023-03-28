@@ -338,3 +338,14 @@ img {
         justify-content: center;
     }
 }
+
+.field-reviews-email{
+    width: 48%;
+}
+.field-reviews-name {
+    width: 48%;
+}
+
+.main-form__box .main-form__input--person{
+    width: 100%;
+}

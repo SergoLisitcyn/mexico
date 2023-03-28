@@ -1,3 +1,7 @@
+<?php
+$reviewsCount = \common\models\Reviews::find()->where(['status' => 0])->count();
+
+?>
 <aside class="main-sidebar">
     <section class="sidebar">
         <div class="user-panel">
@@ -64,7 +68,13 @@
                     ['label' => 'Información precisa', 'icon' => 'info', 'url' => ['/review-information/create']],
                     ['label' => 'Меню', 'icon' => 'reorder', 'url' => ['/menu']],
                     ['label' => 'Футер Текст', 'icon' => 'text-width', 'url' => ['/footer-text/update?id=1']],
-                    ['label' => 'Отзывы', 'icon' => 'comments', 'url' => ['/reviews']],
+                    ['label' => 'Отзывы', 'icon' => 'comments', 'url' => ['/reviews'],'template' => '<li class="nav-item">
+<a href="/admin/reviews" class="nav-link">
+<i class="nav-icon far fa fa-comments"></i>
+Отзывы
+<span class="badge badge-info right">'.$reviewsCount.'</span>
+</a>
+</li>'],
                     ['label' => 'Плашки для МФО', 'icon' => 'paint-brush', 'url' => ['/block-rec']],
                     ['label' => 'SEO', 'icon' => 'area-chart', 'url' => ['/seo-tags']],
                     ['label' => 'Код счетчика', 'icon' => 'area-chart', 'url' => ['/seo-codes/update?id=1']],

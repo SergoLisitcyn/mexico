@@ -106,12 +106,28 @@ class MfoController extends Controller
         if(!$mfo){
             throw new HttpException(404, 'Страница не существует.');
         }
+        $montosText = null;
+        if($mfo->montos_text){
+            $buttonText = 'Recibir dinero';
+            if($mfo->button_text){
+                $buttonText = $mfo->button_text;
+            }
+            $templates = [
+                'button' => '<a class="calculator__button button button--primary" target="_blank"
+ href="/redirect?r='.$mfo->data['meta_tags']['affiliate'].'&url='.$mfo->url.'">'.$buttonText.'</a>'
+            ];
+            if (!empty($templates)) {
+                foreach ($templates as $k => $v) {
+                    $montosText = str_replace('{' . $k . '}', $v, $mfo->montos_text);
+                }
+            }
+        }
         $reviewsCount = Reviews::find()->where(['mfo_id' => $mfo->id, 'status' => 1])->count();
 
         $reviewsModel = new Reviews();
 
         if ($reviewsModel->load(Yii::$app->request->post()) && $reviewsModel->save()) {
-            Yii::$app->session->setFlash('successReviews', 'Tu comentario ha sido enviado. ¡Gracias por ponerte en contacto!');
+            Yii::$app->session->setFlash('successReviews', 'Su comentario ha sido enviado para verificación.');
             return $this->refresh();
         } else {
             return $this->render('view', [
@@ -123,6 +139,7 @@ class MfoController extends Controller
                 'total' => $total,
                 'procent' => $procent,
                 'firstLoan' => $firstLoan,
+                'montosText' => $montosText,
             ]);
         }
     }

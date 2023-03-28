@@ -1,3 +1,6 @@
+<?php
+ if($model->type != 'Cards') {
+?>
 <div class="mfo-about__calculator calculator">
     <div class="calculator__row background-set">
         <div class="calculator__columns">
@@ -45,7 +48,13 @@
             <div class="calculator-sum__number" id="cost"><?= $total ?></div> <span class="calculator-sum__number-span">$</span>
         </div>
         <?php if(isset($model->data['meta_tags']['affiliate']) && $model->data['meta_tags']['affiliate'] != '-') : ?>
-            <a class="calculator__button button button--primary" target="_blank" href="//<?= $model->data['meta_tags']['affiliate'] ?>">Recibir dinero</a>
+            <a class="calculator__button button button--primary" target="_blank" href="/redirect?r=<?= $model->data['meta_tags']['affiliate'] ?>&url=<?= $model->url ?>">Recibir dinero</a>
         <?php endif; ?>
     </div>
 </div>
+<?php } ?>
+<?php if($model->type == 'Cards') { ?>
+<?php if(isset($model->data['meta_tags']['affiliate']) && $model->data['meta_tags']['affiliate'] != '-') : ?>
+    <a class="calculator__button button button--primary" target="_blank" href="/redirect?r=<?= $model->data['meta_tags']['affiliate'] ?>&url=<?= $model->url ?>">Recibir dinero</a>
+<?php endif; ?>
+<?php } ?>

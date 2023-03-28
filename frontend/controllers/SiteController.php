@@ -157,6 +157,17 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+    public function actionRedirect()
+    {
+        if(isset($_GET) && isset($_GET['r'])  && isset($_GET['url'])){
+            $mfo = Mfo::find()->where(['url' => $_GET['url']])->one();
+            return $this->render('redirect', [
+                'redirect' => $_GET['r'],
+                'mfo' => $mfo
+            ]);
+        }
+        throw new HttpException(404, 'Страница не существует.');
+    }
 
     public function actionReviewInformation()
     {

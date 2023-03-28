@@ -57,6 +57,7 @@ if(isset($model->data['meta_tags']['h1'])){
         ); ?>
         <input type="hidden" name="_csrf" value="<?=Yii::$app->request->getCsrfToken()?>" />
         <input type="hidden" id="review-cat_id" name="Reviews[mfo_id]" value="<?= $model->id ?>"/>
+        <input type="hidden" id="review-cat_id" name="Reviews[status]" value="0"/>
             <ul class="main-form__rating-list rating-list">
                 <li class="rating-list__item">
                     <div class="rating-list__title">
@@ -120,8 +121,10 @@ if(isset($model->data['meta_tags']['h1'])){
                 </li>
             </ul>
         <div class="main-form__box">
-            <input class="main-form__input main-form__input--person" name="Reviews[name]" placeholder="Name"></input>
-            <input class="main-form__input main-form__input--person" name="Reviews[email]" placeholder="E-mail"></input>
+            <?= $form->field($reviewsModel, 'name')->textInput(['class' => 'main-form__input main-form__input--person','placeholder' => "Name"])->label(false) ?>
+            <?= $form->field($reviewsModel, 'email')->textInput(['class' => 'main-form__input main-form__input--person','placeholder' => "E-mail"])->label(false) ?>
+<!--            <input class="main-form__input main-form__input--person" name="Reviews[name]" placeholder="Name"></input>-->
+<!--            <input class="main-form__input main-form__input--person" name="Reviews[email]" placeholder="E-mail"></input>-->
         </div>
         <?= $form->field($reviewsModel, 'body')->textarea(['class' => 'main-form__input','placeholder' => "Danos tu opinión"])->label(false) ?>
         <?= $form->field($reviewsModel, 'plus')->textarea(['class' => 'main-form__input','placeholder' => "Ventajas"])->label(false) ?>

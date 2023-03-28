@@ -55,6 +55,7 @@ use \yii\helpers\Url;
             ?>
         </div>
     </div>
+    <?= $form->field($model, 'button_text')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'montos_title')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'montos_text')->widget(Widget::className(), [

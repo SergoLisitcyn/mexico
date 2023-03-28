@@ -7,6 +7,12 @@ if(isset($model->data['meta_tags']['description']) && !empty($model->data['meta_
 ?>
 <div class="main__page-info">
     <div class="container">
+        <?php if( Yii::$app->session->hasFlash('successReviews') ): ?>
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <?php echo Yii::$app->session->getFlash('successReviews'); ?>
+            </div>
+        <?php endif;?>
         <div class="main__breadcrumbs breadcrumbs">
             <ul class="breadcrumbs__items">
                 <li class="breadcrumbs__item">
@@ -82,8 +88,8 @@ if(isset($model->data['meta_tags']['description']) && !empty($model->data['meta_
                                     <?php if($model->montos_title) :  ?>
                                         <h2 class="tabs-content-info__title title"><?= $model->montos_title ?></h2>
                                     <?php endif; ?>
-                                    <?php if($model->montos_text) :  ?>
-                                        <?= $model->montos_text ?>
+                                    <?php if($montosText) :  ?>
+                                        <?= $montosText ?>
                                     <?php endif; ?>
                                 </div>
                                 <!--   Offers -->

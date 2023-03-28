@@ -45,11 +45,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function ($model) {
                     $result = '';
                     if($model->status == 0){
-                        $result .= 'Ожидает проверки';
+                        $result .= 'На проверке';
                     } elseif($model->status == 1) {
                         $result .= 'Опубликован';
                     } else {
-                        $result .= 'Не опубликован';
+                        $result .= 'На проверке';
                     }
                     return $result;
                 },

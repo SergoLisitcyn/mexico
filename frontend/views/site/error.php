@@ -5,8 +5,6 @@
 /** @var string $message */
 /** @var Exception $exception */
 
-use yii\helpers\Html;
-
 $this->title = $name;
 ?>
 <section class="not-found">

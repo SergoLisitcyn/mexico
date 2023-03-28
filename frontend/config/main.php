@@ -48,6 +48,7 @@ return [
                 '/' => '/site/index',
                 'contacto' => '/site/contact',
                 'signup' => '/site/signup',
+                'redirect' => '/site/redirect',
 //                'empresas' => '/site/empresas',
                 'progress-value' => '/site/progress-value',
                 'review-information' => '/site/review-information',

@@ -47,10 +47,10 @@ class Reviews extends ActiveRecord
     public function rules()
     {
         return [
-            [['mfo_id', 'costs', 'conditions', 'support', 'functionality', 'body'], 'required'],
+            [['mfo_id', 'costs', 'conditions', 'support', 'functionality', 'body','name','email'], 'required'],
             [['costs', 'conditions', 'support', 'functionality', 'recommendation', 'status', 'sort', 'created_at', 'updated_at'], 'integer'],
             [['body', 'plus', 'minus'], 'string'],
-            [['mfo_id'], 'string', 'max' => 255],
+            [['mfo_id','name','email'], 'string', 'max' => 255],
         ];
     }
 
@@ -69,6 +69,8 @@ class Reviews extends ActiveRecord
             'body' => 'Сообщение',
             'plus' => 'Плюсы',
             'minus' => 'Минусы',
+            'name' => 'Name',
+            'email' => 'E-mail',
             'recommendation' => 'Recommendation',
             'status' => 'Статус',
             'sort' => 'Сортировка',

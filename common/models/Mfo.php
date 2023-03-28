@@ -29,6 +29,7 @@ use yii\web\UploadedFile;
  * @property string|null $description
  * @property string|null $keywords
  * @property string|null $rating
+ * @property string|null $button_text
  * @property int $created_at
  * @property int $updated_at
  * @property string|null $montos_title
@@ -61,7 +62,7 @@ class Mfo extends ActiveRecord
             [['name', 'url', 'title'], 'required'],
             [['data','rating_auto'], 'safe'],
             [['status', 'sort', 'created_at', 'updated_at','color_id'], 'integer'],
-            [['name', 'url', 'title', 'logo', 'description', 'keywords', 'montos_title'], 'string', 'max' => 255],
+            [['name', 'url', 'title', 'logo', 'description', 'keywords', 'montos_title','button_text'], 'string', 'max' => 255],
             [['montos_text'], 'string'],
             [['rating'], 'string', 'max' => 11],
             [['logo_file'], 'file'],
@@ -92,6 +93,7 @@ class Mfo extends ActiveRecord
             'montos_title' => 'Montos Title',
             'montos_text' => 'Montos Текст',
             'color_id' => 'Плашка',
+            'button_text' => 'Текст кнопки',
         ];
     }
     public function afterFind() {
