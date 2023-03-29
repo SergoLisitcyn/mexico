@@ -349,3 +349,7 @@ img {
 .main-form__box .main-form__input--person{
     width: 100%;
 }
+
+.calculator__button_cards{
+    display: inline-block !important;
+}

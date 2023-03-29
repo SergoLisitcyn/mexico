@@ -55,6 +55,8 @@
 <?php } ?>
 <?php if($model->type == 'Cards') { ?>
 <?php if(isset($model->data['meta_tags']['affiliate']) && $model->data['meta_tags']['affiliate'] != '-') : ?>
-    <a class="calculator__button button button--primary" target="_blank" href="/redirect?r=<?= $model->data['meta_tags']['affiliate'] ?>&url=<?= $model->url ?>">Recibir dinero</a>
+    <div style="text-align: center">
+        <a class="calculator__button button button--primary calculator__button_cards" target="_blank" href="/redirect?r=<?= $model->data['meta_tags']['affiliate'] ?>&url=<?= $model->url ?>">Recibir dinero</a>
+    </div>
 <?php endif; ?>
 <?php } ?>

@@ -113,7 +113,7 @@ class MfoController extends Controller
                 $buttonText = $mfo->button_text;
             }
             $templates = [
-                'button' => '<a class="calculator__button button button--primary" target="_blank"
+                'button' => '<a class="calculator__button button button--primary calculator__button_cards" target="_blank"
  href="/redirect?r='.$mfo->data['meta_tags']['affiliate'].'&url='.$mfo->url.'">'.$buttonText.'</a>'
             ];
             if (!empty($templates)) {
