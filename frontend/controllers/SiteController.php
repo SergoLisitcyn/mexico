@@ -190,14 +190,14 @@ class SiteController extends Controller
      */
     public function actionSolicita($url)
     {
-        if($url == 'p2p'){
-            $mfo = Mfo::find()->with('color')->where(['status' => 1,'type' => 'P2P'])->all();
-            $mfoText = MfoText::find()->where(['name' => 'Text'])->one();
-            return $this->render('p2p', [
-                'mfos' => $mfo,
-                'mfoText' => $mfoText->text_mfo['text'],
-            ]);
-        }
+//        if($url == 'p2p'){
+//            $mfo = Mfo::find()->with('color')->where(['status' => 1,'type' => 'P2P'])->all();
+//            $mfoText = MfoText::find()->where(['name' => 'Text'])->one();
+//            return $this->render('p2p', [
+//                'mfos' => $mfo,
+//                'mfoText' => $mfoText->text_mfo['text'],
+//            ]);
+//        }
         $request = Yii::$app->request;
         $post = $request->post();
         $sum = 50;
@@ -227,7 +227,11 @@ class SiteController extends Controller
         ksort($data);
         $mfoText = MfoText::find()->where(['name' => 'Text'])->one();
 
-        return $this->render('solicita', [
+        $render = 'solicita';
+        if($url == 'p2p'){
+            $render = 'p2p';
+        }
+        return $this->render($render, [
             'mfos' => $data,
             'mfoText' => $mfoText->text_mfo['text'],
             'text' => $text,

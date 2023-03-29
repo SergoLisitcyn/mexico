@@ -726,6 +726,7 @@ class Mfo extends ActiveRecord
         $data['prestamos_rapidos'] = $value[5]; // Prestamos rapidos
         $data['prestamos_en_linea_sin_buro'] = $value[6]; // Prestamos en linea sin buro
         $data['prestamos_personales_urgentes'] = $value[7]; // Prestamos personales urgentes
+        $data['p2p'] = $value[8]; // P2P
 
         return $data;
     }

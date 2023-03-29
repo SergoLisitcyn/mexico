@@ -16,32 +16,34 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
             <li class="breadcrumbs__item">
                 <a href="/" class="breadcrumbs__link">Inicio</a>
             </li>
-            <li class="breadcrumbs__item">
-                Préstamos P2P
-            </li>
+            <?php if($text->title_h1) :?>
+                <li class="breadcrumbs__item">
+                    <?= $text->title_h1 ?>
+                </li>
+            <?php endif; ?>
         </ul>
     </div>
 </div>
 <div class="content">
     <div class="container">
         <h1 class="main__title main-title">Préstamos P2P</h1>
-<!--        --><?php //if($text->text_top) : ?>
+        <?php if($text->text_top) : ?>
             <div class="values__descr">
-                Si estás buscando de un minicrédito o un préstamo que no te involucre con otras instituciones financieras,
-                entonces los préstamos p2p son la mejor opción para ti. Podrás solicitar el dinero completando un sencillo
-                formulario y en poco tiempo inversores comenzarán a aportar capital, permitiéndote recibir el dinero en tu
-                cuenta bancaria. Aprende todo sobre préstamos p2p México y obtén tu crédito ahora.
-<!--                --><?php //= $text->text_top ?>
+<!--                Si estás buscando de un minicrédito o un préstamo que no te involucre con otras instituciones financieras,-->
+<!--                entonces los préstamos p2p son la mejor opción para ti. Podrás solicitar el dinero completando un sencillo-->
+<!--                formulario y en poco tiempo inversores comenzarán a aportar capital, permitiéndote recibir el dinero en tu-->
+<!--                cuenta bancaria. Aprende todo sobre préstamos p2p México y obtén tu crédito ahora.-->
+                <?= $text->text_top ?>
             </div>
-<!--        --><?php //endif; ?>
+        <?php endif; ?>
         <div class="content__block">
             <div class="content__row">
                 <section class="cards">
-                    <?php foreach ($mfos as $mfo) :
-                        $reviewsCount = Reviews::find()->where(['mfo_id' => $mfo->id, 'status' => 1])->count();
-                        $sum = $mfo->sum;
-                        $term = $mfo->term;
-                        $procent = (float)str_replace(',', '.', $mfo->data['condiciones']['rate_first']);
+                    <?php foreach ($mfos as $key => $mfo) :
+                        $reviewsCount = Reviews::find()->where(['mfo_id' => $mfo['params']['id'], 'status' => 1])->count();
+                        $sum = $mfo['params']['sum'];
+                        $term = $mfo['params']['term'];
+                        $procent = (float)str_replace(',', '.', $mfo['params']['data']['condiciones']['rate_first']);
 
                         $sumAll = $sum * ($procent/100) * $term;
                         $sumWithVat = $sumAll * 0.16;
@@ -57,10 +59,10 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                                     <div class="offer__company-line" style="background: <?= $mfo['params']['color']['color'] ?>;"><?= $mfo['params']['color']['name'] ?></div>
                                     <?php endif; ?>
                                     <div class="offer__company-logo">
-                                        <?php if($mfo->logo) : ?>
+                                        <?php if($mfo['params']['logo']) : ?>
                                             <div class="offer__company-img">
-                                                <a href="<?= Url::toRoute(['mfo/view', 'url' => $mfo->url]) ?>">
-                                                    <img src="<?= $mfo->logo ?>" alt="<?= $mfo->name ?>">
+                                                <a href="<?= Url::toRoute(['mfo/view', 'url' => $mfo['params']['url']]) ?>">
+                                                    <img src="<?= $mfo['params']['logo'] ?>" alt="<?= $mfo['params']['name'] ?>">
                                                 </a>
                                             </div>
                                         <?php endif; ?>
@@ -71,17 +73,17 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                                             </div>
                                             <div class="repute__comments">
                                                 <?php if($reviewsCount > 0) : ?>
-                                                    Leer <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $mfo->url]) ?>" class="repute__comments-link"><?= $reviewsCount ?> comentarios</a>
+                                                    Leer <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $mfo['params']['url']]) ?>" class="repute__comments-link"><?= $reviewsCount ?> comentarios</a>
                                                 <?php else: ?>
-                                                    <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $mfo->url]) ?>" class="repute__comments-link">Danos tu opinión
+                                                    <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $mfo['params']['url']]) ?>" class="repute__comments-link">Danos tu opinión
                                                     </a>
                                                 <?php endif; ?>
                                             </div>
 
                                         </div>
                                     </div>
-                                    <?php if(isset($mfo->data['data_company']['legal_name_company']) && $mfo->data['data_company']['legal_name_company'] != '-') : ?>
-                                        <div class="offer__company-title"><?= $mfo->data['data_company']['legal_name_company'] ?></div>
+                                    <?php if(isset($mfo['params']['data']['data_company']['legal_name_company']) && $mfo['params']['data']['data_company']['legal_name_company'] != '-') : ?>
+                                        <div class="offer__company-title"><?= $mfo['params']['data']['data_company']['legal_name_company'] ?></div>
                                     <?php endif; ?>
                                 </div>
                                 <div class="offer__content">
@@ -100,7 +102,7 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                                             <li class="offer__value-item">
                                                 <div class="offer__value-title">
                                                     Tasa de interés, %</div>
-                                                <div class="offer__value-number"><?= $mfo->data['condiciones']['rate_first'] ?></div>
+                                                <div class="offer__value-number"><?= $mfo['params']['data']['condiciones']['rate_first'] ?></div>
                                             </li>
                                             <li class="offer__value-item">
                                                 <div class="offer__value-title">
@@ -112,14 +114,14 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                                                     CAT, %</div>
                                                 <?php
                                                     $cat = 11;
-                                                    if($mfo->data['condiciones']['min_total_cost'] != '-'){
-                                                        $cat = $mfo->data['condiciones']['min_total_cost'];
+                                                    if($mfo['params']['data']['condiciones']['min_total_cost'] != '-'){
+                                                        $cat = $mfo['params']['data']['condiciones']['min_total_cost'];
                                                     }
-                                                    if($mfo->data['condiciones']['max_total_cost'] != '-'){
-                                                        $cat = $mfo->data['condiciones']['max_total_cost'];
+                                                    if($mfo['params']['data']['condiciones']['max_total_cost'] != '-'){
+                                                        $cat = $mfo['params']['data']['condiciones']['max_total_cost'];
                                                     }
-                                                    if($mfo->data['condiciones']['min_total_cost'] != '-' && $mfo->data['condiciones']['max_total_cost'] != '-'){
-                                                        $cat = $mfo->data['condiciones']['min_total_cost'].' - '.$mfo->data['condiciones']['max_total_cost'];
+                                                    if($mfo['params']['data']['condiciones']['min_total_cost'] != '-' && $mfo['params']['data']['condiciones']['max_total_cost'] != '-'){
+                                                        $cat = $mfo['params']['data']['condiciones']['min_total_cost'].' - '.$mfo['params']['data']['condiciones']['max_total_cost'];
                                                     }
                                                 ?>
                                                 <div class="offer__value-number"><?= $cat ?></div>
@@ -136,8 +138,8 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                                             <input type="checkbox" checked class="checkbox">
                                             <div class="offer__links">
                                                 <div class="offer__open button button--secondary open">Más info</div>
-                                                <?php if(isset($mfo->data['meta_tags']['affiliate']) && $mfo->data['meta_tags']['affiliate'] != '-') : ?>
-                                                    <a class="offer__receive button button--primary" target="_blank" href="/redirect?r=<?= $mfo->data['meta_tags']['affiliate'] ?>&url=<?= $mfo->url ?>">Recibir dinero</a>
+                                                <?php if(isset($mfo['params']['data']['meta_tags']['affiliate']) && $mfo['params']['data']['meta_tags']['affiliate'] != '-') : ?>
+                                                    <a class="offer__receive button button--primary" target="_blank" href="/redirect?r=<?= $mfo['params']['data']['meta_tags']['affiliate'] ?>&url=<?= $mfo['params']['url'] ?>">Recibir dinero</a>
                                                 <?php endif; ?>
                                             </div>
                                         </div>
@@ -145,9 +147,9 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
 
                                             <div class="repute__comments">
                                                 <?php if($reviewsCount > 0) : ?>
-                                                    Leer <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $mfo->url]) ?>" class="repute__comments-link"><?= $reviewsCount ?> comentarios</a>
+                                                    Leer <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $mfo['params']['url']]) ?>" class="repute__comments-link"><?= $reviewsCount ?> comentarios</a>
                                                 <?php else: ?>
-                                                    <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $mfo->url]) ?>" class="repute__comments-link">Danos tu opinión
+                                                    <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $mfo['params']['url']]) ?>" class="repute__comments-link">Danos tu opinión
                                                     </a>
                                                 <?php endif; ?>
                                             </div>
@@ -162,16 +164,16 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                                     </div>
                                     <div class="offer-dropdown__item offer-dropdown__info">
                                         <ul class="offer-dropdown__info-list">
-                                            <?php if(isset($mfo->data['requisitos']['older_than']) && $mfo->data['requisitos']['older_than'] != '-') : ?>
+                                            <?php if(isset($mfo['params']['data']['requisitos']['older_than']) && $mfo['params']['data']['requisitos']['older_than'] != '-') : ?>
                                                 <li class="offer-dropdown__info-item">
                                                     <p class="offer-dropdown__info-text">Ser mayor de</p>
-                                                    <div class="offer-dropdown__info-number"><?= $mfo->data['requisitos']['older_than'] ?></div>
+                                                    <div class="offer-dropdown__info-number"><?= $mfo['params']['data']['requisitos']['older_than'] ?></div>
                                                 </li>
                                             <?php endif; ?>
-                                            <?php if(isset($mfo->data['condiciones']['rate_first']) && $mfo->data['condiciones']['rate_first'] != '-') : ?>
+                                            <?php if(isset($mfo['params']['data']['condiciones']['rate_first']) && $mfo['params']['data']['condiciones']['rate_first'] != '-') : ?>
                                                 <li class="offer-dropdown__info-item">
                                                     <p class="offer-dropdown__info-text">Tasa de interés anual</p>
-                                                    <div class="offer-dropdown__info-number"><?= $mfo->data['condiciones']['rate_first'] ?></div>
+                                                    <div class="offer-dropdown__info-number"><?= $mfo['params']['data']['condiciones']['rate_first'] ?></div>
                                                 </li>
                                             <?php endif; ?>
 
@@ -183,20 +185,20 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                                     </div>
                                     <div class="offer-dropdown__item offer-dropdown__connection">
                                         <ul class="offer-dropdown__connection-list">
-                                            <?php if(isset($mfo->data['characteristic']['round_the_clock']) && $mfo->data['characteristic']['round_the_clock'] != '-') : ?>
+                                            <?php if(isset($mfo['params']['data']['characteristic']['round_the_clock']) && $mfo['params']['data']['characteristic']['round_the_clock'] != '-') : ?>
                                                 <li class="offer-dropdown__connection-item">
                                                     <p class="offer-dropdown__connection-text">Abierto 24/7</p>
                                                     <img class="offer-dropdown__connection-image" src="/img/checkbox.svg" alt="checkbox">
                                                 </li>
                                             <?php endif; ?>
 
-                                            <?php if(isset($mfo->data['contacts']['whatsapp']) && $mfo->data['contacts']['whatsapp'] != '-') : ?>
+                                            <?php if(isset($mfo['params']['data']['contacts']['whatsapp']) && $mfo['params']['data']['contacts']['whatsapp'] != '-') : ?>
                                                 <li class="offer-dropdown__connection-item offer-dropdown__connection-item--column">
                                                     <p class="offer-dropdown__connection-text">WhatsApp</p>
-                                                    <a href="tel:<?= $mfo->data['contacts']['whatsapp'] ?>" class="offer-dropdown__connection-phone"><?= $mfo->data['contacts']['whatsapp'] ?></a>
+                                                    <a href="tel:<?= $mfo['params']['data']['contacts']['whatsapp'] ?>" class="offer-dropdown__connection-phone"><?= $mfo['params']['data']['contacts']['whatsapp'] ?></a>
                                                 </li>
                                             <?php endif; ?>
-                                            <?php if(isset($mfo->data['characteristic']['tiene_app']) && $mfo->data['characteristic']['tiene_app'] != '-') : ?>
+                                            <?php if(isset($mfo['params']['data']['characteristic']['tiene_app']) && $mfo['params']['data']['characteristic']['tiene_app'] != '-') : ?>
                                                 <li class="offer-dropdown__connection-item">
                                                     <p class="offer-dropdown__connection-text"><?= $mfoText['characteristic']['tiene_app'] ?></p>
                                                     <img class="offer-dropdown__connection-image" src="/img/checkbox.svg" alt="checkbox">
