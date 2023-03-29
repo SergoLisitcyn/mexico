@@ -43,9 +43,10 @@ class Contacts extends ActiveRecord
         return [
             [['name', 'email', 'body'], 'required'],
             [['body'], 'string'],
+            [['status'], 'integer'],
             [['name', 'email'], 'string', 'max' => 255],
             ['email', 'email'],
-            ['verifyCode', 'captcha'],
+//            ['verifyCode', 'captcha'],
         ];
     }
 
@@ -59,8 +60,9 @@ class Contacts extends ActiveRecord
             'name' => 'Nombre',
             'email' => 'Email',
             'body' => 'Mensaje',
-            'verifyCode' => 'Verification Code',
+//            'verifyCode' => 'Verification Code',
             'created_at' => 'Дата',
+            'status' => 'Статус',
         ];
     }
 }

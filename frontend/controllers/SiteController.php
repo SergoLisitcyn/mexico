@@ -132,7 +132,7 @@ class SiteController extends Controller
      */
     public function actionContact()
     {
-        $model = new Contacts();
+        $model = new ContactForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
                 Yii::$app->session->setFlash('success', 'Gracias por ponerse en contacto con nosotros. Le responderemos lo antes posible.');

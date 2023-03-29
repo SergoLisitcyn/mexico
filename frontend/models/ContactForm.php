@@ -2,6 +2,7 @@
 
 namespace frontend\models;
 
+use common\models\Contacts;
 use Yii;
 use yii\base\Model;
 
@@ -24,7 +25,7 @@ class ContactForm extends Model
     {
         return [
             // name, email, subject and body are required
-            [['name', 'email', 'subject', 'body'], 'required'],
+            [['name', 'email', 'body'], 'required'],
             // email has to be a valid email address
             ['email', 'email'],
             // verifyCode needs to be entered correctly
@@ -57,5 +58,17 @@ class ContactForm extends Model
             ->setSubject($this->subject)
             ->setTextBody($this->body)
             ->send();
+    }
+
+    public function save()
+    {
+        $model = new Contacts();
+        $model->name = $this->name;
+        $model->email = $this->email;
+        $model->body = $this->body;
+        if ($model->save()) {
+            return true;
+        }
+        return false;
     }
 }
