@@ -86,7 +86,7 @@ use yii\helpers\Url;
                                 <div class="offer__links">
                                     <div class="offer__open button button--secondary open">Más info</div>
                                     <?php if(isset($random->data['meta_tags']['affiliate']) && $random->data['meta_tags']['affiliate'] != '-') : ?>
-                                        <a class="offer__receive button button--primary" target="_blank" href="//<?= $random->data['meta_tags']['affiliate'] ?>">Recibir dinero</a>
+                                        <a class="offer__receive button button--primary" target="_blank" href="/redirect?r=<?= $random->data['meta_tags']['affiliate'] ?>&url=<?= $random->url ?>">Recibir dinero</a>
                                     <?php endif; ?>
                                 </div>
                             </div>

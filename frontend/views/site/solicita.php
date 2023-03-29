@@ -140,7 +140,7 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                                             <div class="offer__links">
                                                 <div class="offer__open button button--secondary open">Más info</div>
                                                 <?php if(isset($mfo['params']['data']['meta_tags']['affiliate']) && $mfo['params']['data']['meta_tags']['affiliate'] != '-') : ?>
-                                                    <a class="offer__receive button button--primary" target="_blank" href="//<?= $mfo['params']['data']['meta_tags']['affiliate'] ?>">Recibir dinero</a>
+                                                    <a class="offer__receive button button--primary" target="_blank" href="/redirect?r=<?= $mfo['params']['data']['meta_tags']['affiliate'] ?>&url=<?= $mfo['params']['url'] ?>">Recibir dinero</a>
                                                 <?php endif; ?>
                                             </div>
                                         </div>

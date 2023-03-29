@@ -34,7 +34,7 @@ $this->registerMetaTag(['http-equiv' =>'Refresh', 'content' => '3; https://'.$re
         right: 5px;
         z-index: 1;
         margin: 0 auto;
-        border-bottom: 2px dashed #d8d8d8;
+        border-bottom: 3px solid #6236ff;
     }
     .redirect-box__button-outer-circle {
         position: relative;
@@ -42,9 +42,9 @@ $this->registerMetaTag(['http-equiv' =>'Refresh', 'content' => '3; https://'.$re
         display: block;
         width: 14px;
         height: 14px;
-        border: 3px solid #d8d8d8;
+        border: 3px solid #6236ff;
         border-radius: 100%;
-        background-color: #d8d8d8;
+        background-color: #6236ff;
     }
     .redirect-box__button-outer-arrow {
         position: relative;
@@ -52,7 +52,7 @@ $this->registerMetaTag(['http-equiv' =>'Refresh', 'content' => '3; https://'.$re
         display: block;
         border-top: 6px solid transparent;
         border-bottom: 6px solid transparent;
-        border-left: 12px solid #d8d8d8;
+        border-left: 12px solid #6236ff;
     }
     .redirect-box__description {
         display: block;
@@ -72,6 +72,9 @@ $this->registerMetaTag(['http-equiv' =>'Refresh', 'content' => '3; https://'.$re
         letter-spacing: normal;
         color: #000;
         text-align: center;
+    }
+    .redirect-box__logo img{
+        width: 100%;
     }
 </style>
 <section class="main__block-checkbox block-checkbox" style="margin-bottom: 42px">
