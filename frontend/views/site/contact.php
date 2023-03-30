@@ -46,17 +46,10 @@ $this->title = 'Contact';
 <!--                            --><?php //= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
 //                                'template' => '<div class="row"><div class="col-lg-6">{image}</div><div class="col-lg-6">{input}</div></div>',
 //                            ]) ?>
-<!--                            --><?php //= $form->field($model, 'reCaptcha')->widget(
-//                                \himiklab\yii2\recaptcha\ReCaptcha2::className(),
-//                                [
-//                                    'siteKey' => '6LcVb0MlAAAAABQg6h9WqzweK1DCj-SWKs8UvLm_',
-//                                ]
-//                            ) ?>
                             <?= $form->field($model, 'reCaptcha')->widget(
-                                \himiklab\yii2\recaptcha\ReCaptcha3::className(),
+                                \himiklab\yii2\recaptcha\ReCaptcha2::className(),
                                 [
                                     'siteKey' => '6LcVb0MlAAAAABQg6h9WqzweK1DCj-SWKs8UvLm_',
-                                    'action' => 'contact',
                                 ]
                             ) ?>
 

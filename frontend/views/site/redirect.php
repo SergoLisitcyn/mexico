@@ -11,6 +11,7 @@ $this->registerMetaTag(['http-equiv' =>'Refresh', 'content' => '3; https://'.$re
     }
     .redirect-box__logo {
         /*width: 180px;*/
+        max-width: 180px;
         flex-shrink: 0;
         margin: 0;
     }
