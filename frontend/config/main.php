@@ -61,6 +61,7 @@ return [
                 'review-information' => '/site/review-information',
                 'entidad' => '/mfo/index',
                 'captcha' => '/site/captcha',
+                'sitemap.xml' => '/sitemap/index',
                 [
                     'pattern' => 'entidad/<url:\S+>/reviews',
                     'route' => '/mfo/reviews',
