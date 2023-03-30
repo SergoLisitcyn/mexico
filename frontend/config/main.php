@@ -16,6 +16,11 @@ return [
         'assetManager' => [
             'appendTimestamp' => true,
         ],
+        'reCaptcha' => [
+            'class' => 'himiklab\yii2\recaptcha\ReCaptchaConfig',
+            'siteKeyV2' => '6LcVb0MlAAAAABQg6h9WqzweK1DCj-SWKs8UvLm_',
+            'secretV2' => '6LcVb0MlAAAAACoFCI0Dqv6bYd650VSXjeqoJxwG',
+        ],
         'request' => [
 //            'csrfParam' => '_csrf-frontend',
             'baseUrl' => '',
