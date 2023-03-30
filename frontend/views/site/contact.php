@@ -43,9 +43,15 @@ $this->title = 'Contact';
                             <?= $form->field($model, 'email')->textInput(['class' => 'main-form__input main-form__input--person','placeholder' => "Email"]) ?>
                             <?= $form->field($model, 'body')->textarea(['rows' => 6,'placeholder' => "Mensaje",'class' => 'main-form__input']) ?>
 
-                            <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
-                                'template' => '<div class="row"><div class="col-lg-6">{image}</div><div class="col-lg-6">{input}</div></div>',
-                            ]) ?>
+<!--                            --><?php //= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
+//                                'template' => '<div class="row"><div class="col-lg-6">{image}</div><div class="col-lg-6">{input}</div></div>',
+//                            ]) ?>
+                            <?= $form->field($model, 'reCaptcha')->widget(
+                                \himiklab\yii2\recaptcha\ReCaptcha2::className(),
+                                [
+                                    'siteKey' => '6LcVb0MlAAAAABQg6h9WqzweK1DCj-SWKs8UvLm_',
+                                ]
+                            ) ?>
 
                             <?= Html::submitButton('Enviar un mensaje', ['class' => 'main-form__button button button--primary']) ?>
 
