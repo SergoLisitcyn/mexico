@@ -31,9 +31,14 @@ class ContactForm extends Model
             ['email', 'email'],
             // verifyCode needs to be entered correctly
 //            ['verifyCode', 'captcha'],
-            [['reCaptcha'], ReCaptchaValidator2::className(),
+//            [['reCaptcha'], ReCaptchaValidator2::className(),
+//                'secret' => '6LcVb0MlAAAAACoFCI0Dqv6bYd650VSXjeqoJxwG', // unnecessary if reСaptcha is already configured
+//                'uncheckedMessage' => 'Please confirm that you are not a bot.'],
+            [['reCaptcha'], \himiklab\yii2\recaptcha\ReCaptchaValidator3::className(),
                 'secret' => '6LcVb0MlAAAAACoFCI0Dqv6bYd650VSXjeqoJxwG', // unnecessary if reСaptcha is already configured
-                'uncheckedMessage' => 'Please confirm that you are not a bot.'],
+                'threshold' => 0.5,
+                'action' => 'contact',
+            ],
 
         ];
     }
