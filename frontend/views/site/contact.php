@@ -4,6 +4,7 @@
 /** @var yii\bootstrap4\ActiveForm $form */
 /** @var \frontend\models\ContactForm $model */
 
+use himiklab\yii2\recaptcha\ReCaptcha2;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\ActiveForm;
 use yii\captcha\Captcha;
@@ -47,9 +48,9 @@ $this->title = 'Contact';
 //                                'template' => '<div class="row"><div class="col-lg-6">{image}</div><div class="col-lg-6">{input}</div></div>',
 //                            ]) ?>
                             <?= $form->field($model, 'reCaptcha')->widget(
-                                \himiklab\yii2\recaptcha\ReCaptcha2::className(),
+                                ReCaptcha2::className(),
                                 [
-                                    'siteKey' => '6LcVb0MlAAAAABQg6h9WqzweK1DCj-SWKs8UvLm_',
+                                    'siteKey' => '6Le-e1slAAAAAGdE1gHlP5RNeCT26P_fhaAmqAGJ',
                                 ]
                             ) ?>
 

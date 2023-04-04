@@ -32,7 +32,7 @@ class ContactForm extends Model
             // verifyCode needs to be entered correctly
 //            ['verifyCode', 'captcha'],
             [['reCaptcha'], ReCaptchaValidator2::className(),
-                'secret' => '6LcVb0MlAAAAACoFCI0Dqv6bYd650VSXjeqoJxwG', // unnecessary if reСaptcha is already configured
+                'secret' => '6Le-e1slAAAAADoZMMsMeuozVrVe1aiCWRnaYn6v', // unnecessary if reСaptcha is already configured
                 'uncheckedMessage' => 'Please confirm that you are not a bot.'],
 
         ];
