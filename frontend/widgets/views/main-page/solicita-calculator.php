@@ -76,7 +76,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="calculator__button button button--secondary">Más info</button>
+<!--                    <button type="button" class="calculator__button button button--secondary">Más info</button>-->
                 </div>
             </div>
         </form>
