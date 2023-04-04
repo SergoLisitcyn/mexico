@@ -25,6 +25,7 @@ use yii\db\ActiveRecord;
  * @property string|null $ocde
  * @property string|null $registration_date
  * @property string|null $certificate
+ * @property string|null $text
  */
 class MainContact extends ActiveRecord
 {
@@ -45,6 +46,7 @@ class MainContact extends ActiveRecord
             [['city', 'direction', 'postal_code', 'phone', 'phone_second', 'email', 'whatsapp', 'facebook', 'instagram',
                 'twitter', 'youtube', 'linkedin','company_name', 'bin',
                 'ocde', 'registration_date', 'certificate'], 'string', 'max' => 255],
+            [['text'] ,'string']
         ];
     }
 
@@ -72,6 +74,7 @@ class MainContact extends ActiveRecord
             'ocde' => 'OCDE',
             'registration_date' => 'Fecha de inscripción',
             'certificate' => 'Certificado de IVA',
+            'text' => 'Text',
         ];
     }
 }
