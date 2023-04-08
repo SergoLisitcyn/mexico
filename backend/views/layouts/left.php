@@ -1,5 +1,6 @@
 <?php
 $reviewsCount = \common\models\Reviews::find()->where(['status' => 0])->count();
+$messageCount = \common\models\Contacts::find()->where(['status' => 0])->count();
 
 ?>
 <aside class="main-sidebar">
@@ -78,7 +79,14 @@ $reviewsCount = \common\models\Reviews::find()->where(['status' => 0])->count();
                     ['label' => 'Плашки для МФО', 'icon' => 'paint-brush', 'url' => ['/block-rec']],
                     ['label' => 'SEO', 'icon' => 'area-chart', 'url' => ['/seo-tags']],
                     ['label' => 'Код счетчика', 'icon' => 'area-chart', 'url' => ['/seo-codes/update?id=1']],
-                    ['label' => 'Форма обратной связи', 'icon' => 'address-book', 'url' => ['/contacts/index']],
+                    ['label' => 'Форма обратной связи', 'icon' => 'address-book', 'url' => ['/contacts/index'],'template' => '<li class="nav-item">
+<a href="/admin/contacts" class="nav-link">
+<i class="nav-icon far fa fa-address-book"></i>
+Форма обратной связи
+<span class="badge badge-info right">'.$messageCount.'</span>
+</a>
+</li>'],
+//                    ['label' => 'Форма обратной связи', 'icon' => 'address-book', 'url' => ['/contacts/index']],
                     [
                         "label" => "Управление пользователями",
                         "url" => "#",
