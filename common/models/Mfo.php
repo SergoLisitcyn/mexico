@@ -302,20 +302,24 @@ class Mfo extends ActiveRecord
                     if($mfo){
                         $mfo->data = json_encode($datum);
                         $mfo->rating_auto = json_encode($mfo->rating_auto);
-                        $mfo->sum = $datum['condiciones']['first_loan_max'];
-                        $mfo->min_sum = $datum['condiciones']['first_loan_min'];
-                        $mfo->term = $datum['condiciones']['plazo_max'];
-                        $mfo->min_term = $datum['condiciones']['plazo_min'];
-                        $mfo->type = $datum['condiciones']['type'];;
-                        $procent = 0;
-                        if($datum['condiciones']['rate_first'] != '-'){
-                            $procent = (float)str_replace(',', '.', $datum['condiciones']['rate_first']);
+                        $mfo->type = 'Broker';
+                        if(isset($datum['condiciones'])){
+                            $mfo->sum = $datum['condiciones']['first_loan_max'];
+                            $mfo->min_sum = $datum['condiciones']['first_loan_min'];
+                            $mfo->term = $datum['condiciones']['plazo_max'];
+                            $mfo->min_term = $datum['condiciones']['plazo_min'];
+                            $mfo->type = $datum['condiciones']['type'];
+                            $procent = 0;
+                            if(isset($datum['requisitos']) && $datum['condiciones']['rate_first'] != '-'){
+                                $procent = (float)str_replace(',', '.', $datum['condiciones']['rate_first']);
+                            }
+                            $mfo->percent = $procent;
+                            $mfo->decision = $datum['condiciones']['decision_time'];
                         }
-                        $mfo->percent = $procent;
-                        $mfo->decision = $datum['condiciones']['decision_time'];
+
 
                         $old = 0;
-                        if($datum['requisitos']['older_than'] != '-'){
+                        if(isset($datum['requisitos']) && $datum['requisitos']['older_than'] != '-'){
                             $old = $datum['requisitos']['older_than'];
                         }
                         $mfo->old = $old;
@@ -328,20 +332,31 @@ class Mfo extends ActiveRecord
                         $model->title = $datum['meta_tags']['title'];
                         $model->data = json_encode($datum);
                         $model->rating_auto = null;
-                        $model->sum = $datum['condiciones']['first_loan_max'];
-                        $model->min_sum = $datum['condiciones']['first_loan_min'];
-                        $model->term = $datum['condiciones']['plazo_max'];
-                        $model->min_term = $datum['condiciones']['plazo_min'];
-                        $model->type = $datum['condiciones']['type'];
-                        $procent = 0;
-                        if($datum['condiciones']['rate_first'] != '-'){
-                            $procent = (float)str_replace(',', '.', $datum['condiciones']['rate_first']);
+
+                        $model->sum = 0;
+                        $model->min_sum = 0;
+                        $model->term = 0;
+                        $model->min_term = 0;
+                        $model->type = 0;
+                        $model->percent = 0;
+                        $model->decision = 0;
+                        $model->type = 'Broker';
+                        if(isset($datum['condiciones'])){
+                            $model->sum = $datum['condiciones']['first_loan_max'];
+                            $model->min_sum = $datum['condiciones']['first_loan_min'];
+                            $model->term = $datum['condiciones']['plazo_max'];
+                            $model->min_term = $datum['condiciones']['plazo_min'];
+                            $model->type = $datum['condiciones']['type'];
+                            $procent = 0;
+                            if($datum['condiciones']['rate_first'] != '-'){
+                                $procent = (float)str_replace(',', '.', $datum['condiciones']['rate_first']);
+                            }
+                            $model->percent = $procent;
+                            $model->decision = $datum['condiciones']['decision_time'];
                         }
-                        $model->percent = $procent;
-                        $model->decision = $datum['condiciones']['decision_time'];
 
                         $old = 0;
-                        if($datum['requisitos']['older_than'] != '-'){
+                        if(isset($datum['requisitos']) && $datum['requisitos']['older_than'] != '-'){
                             $old = $datum['requisitos']['older_than'];
                         }
                         $model->old = $old;

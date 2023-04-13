@@ -44,7 +44,10 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                             $sum = $mfo['params']['sum'];
                             $term = $mfo['params']['term'];
                         }
-                        $procent = (float)str_replace(',', '.', $mfo['params']['data']['condiciones']['rate_first']);
+                        if(isset($mfo['params']['data']['condiciones'])){
+                            $procent = (float)str_replace(',', '.', $mfo['params']['data']['condiciones']['rate_first']);
+                        }
+                        $procent = 1;
 
                         $sumAll = $sum * ($procent/100) * $term;
                         $sumWithVat = $sumAll * 0.16;
@@ -100,11 +103,13 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                                                     Fecha de Pago, días</div>
                                                 <div class="offer__value-number"><?= $term ?></div>
                                             </li>
+                                            <?php if(isset($mfo['params']['data']['condiciones'])) : ?>
                                             <li class="offer__value-item">
                                                 <div class="offer__value-title">
                                                     Tasa de interés, %</div>
                                                 <div class="offer__value-number"><?= $mfo['params']['data']['condiciones']['rate_first'] ?></div>
                                             </li>
+                                            <?php endif; ?>
                                             <li class="offer__value-item">
                                                 <div class="offer__value-title">
                                                     Total a Pagar, $</div>
@@ -115,23 +120,27 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                                                     CAT, %</div>
                                                 <?php
                                                     $cat = 11;
-                                                    if($mfo['params']['data']['condiciones']['min_total_cost'] != '-'){
-                                                        $cat = $mfo['params']['data']['condiciones']['min_total_cost'];
-                                                    }
-                                                    if($mfo['params']['data']['condiciones']['max_total_cost'] != '-'){
-                                                        $cat = $mfo['params']['data']['condiciones']['max_total_cost'];
-                                                    }
-                                                    if($mfo['params']['data']['condiciones']['min_total_cost'] != '-' && $mfo['params']['data']['condiciones']['max_total_cost'] != '-'){
-                                                        $cat = $mfo['params']['data']['condiciones']['min_total_cost'].' - '.$mfo['params']['data']['condiciones']['max_total_cost'];
+                                                    if(isset($mfo['params']['data']['condiciones'])){
+                                                        if($mfo['params']['data']['condiciones']['min_total_cost'] != '-'){
+                                                            $cat = $mfo['params']['data']['condiciones']['min_total_cost'];
+                                                        }
+                                                        if($mfo['params']['data']['condiciones']['max_total_cost'] != '-'){
+                                                            $cat = $mfo['params']['data']['condiciones']['max_total_cost'];
+                                                        }
+                                                        if($mfo['params']['data']['condiciones']['min_total_cost'] != '-' && $mfo['params']['data']['condiciones']['max_total_cost'] != '-'){
+                                                            $cat = $mfo['params']['data']['condiciones']['min_total_cost'].' - '.$mfo['params']['data']['condiciones']['max_total_cost'];
+                                                        }
                                                     }
                                                 ?>
                                                 <div class="offer__value-number"><?= $cat ?></div>
                                             </li>
+                                            <?php if (isset($mfo['params']['rating_auto'])) : ?>
                                             <li class="offer__value-item offer__value-item--last">
                                                 <div class="offer__value-title">
                                                     Nuestra calificación</div>
                                                 <div class="offer__value-number"><?= $mfo['params']['rating_auto']['rating']['allRating'] ?></div>
                                             </li>
+                                            <?php endif; ?>
                                         </ul>
                                     </div>
                                     <div class="offer__info">
@@ -167,6 +176,7 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                             </div>
                             <div class="offer__dropdown offer-dropdown">
                                 <div class="offer-dropdown__items">
+                                    <?php if(isset($mfo['params']['rating_auto'])) : ?>
                                     <div class="offer-dropdown__item offer-dropdown__repute">
                                         <ul class="offer-dropdown__repute-list">
                                             <li class="offer-dropdown__repute-item">
@@ -200,6 +210,7 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                                             </li>
                                         </ul>
                                     </div>
+                                    <?php endif; ?>
                                     <div class="offer-dropdown__item offer-dropdown__info">
                                         <ul class="offer-dropdown__info-list">
                                             <?php if(isset($mfo['params']['data']['requisitos']['older_than']) && $mfo['params']['data']['requisitos']['older_than'] != '-') : ?>

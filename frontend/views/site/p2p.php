@@ -87,43 +87,36 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                                 <div class="offer__content">
                                     <div class="offer__value">
                                         <ul class="offer__value-list">
-                                            <li class="offer__value-item">
-                                                <div class="offer__value-title">
-                                                    Monto del Préstamo, $</div>
-                                                <div class="offer__value-number"><?= $sum ?></div>
-                                            </li>
-                                            <li class="offer__value-item">
-                                                <div class="offer__value-title">
-                                                    Fecha de Pago, días</div>
-                                                <div class="offer__value-number"><?= $term ?></div>
-                                            </li>
-                                            <li class="offer__value-item">
-                                                <div class="offer__value-title">
-                                                    Tasa de interés, %</div>
-                                                <div class="offer__value-number"><?= $mfo['params']['data']['condiciones']['rate_first'] ?></div>
-                                            </li>
-                                            <li class="offer__value-item">
-                                                <div class="offer__value-title">
-                                                    Total a Pagar, $</div>
-                                                <div class="offer__value-number"><?= $totalFormat ?></div>
-                                            </li>
+                                            <?php if(isset($mfo['params']['data']['condiciones']['other_loan_max']) && $mfo['params']['data']['condiciones']['other_loan_max'] != '-') : ?>
+                                                <li class="offer__value-item">
+                                                    <div class="offer__value-title">
+                                                        Préstamos personales, hasta, $</div>
+                                                    <div class="offer__value-number"><?= $mfo['params']['data']['condiciones']['other_loan_max'] ?></div>
+                                                </li>
+                                            <?php endif; ?>
+                                            <?php if(isset($mfo['params']['data']['condiciones']['other_term_months_max']) && $mfo['params']['data']['condiciones']['other_term_months_max'] != '-') : ?>
+                                                <li class="offer__value-item">
+                                                    <div class="offer__value-title">
+                                                        Plaza, meses, max</div>
+                                                    <div class="offer__value-number"><?= $mfo['params']['data']['condiciones']['other_term_months_max'] ?></div>
+                                                </li>
+                                            <?php endif; ?>
+                                            <?php if(isset($mfo['params']['data']['condiciones']['other_fija_via']) && $mfo['params']['data']['condiciones']['other_fija_via'] != '-') : ?>
+                                                <li class="offer__value-item">
+                                                    <div class="offer__value-title">
+                                                        Tasa de interés, %</div>
+                                                    <div class="offer__value-number"><?= $mfo['params']['data']['condiciones']['other_fija_via'] ?></div>
+                                                </li>
+                                            <?php endif; ?>
+                                            <?php if(isset($mfo['params']['data']['condiciones']['other_total_loan_cost']) && $mfo['params']['data']['condiciones']['other_total_loan_cost'] != '-') : ?>
+
                                             <li class="offer__value-item">
                                                 <div class="offer__value-title">
                                                     CAT, %</div>
-                                                <?php
-                                                    $cat = 11;
-                                                    if($mfo['params']['data']['condiciones']['min_total_cost'] != '-'){
-                                                        $cat = $mfo['params']['data']['condiciones']['min_total_cost'];
-                                                    }
-                                                    if($mfo['params']['data']['condiciones']['max_total_cost'] != '-'){
-                                                        $cat = $mfo['params']['data']['condiciones']['max_total_cost'];
-                                                    }
-                                                    if($mfo['params']['data']['condiciones']['min_total_cost'] != '-' && $mfo['params']['data']['condiciones']['max_total_cost'] != '-'){
-                                                        $cat = $mfo['params']['data']['condiciones']['min_total_cost'].' - '.$mfo['params']['data']['condiciones']['max_total_cost'];
-                                                    }
-                                                ?>
-                                                <div class="offer__value-number"><?= $cat ?></div>
+
+                                                <div class="offer__value-number"><?= $mfo['params']['data']['condiciones']['other_total_loan_cost'] ?></div>
                                             </li>
+                                            <?php endif; ?>
 <!--                                            <li class="offer__value-item offer__value-item--last">-->
 <!--                                                <div class="offer__value-title">-->
 <!--                                                    Nuestra calificación</div>-->
