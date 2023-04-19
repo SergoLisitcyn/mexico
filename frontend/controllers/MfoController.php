@@ -173,7 +173,7 @@ class MfoController extends Controller
             throw new HttpException(404, 'Страница не существует.');
         }
         $reviews = Reviews::find()->where(['mfo_id' => $mfo->id,'status' => 1])->all();
-
+        $reviewsCount = Reviews::find()->where(['mfo_id' => $mfo->id, 'status' => 1])->count();
         $reviewsModel = new Reviews();
 
         if ($reviewsModel->load(Yii::$app->request->post())) {
@@ -185,6 +185,7 @@ class MfoController extends Controller
                 'model' => $mfo,
                 'reviewsModel' => $reviewsModel,
                 'reviews' => $reviews,
+                'reviewsCount' => $reviewsCount,
                 'mfo' => $mfo,
             ]);
         }

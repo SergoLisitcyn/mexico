@@ -5,6 +5,13 @@ use yii\helpers\Url;
 use kartik\rating\StarRating;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
+$title = 'Deje su opinión sobre la empresa '.$mfo->url;
+if($reviewsCount > 0){
+    $title = 'Leer '.$reviewsCount.' comentarios de clientes de '.$mfo->url.' en Finjenios.com.mx';
+}
+$this->title = $title;
+$description = 'Antes de convertirte en cliente de '.$mfo->url.', lee las opiniones de clientes reales en Finjenios.com.mx';
+$this->registerMetaTag(['name' => 'description','content' => $description]);
 ?>
 <div class="main__page-info">
     <div class="container">
