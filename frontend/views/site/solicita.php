@@ -8,7 +8,7 @@ use yii\helpers\Url;
 
 if(isset($text->title_seo) && !empty($text->title_seo)) { $this->title = $text->title_seo; }
 if(isset($text->keywords) && !empty($text->keywords)) { $this->registerMetaTag(['name' => 'keywords','content' => $text->keywords]); }
-if(isset($text->description) && !empty($text->description)) { $this->registerMetaTag(['name' => 'description','content' => $text->description]); }
+//if(isset($text->description) && !empty($text->description)) { $this->registerMetaTag(['name' => 'description','content' => $text->description]); }
 ?>
 <div class="breadcrumbs">
     <div class="container">
