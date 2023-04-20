@@ -17,25 +17,31 @@ use \yii\helpers\Url;
 
     <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'content')->widget(Widget::className(), [
-        'settings' => [
-            'lang' => 'ru',
-            'minHeight' => 300,
-            'formatting' => ['p', 'blockquote', 'h2', 'h1','h3','div'],
-            'imageUpload' => Url::to(['/pages/save-redactor-img','sub'=>'content']),
-            'attributes' => [
-                [
-                    'attribute' => 'text',
-                    'format' => 'html'
-                ]
-            ],
-            'plugins' => [
-                'clips',
-                'fullscreen'
-            ]
-
-        ]
-    ])?>
+<!--    --><?php //= $form->field($model, 'content')->widget(Widget::className(), [
+//        'settings' => [
+//            'lang' => 'ru',
+//            'minHeight' => 300,
+//            'formatting' => ['p', 'blockquote', 'h2', 'h1','h3','div'],
+//            'imageUpload' => Url::to(['/pages/save-redactor-img','sub'=>'content']),
+//            'attributes' => [
+//                [
+//                    'attribute' => 'text',
+//                    'format' => 'html'
+//                ]
+//            ],
+//            'plugins' => [
+//                'clips',
+//                'fullscreen'
+//            ]
+//
+//        ]
+//    ])?>
+    <?= $form->field($model, 'content')->widget(\yii2jodit\JoditWidget::className(), [
+    'settings' => [
+//    'height'=>'250px',
+    'enableDragAndDropFileToEditor'=>new \yii\web\JsExpression("true"),
+    ],
+    ]);?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 

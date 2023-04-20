@@ -33,7 +33,8 @@
         "unclead/yii2-multiple-input": "~2.0",
         "vova07/yii2-imperavi-widget": "*",
         "kartik-v/yii2-widget-colorinput": "dev-master",
-        "himiklab/yii2-recaptcha-widget" : "*"
+        "himiklab/yii2-recaptcha-widget" : "*",
+        "jodit/yii2-jodit": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
