@@ -8,7 +8,7 @@ return [
     'modules' => [
         'jodit' => 'yii2jodit\JoditModule',
         'extensions'=>['jpg','png','gif'],
-        'root'=> '@webroot/uploads/images',
+        'root'=> '@web/uploads/images',
         'baseurl'=> '@web/uploads/images',
         'maxFileSize'=> '20mb',
         'defaultPermission'=> 0775,
