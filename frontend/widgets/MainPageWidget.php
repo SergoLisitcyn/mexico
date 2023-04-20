@@ -40,7 +40,7 @@ class MainPageWidget extends Widget
                 'termMin' => Mfo::getMinMaxValues(false,false,false,true),
             ]);
         }
-        if($this->type == 'solicita-calculator'){
+        if($this->type == 'solicita-calculator' || $this->type == 'mfo_calculator_version'){
             return $this->render('main-page/'.$this->type,[
                 'term' => $this->term,
                 'sum' => $this->sum,

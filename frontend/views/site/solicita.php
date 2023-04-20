@@ -24,9 +24,9 @@ if(isset($text->keywords) && !empty($text->keywords)) { $this->registerMetaTag([
         </ul>
     </div>
 </div>
-<?= MainPageWidget::widget(['type' => 'solicita-calculator','sum'=> $sum,'term' => $term]); ?>
 <div class="content">
     <div class="container">
+        <?= MainPageWidget::widget(['type' => 'mfo_calculator_version','sum'=> $sum,'term' => $term]) ?>
         <?php if($text->title_h1) :?>
         <h1 class="main__title main-title"><?= $text->title_h1 ?></h1>
         <?php endif; ?>
