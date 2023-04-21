@@ -58,29 +58,12 @@ use \yii\helpers\Url;
     <?= $form->field($model, 'button_text')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'montos_title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'montos_text')->widget(Widget::className(), [
+    <?= $form->field($model, 'montos_text')->widget(\yii2jodit\JoditWidget::className(), [
         'settings' => [
-            'lang' => 'ru',
-            'minHeight' => 300,
-            'formatting' => ['p', 'blockquote', 'h2', 'h1','h3','div'],
-            'imageUpload' => Url::to(['/mfo/save-redactor-img','sub'=>'content']),
-            'attributes' => [
-                [
-                    'attribute' => 'text',
-                    'format' => 'html'
-                ]
-            ],
-            'plugins' => [
-                'clips',
-                'fullscreen',
-                'imageupload',
-                'imagemanager',
-                'filemanager',
-                'fontcolor',
-            ]
-
-        ]
-    ])?>
+//    'height'=>'250px',
+            'enableDragAndDropFileToEditor'=>new \yii\web\JsExpression("true"),
+        ],
+    ]);?>
 
     <?php
     $blockRec = BlockRec::find()->where(['status' => 1])->all();
