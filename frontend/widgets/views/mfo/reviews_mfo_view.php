@@ -1,5 +1,5 @@
 <?php if($reviews) : ?>
-<div class="tabs-content__comments-sect comments-sect">
+<div class="tabs-content__comments-sect comments-sect" style="margin-bottom: 50px">
     <h2 class="comments-sect__title title">Comentarios sobre <?= $model->name ?></h2>
     <div class="comments-sect__slider comments-block comments-slider background-set">
         <?php foreach ($reviews as $review) :
