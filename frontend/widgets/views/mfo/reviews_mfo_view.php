@@ -20,7 +20,7 @@
 <!--                </div>-->
             </div>
             <div class="comments-block__info">
-                <?php if($review->plus) : ?>
+                <?php if($review->name) : ?>
                 <div class="comments-block__info-name"><?= $review->name ?></div>
                 <?php endif; ?>
                 <p class="comments-block__info-text"><?= $review->body ?></p>
