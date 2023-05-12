@@ -34,7 +34,7 @@
                                     </div>
                                     <span class="range__result-span">días</span>
                                 </div>
-                                <input id="rs_term" type="range" name="rs_term" min="<?= $termMin ?>" max="<?= $term ?>" value="30" step="1" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
+                                <input id="rs_term" type="range" name="rs_term" min="7" max="<?= $term ?>" value="30" step="1" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
                             </div>
                         </div>
                     </div>

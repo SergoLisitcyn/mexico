@@ -53,7 +53,8 @@ class MfoViewWidget extends Widget
                 ->with('color')
                 ->where(['status' => 1])
                 ->andWhere(['!=','id', $this->model['id']])
-                ->andWhere(['!=','rating_auto', null])
+                ->andWhere(['!=','rating_auto', ''])
+                ->andWhere(['!=','rating_auto', 'null'])
                 ->orderBy(new Expression('rand()'))
                 ->limit(3)
                 ->all();
