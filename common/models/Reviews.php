@@ -66,7 +66,7 @@ class Reviews extends ActiveRecord
             'conditions' => 'Condiciones',
             'support' => 'Atención al cliente',
             'functionality' => 'Funcionalidad',
-            'body' => 'Сообщение',
+            'body' => 'Danos tu opinión',
             'plus' => 'Плюсы',
             'minus' => 'Минусы',
             'name' => 'Name',

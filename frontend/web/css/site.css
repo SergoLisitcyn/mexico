@@ -328,7 +328,13 @@ img {
 @media (max-width: 1000px){
     .main-sect__items {
         margin-top: 23px;
-        gap: 25px 5px; <-- добавить
+        gap: 25px 5px;
+    }
+    .field-reviews-email{
+        width: 100% !important;
+    }
+    .field-reviews-name {
+        width: 100%  !important;
     }
 }
 

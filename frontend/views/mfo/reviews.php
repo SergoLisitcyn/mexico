@@ -33,6 +33,12 @@ $this->registerMetaTag(['name' => 'description','content' => $description]);
 </div>
 <div class="content">
     <div class="container">
+        <?php if( Yii::$app->session->hasFlash('successReviews') ): ?>
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <?php echo Yii::$app->session->getFlash('successReviews'); ?>
+            </div>
+        <?php endif;?>
         <div class="content__block">
             <div class="content__row">
                 <section class="content__comments-sect comments-sect" style="margin-bottom: 30px">
@@ -77,7 +83,7 @@ $this->registerMetaTag(['name' => 'description','content' => $description]);
                         ); ?>
                         <input type="hidden" name="_csrf" value="<?=Yii::$app->request->getCsrfToken()?>" />
                         <input type="hidden" id="review-cat_id" name="Reviews[mfo_id]" value="<?= $mfo->id ?>"/>
-
+                        <input type="hidden" id="review-cat_id" name="Reviews[status]" value="0"/>
                         <ul class="main-form__rating-list rating-list">
                             <li class="rating-list__item">
                                 <div class="rating-list__title">
@@ -145,8 +151,8 @@ $this->registerMetaTag(['name' => 'description','content' => $description]);
                             </li>
                         </ul>
                         <div class="main-form__box">
-                            <input class="main-form__input main-form__input--person" name="Reviews[name]" placeholder="Name"></input>
-                            <input class="main-form__input main-form__input--person" name="Reviews[email]" placeholder="E-mail"></input>
+                            <?= $form->field($reviewsModel, 'name')->textInput(['class' => 'main-form__input main-form__input--person','placeholder' => "Name"])->label(false) ?>
+                            <?= $form->field($reviewsModel, 'email')->textInput(['class' => 'main-form__input main-form__input--person','placeholder' => "E-mail"])->label(false) ?>
                         </div>
                         <?= $form->field($reviewsModel, 'body')->textInput(['class' => 'main-form__input','placeholder' => "Danos tu opinión"])->label(false) ?>
                         <?= $form->field($reviewsModel, 'plus')->textInput(['class' => 'main-form__input','placeholder' => "Ventajas"])->label(false) ?>
