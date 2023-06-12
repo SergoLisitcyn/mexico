@@ -200,7 +200,7 @@ class SiteController extends Controller
 //        }
         $request = Yii::$app->request;
         $post = $request->post();
-        $sum = 50;
+        $sum = 300;
         $term = 30;
         $isPost = false;
         if($post){

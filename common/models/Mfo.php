@@ -1140,7 +1140,8 @@ AppStore de Apple es de {IOs_APP_RATING_COUNT}. ';
             return self::find()->max('term');
         }
         if($minSum){
-            return self::find()->min('min_sum');
+            return 300;
+//            return self::find()->min('min_sum');
         }
         if($minTerm){
             return self::find()->min('min_term');
