@@ -23,6 +23,15 @@ AppAsset::register($this);
     <?= MainPageWidget::widget(['type' => 'seo_code','zone' => 'header']) ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y17H898B57"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-Y17H898B57');
+    </script>
 </head>
 <body class="d-flex flex-column h-100">
 <?php $this->beginBody() ?>
