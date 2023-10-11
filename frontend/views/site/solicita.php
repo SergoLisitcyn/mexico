@@ -55,6 +55,10 @@ if(isset($text->keywords) && !empty($text->keywords)) { $this->registerMetaTag([
                         $total = $sum + $totalSum;
 
                         $totalFormat = number_format($total, 2, '.', '');
+                        if(isset($mfo['params']['type']) && $mfo['params']['type'] == 'Broker'){
+                            $sum = 14000;
+                            $term = 99;
+                        }
                         ?>
                         <div class="offer change-text">
                             <div class="offer__row">

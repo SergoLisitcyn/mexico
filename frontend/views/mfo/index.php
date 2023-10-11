@@ -31,6 +31,11 @@ $this->title = 'Empresas';
         <div class="content__block">
             <div class="content__row">
                 <section class="cards">
+                    <?php if(!$mfos)  : ?>
+                        <div style="margin-bottom: 20px;">
+                            <h1 class="not-found__title">Prueba a cambiar el importe o el plazo del préstamo!</h1>
+                        </div>
+                    <?php endif; ?>
                     <?php foreach ($mfos as $mfo) :
                         $reviewsCount = Reviews::find()->where(['mfo_id' => $mfo->id, 'status' => 1])->count();
                         $formatSum = intval($mfo->data['condiciones']['first_loan_max']);
@@ -41,6 +46,10 @@ $this->title = 'Empresas';
                         $totalSum = $sum + $sumWithVat;
                         $total = $formatSum + $totalSum;
                         $totalFormat = number_format($total, 2, '.', '');
+                        if($mfo->type == 'Broker'){
+                            $sum = 14000;
+                            $term = 99;
+                        }
                         ?>
                     <div class="offer change-text">
                         <div class="offer__row">

@@ -42,18 +42,22 @@ $this->registerMetaTag(['name' => 'description','content' => $description]);
         <div class="content__block">
             <div class="content__row">
                 <section class="content__comments-sect comments-sect" style="margin-bottom: 30px">
-                    <?php foreach ($reviews as $review) : ?>
+                    <?php foreach ($reviews as $review) :
+                        $reviewRating = ($review->costs + $review->conditions + $review->support + $review->functionality) / 4;
+                        $reviewStar= (100 *  $reviewRating)/5;
+                        ?>
                     <div class="content__comments-block comments-block background-set">
                         <div class="comments-block__item">
                             <div class="comments-block__data">
                                 <div class="comments-block__date"><?= date('d.m.Y', $review->created_at) ?></div>
-                                <div class="comments-block__rating">
-                                    <img class="comments-block__rating-img" src="/img/stars.svg" alt="stars">
-                                    <span class="comments-block__rating-number">4,4</span>
+                                <div class="rating-sidebar__rating">
+                                    <div class="rating__stars" style="width:<?= $reviewStar ?>%"></div>
+                                    <!--                                        <img class="rating-sidebar__rating-image" src="/img/stars.svg" alt="stars">-->
+                                    <div class="rating-sidebar__rating-number"><?= $reviewRating ?></div>
                                 </div>
                             </div>
                             <div class="comments-block__info">
-                                <div class="comments-block__info-name">Rocio Torres</div>
+                                <div class="comments-block__info-name"><?= $review->name ?></div>
                                 <p class="comments-block__info-text"><?= $review->body ?></p>
                                 <div class="comments-block__descr">
                                     <?php if($review->plus) : ?>
@@ -64,6 +68,15 @@ $this->registerMetaTag(['name' => 'description','content' => $description]);
                                     <div class="comments-block__descr-title">Desventajas</div>
                                     <p class="comments-block__descr-text"><?= $review->minus ?></p>
                                     <?php endif; ?>
+                                        <label class="main-form__checkbox">
+                                            <?php if ($review->recommendation == 1) : ?>
+<!--                                            <input type="checkbox" checked disabled>-->
+                                            <input type="checkbox" checked disabled>
+                                            <?php else: ?>
+                                                <input type="checkbox" disabled>
+                                            <?php endif; ?>
+                                            <span class="main-form__checkbox-text">Recomendacion</span>
+                                        </label>
                                 </div>
                             </div>
                         </div>
