@@ -135,6 +135,7 @@ class MfoController extends Controller
      */
     public function actionUpdate($id)
     {
+        $this->enableCsrfValidation = false;
         $model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post())) {
             $model->data = Json::encode($model->data);

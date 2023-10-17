@@ -165,6 +165,7 @@ class MfoController extends Controller
      */
     public function actionReviews($url)
     {
+        $this->enableCsrfValidation = false;
         if(!$url){
             return $this->redirect('/');
         }

@@ -20,6 +20,7 @@ return [
     'components' => [
         'request' => [
             'baseUrl' => '/admin',
+            'enableCsrfValidation' => false
         ],
         'user' => [
             'identityClass' => 'common\models\User',
