@@ -55,9 +55,20 @@ if(isset($text->keywords) && !empty($text->keywords)) { $this->registerMetaTag([
                         $total = $sum + $totalSum;
 
                         $totalFormat = number_format($total, 2, '.', '');
+
+                        $montoText = 'Monto del Préstamo, $';
+                        $fechaText = 'Fecha de Pago, días';
+                        $tasaText = 'Tasa de interés, %';
+                        $pagarText = 'Total a Pagar, $';
+                        $catText = 'CAT, %';
                         if(isset($mfo['params']['type']) && $mfo['params']['type'] == 'Broker'){
-                            $sum = 14000;
-                            $term = 99;
+                            $montoText = 'Monto del Préstamo, min.';
+                            $fechaText = 'Monto del Préstamo, max.';
+                            $tasaText = 'Plazo del Préstamo, min.';
+                            $pagarText = 'Plazo, max.';
+                            $catText = 'Edad mínima';
+//                            $sum = 14000;
+//                            $term = 99;
                         }
                         ?>
                         <div class="offer change-text">
@@ -98,30 +109,25 @@ if(isset($text->keywords) && !empty($text->keywords)) { $this->registerMetaTag([
                                     <div class="offer__value">
                                         <ul class="offer__value-list">
                                             <li class="offer__value-item">
-                                                <div class="offer__value-title">
-                                                    Monto del Préstamo, $</div>
+                                                <div class="offer__value-title"><?= $montoText ?></div>
                                                 <div class="offer__value-number"><?= $sum ?></div>
                                             </li>
                                             <li class="offer__value-item">
-                                                <div class="offer__value-title">
-                                                    Fecha de Pago, días</div>
+                                                <div class="offer__value-title"><?= $fechaText ?></div>
                                                 <div class="offer__value-number"><?= $term ?></div>
                                             </li>
                                             <?php if(isset($mfo['params']['data']['condiciones'])) : ?>
                                             <li class="offer__value-item">
-                                                <div class="offer__value-title">
-                                                    Tasa de interés, %</div>
+                                                <div class="offer__value-title"><?= $tasaText ?></div>
                                                 <div class="offer__value-number"><?= $mfo['params']['data']['condiciones']['rate_first'] ?></div>
                                             </li>
                                             <?php endif; ?>
                                             <li class="offer__value-item">
-                                                <div class="offer__value-title">
-                                                    Total a Pagar, $</div>
+                                                <div class="offer__value-title"><?= $pagarText ?></div>
                                                 <div class="offer__value-number"><?= $totalFormat ?></div>
                                             </li>
                                             <li class="offer__value-item">
-                                                <div class="offer__value-title">
-                                                    CAT, %</div>
+                                                <div class="offer__value-title"><?= $catText ?></div>
                                                 <?php
                                                     $cat = 11;
                                                     if(isset($mfo['params']['data']['condiciones'])){

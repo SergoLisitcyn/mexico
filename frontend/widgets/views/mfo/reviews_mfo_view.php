@@ -33,15 +33,12 @@
                     <div class="comments-block__descr-title">Desventajas</div>
                     <p class="comments-block__descr-text"><?= $review->minus ?></p>
                     <?php endif; ?>
-                    <label class="main-form__checkbox">
-                        <?php if ($review->recommendation == 1) : ?>
-                            <!--                                            <input type="checkbox" checked disabled>-->
+                    <?php if ($review->recommendation == 1) : ?>
+                        <label class="main-form__checkbox">
                             <input type="checkbox" checked disabled>
-                        <?php else: ?>
-                            <input type="checkbox" disabled>
-                        <?php endif; ?>
-                        <span class="main-form__checkbox-text">Recomendacion</span>
-                    </label>
+                            <span class="main-form__checkbox-text">Recomendacion</span>
+                        </label>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

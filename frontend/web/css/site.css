@@ -359,3 +359,7 @@ img {
 .calculator__button_cards{
     display: inline-block !important;
 }
+
+.comments-block__descr-text{
+    margin-bottom: 15px;
+}

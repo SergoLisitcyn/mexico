@@ -64,15 +64,16 @@ if(isset($model->data['meta_tags']['description']) && !empty($model->data['meta_
                 <section class="content__mfo-about mfo-about">
                     <!--  Características de la compañía -->
                     <?= MfoViewWidget::widget(['type' => 'mfo_calculator','model' => $model,'procent' => $procent,'total' => $total,'firstLoan' => $firstLoan]) ?>
-                    <div class="mfo-about__list mfo-list">
-                        <h2 class="mfo-list__title title">Visión general de Crédito</h2>
-                        <ul class="mfo-list__list">
-                            <li class="mfo-list__item">Proceso 100% online</li>
-                            <li class="mfo-list__item">Financiación de $1.000 a $10.000.000 pesos</li>
-                            <li class="mfo-list__item">Más de 50 entidades para comparar</li>
-                            <li class="mfo-list__item">Reparadoras de deuda</li>
-                        </ul>
-                    </div>
+                    <?php if($model->general_text) : ?>
+                        <div class="mfo-about__list mfo-list">
+                            <h2 class="mfo-list__title title">Visión general de <?= $model->name ?></h2>
+                            <ul class="mfo-list__list">
+                                <?php foreach ($model->general_text as $item) : ?>
+                                    <li class="mfo-list__item"><?= $item ?></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    <?php endif; ?>
                     <div class="mfo-about__mfo-tabs mfo-tabs">
                         <ul class="mfo-tabs__control tabs-control">
                             <li class="tabs-control__item tabs-control__item--active" data-tab="1">Análisis</li>

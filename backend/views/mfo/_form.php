@@ -6,7 +6,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use vova07\imperavi\Widget;
 use \common\models\BlockRec;
-use \yii\helpers\Url;
+use unclead\multipleinput\MultipleInput;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Mfo */
@@ -31,6 +31,16 @@ use \yii\helpers\Url;
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'rating')->textInput(['maxlength' => true]) ?>
+
+    <?php
+    echo $form->field($model, 'general_text')->widget(MultipleInput::className(), [
+        'min'               => 1, // should be at least 2 rows
+        'allowEmptyList'    => false,
+        'enableGuessTitle'  => true,
+        'addButtonPosition' => MultipleInput::POS_HEADER, // show add button in the header
+    ])
+        ->label(false);
+    ?>
 
     <div class="row">
         <div class="col-xs-6">

@@ -60,7 +60,7 @@ class Mfo extends ActiveRecord
     {
         return [
             [['name', 'url', 'title'], 'required'],
-            [['data','rating_auto'], 'safe'],
+            [['data','rating_auto','general_text'], 'safe'],
             [['status', 'sort', 'created_at', 'updated_at','color_id'], 'integer'],
             [['name', 'url', 'title', 'logo', 'description', 'keywords', 'montos_title','button_text'], 'string', 'max' => 255],
             [['montos_text'], 'string'],
@@ -94,6 +94,7 @@ class Mfo extends ActiveRecord
             'montos_text' => 'Montos Текст',
             'color_id' => 'Плашка',
             'button_text' => 'Текст кнопки',
+            'general_text' => 'Visión general',
         ];
     }
     public function afterFind() {
