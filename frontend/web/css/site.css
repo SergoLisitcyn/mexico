@@ -363,3 +363,8 @@ img {
 .comments-block__descr-text{
     margin-bottom: 15px;
 }
+.footer {
+    background: #f0efef;
+    padding: 30px 0;
+    margin-top: 20px;
+}

@@ -74,6 +74,7 @@ class MfoViewWidget extends Widget
                 'text' => $text
             ]);
         }
+        $visibleCharacteristic = self::visibleCharacteristic($this->model);
 //        if($this->type == 'rating'){
 //            if($this->model->rating_auto){
 //                $mfoRating = self::generateRating($this->model->rating_auto['interes_costes'],$this->model->rating_auto['condiciones'],$this->model->rating_auto['atencion'],$this->model->rating_auto['funcionalidad']);
@@ -87,6 +88,23 @@ class MfoViewWidget extends Widget
             'procent' => $this->procent,
             'total' => $this->total,
             'firstLoan' => $this->firstLoan,
+            'visibleCharacteristic' => $visibleCharacteristic,
         ]);
+    }
+
+    public function visibleCharacteristic($model)
+    {
+        $count = 0;
+        if($model && isset($model['characteristic'])){
+            foreach ($model['characteristic'] as $value){
+                if($value != '-'){
+                    $count++;
+                }
+            }
+        }
+        if($count == 0){
+            return false;
+        }
+        return true;
     }
 }

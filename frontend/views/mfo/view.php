@@ -115,7 +115,7 @@ if(isset($model->data['meta_tags']['description']) && !empty($model->data['meta_
                                 <?php if(isset($model->data['payment_methods'])) : ?>
                                     <?= MfoViewWidget::widget(['type' => 'payment_methods','model' => $model->data['payment_methods']]) ?>
                                 <?php endif; ?>
-
+                                <?php if(isset($model->data['account']) || isset($model->data['customer_support'])) : ?>
                                 <div class="tabs-content__box tabs-content-box">
                                     <div class="tabs-content-box__columns">
                                         <!--   La cuenta-->
@@ -131,6 +131,7 @@ if(isset($model->data['meta_tags']['description']) && !empty($model->data['meta_
 
                                     </div>
                                 </div>
+                                <?php endif; ?>
                             </div>
                             <div class="tabs-content__item" data-tab-content="3">
                                 <!--  Requisitos -->
