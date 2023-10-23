@@ -138,7 +138,7 @@ class Mfo extends ActiveRecord
         $googleAccountKeyFilePath = __DIR__ . '/../../backend/views/mfo/mexicocrm.json';
         putenv('GOOGLE_APPLICATION_CREDENTIALS=' . $googleAccountKeyFilePath);
 
-        $client = new Google_Client();
+        $client = new Google_Client(['verify' => false]);
         $client->useApplicationDefaultCredentials();
         $client->addScope('https://www.googleapis.com/auth/spreadsheets');
 
