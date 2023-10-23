@@ -138,9 +138,14 @@ class MfoController extends Controller
         $this->enableCsrfValidation = false;
         $model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post())) {
+            $post = Yii::$app->request->post();
             $model->data = Json::encode($model->data);
             $model->rating_auto = Json::encode($model->rating_auto);
             $model->general_text = Json::encode($model->general_text);
+            if(!$post['Mfo']['general_text'][0]){
+                $model->general_text = null;
+            }
+
             if($model->save()){
                 Yii::$app->session->addFlash('success', 'Мфо обновлен');
                 return $this->redirect(['update', 'id' => $model->id]);
