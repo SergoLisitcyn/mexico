@@ -78,4 +78,68 @@ class Reviews extends ActiveRecord
             'updated_at' => 'Дата обновления',
         ];
     }
+
+    public static function getSumRating($id)
+    {
+        $reviews = self::find()->where(['mfo_id' => $id,'status' => 1])->all();
+        $sum = 0;
+        if($reviews){
+            foreach ($reviews as $item) {
+                $total = ((int)$item['costs'] + (int)$item['conditions'] + (int)$item['support'] + (int)$item['functionality']) / 4;
+                $sum += $total;
+            }
+
+            $sumAll = $sum / count($reviews);
+            return number_format($sumAll,2);
+        }
+
+        return 0;
+    }
+
+    public static function getReviewsRatingList($id)
+    {
+        $reviews = self::find()->where(['mfo_id' => $id,'status' => 1])->all();
+        $sum = 0;
+        $costs = 0;
+        $conditions = 0;
+        $support = 0;
+        $functionality = 0;
+        if($reviews){
+            $count = count($reviews);
+            foreach ($reviews as $item) {
+                $total = ((int)$item['costs'] + (int)$item['conditions'] + (int)$item['support'] + (int)$item['functionality']) / 4;
+                $costs +=  (int)$item['costs'];
+                $conditions +=  (int)$item['conditions'];
+                $support +=  (int)$item['support'];
+                $functionality +=  (int)$item['functionality'];
+                $sum += $total;
+            }
+            $costs = $costs / $count;
+            $conditions = $conditions / $count;
+            $support = $support / $count;
+            $functionality = $functionality / $count;
+
+            $sumAll = $sum / count($reviews);
+
+            $starWidthAll = (100 * $sumAll)/5;
+            $starWidthCosts = (100 * $costs)/5;
+            $starWidthConditions = (100 * $conditions)/5;
+            $starWidthSupport = (100 * $support)/5;
+            $starWidthFunctionality = (100 * $functionality)/5;
+            return [
+                'costs' => number_format($costs,2),
+                'conditions' => number_format($conditions,2),
+                'support' => number_format($support,2),
+                'functionality' => number_format($functionality,2),
+                'all' => number_format($sumAll,2),
+                'starWidthAll' => $starWidthAll,
+                'starWidthCosts' => $starWidthCosts,
+                'starWidthConditions' => $starWidthConditions,
+                'starWidthSupport' => $starWidthSupport,
+                'starWidthFunctionality' => $starWidthFunctionality,
+            ];
+        }
+
+        return 0;
+    }
 }

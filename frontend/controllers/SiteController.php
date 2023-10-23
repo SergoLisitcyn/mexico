@@ -9,6 +9,7 @@ use common\models\MainSolicita;
 use common\models\Mfo;
 use common\models\MfoText;
 use common\models\ReviewInformation;
+use common\models\Reviews;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -205,8 +206,13 @@ class SiteController extends Controller
             throw new HttpException(404, 'Страница не существует.');
         }
 
-        $mfo = Mfo::find()->with('color')->where(['status' => 1])->all();
-
+        $mfo = Mfo::find()->with('color')
+            ->where(['status' => 1])
+            ->andWhere(['!=', 'type', 'Broker'])
+            ->all();
+        if($url == 'corredores'){
+            $mfo = Mfo::find()->with('color')->where(['status' => 1])->where(['type' => 'Broker'])->all();
+        }
         $data = [];
         foreach ($mfo as $key => $value){
             if(!isset($value['data']['pages'][$url]) || $value['data']['pages'][$url] == '-'){
@@ -222,6 +228,9 @@ class SiteController extends Controller
         $render = 'solicita';
         if($url == 'p2p'){
             $render = 'p2p';
+        }
+        if($url == 'corredores'){
+            $render = 'corredores';
         }
         return $this->render($render, [
             'mfos' => $data,

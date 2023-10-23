@@ -1,3 +1,4 @@
+<?php if($visible) : ?>
 <div class="tabs-content-box__column">
     <div class="tabs-content-box__item">
         <div class="tabs-content-box__item-left">
@@ -55,3 +56,4 @@
         </div>
     <?php endif; ?>
 </div>
+<?php endif; ?>

@@ -24,6 +24,7 @@ class MainPageWidget extends Widget
     public $term;
     public $sum;
     public $zone;
+    public $mfoId;
 
     public function init()
     {
@@ -161,6 +162,13 @@ class MainPageWidget extends Widget
         if($this->type == 'faq'){
             return $this->render('main-page/'.$this->type,[
                 'data' => Faq::find()->all()
+            ]);
+        }
+
+        if($this->type == 'reviewsRatingList'){
+            $data = Reviews::getReviewsRatingList($this->mfoId);
+            return $this->render('main-page/'.$this->type,[
+                'data' => $data
             ]);
         }
         return $this->render('main-page/'.$this->type,[

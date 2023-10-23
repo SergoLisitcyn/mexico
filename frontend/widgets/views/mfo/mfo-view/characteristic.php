@@ -1,4 +1,4 @@
-<?php if($visibleCharacteristic) : ?>
+<?php if($visible) : ?>
 <div class="tabs-content__block tabs-content-block background-set">
     <h2 class="tabs-content-block__title title">Características de la compañía</h2>
     <div class="tabs-content-block__columns">

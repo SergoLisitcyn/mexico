@@ -52,6 +52,7 @@ class MfoController extends Controller
             ->where(['status' => 1])
             ->andWhere(['>=', 'term', $term])
             ->andWhere(['>=', 'sum', $sum])
+            ->andWhere(['!=', 'type', 'Broker'])
             ->orderBy(['rating' => SORT_DESC])
             ->all();
         $mfoText = MfoText::find()->where(['name' => 'Text'])->one();
@@ -178,9 +179,20 @@ class MfoController extends Controller
         $reviewsModel = new Reviews();
 
         if ($reviewsModel->load(Yii::$app->request->post())) {
-            $reviewsModel->save();
-            Yii::$app->session->setFlash('successReviews', 'Tu comentario ha sido enviado. ¡Gracias por ponerte en contacto!');
-            return $this->refresh();
+            $post = Yii::$app->request->post();
+            $reviewsModel->recommendation = 0;
+            if(isset($post['Reviews']['recommendation']) && $post){
+                if($post['Reviews']['recommendation'] == 'on'){
+                    $reviewsModel->recommendation = 1;
+                }
+            }
+            if($reviewsModel->save()){
+                Yii::$app->session->setFlash('successReviews', 'Tu comentario ha sido enviado. ¡Gracias por ponerte en contacto!');
+                return $this->refresh();
+            } else {
+                var_dump($reviewsModel->errors);die;
+            }
+
         } else {
             return $this->render('reviews', [
                 'model' => $mfo,

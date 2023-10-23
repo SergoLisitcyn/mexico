@@ -305,6 +305,7 @@ class Mfo extends ActiveRecord
                     if($mfo){
                         $mfo->data = json_encode($datum);
                         $mfo->rating_auto = json_encode($mfo->rating_auto);
+                        $mfo->general_text = json_encode($mfo->general_text);
                         $mfo->type = 'Broker';
                         if(isset($datum['condiciones'])){
                             $mfo->sum = $datum['condiciones']['first_loan_max'];
@@ -335,12 +336,12 @@ class Mfo extends ActiveRecord
                         $model->title = $datum['meta_tags']['title'];
                         $model->data = json_encode($datum);
                         $model->rating_auto = null;
+                        $model->general_text = null;
 
                         $model->sum = 0;
                         $model->min_sum = 0;
                         $model->term = 0;
                         $model->min_term = 0;
-                        $model->type = 0;
                         $model->percent = 0;
                         $model->decision = 0;
                         $model->type = 'Broker';
@@ -745,6 +746,7 @@ class Mfo extends ActiveRecord
         $data['prestamos_en_linea_sin_buro'] = $value[6]; // Prestamos en linea sin buro
         $data['prestamos_personales_urgentes'] = $value[7]; // Prestamos personales urgentes
         $data['p2p'] = $value[8]; // P2P
+        $data['corredores'] = $value[9]; // Corredores
 
         return $data;
     }

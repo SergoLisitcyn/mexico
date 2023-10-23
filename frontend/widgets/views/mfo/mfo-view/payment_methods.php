@@ -1,3 +1,4 @@
+<?php if($visible) : ?>
 <div class="tabs-content__block tabs-content-block background-set">
     <h2 class="tabs-content-block__title title">El procedimiento de la reembolso del préstamo</h2>
     <div class="tabs-content-block__columns">
@@ -359,3 +360,4 @@
         </div>
     </div>
 </div>
+<?php endif; ?>
