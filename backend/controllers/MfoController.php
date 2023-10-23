@@ -140,6 +140,7 @@ class MfoController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $model->data = Json::encode($model->data);
             $model->rating_auto = Json::encode($model->rating_auto);
+            $model->general_text = Json::encode($model->general_text);
             if($model->save()){
                 Yii::$app->session->addFlash('success', 'Мфо обновлен');
                 return $this->redirect(['update', 'id' => $model->id]);
