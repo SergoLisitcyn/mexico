@@ -138,7 +138,7 @@ class Mfo extends ActiveRecord
         $googleAccountKeyFilePath = __DIR__ . '/../../backend/views/mfo/mexicocrm.json';
         putenv('GOOGLE_APPLICATION_CREDENTIALS=' . $googleAccountKeyFilePath);
 
-        $client = new Google_Client(['verify' => false]);
+        $client = new Google_Client();
         $client->useApplicationDefaultCredentials();
         $client->addScope('https://www.googleapis.com/auth/spreadsheets');
 
@@ -152,6 +152,7 @@ class Mfo extends ActiveRecord
     {
         $service = self::getResponseSheet();
         $spreadsheetId = Yii::$app->params['mfoSheet'];
+        var_dump($service->spreadsheets);die;
         $response = $service->spreadsheets->get($spreadsheetId);
 
         if(!$response){
