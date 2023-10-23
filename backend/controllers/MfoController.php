@@ -141,6 +141,7 @@ class MfoController extends Controller
             $post = Yii::$app->request->post();
             $model->data = Json::encode($model->data);
             $model->rating_auto = Json::encode($model->rating_auto);
+            $model->general_text = Json::encode($model->general_text);
             if(!$post['Mfo']['general_text'][0]){
                 $model->general_text = null;
             }

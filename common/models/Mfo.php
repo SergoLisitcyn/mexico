@@ -34,6 +34,7 @@ use yii\web\UploadedFile;
  * @property int $updated_at
  * @property string|null $montos_title
  * @property string|null $montos_text
+ * @property string|null $general_text
  */
 class Mfo extends ActiveRecord
 {
@@ -101,6 +102,7 @@ class Mfo extends ActiveRecord
         parent::afterFind();
         $this->data = Json::decode($this->data);
         $this->rating_auto = Json::decode($this->rating_auto);
+        $this->general_text = Json::decode($this->general_text);
     }
 
     /**
