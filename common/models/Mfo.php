@@ -152,7 +152,6 @@ class Mfo extends ActiveRecord
     {
         $service = self::getResponseSheet();
         $spreadsheetId = Yii::$app->params['mfoSheet'];
-        var_dump($spreadsheetId);die;
         $response = $service->spreadsheets->get($spreadsheetId);
 
         if(!$response){
