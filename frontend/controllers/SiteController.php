@@ -220,6 +220,8 @@ class SiteController extends Controller
                     'params' => $value
                 ];
             }
+            echo '<pre>';
+            var_dump($data);die;
         } else {
             foreach ($mfo as $key => $value){
                 if(!isset($value['data']['pages'][$url]) || $value['data']['pages'][$url] == '-'){
