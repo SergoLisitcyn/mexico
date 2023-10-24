@@ -216,7 +216,7 @@ class SiteController extends Controller
         $data = [];
         if($url == 'corredores'){
             foreach ($mfo as $key => $value){
-                $data[$value['data']['pages'][$url]] = [
+                $data[$key] = [
                     'params' => $value
                 ];
             }
