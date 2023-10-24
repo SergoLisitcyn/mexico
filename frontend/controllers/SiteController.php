@@ -214,14 +214,23 @@ class SiteController extends Controller
             $mfo = Mfo::find()->with('color')->where(['status' => 1])->where(['type' => 'Broker'])->all();
         }
         $data = [];
-        foreach ($mfo as $key => $value){
-            if(!isset($value['data']['pages'][$url]) || $value['data']['pages'][$url] == '-'){
-                continue;
+        if($url == 'corredores'){
+            foreach ($mfo as $key => $value){
+                $data[$value['data']['pages'][$url]] = [
+                    'params' => $value
+                ];
             }
-            $data[$value['data']['pages'][$url]] = [
-                'params' => $value
-            ];
+        } else {
+            foreach ($mfo as $key => $value){
+                if(!isset($value['data']['pages'][$url]) || $value['data']['pages'][$url] == '-'){
+                    continue;
+                }
+                $data[$value['data']['pages'][$url]] = [
+                    'params' => $value
+                ];
+            }
         }
+
         ksort($data);
         $mfoText = MfoText::find()->where(['name' => 'Text'])->one();
 
