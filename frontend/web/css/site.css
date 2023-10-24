@@ -368,3 +368,11 @@ img {
     padding: 30px 0;
     margin-top: 20px;
 }
+
+.button--secondary{
+    margin-right: 30px;
+}
+
+.offer__links{
+    justify-content: center;
+}
