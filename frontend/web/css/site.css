@@ -449,5 +449,8 @@ img {
     .rating__value-title{
         padding-bottom: 0;
     }
+    .rating__value{
+        padding-top: 0;
+    }
 }
 
