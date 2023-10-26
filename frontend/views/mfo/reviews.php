@@ -45,6 +45,10 @@ $this->registerMetaTag(['name' => 'description','content' => $description]);
                     <?php foreach ($reviews as $review) :
                         $reviewRating = ($review->costs + $review->conditions + $review->support + $review->functionality) / 4;
                         $reviewStar= (100 *  $reviewRating)/5;
+                        $reviewStarCosts = (100 *  $review->costs)/5;
+                        $reviewStarConditions = (100 *  $review->conditions)/5;
+                        $reviewStarSupport = (100 *  $review->support)/5;
+                        $reviewStarFunctionality = (100 *  $review->functionality)/5;
                         ?>
                     <div class="content__comments-block comments-block background-set">
                         <div class="comments-block__item">
@@ -52,9 +56,40 @@ $this->registerMetaTag(['name' => 'description','content' => $description]);
                                 <div class="comments-block__date"><?= date('d.m.Y', $review->created_at) ?></div>
                                 <div class="rating-sidebar__rating">
                                     <div class="rating__stars" style="width:<?= $reviewStar ?>%"></div>
-                                    <!--                                        <img class="rating-sidebar__rating-image" src="/img/stars.svg" alt="stars">-->
                                     <div class="rating-sidebar__rating-number"><?= $reviewRating ?></div>
                                 </div>
+                            </div>
+                            <div class="rating__value">
+                                <ul class="rating__value-list">
+                                    <li class="rating__value-item">
+                                        <div class="rating__value-title">Interés & Costes</div>
+                                        <div class="rating-sidebar__rating">
+                                            <div class="rating__stars" style="width:<?= $reviewStarCosts ?>%"></div>
+                                            <div class="rating-sidebar__rating-number"><?= $review->costs ?></div>
+                                        </div>
+                                    </li>
+                                    <li class="rating__value-item">
+                                        <div class="rating__value-title">Condiciones</div>
+                                        <div class="rating-sidebar__rating">
+                                            <div class="rating__stars" style="width:<?= $reviewStarConditions ?>%"></div>
+                                            <div class="rating-sidebar__rating-number"><?= $review->conditions ?></div>
+                                        </div>
+                                    </li>
+                                    <li class="rating__value-item">
+                                        <div class="rating__value-title">Atención al cliente</div>
+                                        <div class="rating-sidebar__rating">
+                                            <div class="rating__stars" style="width:<?= $reviewStarSupport ?>%"></div>
+                                            <div class="rating-sidebar__rating-number"><?= $review->support ?></div>
+                                        </div>
+                                    </li>
+                                    <li class="rating__value-item">
+                                        <div class="rating__value-title">Funcionalidad</div>
+                                        <div class="rating-sidebar__rating">
+                                            <div class="rating__stars" style="width:<?= $reviewStarFunctionality ?>%"></div>
+                                            <div class="rating-sidebar__rating-number"><?= $review->functionality ?></div>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
                             <div class="comments-block__info">
                                 <div class="comments-block__info-name"><?= $review->name ?></div>
