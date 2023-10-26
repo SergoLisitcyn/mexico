@@ -39,6 +39,11 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                 <section class="cards">
                     <?php foreach ($mfos as $key => $mfo) :
                         $reviewsCount = Reviews::find()->where(['mfo_id' => $mfo['params']['id'], 'status' => 1])->count();
+                        $ratingReviews = Reviews::getSumRating($mfo['params']['id']);
+                        $starReviews = 0;
+                        if($ratingReviews > 0){
+                            $starReviews = (100 * $ratingReviews)/5;
+                        }
                         $sum = $mfo['params']['sum'];
                         $term = $mfo['params']['term'];
                         $procent = (float)str_replace(',', '.', $mfo['params']['data']['condiciones']['rate_first']);
@@ -65,10 +70,12 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                                             </div>
                                         <?php endif; ?>
                                         <div class="repute">
-                                            <div class="repute__rating">
-                                                <img class="repute__rating-image" src="/img/stars.svg" alt="stars">
-                                                <div class="repute__rating-number">4,4</div>
-                                            </div>
+                                            <?php if($reviewsCount > 0) : ?>
+                                                <div class="repute__rating">
+                                                    <div class="rating__stars_similar" style="width:<?= $starReviews ?>%"></div>
+                                                    <div class="offer-dropdown__repute-number"><?= $ratingReviews ?></div>
+                                                </div>
+                                            <?php endif; ?>
                                             <div class="repute__comments">
                                                 <?php if($reviewsCount > 0) : ?>
                                                     Leer <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $mfo['params']['url']]) ?>" class="repute__comments-link"><?= $reviewsCount ?> comentarios</a>
@@ -135,7 +142,12 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                                             </div>
                                         </div>
                                         <div class="offer__repute repute">
-
+                                            <?php if($reviewsCount > 0) : ?>
+                                                <div class="repute__rating">
+                                                    <div class="rating__stars_similar" style="width:<?= $starReviews ?>%"></div>
+                                                    <div class="offer-dropdown__repute-number"><?= $ratingReviews ?></div>
+                                                </div>
+                                            <?php endif; ?>
                                             <div class="repute__comments">
                                                 <?php if($reviewsCount > 0) : ?>
                                                     Leer <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $mfo['params']['url']]) ?>" class="repute__comments-link"><?= $reviewsCount ?> comentarios</a>
