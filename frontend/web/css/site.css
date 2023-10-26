@@ -452,5 +452,8 @@ img {
     .rating__value{
         padding-top: 0;
     }
+    .offer__company-title{
+       text-align: left;
+    }
 }
 
