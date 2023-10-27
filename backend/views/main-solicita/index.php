@@ -42,10 +42,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'class' => 'kartik\grid\EditableColumn',
-                'attribute' => 'alt',
+                'attribute' => 'Title',
                 'hAlign' => 'center',
                 'filter' => false,
-                'value' => function($model){ return $model->alt; },
+                'value' => function($model){ return $model->title_h1; },
             ],
             [
                 'class' => 'kartik\grid\EditableColumn',
