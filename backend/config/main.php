@@ -47,6 +47,11 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                [
+                    'pattern' => 'sort/<url:\S+>',
+                    'route' => '/sort/index',
+                    'defaults' => ['url' => '']
+                ],
             ],
         ],
     ],
