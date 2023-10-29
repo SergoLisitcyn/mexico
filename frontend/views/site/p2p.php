@@ -124,11 +124,6 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                                                 <div class="offer__value-number"><?= $mfo['params']['data']['condiciones']['other_total_loan_cost'] ?></div>
                                             </li>
                                             <?php endif; ?>
-<!--                                            <li class="offer__value-item offer__value-item--last">-->
-<!--                                                <div class="offer__value-title">-->
-<!--                                                    Nuestra calificación</div>-->
-<!--                                                <div class="offer__value-number">--><?php //= $mfo['params']['rating_auto']['rating']['allRating'] ?><!--</div>-->
-<!--                                            </li>-->
                                         </ul>
                                     </div>
                                     <div class="offer__info">
@@ -213,9 +208,7 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                             </div>
                         </div>
                     <?php endforeach; ?>
-<!--                    <button class="offer__all button button--secondary">Mostrar todas las ofertas</button>-->
                 </section>
-                <!-- <sidebar class="sidebar"></sidebar> -->
             </div>
         </div>
         <?php if($text->text_bottom) : ?>

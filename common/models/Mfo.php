@@ -1139,17 +1139,17 @@ AppStore de Apple es de {IOs_APP_RATING_COUNT}. ';
     public static function getMinMaxValues($maxSum = false,$maxTerm = false,$minSum = false,$minTerm = false)
     {
         if($maxSum){
-            return self::find()->max('sum');
+            return self::find()->where(['status' => 1])->where(['type' => 'PDL'])->max('sum');
         }
         if($maxTerm){
-            return self::find()->max('term');
+            return self::find()->where(['status' => 1])->where(['type' => 'PDL'])->max('term');
         }
         if($minSum){
-            return 300;
-//            return self::find()->min('min_sum');
+//            return 300;
+            return self::find()->where(['status' => 1])->where(['type' => 'PDL'])->min('min_sum');
         }
         if($minTerm){
-            return self::find()->min('min_term');
+            return self::find()->where(['status' => 1])->where(['type' => 'PDL'])->min('min_term');
         }
         return null;
     }

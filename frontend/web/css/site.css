@@ -265,7 +265,7 @@ img {
     }
     .range__result-input input {
         font-size: 20px;
-        width: 60px;
+        width: 70px;
     }
 }
 
@@ -428,6 +428,18 @@ img {
     -ms-flex-pack: justify;
     justify-content: space-between;
     padding: 8px 0;
+}
+
+.calculator__disabled{
+    background: grey;
+    border: 2px solid grey;
+    cursor: default;
+}
+.calculator__disabled:hover{
+    background: grey;
+    border: 2px solid grey;
+    color: #fff;
+    cursor: default;
 }
 
 @media (max-width: 900px){

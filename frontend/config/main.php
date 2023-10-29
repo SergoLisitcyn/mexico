@@ -63,6 +63,7 @@ return [
                 'entidad' => '/mfo/index',
                 'captcha' => '/site/captcha',
                 'sitemap.xml' => '/sitemap/index',
+                'count-mfo' => '/mfo/count-mfo',
                 [
                     'pattern' => 'entidad/<url:\S+>/reviews',
                     'route' => '/mfo/reviews',

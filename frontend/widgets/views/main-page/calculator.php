@@ -18,7 +18,7 @@
                                     </div>
                                     <span class="range__result-span">$</span>
                                 </div>
-                                <input id="rs_sum" type="range" name="rs_sum" min="<?= $sumMin ?>" max="<?= $sum ?>" value="1000" step="100" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
+                                <input id="rs_sum" oninput="funmfo()" type="range" name="rs_sum" min="<?= $sumMin ?>" max="<?= $sum ?>" value="1000" step="100" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
                             </div>
                         </div>
                     </div>
@@ -34,12 +34,12 @@
                                     </div>
                                     <span class="range__result-span">días</span>
                                 </div>
-                                <input id="rs_term" type="range" name="rs_term" min="7" max="<?= $term ?>" value="30" step="1" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
+                                <input id="rs_term" oninput="funmfo()" type="range" name="rs_term" min="7" max="<?= $term ?>" value="30" step="1" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
                             </div>
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="calculator__button button button--primary">Recibir dinero</button>
+                <button type="submit" id="calculator__button_main_page" class="calculator__button button button--primary">Recibir dinero</button>
             </div>
         </form>
     </div>

@@ -50,9 +50,12 @@ class MfoController extends Controller
         $mfo = Mfo::find()
             ->with('color')
             ->where(['status' => 1])
-            ->andWhere(['>=', 'term', $term])
+            ->where(['type' => 'PDL'])
+            ->andWhere(['<=', 'min_term', $term])
+            ->andWhere(['<=', 'min_sum', $sum])
             ->andWhere(['>=', 'sum', $sum])
-            ->andWhere(['!=', 'type', 'Broker'])
+            ->andWhere(['>=', 'term', $term])
+//            ->andWhere(['!=', 'type', 'Broker'])
             ->orderBy(['rating' => SORT_DESC])
             ->all();
         $mfoText = MfoText::find()->where(['name' => 'Text'])->one();
@@ -201,6 +204,27 @@ class MfoController extends Controller
                 'reviewsCount' => $reviewsCount,
                 'mfo' => $mfo,
             ]);
+        }
+    }
+
+    public function actionCountMfo()
+    {
+        $request = Yii::$app->request;
+        $sum = $request->post('rs_sum');
+        $term = $request->post('rs_term');
+        $mfo = Mfo::find()
+            ->where(['status' => 1])
+            ->where(['type' => 'PDL'])
+            ->andWhere(['<=', 'min_term', $term])
+            ->andWhere(['<=', 'min_sum', $sum])
+            ->andWhere(['>=', 'sum', $sum])
+            ->andWhere(['>=', 'term', $term])
+            ->all();
+
+        if ($mfo) {
+            return "SUCCESS";
+        } else {
+            return "ERROR";
         }
     }
 }
