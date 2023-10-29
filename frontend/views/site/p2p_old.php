@@ -44,7 +44,16 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                         if($ratingReviews > 0){
                             $starReviews = (100 * $ratingReviews)/5;
                         }
-                        $data = $mfo['params']['data'];
+                        $sum = $mfo['params']['sum'];
+                        $term = $mfo['params']['term'];
+                        $procent = (float)str_replace(',', '.', $mfo['params']['data']['condiciones']['rate_first']);
+
+                        $sumAll = $sum * ($procent/100) * $term;
+                        $sumWithVat = $sumAll * 0.16;
+                        $totalSum = $sumAll + $sumWithVat;
+                        $total = $sum + $totalSum;
+
+                        $totalFormat = number_format($total, 2, '.', '');
                         ?>
                         <div class="offer change-text">
                             <div class="offer__row">
@@ -85,49 +94,35 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                                 <div class="offer__content">
                                     <div class="offer__value">
                                         <ul class="offer__value-list">
-
-                                            <?php if(isset($data['condiciones']['plazo_min']) && $data['condiciones']['plazo_min'] != '-') : ?>
-                                            <li class="offer__value-item">
-                                                 <div class="offer__value-title">
-                                                     Monto del Préstamo, min.</div>
-                                                <div class="offer__value-number"><?= $data['condiciones']['plazo_min'] ?></div>
-                                            </li>
-                                            <?php endif; ?>
-
-                                            <?php if(isset($data['condiciones']['plazo_max']) && $data['condiciones']['plazo_max'] != '-') : ?>
+                                            <?php if(isset($mfo['params']['data']['condiciones']['other_loan_max']) && $mfo['params']['data']['condiciones']['other_loan_max'] != '-') : ?>
                                                 <li class="offer__value-item">
                                                     <div class="offer__value-title">
-                                                        Monto del Préstamo, max.</div>
-                                                    <div class="offer__value-number"><?= $data['condiciones']['plazo_max'] ?></div>
+                                                        Préstamos personales, hasta, $</div>
+                                                    <div class="offer__value-number"><?= $mfo['params']['data']['condiciones']['other_loan_max'] ?></div>
                                                 </li>
                                             <?php endif; ?>
-
-                                            <?php if(isset($data['condiciones']['first_loan_min']) && $data['condiciones']['first_loan_min'] != '-') : ?>
+                                            <?php if(isset($mfo['params']['data']['condiciones']['other_term_months_max']) && $mfo['params']['data']['condiciones']['other_term_months_max'] != '-') : ?>
                                                 <li class="offer__value-item">
                                                     <div class="offer__value-title">
-                                                        Plazo del Préstamo, min.</div>
-                                                    <div class="offer__value-number"><?= $data['condiciones']['first_loan_min'] ?></div>
+                                                        Plaza, meses, max</div>
+                                                    <div class="offer__value-number"><?= $mfo['params']['data']['condiciones']['other_term_months_max'] ?></div>
                                                 </li>
                                             <?php endif; ?>
-
-                                            <?php if(isset($data['condiciones']['first_loan_max']) && $data['condiciones']['first_loan_max'] != '-') : ?>
+                                            <?php if(isset($mfo['params']['data']['condiciones']['other_fija_via']) && $mfo['params']['data']['condiciones']['other_fija_via'] != '-') : ?>
+                                                <li class="offer__value-item">
+                                                    <div class="offer__value-title">
+                                                        Tasa de interés, %</div>
+                                                    <div class="offer__value-number"><?= $mfo['params']['data']['condiciones']['other_fija_via'] ?></div>
+                                                </li>
+                                            <?php endif; ?>
+                                            <?php if(isset($mfo['params']['data']['condiciones']['other_total_loan_cost']) && $mfo['params']['data']['condiciones']['other_total_loan_cost'] != '-') : ?>
 
                                             <li class="offer__value-item">
                                                 <div class="offer__value-title">
-                                                    Plazo, max.</div>
+                                                    CAT, %</div>
 
-                                                <div class="offer__value-number"><?= $data['condiciones']['first_loan_max'] ?></div>
+                                                <div class="offer__value-number"><?= $mfo['params']['data']['condiciones']['other_total_loan_cost'] ?></div>
                                             </li>
-                                            <?php endif; ?>
-
-                                            <?php if(isset($data['requisitos']['older_than']) && $data['requisitos']['older_than'] != '-') : ?>
-
-                                                <li class="offer__value-item">
-                                                    <div class="offer__value-title">
-                                                        Edad mínima</div>
-
-                                                    <div class="offer__value-number"><?= $data['requisitos']['older_than'] ?></div>
-                                                </li>
                                             <?php endif; ?>
                                         </ul>
                                     </div>
@@ -135,23 +130,20 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                                         <div class="offer__buttons">
                                             <input type="checkbox" checked class="checkbox">
                                             <div class="offer__links">
-                                                <?php if($reviewsCount > 0) : ?>
-                                                    <div class="offer__open button button--secondary open">Más info</div>
-                                                <?php endif; ?>
+                                                <div class="offer__open button button--secondary open">Más info</div>
                                                 <?php if(isset($mfo['params']['data']['meta_tags']['affiliate']) && $mfo['params']['data']['meta_tags']['affiliate'] != '-') : ?>
                                                     <a class="offer__receive button button--primary" target="_blank" href="/redirect?r=<?= $mfo['params']['data']['meta_tags']['affiliate'] ?>&url=<?= $mfo['params']['url'] ?>">Recibir dinero</a>
                                                 <?php endif; ?>
                                             </div>
                                         </div>
                                         <div class="offer__repute repute">
-
-                                            <div class="repute__comments">
-                                                <?php if($reviewsCount > 0) : ?>
+                                            <?php if($reviewsCount > 0) : ?>
                                                 <div class="repute__rating">
                                                     <div class="rating__stars_similar" style="width:<?= $starReviews ?>%"></div>
                                                     <div class="offer-dropdown__repute-number"><?= $ratingReviews ?></div>
                                                 </div>
-                                                <?php endif; ?>
+                                            <?php endif; ?>
+                                            <div class="repute__comments">
                                                 <?php if($reviewsCount > 0) : ?>
                                                     Leer <a href="<?= Url::toRoute(['mfo/reviews', 'url' => $mfo['params']['url']]) ?>" class="repute__comments-link"><?= $reviewsCount ?> comentarios</a>
                                                 <?php else: ?>
@@ -166,7 +158,7 @@ if(isset($text->description) && !empty($text->description)) { $this->registerMet
                             <div class="offer__dropdown offer-dropdown">
                                 <div class="offer-dropdown__items">
                                     <div class="offer-dropdown__item offer-dropdown__repute">
-                                        <?= MainPageWidget::widget(['type' => 'reviewsRatingList','mfoId' => $mfo['params']['id']]) ?>
+
                                     </div>
                                     <div class="offer-dropdown__item offer-dropdown__info">
                                         <ul class="offer-dropdown__info-list">
