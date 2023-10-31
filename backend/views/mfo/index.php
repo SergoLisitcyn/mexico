@@ -51,7 +51,21 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             'name',
-            'url',
+            [
+                'attribute' => 'url',
+                'format' => 'raw',
+                'value' => function($model){
+                    $link = 'http://'.$_SERVER['SERVER_NAME'].'/entidad';
+                    if( isset($_SERVER['HTTPS'] ) ) {
+                        $link = 'https://'.$_SERVER['SERVER_NAME'].'/entidad';
+                    }
+                    if($model->url){
+                        return '<a href='.$link.'/'.$model->url.' target="_blank">'.$model->url. '</a>' ;
+                    }
+
+                    return '';
+                },
+            ],
             [
                 'class' => 'kartik\grid\EditableColumn',
                 'attribute' => 'status',
