@@ -70,6 +70,11 @@ class SortController extends Controller
 
         $dataProvider = new ActiveDataProvider([
             'query' => Mfo::find()->where(['in', 'id', $str]),
+            'sort' => [
+                'defaultOrder' => [
+                    'id' => SORT_DESC,
+                ]
+            ],
         ]);
         $title = '';
         if($url == 'prestamos_rapidos'){
