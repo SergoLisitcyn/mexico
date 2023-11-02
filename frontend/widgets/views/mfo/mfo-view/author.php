@@ -5,7 +5,7 @@
         <ul class="entities__list">
             <?php foreach ($teams as $team) : ?>
                 <li class="entities__item">
-                    <div class="entities__logo">
+                    <div class="team_logo">
                         <a href="/#faq_main">
                             <img src="<?= $team['image'] ?>" alt="<?= $team['name'] ?>" class="staff__image">
                         </a>

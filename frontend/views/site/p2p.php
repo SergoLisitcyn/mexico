@@ -34,12 +34,12 @@ if(isset($text->keywords) && !empty($text->keywords)) { $this->registerMetaTag([
         <?php if($haveTeam) : ?>
             <?php if($text->text_top) : ?>
                 <div class="row">
-                    <div class="col-sm-9">
+                    <div class="col-sm-8">
                         <div class="values__descr" style="margin-top: 0">
                             <?= $text->text_top ?>
                         </div>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                         <?= MfoViewWidget::widget(['type' => 'author','action' => $url]) ?>
                     </div>
                 </div>
