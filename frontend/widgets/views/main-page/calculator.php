@@ -39,6 +39,7 @@
                         </div>
                     </div>
                 </div>
+                <div class="error_calc" id="error_calc"><b>No hay opciones, intente cambiar la consulta</b></div>
                 <button type="submit" id="calculator__button_main_page" class="calculator__button button button--primary">Recibir dinero</button>
             </div>
         </form>

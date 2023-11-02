@@ -29,12 +29,12 @@
                             <?php endif; ?>
                             <?php if($team['twitter']) : ?>
                                 <a href="//<?= $team['twitter'] ?>" target="_blank"  class="staff__link">
-                                    <img src="img/social/twitter.svg" alt="twitter" class="staff__social staff__social--twitter">
+                                    <img src="/img/social/twitter.svg" alt="twitter" class="staff__social staff__social--twitter">
                                 </a>
                             <?php endif; ?>
                             <?php if($team['linkedin']) : ?>
                                 <a href="//<?= $team['linkedin'] ?>" target="_blank"  class="staff__link">
-                                    <img src="img/social/linkedin.svg" alt="linkedin" class="staff__social staff__social--twitter">
+                                    <img src="/img/social/linkedin.svg" alt="linkedin" class="staff__social staff__social--twitter">
                                 </a>
                             <?php endif; ?>
                         </div>

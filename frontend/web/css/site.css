@@ -442,6 +442,11 @@ img {
     cursor: default;
 }
 
+.error_calc{
+    margin-top: 20px;
+    display: none;
+}
+
 @media (max-width: 900px){
     .rating__value-list {
         margin-top: 25px;

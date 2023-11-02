@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Exception;
 use yii\db\ActiveRecord;
 use yii\helpers\FileHelper;
+use yii\helpers\Json;
 use yii\web\UploadedFile;
 
 /**
@@ -19,6 +20,7 @@ use yii\web\UploadedFile;
  * @property string|null $twitter
  * @property string|null $instagram
  * @property string|null $linkedin
+ * @property string|null $array_url
  * @property int|null $status
  */
 class MainTeam extends ActiveRecord
@@ -41,6 +43,7 @@ class MainTeam extends ActiveRecord
             [['name', 'text'], 'required'],
             [['status'], 'integer'],
             [['name', 'text', 'image','facebook','instagram','twitter','linkedin'], 'string', 'max' => 255],
+            [['array_url'], 'safe'],
         ];
     }
 
@@ -60,7 +63,12 @@ class MainTeam extends ActiveRecord
             'instagram' => 'Instagram',
             'twitter' => 'Twitter',
             'linkedin' => 'Linkedin',
+            'array_url' => 'Url страниц',
         ];
+    }
+    public function afterFind() {
+        parent::afterFind();
+        $this->array_url = Json::decode($this->array_url);
     }
 
     /**

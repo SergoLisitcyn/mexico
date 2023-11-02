@@ -6,6 +6,7 @@ use common\models\BlockManagement;
 use common\models\Contacts;
 use common\models\MainInfo;
 use common\models\MainSolicita;
+use common\models\MainTeam;
 use common\models\Mfo;
 use common\models\MfoText;
 use common\models\ReviewInformation;
@@ -241,6 +242,22 @@ class SiteController extends Controller
         if($url == 'corredores'){
             $render = 'corredores';
         }
+        $teams = MainTeam::find()->where(['status' => 1])->all();
+        $i = 0;
+        $haveTeam = false;
+        if($teams){
+            foreach ($teams as $team){
+                if($team['array_url']){
+                    if (in_array($url, $team['array_url'])){
+                        $i++;
+                    }
+                }
+            }
+        }
+
+        if($i > 0){
+            $haveTeam = true;
+        }
         return $this->render($render, [
             'mfos' => $data,
             'mfoText' => $mfoText->text_mfo['text'],
@@ -248,6 +265,8 @@ class SiteController extends Controller
             'sum' => $sum,
             'term' => $term,
             'isPost' => $isPost,
+            'url' => $url,
+            'haveTeam' => $haveTeam,
         ]);
     }
 

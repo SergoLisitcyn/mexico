@@ -168,6 +168,7 @@ if(isset($model->data['meta_tags']['description']) && !empty($model->data['meta_
                     <!--   Rating calificación -->
                     <?= MfoViewWidget::widget(['type' => 'rating','model' => $model]) ?>
                     <!--   TOP 3 Entidades-->
+                    <?= MfoViewWidget::widget(['type' => 'author','model' => $model,'action' => 'view']) ?>
                     <?= MfoViewWidget::widget(['type' => 'top_entidades','model' => $model]) ?>
                 </sidebar>
             </div>

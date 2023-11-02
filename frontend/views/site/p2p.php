@@ -3,6 +3,7 @@
 use common\models\Reviews;
 use frontend\widgets\MainPageWidget;
 use frontend\widgets\MfoCompanyWidget;
+use frontend\widgets\MfoViewWidget;
 use yii\helpers\Url;
 
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -30,7 +31,21 @@ if(isset($text->keywords) && !empty($text->keywords)) { $this->registerMetaTag([
         <?php if($text->title_h1) :?>
             <h1 class="main__title main-title"><?= $text->title_h1 ?></h1>
         <?php endif; ?>
-        <?php if($text->text_top) : ?>
+        <?php if($haveTeam) : ?>
+            <?php if($text->text_top) : ?>
+                <div class="row">
+                    <div class="col-sm-9">
+                        <div class="values__descr" style="margin-top: 0">
+                            <?= $text->text_top ?>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <?= MfoViewWidget::widget(['type' => 'author','action' => $url]) ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+        <?php endif; ?>
+        <?php if(!$haveTeam && $text->text_top) : ?>
             <div class="values__descr">
                 <?= $text->text_top ?>
             </div>

@@ -6,6 +6,7 @@ use common\models\MainTeam;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
+use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -118,9 +119,21 @@ class MainTeamController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            Yii::$app->session->addFlash('success', 'Обновлено');
-            return $this->redirect(['update', 'id' => $model->id]);
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            if($model->array_url){
+                $model->array_url = Json::encode($model->array_url);
+            } else {
+                $model->array_url = null;
+            }
+
+            if($model->save()){
+                Yii::$app->session->addFlash('success', 'Обновлено');
+                return $this->redirect(['update', 'id' => $model->id]);
+            } else {
+                var_dump($model->errors);
+                die;
+            }
+
         }
 
         return $this->render('update', [

@@ -2,6 +2,7 @@
 
 namespace frontend\widgets;
 
+use common\models\MainTeam;
 use common\models\Mfo;
 use common\models\MfoText;
 use common\models\Reviews;
@@ -64,6 +65,24 @@ class MfoViewWidget extends Widget
             $data = Mfo::getTopRatingMfo();
             return $this->render('mfo/mfo-view/'.$this->type,[
                 'mfo' => $data
+            ]);
+        }
+        if($this->type == 'author'){
+            $teams = MainTeam::find()->where(['status' => 1])->all();
+            $data = [];
+            foreach ($teams as $team){
+                if($team['array_url']){
+                    $find = $this->action;
+                    if($this->action == 'view'){
+                        $find = $this->model['url'];
+                    }
+                    if (in_array($find, $team['array_url'])){
+                        $data[] = $team;
+                    }
+                }
+            }
+            return $this->render('mfo/mfo-view/'.$this->type,[
+                'teams' => $data
             ]);
         }
 
