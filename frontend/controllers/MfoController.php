@@ -177,7 +177,7 @@ class MfoController extends Controller
         if(!$mfo){
             throw new HttpException(404, 'Страница не существует.');
         }
-        $reviews = Reviews::find()->where(['mfo_id' => $mfo->id,'status' => 1])->orderBy(['id desc'])->all();
+        $reviews = Reviews::find()->where(['mfo_id' => $mfo->id,'status' => 1])->orderBy(['id' => SORT_DESC])->all();
         $reviewsCount = Reviews::find()->where(['mfo_id' => $mfo->id, 'status' => 1])->count();
         $reviewsModel = new Reviews();
 
