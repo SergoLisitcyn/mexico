@@ -71,7 +71,7 @@ class MainInfo extends ActiveRecord
 
     public function afterFind() {
         parent::afterFind();
-        $this->work = Json::decode($this->work);
-        $this->mission = Json::decode($this->mission);
+        $this->work = $this->work ? Json::decode($this->work) : null;
+        $this->mission = $this->mission ? Json::decode($this->mission) : null;
     }
 }

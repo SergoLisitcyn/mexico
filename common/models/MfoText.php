@@ -61,6 +61,6 @@ class MfoText extends ActiveRecord
 
     public function afterFind() {
         parent::afterFind();
-        $this->text_mfo = Json::decode($this->text_mfo);
+        $this->text_mfo = $this->text_mfo ? Json::decode($this->text_mfo) : null;
     }
 }
