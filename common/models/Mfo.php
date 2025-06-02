@@ -100,10 +100,9 @@ class Mfo extends ActiveRecord
     }
     public function afterFind() {
         parent::afterFind();
-        var_dump($this->data);die;
-        $this->data = $this->data ? Json::decode($this->data) : null;
-        $this->rating_auto = $this->rating_auto ? Json::decode($this->rating_auto) : null;
-        $this->general_text = $this->general_text ? Json::decode($this->general_text) : null;
+        $this->data = $this->data;
+        $this->rating_auto = $this->rating_auto;
+        $this->general_text = $this->general_text;
     }
 
     /**
